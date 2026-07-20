@@ -47,6 +47,148 @@ MERGED → DEPLOYED → VERIFIED → CLOSED
 3. **代码与行为 Review**：独立 Reviewer 审查
 4. **部署后 Review**：检查真实环境
 
+---
+
+## 执行模式选择门
+
+> 任务达到 APPROVED 后，Chief of Staff 不得默认立即调用 `delegate_task`。
+> 必须先判断本任务采用哪种执行模式，并等待用户确认。
+
+### 模式 A：临时委派（delegated）
+
+只有当任务满足大部分以下条件时才使用：
+
+- 边界明确；
+- 输入信息完整；
+- 基本不需要用户中途作决定；
+- 预计一次运行可以完成或形成独立交付物；
+- 不需要多轮"实现—验证—调整"；
+- 失败后可以依靠文件、代码和报告轻松重试；
+- 不需要长期保留 Builder 的对话上下文。
+
+### 模式 B：长期会话（persistent_session）
+
+出现以下任一情况时，不得自动委派，必须输出 `HANDOFF REQUIRED`：
+
+- 需要多轮实现、测试和调整；
+- 需要用户中途查看页面、结果或方案并作决定；
+- 涉及复杂前后端联调；
+- 同时涉及数据库、权限、文件、第三方服务等多个高风险部分；
+- 技术 Spike 需要根据实验结果反复调整；
+- 预计 Reviewer 会多轮打回；
+- 任务可能跨较长时间；
+- 单次子 Agent 上下文或运行时间不足；
+- 失败尝试和调整理由对后续工作很重要。
+
+此时输出：
+
+```text
+HANDOFF REQUIRED
+
+原因：[为什么不适合临时委派]
+
+建议手动新建：长期 Builder 会话
+
+建议会话名称：TASK-XXX｜Builder｜任务名称
+
+需要提供的上下文：[列出任务、分支、契约、代码、测试和其他必要材料]
+```
+
+### 核心原则
+
+> 能一次独立完成的工作自动委派；需要连续责任和多轮互动的工作，建立长期可见会话。
+
+---
+
+## 委派前的固定输出
+
+任务达到 APPROVED 后，Chief of Staff 必须先输出以下判断，等待用户确认执行模式：
+
+```text
+## 执行模式判断
+
+任务：[任务描述]
+任务复杂度：[简单 / 中等 / 复杂]
+是否需要用户中途决策：[是 / 否]
+是否预计多轮实现—验证—调整：[是 / 否]
+是否涉及高风险数据、权限或第三方服务：[是 / 否]
+推荐模式：
+- delegate_task 临时委派
+或
+- HANDOFF REQUIRED 长期会话
+
+判断依据：[列出关键判断因素]
+建议的 Builder 会话名称：TASK-XXX｜Builder｜任务名称
+任务分支：feature/task-xxx-xxx
+```
+
+用户确认后，才调用 `delegate_task` 或要求用户手动新建长期会话。
+
+---
+
+## Reviewer 打回处理规则
+
+Reviewer 打回（CHANGES_REQUESTED）后，根据原任务的 `execution_mode` 决定处理方式：
+
+| 原任务模式 | 打回处理 |
+|---|---|
+| `delegated` | 边界清楚的小修可以再次委派临时 Builder |
+| `persistent_session` | Reviewer 意见必须返回原长期 Builder 会话修改，不得用新临时 Builder 替代 |
+| 方案根本错误 | 退回 Chief of Staff 重新设计 |
+
+不得用新的临时 Builder 替代长期 Builder 的连续责任。
+
+---
+
+## Reviewer 执行模式
+
+Reviewer 默认适合临时委派（全新子 Agent），以保证独立视角。
+
+但以下情况应输出 `HANDOFF REQUIRED`，建议建立长期 Reviewer 会话：
+
+- 安全审计需要多轮讨论；
+- 架构审查需要反复对抗；
+- 需要用户多次确认风险取舍；
+- 审查范围超过单次上下文可以安全处理的程度。
+
+---
+
+## 临时子 Agent 的持久化要求
+
+临时 Builder 返回前必须提供：
+
+1. 当前任务和分支；
+2. 实际修改文件列表；
+3. 实际 Git diff；
+4. 已完成内容；
+5. 未完成内容；
+6. 构建、Lint、类型检查和测试结果；
+7. 是否存在 Change Request；
+8. 必要时的检查点 Commit；
+9. 结构化实现报告；
+10. 下一步建议。
+
+> 子 Agent 的会话是临时的，但工作状态不得只存在于聊天回复中。
+
+多次临时 Builder 接力只作为异常中断、小型续作或会话损坏时的兜底，不作为复杂功能的默认执行方式。
+
+---
+
+## 任务执行信息记录
+
+每个任务至少记录以下元数据：
+
+```yaml
+task_id: TASK-XXX
+status: APPROVED | IN_PROGRESS | IMPLEMENTED | IN_REVIEW | ...
+execution_mode: delegated | persistent_session
+assigned_role: Builder
+assigned_session: TASK-XXX｜Builder｜任务名称   # delegated 时可为空
+branch: feature/task-xxx-xxx
+```
+
+---
+
 ## 固定状态报告
 
 每次重要节点输出：
