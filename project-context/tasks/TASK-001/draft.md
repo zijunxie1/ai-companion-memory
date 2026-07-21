@@ -4,11 +4,11 @@
 
 ```yaml
 task_id: TASK-001
-status: DRAFT
-execution_mode: pending
-assigned_role: pending
-assigned_session: pending
-branch: pending
+status: APPROVED
+execution_mode: user_build   # 用户在 Dify 中自行搭建
+assigned_role: user
+assigned_session: 无需 Builder 会话
+branch: 无（Dify 平台搭建，不涉及代码分支）
 ```
 
 ---
