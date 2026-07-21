@@ -1,6 +1,9 @@
 # Hermes desktop app attachments (temporary session files)
 .hermes/
 
+# Personal handoff documents (contains job search context, not for public repo)
+聊天记录.txt
+
 # OS
 Thumbs.db
 Desktop.ini
