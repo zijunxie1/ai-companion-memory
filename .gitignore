@@ -1,0 +1,33 @@
+# Hermes desktop app attachments (temporary session files)
+.hermes/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+*.pfx
+*.key
+
+# Dependencies (populated when tech stack is chosen)
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build output
+bin/
+obj/
+dist/
+build/
