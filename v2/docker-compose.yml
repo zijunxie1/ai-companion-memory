@@ -53,11 +53,9 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      # mem0 配置（走环境变量，不硬编码）
-      MEM0_EMBEDDER_PROVIDER: ${MEM0_EMBEDDER_PROVIDER:-openai}
-      MEM0_EMBEDDER_MODEL: ${MEM0_EMBEDDER_MODEL:-text-embedding-3-small}
-      MEM0_EMBEDDER_API_KEY: ${LLM_API_KEY}
-      MEM0_EMBEDDER_OPENAI_BASE_URL: ${LLM_BASE_URL:-}
+      # mem0 LLM 配置（用于 Memory 抽取，走环境变量）
+      # Embedder 不走环境变量——硬编码 fastembed 本地模型
+      # 原因：DeepSeek 不提供 embedding API，fastembed 是永久选择而非临时方案
       MEM0_LLM_PROVIDER: ${MEM0_LLM_PROVIDER:-openai}
       MEM0_LLM_MODEL: ${MEM0_LLM_MODEL:-deepseek-chat}
       MEM0_LLM_API_KEY: ${LLM_API_KEY}
