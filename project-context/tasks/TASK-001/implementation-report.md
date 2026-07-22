@@ -4,10 +4,12 @@
 
 ```yaml
 task_id: TASK-001
-status: COMPLETED
+status: CLOSED
 execution_mode: user_build
 assigned_role: user
 completed_at: 2026-07-23
+closed_at: 2026-07-23
+close_note: V1 达到设计目标。Path C 未测、猫依赖问题、Memory 写回未持久化均为已知限制，面试时间未定，用户选择直接进入 V2。V1 问题后续在 V2 中一并解决。
 ```
 
 ## 交付物
