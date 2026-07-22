@@ -1,0 +1,80 @@
+# V2 Memory Loop — Docker Compose
+# 全部服务容器化，配置走环境变量，随时可迁移到火山云
+#
+# 服务清单：
+#   qdrant       — mem0 向量存储
+#   postgres     — 单实例双数据库（mem0 内部 + 业务数据）
+#   mem0-server  — Python FastAPI 包装 mem0 库，提供 REST API
+#   (Next.js 开发期用 npm dev，不在 Docker 内运行)
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.13.2
+    container_name: v2-qdrant
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: v2-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${BUSINESS_DB:-ai_companion}
+      # mem0 用同一个实例的独立数据库
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  mem0-server:
+    build:
+      context: ./mem0-server
+      dockerfile: Dockerfile
+    container_name: v2-mem0-server
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    environment:
+      # mem0 配置（走环境变量，不硬编码）
+      MEM0_EMBEDDER_PROVIDER: ${MEM0_EMBEDDER_PROVIDER:-openai}
+      MEM0_EMBEDDER_MODEL: ${MEM0_EMBEDDER_MODEL:-text-embedding-3-small}
+      MEM0_EMBEDDER_API_KEY: ${LLM_API_KEY}
+      MEM0_EMBEDDER_OPENAI_BASE_URL: ${LLM_BASE_URL:-}
+      MEM0_LLM_PROVIDER: ${MEM0_LLM_PROVIDER:-openai}
+      MEM0_LLM_MODEL: ${MEM0_LLM_MODEL:-deepseek-chat}
+      MEM0_LLM_API_KEY: ${LLM_API_KEY}
+      MEM0_LLM_BASE_URL: ${LLM_BASE_URL:-}
+      # 向量存储
+      MEM0_VECTOR_STORE_PROVIDER: qdrant
+      MEM0_VECTOR_STORE_URL: http://qdrant:6333
+      # mem0 内部 metadata 数据库（与业务数据库独立）
+      MEM0_HISTORY_DB_HOST: postgres
+      MEM0_HISTORY_DB_PORT: 5432
+      MEM0_HISTORY_DB_USER: ${POSTGRES_USER:-postgres}
+      MEM0_HISTORY_DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      MEM0_HISTORY_DB_NAME: mem0_history
+    ports:
+      - "${MEM0_SERVER_PORT:-8900}:8900"
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+  postgres_data:
