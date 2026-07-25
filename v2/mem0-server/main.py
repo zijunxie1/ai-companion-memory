@@ -103,6 +103,20 @@ def health():
     return {"status": "ok"}
 
 
+# 中文抽取 Prompt —— 强制 mem0 用中文输出 Memory
+MEMORY_EXTRACT_PROMPT = (
+    "你是一个记忆管理助手。请从下面的对话中提取用户的关键信息和偏好。\n\n"
+    "规则：\n"
+    "1. 只提取【用户明确说过的】信息——不提取 AI 回复中的内容、不推断、不补充\n"
+    "2. 只提取值得长期记住的信息（稳定偏好、重要事件、关系节点、共同经历）\n"
+    "3. 忽略一次性情绪、随口玩笑、临时状态\n"
+    "4. 【隐私保护】禁止提取身份证号、手机号、银行卡号、精确住址、密码等敏感个人信息\n"
+    "5. 用中文输出每条记忆，格式为简洁的事实陈述\n"
+    "6. 如果没有值得提取的信息，返回空数组\n\n"
+    "对话内容：\n{content}"
+)
+
+
 @app.post("/memories")
 def add_memory(req: AddMemoryRequest):
     try:
@@ -110,6 +124,7 @@ def add_memory(req: AddMemoryRequest):
             req.text,
             user_id=req.user_id,
             metadata=req.metadata or None,
+            prompt=MEMORY_EXTRACT_PROMPT,
         )
         return {"success": True, "result": result}
     except Exception as e:

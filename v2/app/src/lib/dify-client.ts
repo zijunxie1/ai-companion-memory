@@ -25,10 +25,24 @@ export async function callDifyChatflow(params: {
   const { message, memories, userId } = params;
 
   // 将 Memory 拼接到 user_input 前面（V1 Chatflow 通过 user_input 接收全部内容）
+  // 注意：Dify user_input 限制 500 字符，需要控制 Memory 注入量
   const memoryBlock = formatMemoriesForPrompt(memories);
-  const fullInput = memoryBlock
-    ? `[Memory Context]\n${memoryBlock}\n\n[User Message]\n${message}`
+  let fullInput = memoryBlock
+    ? `[Memory]\n${memoryBlock}\n\n[消息]\n${message}`
     : message;
+
+  // 安全截断：确保不超过 Dify 的 500 字符限制
+  if (fullInput.length > 480) {
+    // 优先保留用户消息，截断 Memory
+    const msgPart = `\n[消息]\n${message}`;
+    const maxMemLen = 480 - msgPart.length;
+    if (maxMemLen > 50) {
+      fullInput = `[Memory]\n${memoryBlock.slice(0, maxMemLen)}…${msgPart}`;
+    } else {
+      // Memory 太长或消息太长，只保留消息
+      fullInput = message.slice(0, 480);
+    }
+  }
 
   const body = {
     inputs: {
