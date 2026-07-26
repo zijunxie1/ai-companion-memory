@@ -48,7 +48,7 @@ export async function callDifyChatflow(params: {
     inputs: {
       user_input: fullInput,
       user_id: userId,
-      conversation_id: params.conversationId || "demo-session-001",
+      conversation_id: "",
     },
     query: message,
     response_mode: "blocking" as const,
