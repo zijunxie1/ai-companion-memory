@@ -234,9 +234,28 @@ function CaseEvidenceCard({ result }: { result: EvalResult }) {
         <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[10px] text-purple-600">
           来源: {JUDGE_LABEL[result.judge_type]}
         </span>
-        {final.write_state && final.write_state.state !== "completed" && (
-          <span className="rounded-full bg-orange-50 px-2 py-0.5 text-[10px] text-orange-600">
-            写入: {final.write_state.state === "failed" ? "失败" : "超时(NOT_TESTED)"}
+        {final.write_state && (
+          <span
+            className={`rounded-full px-2 py-0.5 text-[10px] ${
+              final.write_state.state !== "completed"
+                ? "bg-orange-50 text-orange-600"
+                : final.write_state.disposition === "skipped_crisis"
+                  ? "bg-purple-50 text-purple-600"
+                  : final.write_state.disposition === "written"
+                    ? "bg-emerald-50 text-emerald-600"
+                    : "bg-gray-100 text-[#70747D]"
+            }`}
+          >
+            写入:{" "}
+            {final.write_state.state === "failed"
+              ? "失败"
+              : final.write_state.state === "timeout"
+                ? "超时(NOT_TESTED)"
+                : final.write_state.disposition === "skipped_crisis"
+                  ? "危机拦截(未写入)"
+                  : final.write_state.disposition === "written"
+                    ? "已写入"
+                    : "无写入"}
           </span>
         )}
       </div>

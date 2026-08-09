@@ -22,15 +22,8 @@ import {
   getUserPersona,
 } from "@/lib/db";
 import { env } from "@/lib/env";
+import { containsCrisis } from "@/lib/eval-crisis";
 import type { ChatRequest, ChatResponse } from "@/lib/types";
-
-/**
- * 危机表达正则（CR-A：命中则默认不写入长期 Memory）。
- * 范围与局限：覆盖常见简体中文危机表达；模型改写/变体需通过 E007 测试持续补充。
- * 命中后仍正常回复 + 保存完整 Trace（write_disposition='skipped_crisis'）。
- */
-export const CRISIS_PATTERN =
-  /不想活|不想活了|自杀|轻生|结束生命|活着没意思|活着太累|想死|了结自己|撑不下去|活不下去/;
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
@@ -128,7 +121,7 @@ export async function POST(request: NextRequest) {
     const conversationText = `用户: ${message}\nAI: ${difyResult.reply}`;
     void (async () => {
       // CR-A：危机表达默认不写入长期 Memory——命中则跳过 mem0.add
-      if (CRISIS_PATTERN.test(message)) {
+      if (containsCrisis(message)) {
         await finalizeTraceWrite({
           traceId,
           status: "completed",
