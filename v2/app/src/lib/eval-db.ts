@@ -154,9 +154,25 @@ export async function updateEvalRun(
     status: "running" | "completed" | "failed";
     summary?: RunSummary | null;
     error?: string | null;
+    /** 传 undefined 表示不更新 completed_at（避免 recalc 重写导致时间漂移） */
     completedAt?: string | null;
   }
 ): Promise<void> {
+  if (input.completedAt === undefined) {
+    // 保留原 completed_at（人工覆盖重算场景，Reviewer #4 修复）
+    await pool.query(
+      `UPDATE eval_runs
+       SET status = $2, summary = $3, error = $4
+       WHERE id = $1`,
+      [
+        id,
+        input.status,
+        input.summary ? JSON.stringify(input.summary) : null,
+        input.error ?? null,
+      ]
+    );
+    return;
+  }
   await pool.query(
     `UPDATE eval_runs
      SET status = $2, summary = $3, error = $4, completed_at = $5
@@ -166,7 +182,7 @@ export async function updateEvalRun(
       input.status,
       input.summary ? JSON.stringify(input.summary) : null,
       input.error ?? null,
-      input.completedAt ?? null,
+      input.completedAt,
     ]
   );
 }
@@ -289,11 +305,17 @@ function mapRunRow(row: Record<string, unknown>): EvalRun {
   };
 }
 
-/** 任意时间值 → ISO 8601（PG timestamp 可解析） */
+/** 任意时间值 → PG timestamp 可解析字符串（保持本地时区，避免 UTC 漂移）
+ *  Review #4 修复：PG timestamp(无时区) 经 node-postgres 读出是本地时区 Date，
+ *  用 toISOString() 会转 UTC 偏移 8h；按本地时间格式化原样回写。 */
 function toIso(v: unknown): string {
   if (!v) return "";
   const d = new Date(v as string);
-  return Number.isNaN(d.getTime()) ? String(v) : d.toISOString();
+  if (Number.isNaN(d.getTime())) return String(v);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(
+    d.getHours()
+  )}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
 function mapResultRow(row: Record<string, unknown>): EvalResult {

@@ -98,6 +98,10 @@ export interface FinalVerdict {
   scores: Partial<Record<string, number>>; // 1-5 分档维度
   judge_type: "program" | "llm" | "human";
   notes: string[];
+  /** 程序规则是否存在失败项（Review：程序失败必须显式可见，不被分数掩盖） */
+  program_failed?: boolean;
+  /** 程序失败的具体规则名（供总览首要展示） */
+  program_failures?: Array<{ name: string; detail: string }>;
 }
 
 /** eval_runs 行 */
@@ -120,6 +124,13 @@ export interface RunSummary {
   gsb: { good: number; same: number; bad: number; total: number };
   strong: Record<string, { pass: number; fail: number; not_tested: number }>;
   score_avg: number | null;
+  /** 程序规则失败的 Case（Review：失败必须显式呈现，不得被平均分掩盖） */
+  program_failures: Array<{
+    case_id: string;
+    title: string;
+    rules: Array<{ name: string; detail: string }>;
+  }>;
+  not_tested: string[]; // 强约束 NOT_TESTED 的 Case 列表
 }
 
 /** eval_results 行 */
