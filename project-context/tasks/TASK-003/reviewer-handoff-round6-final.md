@@ -1,8 +1,8 @@
 # TASK-003｜四项复审交接包（合并准备终审）
 
 > 交接角色：Chief of Staff → **新独立 Reviewer**
-> 交接类型：合并前四项复审（Builder 已完成合并收尾）
-> 复审对象：`feature/task-003-eval-run-slice` @ `aecb9ed`
+> 交接类型：合并前四项复审（Builder 已完成合并收尾；复审项 1 打回后已修复）
+> 复审对象：`feature/task-003-eval-run-slice` @ `9bcfe9c`
 > 复审范围：**只审四项，不审业务功能**（功能已由前五轮 Review 完成，最终报告 `review-report-final.md` 为 REVIEW_APPROVED）
 > 日期：2026-08-10
 
@@ -12,21 +12,28 @@
 
 ```
 你是 TASK-003 合并前的独立 Reviewer（新会话，独立视角）。
-任务：对 feature/task-003-eval-run-slice @ aecb9ed 做合并前四项复审。
+任务：对 feature/task-003-eval-run-slice @ 9bcfe9c 做合并前四项复审。
 只审下列四项，不做功能 Review（功能已 REVIEW_APPROVED，见
 project-context/tasks/TASK-003/review-report-final.md）。
 
-【复审项 1：文档与代码一致性】
+【复审项 1：文档与代码一致性】（重点：前次打回 5 处已修复，请复核 commit 9bcfe9c）
 对照 eval/eval-contracts.md 与 v2/app/src/lib/ 下实际代码、v2/migrations/002/003_eval_fixes.sql，
 逐项核实：数据模型列名/类型、API 路由路径、状态机语义是否与代码一致。
-发现不一致 → 列出差异文件/行并判 CHANGES_REQUESTED。
+前次 5 处差异（已在 9bcfe9c 修正，复核点）：
+1. eval_cases.created_at=TIMESTAMP（非 TIMESTAMPTZ；003 未转换该表）
+2. judge 请求体={strong?, scores?, reason}（reason 必填；非 {override}）
+3. human_override={strong, scores, reason, judged_at}
+4. final_verdict 按 judge_type 变化：程序/LLM 保留候选字段；
+   人工覆盖重建仅 {strong,scores,judge_type,notes}（契约 §1.3.1 已记录）
+5. case_id 含 Txxx（from-trace）；source 含 manual（普通 POST）
+发现新不一致 → 列差异并判 CHANGES_REQUESTED。
 
 【复审项 2：无关文件检查】
 git status --short 中所有未跟踪项（V3-Memory-评测效率工具-workspace/、
 articles_batch*.txt、cards_batch*.txt、eval/cases-full.md、eval/llm-judge.md、
 eval/shots-r4/）必须保持未跟踪、不得进入任何提交。
-git diff master...HEAD --name-only 必须只含 TASK-003 业务文件（预期 35 个：
-26 代码 + 9 文档）。发现混入 → 判 CHANGES_REQUESTED。
+git diff master...HEAD --name-only 必须只含 TASK-003 业务文件。
+发现混入 → 判 CHANGES_REQUESTED。
 
 【复审项 3：契约覆盖】
 确认 eval-contracts.md 覆盖：
@@ -61,11 +68,11 @@ git diff master...HEAD --name-only 必须只含 TASK-003 业务文件（预期 3
 
 | 材料 | 路径 | 用途 |
 |---|---|---|
-| 复审对象分支 | `feature/task-003-eval-run-slice` @ `aecb9ed` | 待审提交 |
+| 复审对象分支 | `feature/task-003-eval-run-slice` @ `9bcfe9c` | 待审提交 |
 | 契约文档 | `eval/eval-contracts.md` | 一致性/覆盖对照基准 |
 | 指标策略 | `eval/eval-policy-v1.md` | 关联策略（只读） |
 | 最终功能 Review | `project-context/tasks/TASK-003/review-report-final.md` | 功能已 APPROVED 依据 |
-| 本轮收尾提交 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注精确化） | 复审目标 |
+| 收尾提交链 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注）/ `9bcfe9c`（**复审项1 契约修正**） | 复审目标 |
 | 前五轮交接包 | `reviewer-handoff-round3/4/5.md` | 历史打回背景（可选参考） |
 | Chief 裁决 | `chief-decision-brief-v2.md` | CR-A/CR-C 范围依据 |
 
@@ -87,11 +94,25 @@ git diff master...HEAD --name-only 必须只含 TASK-003 业务文件（预期 3
 ## 4. 已执行的检查命令（Builder 自证，Reviewer 可复核）
 
 ```bash
-git diff master...HEAD --stat          # 35 files, +6280/-16
+git diff master...HEAD --stat          # 35 files, +6280/-16（收尾前）；+9bcfe9c 后仍纯 docs
 git diff master...HEAD --name-only | grep -iE "V3-|workspace|batch|profile"  # 空=干净
 grep -c "已被 B+ 修正" project-context/tasks/TASK-003/draft.md   # 1
 git status --short                     # 未跟踪仅 V3-workspace/batch 等无关项
 ```
+
+## 4.5 复审项 1 打回修复记录（2026-08-10，commit 9bcfe9c）
+
+Reviewer 复审项 1 判 CHANGES_REQUESTED，指出 5 处契约与代码不一致。Builder 以**代码为准**修正契约（未动任何代码/迁移）：
+
+| # | Reviewer 指出 | 代码事实（已核实）| 契约修正 |
+|---|---|---|---|
+| 1 | eval_cases.created_at 类型错误 | `002_eval.sql:23`=TIMESTAMP；`003` 未转换 eval_cases | 改回 TIMESTAMP + 注明未随 003 转换 |
+| 2 | judge 请求体不一致 | `judge/route.ts:22` 读取 `{strong, scores, reason}`（reason 必填 400） | 改写实际格式，删除错误的 `{override}` |
+| 3 | human_override 结构不一致 | `eval-types.ts:96`=`{strong, scores, reason, judged_at}` | 对齐实际类型 |
+| 4 | 覆盖后 final_verdict 不保留候选字段 | `judge/route.ts:31` 重建仅 `{strong,scores,judge_type,notes}` | 新增 §1.3.1 字段矩阵 + absolute_status 适用范围注明 |
+| 5 | case_id/source 枚举缺项 | from-trace 生成 `T###`；POST 默认 `manual` | 补 Txxx + manual |
+
+修正后契约与代码逐项对齐，复审项 2/3/4 原结论不受影响。
 
 ## 5. Reviewer 输出格式
 
