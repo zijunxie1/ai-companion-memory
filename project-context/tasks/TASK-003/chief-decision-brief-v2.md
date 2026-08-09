@@ -25,7 +25,7 @@
 ### 1.1 页面仓库
 
 ```text
-路径：C:\Users\admin\Documents\作品1
+路径：prototypes/task-003-eval-console-v2.1
 分支：feature/v2.1-builder-revision
 HEAD：72a1da4
 页面修订提交：819275b
@@ -242,9 +242,9 @@ Chief 在输出 DRAFT 后应先等待用户批准，不得直接交 Builder。
 2. 项目章程：`AGENTS.md`
 3. 原任务草案：`project-context/tasks/TASK-003/draft.md`
 4. 产品定义：`project-context/product.md`
-5. 设计规范：`C:\Users\admin\Documents\作品1\design-spec-v2-implementation.md`
-6. 静态页面复审：`C:\Users\admin\Documents\作品1\REVIEW-REPORT-RECHECK.md`
-7. 页面：`C:\Users\admin\Documents\作品1\index.html`
+5. 设计规范：`prototypes/task-003-eval-console-v2.1/design-spec-v2-implementation.md`
+6. 静态页面复审：`project-context/tasks/TASK-003/static-prototype-review-v2.1/REVIEW-REPORT-RECHECK.md`
+7. 页面：`prototypes/task-003-eval-console-v2.1/index.html`
 
 建议复制给 Chief 的消息：
 

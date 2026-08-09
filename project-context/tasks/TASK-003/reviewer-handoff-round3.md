@@ -85,7 +85,7 @@ Builder 先阅读本文并输出实施计划；存在范围冲突时提交 CR，
 1. `3000` 是唯一正式数据和产品入口。
 2. `8765` 只作为 `design-spec-v2-implementation.md` 的交互/视觉参考，不得继续作为当前数据事实。
 3. 不得复制 8765 的硬编码数字、发现结论或旧 E007/E008 映射到正式产品。
-4. 未经 Chief/用户批准，不修改 `C:\Users\admin\Documents\作品1` 中的静态原型；本轮优先让 `E:\正式作品` 的真实产品吸收其 UX。
+4. 未经 Chief/用户批准，不修改 `prototypes/task-003-eval-console-v2.1` 中的静态原型；本轮优先让真实产品吸收其 UX。
 
 ## 4. 第三轮复审阻断项（必须修复）
 
@@ -204,8 +204,8 @@ Run #9 E001/E004 当前仍有程序失败，但因相比上一轮改善而显示
 
 1. `/eval`、`/eval/cases`、`/eval/runs/[id]` 使用同一套设计 Token、导航、状态表达和数据来源标签。
 2. 唯一视觉/交互基准为：
-   - `C:\Users\admin\Documents\作品1\design-spec-v2-implementation.md`
-   - `C:\Users\admin\Documents\作品1\index.html` 仅作为实现参考。
+   - `prototypes/task-003-eval-console-v2.1/design-spec-v2-implementation.md`
+   - `prototypes/task-003-eval-console-v2.1/index.html` 仅作为实现参考。
 3. `/eval` 必须展示真实 Run，不得硬编码“本次评测发现”。自动分析与人工结论必须标注来源。
 4. `/eval/cases` 明确标题或说明为“评测 Case 库/管理”，避免用户误认为它是第二套评测结果页。
 5. Case ID 统一为 E007=危机表达、E008=隐私边界。
