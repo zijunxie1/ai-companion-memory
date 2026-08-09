@@ -1,8 +1,8 @@
 # TASK-003｜四项复审交接包（合并准备终审）
 
 > 交接角色：Chief of Staff → **新独立 Reviewer**
-> 交接类型：合并前四项复审（Builder 已完成合并收尾；复审项 1 两轮打回均已修复）
-> 复审对象：`feature/task-003-eval-run-slice` @ `ae8453f`
+> 交接类型：合并前四项复审（Builder 已完成合并收尾；复审项 1 三轮打回均已修复）
+> 复审对象：`feature/task-003-eval-run-slice` @ `6907940`
 > 复审范围：**只审四项，不审业务功能**（功能已由前五轮 Review 完成，最终报告 `review-report-final.md` 为 REVIEW_APPROVED）
 > 日期：2026-08-10
 
@@ -12,25 +12,29 @@
 
 ```
 你是 TASK-003 合并前的独立 Reviewer（新会话，独立视角）。
-任务：对 feature/task-003-eval-run-slice @ ae8453f 做合并前四项复审。
+任务：对 feature/task-003-eval-run-slice @ 6907940 做合并前四项复审。
 只审下列四项，不做功能 Review（功能已 REVIEW_APPROVED，见
 project-context/tasks/TASK-003/review-report-final.md）。
 
-【复审项 1：文档与代码一致性】（重点：两轮打回均已修复，请复核）
-前两轮已修正 7 处（9bcfe9c 5 处 + ae8453f 2 处），复核点：
+【复审项 1：文档与代码一致性】（重点：三轮打回均已修复，请复核）
+前三轮已修正 11 处（9bcfe9c 5 处 + ae8453f 2 处 + 6907940 4 处），复核点：
 第一轮 5 处：
 1. eval_cases.created_at=TIMESTAMP（非 TIMESTAMPTZ；003 未转换该表）
 2. judge 请求体={strong?, scores?, reason}（reason 必填；非 {override}）
 3. human_override={strong, scores, reason, judged_at}
-4. final_verdict 按判定路径变化（见 5）
+4. final_verdict 按判定路径变化
 5. case_id 含 Txxx（from-trace）；source 含 manual（普通 POST）
-第二轮 2 处（重点）：
-6. §1.3.1 判定路径三维表：程序/LLM 候选（候选完整）｜等待人工判定
-   （eval-llm-judge.ts:383 无程序规则且无 LLM 时 judge_type=human 但候选字段完整）｜
-   已应用人工覆盖（human_override 非空，judge/route.ts 重建丢字段）。
-   准确条件=human_override 非空，不是 judge_type=human。
-7. absolute 计数语义：覆盖重建后 absolute_status 被删除，eval-runner.ts:516
-   summary 只读取不推导 → 被覆盖 Case 不进入 absolute PASS/FAIL/NOT_TESTED 统计。
+第二轮 2 处：
+6. §1.3.1 判定路径三维表；准确条件=human_override 非空（不是 judge_type=human）
+7. absolute 计数：覆盖 Case 不进入统计（summary 只读不推导）
+第三轮 4 处（重点，异常路径）：
+8. final_verdict 判定路径表新增「Case 级执行异常」行（eval-runner.ts:372 catch）：
+   strong 全 FAIL / scores:{} / judge_type=program / notes=执行异常，
+   无 program_failed/absolute_status/write_state
+9. absolute 计数补注：执行异常 Case 同样无 absolute_status → 不计入统计
+10. eval_user_id 补注：异常路径落库 NULL（eval-db.ts ?? null 回退）
+11. §3.1 Run 状态机异常双层语义：Case 级异常被捕获→Run 继续 completed；
+    仅 Run 级未捕获异常→failed+清理半成品（eval-runner.ts:447）
 发现新不一致 → 列差异并判 CHANGES_REQUESTED。
 
 【复审项 2：无关文件检查】
@@ -44,9 +48,9 @@ git diff master...HEAD --name-only 必须只含 TASK-003 业务文件。
 确认 eval-contracts.md 覆盖：
 - 新增表 3 个（eval_cases / eval_runs / eval_results）+ traces 终态协议 4 字段
 - API 5 个（runs POST / runs GET / runs[id] GET / cases / cases/from-trace / results[id]/judge）
-- Run 状态机：running → completed/failed；写入终态四态 pending/completed/failed/timeout；
-  三态 PASS/FAIL/NOT_TESTED + absolute_status 优先级
-- eval_user_id 持久化（Case 级隔离）
+- Run 状态机：running → completed/failed（含异常双层语义）；写入终态四态
+  pending/completed/failed/timeout；三态 PASS/FAIL/NOT_TESTED + absolute_status 优先级
+- eval_user_id 持久化（含异常路径 NULL 语义）
 缺项 → 判 CHANGES_REQUESTED。
 
 【复审项 4：可安全合并】
@@ -73,11 +77,11 @@ git diff master...HEAD --name-only 必须只含 TASK-003 业务文件。
 
 | 材料 | 路径 | 用途 |
 |---|---|---|
-| 复审对象分支 | `feature/task-003-eval-run-slice` @ `ae8453f` | 待审提交 |
+| 复审对象分支 | `feature/task-003-eval-run-slice` @ `6907940` | 待审提交 |
 | 契约文档 | `eval/eval-contracts.md` | 一致性/覆盖对照基准 |
 | 指标策略 | `eval/eval-policy-v1.md` | 关联策略（只读） |
 | 最终功能 Review | `project-context/tasks/TASK-003/review-report-final.md` | 功能已 APPROVED 依据 |
-| 收尾提交链 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注）/ `9bcfe9c`（复审项1 第一轮修正）/ `ae8453f`（**复审项1 第二轮修正**） | 复审目标 |
+| 收尾提交链 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注）/ `9bcfe9c`（复审项1 第一轮）/ `ae8453f`（第二轮）/ `6907940`（**第三轮：异常路径**） | 复审目标 |
 | 前五轮交接包 | `reviewer-handoff-round3/4/5.md` | 历史打回背景（可选参考） |
 | Chief 裁决 | `chief-decision-brief-v2.md` | CR-A/CR-C 范围依据 |
 
@@ -130,6 +134,19 @@ Reviewer 第二轮指出 2 处更细的契约语义不一致，Builder 再次以
 
 > 说明：Reviewer 提示"若希望 absolute 真从人工结果重算需先提交 CR"——本轮选择**如实记录现有实现**，
 > 未擅自改动代码功能。absolute 从人工结果重算如需实现，另立 CR/TASK。
+
+### 4.7 复审项 1 第三轮打回修复记录（2026-08-10，commit 6907940）
+
+Reviewer 第三轮指出 4 处**异常路径**契约不一致，Builder 以代码为准修正契约：
+
+| # | Reviewer 指出 | 代码事实（已核实）| 契约修正 |
+|---|---|---|---|
+| 8 | 契约称 program/llm 保留完整候选字段，但异常分支只写强约束 FAIL | `eval-runner.ts:372-380` catch：failedVerdict=`{strong:强约束全FAIL, scores:{}, judge_type:"program", notes:["执行异常"]}` | 判定路径表新增「Case 级执行异常」行 |
+| 9 | 异常 Case 缺 absolute_status 不计入 | 异常 final_verdict 无 absolute_status（program_verdict 虽 FAIL，汇总只读 final_verdict） | absolute 计数语义补注执行异常 Case 同样不计入 |
+| 10 | 异常路径 eval_user_id 落库 NULL | `eval-runner.ts:382` 未传；`eval-db.ts:234` `?? null` 回退 | eval_user_id 说明补注异常路径 NULL |
+| 11 | 契约写"执行异常→failed"，实际 Case 级异常 Run 继续 completed | `eval-runner.ts:447`：runOneCase catch 内部消化；仅 executeEvalRun catch 才 failed+清理 | §3.1 补异常双层语义 |
+
+> 说明：以上均为契约如实记录现有实现，未改动任何代码功能。
 
 ## 5. Reviewer 输出格式
 
