@@ -50,7 +50,7 @@
 - ❌ 评测判定逻辑（eval-program-rules / eval-runner / eval-llm-judge）
 - ❌ 数据库迁移文件（002/003 已应用）
 - ❌ V2 产品链路（/api/chat、mem0、Dify Chatflow）
-- ❌ `C:\Users\admin\Documents\作品1` 静态原型
+- ❌ `prototypes/task-003-eval-console-v2.1` 静态原型
 
 ## 6. 相关正式契约
 
