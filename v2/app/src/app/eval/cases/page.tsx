@@ -95,7 +95,9 @@ export default function EvalCasesPage() {
         </div>
       ) : (
         <div className="overflow-hidden rounded-xl border border-gray-100 bg-white">
-          <table className="w-full text-sm">
+          {/* 移动端：表格容器内部横向滚动，不撑破页面（Review R4 P1-1） */}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b border-gray-100 text-left text-xs text-[#70747D]">
                 <th className="px-4 py-2.5 font-medium">ID</th>
@@ -140,7 +142,8 @@ export default function EvalCasesPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       )}
     </div>

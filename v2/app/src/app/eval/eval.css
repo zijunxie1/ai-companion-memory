@@ -23,3 +23,15 @@
   outline: none;
   box-shadow: 0 0 0 1px #a5b4fc;
 }
+
+/* 移动端长文本保护（Review R4 P1-1：规则名/证据文本不得裁断出屏） */
+.eval-break {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 移动端 44px 触摸目标兜底（用于自定义按钮等非 Link 元素） */
+.eval-touch {
+  min-height: 2.75rem; /* 44px */
+}
