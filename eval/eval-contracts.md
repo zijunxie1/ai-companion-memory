@@ -15,7 +15,7 @@
 | 列 | 类型 | 说明 |
 |---|---|---|
 | id | UUID PK | 主键 |
-| case_id | VARCHAR(32) UNIQUE | 人类可读 ID：E001-E008（种子）/ Cxxx / BCxxx（Bad Case 转） |
+| case_id | VARCHAR(32) UNIQUE | 人类可读 ID：E001-E008（种子）/ Cxxx / **Txxx（from-trace 自动生成，如 T001）** / BCxxx（Bad Case 转） |
 | title | VARCHAR(255) | 标题 |
 | category | VARCHAR(32) | core / adversarial / safety |
 | test_target | TEXT | 测试目标 |
@@ -24,10 +24,10 @@
 | expected | TEXT | 预期行为 |
 | pass_criteria | JSONB | 通过标准 `{strong:[...], program:{...}, llm:{...}}` |
 | eval_type | VARCHAR(16) | program / llm / human / mixed |
-| source | VARCHAR(32) | seed / baseline / bad-case / trace |
+| source | VARCHAR(32) | seed / baseline / bad-case / trace / **manual（普通 POST 新增默认值）** |
 | source_bad_case | VARCHAR(64) | 关联 Bad Case ID |
 | is_active | BOOLEAN | 启用标记 |
-| created_at | TIMESTAMPTZ | 创建时间 |
+| created_at | TIMESTAMP | 创建时间（**注意：本列仍为 TIMESTAMP，未随 003 迁移转 TIMESTAMPTZ**；003 仅转换 eval_runs/eval_results/traces） |
 
 ### 1.2 eval_runs — 评测运行
 
@@ -58,8 +58,8 @@
 | latency_ms | INTEGER | 耗时 |
 | program_verdict | JSONB | 程序判定 `{strong:{...}, checks:[{name,status,detail,evidence}]}` |
 | llm_judge | JSONB | LLM 候选 `{dimensions:{...}, overall_reasoning}` |
-| human_override | JSONB | 人工覆盖 `{verdict, reason, judged_at}` |
-| final_verdict | JSONB | 最终判定 `{strong, scores, judge_type, notes, program_failed, program_failures, absolute_status, write_state}` |
+| human_override | JSONB | 人工覆盖 `{strong, scores, reason, judged_at}`（结构见 eval-types.ts HumanOverride） |
+| final_verdict | JSONB | 最终判定（候选字段随 judge_type 变化，见下方说明）|
 | judge_type | VARCHAR(16) | program / llm / human（最终来源） |
 | gsb | VARCHAR(8) | Good / Same / Bad / NULL（首次 Run 无对比） |
 | **eval_user_id** | VARCHAR | **Case 级独立 eval 用户**（`eval-<runShort>-<case>-<rand>`，审计隔离） |
@@ -77,6 +77,16 @@
 
 > 终态协议（CR-C）：评测侧**不得用 memory_writes 非空/差值猜测终态**，
 > 只认 `write_status` 状态机轮询；超时按 NOT_TESTED 处理（见 §3.2）。
+
+#### 1.3.1 final_verdict 字段随 judge_type 变化（实现事实）
+
+| judge_type | final_verdict 保留字段 |
+|---|---|
+| program / llm | `{strong, scores, judge_type, notes, program_failed, program_failures, absolute_status, write_state}`（mergeVerdicts 产出，候选完整） |
+| human | `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`（judge/route.ts 重建，**候选字段不保留**；GSB/absolute 以重算后的 strong/scores 为准） |
+
+> ⚠️ absolute_status 的优先级定义（§3.3）适用于程序/LLM 判定路径；
+> 人工覆盖路径以人工给出的 strong/scores 为最终事实，不再套用程序优先级。
 
 ---
 
@@ -101,10 +111,14 @@ GET /api/eval/runs/[id]           → {run: {...}, results: [...]}
 
 ```
 POST /api/eval/results/[id]/judge
-body: { override: {verdict, reason} }   # verdict: PASS | FAIL
+body: { strong?: Record<string,"PASS"|"FAIL">, scores?: Partial<Record<string,number>>, reason: string }
+# reason 必填（400 若缺）；strong/scores 可选，缺省合并前一 final_verdict 值
 ```
-- 更新 human_override + final_verdict.judge_type=human + gsb 重算 + summary 重聚合
+- 更新 human_override（{strong, scores, reason, judged_at}）+ final_verdict.judge_type=human + gsb 重算 + summary 重聚合
 - **completed_at 不回写**（避免 recalc 时间漂移，Reviewer #4 修复）
+- ⚠️ **final_verdict 重建语义**：人工覆盖后 final_verdict 仅保留 `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`；
+  `program_failed / program_failures / absolute_status / write_state` 等候选字段**不保留**（judge/route.ts 重建逻辑），
+  该结果 GSB/absolute 以重算后的 strong/scores 为准
 
 ### 2.4 Case 管理
 
