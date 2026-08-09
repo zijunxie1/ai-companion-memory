@@ -20,4 +20,12 @@ export const env = {
 
   // Demo 用户
   DEMO_USER_ID: process.env.DEMO_USER_ID || "demo-alice",
+
+  // LLM Judge（评测用，直接调 DeepSeek OpenAI 兼容接口）
+  LLM_API_KEY: process.env.LLM_API_KEY || "",
+  LLM_BASE_URL: process.env.LLM_BASE_URL || "https://api.deepseek.com/v1",
+  JUDGE_MODEL: process.env.JUDGE_MODEL || "deepseek-v4-flash",
+
+  // 评测专用用户（与 demo-alice 产品数据隔离）
+  EVAL_USER_ID: process.env.EVAL_USER_ID || "eval-runner",
 };
