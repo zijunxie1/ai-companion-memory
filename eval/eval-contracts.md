@@ -62,7 +62,7 @@
 | final_verdict | JSONB | 最终判定（候选字段随 judge_type 变化，见下方说明）|
 | judge_type | VARCHAR(16) | program / llm / human（最终来源） |
 | gsb | VARCHAR(8) | Good / Same / Bad / NULL（首次 Run 无对比） |
-| **eval_user_id** | VARCHAR | **Case 级独立 eval 用户**（`eval-<runShort>-<case>-<rand>`，审计隔离） |
+| **eval_user_id** | VARCHAR | **Case 级独立 eval 用户**（`eval-<runShort>-<case>-<rand>`，审计隔离）；**异常路径为 NULL**（runOneCase catch 不传，eval-db.ts `?? null` 回退） |
 | created_at | TIMESTAMPTZ | 创建时间 |
 
 ### 1.4 traces（产品表，003 扩展）— 写入终态协议
@@ -85,14 +85,16 @@
 | 程序/LLM 候选 | judge_type = program / llm | `{strong, scores, judge_type, notes, program_failed, program_failures, absolute_status, write_state}`（mergeVerdicts 产出，候选完整） |
 | 等待人工判定 | **无程序规则且无 LLM 评分** → judge_type="human"（eval-llm-judge.ts:383），**但 final_verdict 仍保留全部候选字段**（mergeVerdicts 产出，未重建） | 同上（候选完整），notes 含"该 Case 无程序规则覆盖，等待人工判定" |
 | 已应用人工覆盖 | `human_override` 非空（judge/route.ts POST 后） | `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`（重建，**候选字段被删除**） |
+| **Case 级执行异常** | runOneCase catch（eval-runner.ts:372） | `{strong: 强约束全 FAIL, scores:{}, judge_type:"program", notes:["执行异常: <msg>"]}`（**无 program_failed/program_failures/absolute_status/write_state**；eval_user_id 落库 NULL） |
 
 > ⚠️ **准确条件**：字段结构差异的判定条件是「**human_override 是否非空**（已应用人工覆盖）」，
 > **不是** judge_type="human"——因为"等待人工判定"状态下 judge_type 同为 human 但候选字段完整。
 >
 > ⚠️ **absolute 计数语义**：人工覆盖重建后 `absolute_status` 被删除；
+> Case 级执行异常同样**无 absolute_status**（final_verdict 不含该字段，尽管 program_verdict 设 FAIL）；
 > `eval-runner.ts` 的 summary 聚合**只读取** `final_verdict.absolute_status` 计数（不推导），
-> 因此**被人工覆盖的 Case 不进入 absolute 的 PASS/FAIL/NOT_TESTED 统计**（除非覆盖请求体显式提供并经上游重建保留——当前实现不保留）。
-> absolute_status 的优先级定义（§3.3）仅适用于程序/LLM 判定路径。
+> 因此**被人工覆盖或执行异常的 Case 不进入 absolute 的 PASS/FAIL/NOT_TESTED 统计**。
+> absolute_status 的优先级定义（§3.3）仅适用于程序/LLM 正常判定路径。
 
 ---
 
@@ -141,13 +143,16 @@ POST /api/eval/cases/from-trace     # Trace 转回归 Case
 ### 3.1 Run 生命周期
 
 ```text
-(running) ──全部 Case 完成──▶ (completed)
+(running) ──全部 Case 完成（含 Case 级异常被捕获）──▶ (completed)
     │
-    └──执行异常──▶ (failed)   # error 记录原因
+    └──Run 级未捕获异常──▶ (failed)   # error 记录原因；半成品结果被清理
 ```
 
 - 互斥：同一时刻最多一个 running Run（409）
 - GSB 对比基准：上一次 **completed** 的 Run（同 Case 逐条对比）
+- ⚠️ **异常双层语义**：**Case 级异常**（runOneCase catch）被内部捕获——该 Case 记为失败结果
+  （strong 全 FAIL / judge_type=program / notes="执行异常"），**Run 继续执行并可标记 completed**；
+  仅**未捕获的 Run 级异常**（executeEvalRun catch）才进入 failed 并清理半成品结果（eval-runner.ts:447）
 
 ### 3.2 Trace 写入终态（每 Case 内）
 
