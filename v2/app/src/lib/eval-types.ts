@@ -48,15 +48,23 @@ export interface EvalPassCriteria {
   llm?: Record<string, unknown>; // LLM Judge 参数（阈值等）
 }
 
+/** 规则三态（Review R3 §4.2：不用 pass:boolean 表达证据缺失） */
+export type RuleStatus = "PASS" | "FAIL" | "NOT_TESTED";
+
 /** 程序规则判定结果 */
 export interface ProgramVerdict {
   checks: Array<{
     name: string;
+    /** 兼容字段（旧 UI/GSB 使用）；新逻辑以 status 为准 */
     pass: boolean;
     detail: string;
     evidence?: unknown;
+    /** 三态结果（Review R3：NOT_TESTED 表示证据缺失，不算 FAIL） */
+    status: RuleStatus;
   }>;
   strong?: Record<string, "PASS" | "FAIL" | "NOT_TESTED">;
+  /** 绝对状态（强约束 FAIL > 强约束 NOT_TESTED > 普通程序 FAIL > PASS） */
+  absolute_status?: RuleStatus;
 }
 
 /** LLM Judge 维度评分 */
@@ -102,6 +110,10 @@ export interface FinalVerdict {
   program_failed?: boolean;
   /** 程序失败的具体规则名（供总览首要展示） */
   program_failures?: Array<{ name: string; detail: string }>;
+  /** 绝对状态（Review R3 §4.1：GSB 表示相对变化，absolute_status 表示当前是否满足规则） */
+  absolute_status?: "PASS" | "FAIL" | "NOT_TESTED";
+  /** 写入终态（CR-C：completed/failed/timeout + disposition） */
+  write_state?: { state: string; disposition: string | null } | null;
 }
 
 /** eval_runs 行 */
@@ -131,6 +143,8 @@ export interface RunSummary {
     rules: Array<{ name: string; detail: string }>;
   }>;
   not_tested: string[]; // 强约束 NOT_TESTED 的 Case 列表
+  /** 绝对状态分布（Review R3 §4.1：GSB 相对变化 + 当前绝对状态分离） */
+  absolute: { pass: number; fail: number; not_tested: number };
 }
 
 /** eval_results 行 */

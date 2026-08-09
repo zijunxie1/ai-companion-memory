@@ -305,6 +305,42 @@ function LatestRunSummary({ run }: { run: EvalRun }) {
         </div>
       )}
 
+      {/* 绝对状态（Review R3 §4.1：GSB=相对变化，absolute=当前是否满足规则） */}
+      <div className="rounded-xl border border-gray-100 bg-white p-5">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-medium text-[#70747D]">
+            当前绝对状态（本轮是否满足规则）
+          </p>
+          <span className="text-[10px] text-[#70747D]/70">
+            GSB 表示相对变化，不等于当前通过
+          </span>
+        </div>
+        {summary?.absolute ? (
+          <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-lg bg-emerald-50 py-2">
+              <p className="text-xl font-bold tabular-nums text-emerald-600">
+                {summary.absolute.pass}
+              </p>
+              <p className="text-xs text-emerald-600/70">PASS</p>
+            </div>
+            <div className="rounded-lg bg-red-50 py-2">
+              <p className="text-xl font-bold tabular-nums text-red-600">
+                {summary.absolute.fail}
+              </p>
+              <p className="text-xs text-red-600/70">FAIL</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 py-2">
+              <p className="text-xl font-bold tabular-nums text-amber-600">
+                {summary.absolute.not_tested}
+              </p>
+              <p className="text-xs text-amber-600/70">NOT_TESTED</p>
+            </div>
+          </div>
+        ) : (
+          <p className="mt-3 text-sm text-[#70747D]">尚无 Run 数据</p>
+        )}
+      </div>
+
       {/* GSB + 平均分 */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-xl border border-gray-100 bg-white p-5">

@@ -204,12 +204,17 @@ export async function insertEvalResult(input: {
   finalVerdict: FinalVerdict;
   judgeType: string;
   gsb: "Good" | "Same" | "Bad" | null;
+  /** Case 级 eval 用户（Review R3 P1-2 审计追溯） */
+  evalUserId?: string;
+  /** Trace 写入终态（completed/failed/timeout）与处置 */
+  writeState?: string | null;
+  writeDisposition?: string | null;
 }): Promise<string> {
   const result = await pool.query(
     `INSERT INTO eval_results
       (run_id, case_id, case_snapshot, user_input, ai_reply, used_memory, recall_reason, memory_writes, latency_ms,
-       program_verdict, llm_judge, final_verdict, judge_type, gsb)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+       program_verdict, llm_judge, final_verdict, judge_type, gsb, eval_user_id)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
      RETURNING id`,
     [
       input.runId,
@@ -226,8 +231,23 @@ export async function insertEvalResult(input: {
       JSON.stringify(input.finalVerdict),
       input.judgeType,
       input.gsb,
+      input.evalUserId ?? null,
     ]
   );
+  // 写入终态存到 final_verdict.notes 便于展示（不新增列，保持迁移最小）
+  if (input.writeState) {
+    await pool.query(
+      `UPDATE eval_results SET final_verdict = jsonb_set(final_verdict, '{write_state}', $2::jsonb, true)
+       WHERE id = $1`,
+      [
+        result.rows[0].id,
+        JSON.stringify({
+          state: input.writeState,
+          disposition: input.writeDisposition ?? null,
+        }),
+      ]
+    );
+  }
   return result.rows[0].id;
 }
 

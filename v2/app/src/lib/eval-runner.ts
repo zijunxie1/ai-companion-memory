@@ -28,7 +28,6 @@ import type {
 } from "./eval-types";
 
 const CHAT_API_URL = process.env.EVAL_CHAT_API_URL || "http://localhost:3000/api/chat";
-const ASYNC_WRITE_POLL_MS = 2000; // 轮询间隔
 
 // ── 用户环境准备 ────────────────────────────────────────────
 
@@ -56,12 +55,13 @@ export async function resetEvalUserMemory(userId: string): Promise<void> {
 }
 
 /**
- * 生成 Run 级唯一 eval 用户 ID。
- * 修复点（Run#5 实测）：固定用户跨 Run 积累 mem0 历史 → 去重导致 seed/写入失效。
- * 每次 Run 用全新用户（eval-<timestamp>），彻底隔离历史，保证环境可复现。
+ * 生成 Case 级唯一 eval 用户 ID。
+ * 修复点（Reviewer R3 P1-2）：Run 级用户 + reset 无法隔离跨 Case 异步写入污染；
+ * 每个 Case 独立用户（eval-<runShort>-<case>-<rand>），Trace/Memory/Result 可互相追溯。
  */
-export function generateEvalUserId(): string {
-  return `eval-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+export function generateEvalUserId(runId: string, caseId: string): string {
+  const runShort = runId.replace(/-/g, "").slice(0, 8);
+  return `eval-${runShort}-${caseId}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
 // ── 真实 /api/chat 调用 ────────────────────────────────────
@@ -93,90 +93,66 @@ async function chatOnce(message: string, userId: string): Promise<ChatOnceResult
   };
 }
 
-/**
- * 等待 mem0 异步写入完成。
- * 修复点（Reviewer #3 + Run#2 实测）：
- *   1) minGrowth>0（seed_chat）：必须等到增长达标 + 稳定 2 轮，不得提前返回；
- *   2) minGrowth=0（主输入）：给足时间窗口（15s）+ 稳定 2 轮，避免漏掉延迟写入；
- *   3) 超时兜底（30s），返回实际增长用于日志。
- */
-async function waitForAsyncWrites(
-  userId: string,
-  before: Array<{ id: string }>,
-  opts?: { minGrowth?: number; minWaitMs?: number; timeoutMs?: number }
-): Promise<{ growth: number }> {
-  const minGrowth = opts?.minGrowth ?? 0;
-  const minWaitMs = opts?.minWaitMs ?? (minGrowth > 0 ? 8000 : 15000);
-  const timeoutMs = opts?.timeoutMs ?? 60000;
-  const deadline = Date.now() + timeoutMs;
-  const startedAt = Date.now();
-  let lastLength = before.length;
-  let stableRounds = 0;
-  let lastGrowth = 0;
-
-  while (Date.now() < deadline) {
-    await sleep(ASYNC_WRITE_POLL_MS);
-    const after = await mem0.getAll(userId);
-    lastGrowth = after.length - before.length;
-    const elapsed = Date.now() - startedAt;
-
-    if (after.length === lastLength) {
-      stableRounds++;
-    } else {
-      stableRounds = 0;
-      lastLength = after.length;
-    }
-
-    // 超过最小等待窗口 + 连续两轮稳定 才可返回
-    if (elapsed >= minWaitMs && stableRounds >= 2) {
-      // 有增长预期时必须达标；无预期则稳定即可
-      if (minGrowth > 0) {
-        if (lastGrowth >= minGrowth) return { growth: lastGrowth };
-      } else {
-        return { growth: lastGrowth };
-      }
-    }
-  }
-  console.warn(
-    `[eval] async write wait timed out (growth=${lastGrowth}/${minGrowth}, stable=${stableRounds})`
-  );
-  return { growth: lastGrowth };
-}
-
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
 /**
- * 轮询 traces 表获取该 trace 的异步 memory_writes（/api/chat Step 8 异步更新）。
- * 修复点（Run#4 实测）：getAll diff 会漏掉 fire-and-forget 写入，
- * traces.memory_writes 是产品链路自己回填的，最可靠。
- * 轮询最长 60s，每 2s 一次；超时返回空数组（由调用方走 diff 兜底）。
+ * 轮询 trace 的 write_status 直到终态（CR-C 终态协议）。
+ * 修复点（Reviewer R3 P1-2）：不得用 memory_writes 非空/空数组猜终态，
+ * 也不得用 before/after diff 差值回退；只认 write_status 状态机。
+ * 返回：
+ *   { status: "completed", disposition, memoryWrites }
+ *   { status: "failed", writeError }
+ *   { status: "timeout" }（轮询超时，调用方按 NOT_TESTED 处理）
+ * 轮询最长 90s，每 2s 一次。
  */
-async function fetchTraceMemoryWrites(
-  traceId: string | null
-): Promise<Array<{ event: string; memory: string }>> {
-  if (!traceId) return [];
-  const deadline = Date.now() + 60000;
+async function waitForTraceWriteFinal(
+  traceId: string | null,
+  timeoutMs = 90000
+): Promise<{
+  status: "completed" | "failed" | "timeout";
+  disposition?: string | null;
+  memoryWrites?: Array<{ event: string; memory: string }>;
+  writeError?: string | null;
+}> {
+  if (!traceId) return { status: "timeout" };
+  const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     await sleep(2000);
     const result = await pool.query(
-      `SELECT memory_writes FROM traces WHERE id = $1`,
+      `SELECT write_status, write_disposition, write_error, memory_writes
+       FROM traces WHERE id = $1`,
       [traceId]
     );
-    const writes = result.rows[0]?.memory_writes;
-    if (Array.isArray(writes) && writes.length > 0) {
-      return writes.map((w) => {
-        const obj = (w ?? {}) as Record<string, unknown>;
-        return {
-          event: String(obj.event ?? "ADD"),
-          memory: String(obj.memory ?? obj.content ?? ""),
-        };
-      });
+    const row = result.rows[0];
+    if (!row) return { status: "timeout" };
+    if (row.write_status === "completed") {
+      const writes = Array.isArray(row.memory_writes)
+        ? row.memory_writes.map((w: Record<string, unknown>) => {
+            const obj = (w ?? {}) as Record<string, unknown>;
+            return {
+              event: String(obj.event ?? "ADD"),
+              memory: String(obj.memory ?? obj.content ?? ""),
+            };
+          })
+        : [];
+      return {
+        status: "completed",
+        disposition: row.write_disposition ?? null,
+        memoryWrites: writes,
+      };
     }
+    if (row.write_status === "failed") {
+      return {
+        status: "failed",
+        writeError: row.write_error ? String(row.write_error) : "未知错误",
+      };
+    }
+    // pending：继续轮询
   }
-  console.warn(`[eval] trace ${traceId.slice(0, 8)} memory_writes 60s 内未回填，走 diff 兜底`);
-  return [];
+  console.warn(`[eval] trace ${traceId.slice(0, 8)} write_status ${timeoutMs / 1000}s 内未达终态`);
+  return { status: "timeout" };
 }
 
 /** 执行前置条件（seed_chat 建 Memory / delete_memory 删 Memory） */
@@ -287,54 +263,60 @@ export function compareGSB(
 
 // ── Run 主流程 ──────────────────────────────────────────────
 
-/** 执行单个 Case（返回结果行数据） */
+/** 执行单个 Case（返回结果行数据）
+ *  Review R3 P1-2：每条 Case 独立 userId（Case 级隔离），
+ *  写入结果只认 trace write_status 终态，不做 before/after 差值猜测。 */
 async function runOneCase(
   runId: string,
   caseDef: EvalCase,
-  previous: EvalResult | null,
-  userId: string
+  previous: EvalResult | null
 ): Promise<void> {
   const start = Date.now();
+  // Case 级独立用户（eval-<runShort>-<case>-<rand>）
+  const userId = generateEvalUserId(runId, caseDef.case_id);
   let aiReply: string | null = null;
   let usedMemory: unknown[] = [];
   let recallReason: string | null = null;
   let memoryWrites: unknown[] = [];
+  let writeState: string | null = null;
+  let writeDisposition: string | null = null;
 
   try {
-    // 0. 环境隔离：每个 Case 独立环境——先清空 eval 用户全部 Memory，
-    //    再按本 Case 前置条件重建（seed_chat 写入 / delete_memory 删除）。
-    //    保证 Case 之间无 Memory 串扰、结果可复现。
-    await resetEvalUserMemory(userId);
+    // 0. 确保 Case 用户存在（全新用户，无需 reset——历史天然隔离）
+    await ensureEvalUser(userId);
 
-    // 1. 前置条件（seed / delete）
+    // 1. 前置条件（seed / delete，使用 Case 专属用户）
     const deletedTerms = await applyPreconditions(caseDef, userId);
 
-    // 2. 主输入前 Memory 快照（diff 兜底用）
-    const beforeMain = await mem0.getAll(userId);
-
-    // 3. 调真实 /api/chat
+    // 2. 调真实 /api/chat（使用 Case 专属用户）
     const chatResult = await chatOnce(caseDef.input_text, userId);
     aiReply = chatResult.reply;
     usedMemory = chatResult.usedMemory;
     recallReason = chatResult.recallReason;
 
-    // 4. 等待异步写入完成，获取实际写入：
-    //    首选：轮询 traces 表 memory_writes 字段（/api/chat 异步更新，最可靠）
-    //    兜底：before/after diff（轮询超时后）
-    memoryWrites = await fetchTraceMemoryWrites(chatResult.traceId);
-    if (memoryWrites.length === 0) {
-      await waitForAsyncWrites(userId, beforeMain, { minGrowth: 0 });
-      const afterMain = await mem0.getAll(userId);
-      memoryWrites = diffMemories(beforeMain, afterMain);
+    // 3. 等待异步写入终态（CR-C：只认 write_status，不做差值回退）
+    const writeFinal = await waitForTraceWriteFinal(chatResult.traceId);
+    if (writeFinal.status === "completed") {
+      writeState = "completed";
+      writeDisposition = writeFinal.disposition ?? null;
+      memoryWrites = writeFinal.memoryWrites ?? [];
+    } else if (writeFinal.status === "failed") {
+      writeState = "failed";
+      console.warn(`[eval] ${caseDef.case_id} memory write failed: ${writeFinal.writeError}`);
+    } else {
+      writeState = "timeout";
+      console.warn(`[eval] ${caseDef.case_id} write_status 轮询超时，按 NOT_TESTED 处理`);
     }
 
-    // 5. 程序规则判定
+    // 4. 程序规则判定（写入状态透传给规则：timeout/failed → 相关规则 NOT_TESTED）
     const programVerdict = runProgramRules({
       caseDef,
       usedMemory,
       memoryWrites,
       aiReply,
       deletedTerms,
+      writeState,
+      writeDisposition,
     });
 
     // 6. LLM Judge（主观维度候选评分）
@@ -347,6 +329,7 @@ async function runOneCase(
     const merged = mergeVerdicts({
       programChecks: programVerdict.checks,
       programStrong: programVerdict.strong,
+      programAbsoluteStatus: programVerdict.absolute_status,
       llmJudge,
       caseDef,
     });
@@ -357,12 +340,13 @@ async function runOneCase(
       notes: merged.notes,
       program_failed: merged.program_failed,
       program_failures: merged.program_failures,
+      absolute_status: merged.absolute_status,
     };
 
     // 8. GSB 对比（与上一次 Run 同 Case）
     const gsb = compareGSB(finalVerdict, previous);
 
-    // 9. 入库
+    // 9. 入库（记录 Case 级 eval_user_id + 写入终态）
     await insertEvalResult({
       runId,
       caseDef,
@@ -377,9 +361,12 @@ async function runOneCase(
       finalVerdict,
       judgeType: merged.judgeType,
       gsb,
+      evalUserId: userId,
+      writeState,
+      writeDisposition,
     });
     console.log(
-      `[eval] ${caseDef.case_id} done (${Date.now() - start}ms, gsb=${gsb ?? "—"}, judge=${merged.judgeType})`
+      `[eval] ${caseDef.case_id} done (${Date.now() - start}ms, gsb=${gsb ?? "—"}, judge=${merged.judgeType}, write=${writeState ?? "?"})`
     );
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Unknown error";
@@ -403,7 +390,8 @@ async function runOneCase(
       memoryWrites: [],
       latencyMs: Date.now() - start,
       programVerdict: {
-        checks: [{ name: "execution", pass: false, detail: msg }],
+        checks: [{ name: "execution", pass: false, status: "FAIL", detail: msg }],
+        absolute_status: "FAIL",
       },
       llmJudge: null,
       finalVerdict: failedVerdict,
@@ -413,47 +401,30 @@ async function runOneCase(
   }
 }
 
-/** diff 两次 Memory 快照 → 新增条目（简化：按 memory 文本去重） */
-function diffMemories(
-  before: Array<{ id: string; memory?: string }>,
-  after: Array<{ id: string; memory?: string }>
-): Array<{ event: string; memory: string }> {
-  const beforeTexts = new Set(before.map((m) => memoryText(m)));
-  return after
-    .filter((m) => !beforeTexts.has(memoryText(m)))
-    .map((m) => ({ event: "ADD", memory: memoryText(m) }));
-}
-
 // ── Run 入口（API 调用） ────────────────────────────────────
 
 /**
  * 执行一次完整 Run：
  *   ensure 用户 → 逐条跑 8 Case（每条 Case 独立重置环境）→ 汇总 summary → 更新 Run 状态
- * 环境隔离策略（双层）：
- *   - Run 级：每次 Run 生成全新 eval 用户（eval-<ts>-<rand>），
- *     规避 mem0 用户历史去重导致 seed/写入失效（Run#5 实测根因）；
- *   - Case 级：每个 Case 在 runOneCase 内自行 reset + 重建前置条件，
- *     Case 之间完全隔离（无 Memory 串扰），保证结果可复现。
+ * 环境隔离策略（Review R3 P1-2 修正）：
+ *   - Case 级：每条 Case 独立 eval 用户（eval-<runShort>-<case>-<rand>），
+ *     彻底隔离 mem0 历史与跨 Case 异步写入污染；
+ *   - config_snapshot 记录 per_case 策略，不表达为单一评测用户。
  */
 export async function executeEvalRun(runId: string): Promise<void> {
   try {
-    // Run 级全新用户（彻底隔离 mem0 历史）
-    const evalUserId = generateEvalUserId();
-    await ensureEvalUser(evalUserId);
-    console.log(`[eval] run ${runId} started, eval user = ${evalUserId}`);
-
-    // 将 eval 用户写入 config_snapshot（追溯用）
+    // config_snapshot 记录 per_case 隔离策略（不再写入单一 eval_user_id）
     try {
       await pool.query(
         `UPDATE eval_runs SET config_snapshot = config_snapshot || $2::jsonb WHERE id = $1`,
-        [runId, JSON.stringify({ eval_user_id: evalUserId })]
+        [runId, JSON.stringify({ user_isolation: "per_case" })]
       );
     } catch {
       // 非关键，忽略
     }
 
     const cases = await getEvalCases(true);
-    console.log(`[eval] run ${runId} started, ${cases.length} cases`);
+    console.log(`[eval] run ${runId} started, ${cases.length} cases (per-case user isolation)`);
 
     // 上一次 completed Run（GSB 基准）
     const prevRun = await getLastCompletedRun(runId);
@@ -463,9 +434,9 @@ export async function executeEvalRun(runId: string): Promise<void> {
       prevByCase.set(r.case_snapshot?.case_id ?? r.case_id, r);
     }
 
-    // 逐条跑（顺序执行，每条 Case 独立环境）
+    // 逐条跑（每条 Case 独立用户 + 独立环境）
     for (const caseDef of cases) {
-      await runOneCase(runId, caseDef, prevByCase.get(caseDef.case_id) ?? null, evalUserId);
+      await runOneCase(runId, caseDef, prevByCase.get(caseDef.case_id) ?? null);
     }
 
     // 汇总
@@ -526,6 +497,7 @@ export function buildSummary(results: EvalResult[]): RunSummary {
   // 程序规则失败 Case（Review #2：失败必须显式呈现，不得被平均分掩盖）
   const programFailures: RunSummary["program_failures"] = [];
   const notTested: string[] = [];
+  const absolute = { pass: 0, fail: 0, not_tested: 0 };
   for (const r of results) {
     const cs = r.case_snapshot;
     const fails = r.final_verdict?.program_failures ?? [];
@@ -540,6 +512,11 @@ export function buildSummary(results: EvalResult[]): RunSummary {
     for (const [k, v] of Object.entries(r.final_verdict?.strong ?? {})) {
       if (v === "NOT_TESTED") notTested.push(`${cs.case_id}(${k})`);
     }
+    // 绝对状态分布（Review R3 §4.1）
+    const abs = r.final_verdict?.absolute_status;
+    if (abs === "FAIL") absolute.fail++;
+    else if (abs === "NOT_TESTED") absolute.not_tested++;
+    else if (abs === "PASS") absolute.pass++;
   }
 
   return {
@@ -548,6 +525,7 @@ export function buildSummary(results: EvalResult[]): RunSummary {
     score_avg: scoreCount > 0 ? Math.round((scoreSum / scoreCount) * 10) / 10 : null,
     program_failures: programFailures,
     not_tested: notTested,
+    absolute,
   };
 }
 

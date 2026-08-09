@@ -208,13 +208,37 @@ function CaseEvidenceCard({ result }: { result: EvalResult }) {
                   ? "bg-red-50 text-red-600"
                   : "bg-[#F6F7F9] text-[#70747D]"
             }`}
+            title="GSB = 相比上一轮的相对变化，不等于当前通过"
           >
             {result.gsb === "Good" ? "↑ Good" : result.gsb === "Bad" ? "↓ Bad" : "→ Same"}
+          </span>
+        )}
+        {/* 绝对状态（Review R3 §4.1：与 GSB 分离展示） */}
+        {final.absolute_status && (
+          <span
+            className={`rounded-md px-2 py-0.5 text-xs font-bold ${
+              final.absolute_status === "PASS"
+                ? "bg-emerald-50 text-emerald-700"
+                : final.absolute_status === "FAIL"
+                  ? "bg-red-50 text-red-700"
+                  : "bg-amber-50 text-amber-700"
+            }`}
+          >
+            {final.absolute_status === "PASS"
+              ? "✓ 通过"
+              : final.absolute_status === "FAIL"
+                ? "✗ 未通过"
+                : "? 未测试"}
           </span>
         )}
         <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[10px] text-purple-600">
           来源: {JUDGE_LABEL[result.judge_type]}
         </span>
+        {final.write_state && final.write_state.state !== "completed" && (
+          <span className="rounded-full bg-orange-50 px-2 py-0.5 text-[10px] text-orange-600">
+            写入: {final.write_state.state === "failed" ? "失败" : "超时(NOT_TESTED)"}
+          </span>
+        )}
       </div>
 
       <div className="space-y-4 px-4 py-4">
