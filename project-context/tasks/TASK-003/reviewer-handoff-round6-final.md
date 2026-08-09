@@ -1,8 +1,8 @@
 # TASK-003｜四项复审交接包（合并准备终审）
 
 > 交接角色：Chief of Staff → **新独立 Reviewer**
-> 交接类型：合并前四项复审（Builder 已完成合并收尾；复审项 1 打回后已修复）
-> 复审对象：`feature/task-003-eval-run-slice` @ `9bcfe9c`
+> 交接类型：合并前四项复审（Builder 已完成合并收尾；复审项 1 两轮打回均已修复）
+> 复审对象：`feature/task-003-eval-run-slice` @ `ae8453f`
 > 复审范围：**只审四项，不审业务功能**（功能已由前五轮 Review 完成，最终报告 `review-report-final.md` 为 REVIEW_APPROVED）
 > 日期：2026-08-10
 
@@ -12,20 +12,25 @@
 
 ```
 你是 TASK-003 合并前的独立 Reviewer（新会话，独立视角）。
-任务：对 feature/task-003-eval-run-slice @ 9bcfe9c 做合并前四项复审。
+任务：对 feature/task-003-eval-run-slice @ ae8453f 做合并前四项复审。
 只审下列四项，不做功能 Review（功能已 REVIEW_APPROVED，见
 project-context/tasks/TASK-003/review-report-final.md）。
 
-【复审项 1：文档与代码一致性】（重点：前次打回 5 处已修复，请复核 commit 9bcfe9c）
-对照 eval/eval-contracts.md 与 v2/app/src/lib/ 下实际代码、v2/migrations/002/003_eval_fixes.sql，
-逐项核实：数据模型列名/类型、API 路由路径、状态机语义是否与代码一致。
-前次 5 处差异（已在 9bcfe9c 修正，复核点）：
+【复审项 1：文档与代码一致性】（重点：两轮打回均已修复，请复核）
+前两轮已修正 7 处（9bcfe9c 5 处 + ae8453f 2 处），复核点：
+第一轮 5 处：
 1. eval_cases.created_at=TIMESTAMP（非 TIMESTAMPTZ；003 未转换该表）
 2. judge 请求体={strong?, scores?, reason}（reason 必填；非 {override}）
 3. human_override={strong, scores, reason, judged_at}
-4. final_verdict 按 judge_type 变化：程序/LLM 保留候选字段；
-   人工覆盖重建仅 {strong,scores,judge_type,notes}（契约 §1.3.1 已记录）
+4. final_verdict 按判定路径变化（见 5）
 5. case_id 含 Txxx（from-trace）；source 含 manual（普通 POST）
+第二轮 2 处（重点）：
+6. §1.3.1 判定路径三维表：程序/LLM 候选（候选完整）｜等待人工判定
+   （eval-llm-judge.ts:383 无程序规则且无 LLM 时 judge_type=human 但候选字段完整）｜
+   已应用人工覆盖（human_override 非空，judge/route.ts 重建丢字段）。
+   准确条件=human_override 非空，不是 judge_type=human。
+7. absolute 计数语义：覆盖重建后 absolute_status 被删除，eval-runner.ts:516
+   summary 只读取不推导 → 被覆盖 Case 不进入 absolute PASS/FAIL/NOT_TESTED 统计。
 发现新不一致 → 列差异并判 CHANGES_REQUESTED。
 
 【复审项 2：无关文件检查】
@@ -68,11 +73,11 @@ git diff master...HEAD --name-only 必须只含 TASK-003 业务文件。
 
 | 材料 | 路径 | 用途 |
 |---|---|---|
-| 复审对象分支 | `feature/task-003-eval-run-slice` @ `9bcfe9c` | 待审提交 |
+| 复审对象分支 | `feature/task-003-eval-run-slice` @ `ae8453f` | 待审提交 |
 | 契约文档 | `eval/eval-contracts.md` | 一致性/覆盖对照基准 |
 | 指标策略 | `eval/eval-policy-v1.md` | 关联策略（只读） |
 | 最终功能 Review | `project-context/tasks/TASK-003/review-report-final.md` | 功能已 APPROVED 依据 |
-| 收尾提交链 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注）/ `9bcfe9c`（**复审项1 契约修正**） | 复审目标 |
+| 收尾提交链 | `002e8b8`（文档归档）/ `4849b08`（元数据+契约）/ `aecb9ed`（标注）/ `9bcfe9c`（复审项1 第一轮修正）/ `ae8453f`（**复审项1 第二轮修正**） | 复审目标 |
 | 前五轮交接包 | `reviewer-handoff-round3/4/5.md` | 历史打回背景（可选参考） |
 | Chief 裁决 | `chief-decision-brief-v2.md` | CR-A/CR-C 范围依据 |
 
@@ -113,6 +118,18 @@ Reviewer 复审项 1 判 CHANGES_REQUESTED，指出 5 处契约与代码不一�
 | 5 | case_id/source 枚举缺项 | from-trace 生成 `T###`；POST 默认 `manual` | 补 Txxx + manual |
 
 修正后契约与代码逐项对齐，复审项 2/3/4 原结论不受影响。
+
+### 4.6 复审项 1 第二轮打回修复记录（2026-08-10，commit ae8453f）
+
+Reviewer 第二轮指出 2 处更细的契约语义不一致，Builder 再次以代码为准修正契约：
+
+| # | Reviewer 指出 | 代码事实（已核实）| 契约修正 |
+|---|---|---|---|
+| 6 | §1.3.1 把字段结构绑定 judge_type=human 不准确 | `eval-llm-judge.ts:383`：无程序规则且无 LLM 评分时 judge_type="human" 但**候选字段完整**（等待人工判定）；仅 `judge/route.ts:31` 覆盖重建丢字段 | 改为判定路径三维表：程序/LLM 候选 / 等待人工判定（候选完整）/ 已应用人工覆盖（重建）；准确条件=**human_override 非空** |
+| 7 | §2.3 声称覆盖后 absolute 按 strong/scores 重算 | `judge/route.ts:31` 重建删除 absolute_status；`eval-runner.ts:516` summary **只读取**不推导 | 修正为：被覆盖 Case **不进入 absolute 的 PASS/FAIL/NOT_TESTED 统计**（§1.3.1 + §2.3 双处注明） |
+
+> 说明：Reviewer 提示"若希望 absolute 真从人工结果重算需先提交 CR"——本轮选择**如实记录现有实现**，
+> 未擅自改动代码功能。absolute 从人工结果重算如需实现，另立 CR/TASK。
 
 ## 5. Reviewer 输出格式
 
