@@ -1,0 +1,25 @@
+/* ============================================================
+   评测台样式（仅作用于 eval/ 区域，不污染产品页面）
+   Design Spec V2 Token：背景 #F6F7F9 / 主文字 #1C1D21 / 次级 #70747D
+   ============================================================ */
+
+.eval-input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: #1c1d21;
+  background: #fff;
+}
+
+.eval-input::placeholder {
+  color: #d1d5db;
+}
+
+.eval-input:focus {
+  border-color: #a5b4fc;
+  outline: none;
+  box-shadow: 0 0 0 1px #a5b4fc;
+}
