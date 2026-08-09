@@ -313,8 +313,14 @@ async function judgeOnce(
 
 /** 合并程序规则 + LLM Judge → 最终判定（候选；人工可覆盖） */
 export function mergeVerdicts(input: {
-  programChecks: Array<{ name: string; pass: boolean; detail: string }>;
+  programChecks: Array<{
+    name: string;
+    pass: boolean;
+    detail: string;
+    status: "PASS" | "FAIL" | "NOT_TESTED";
+  }>;
   programStrong?: Record<string, "PASS" | "FAIL" | "NOT_TESTED">;
+  programAbsoluteStatus?: "PASS" | "FAIL" | "NOT_TESTED";
   llmJudge?: LLMJudgeResult | null;
   caseDef: EvalCase;
 }): {
@@ -324,8 +330,15 @@ export function mergeVerdicts(input: {
   notes: string[];
   program_failed?: boolean;
   program_failures?: Array<{ name: string; detail: string }>;
+  absolute_status?: "PASS" | "FAIL" | "NOT_TESTED";
 } {
-  const { programChecks, programStrong = {}, llmJudge, caseDef } = input;
+  const {
+    programChecks,
+    programStrong = {},
+    programAbsoluteStatus,
+    llmJudge,
+    caseDef,
+  } = input;
   const strong: Record<string, "PASS" | "FAIL" | "NOT_TESTED"> = {};
   const notes: string[] = [];
   const scores: Partial<Record<string, number>> = {};
@@ -378,45 +391,36 @@ export function mergeVerdicts(input: {
     notes.push("该 Case 无程序规则覆盖，等待人工判定");
   }
 
-  // 程序 check 摘要 + 失败标记（Review：程序失败必须显式可见，不被 LLM 分数掩盖）
-  const failedChecks = programChecks.filter((c) => !c.pass);
+  // 程序 check 摘要 + 失败标记（Review R3：三态，NOT_TESTED 不算失败；P2-1 不再代偿分数）
+  const failedChecks = programChecks.filter((c) => c.status === "FAIL");
   const programFailures = failedChecks.map((c) => ({
     name: c.name,
     detail: c.detail,
   }));
+  const notTestedChecks = programChecks.filter((c) => c.status === "NOT_TESTED");
   if (failedChecks.length > 0) {
     notes.push(
       `程序规则 ${failedChecks.length} 项未通过: ${failedChecks
         .map((c) => c.name)
         .join("、")}`
     );
-    // 程序失败时，LLM 分数不得掩盖失败：相关维度分数降级为 1 分，
-    // 并在 notes 中说明（避免 E002 写入失败却显示四维满分）
-    const suppressedDims: string[] = [];
-    for (const check of failedChecks) {
-      if (check.name.includes("must_write") && scores.recall_accuracy !== undefined) {
-        scores.recall_accuracy = 1;
-        suppressedDims.push("recall_accuracy(写入失败)");
-      }
-      if (check.name.includes("must_recall") && scores.recall_accuracy !== undefined) {
-        scores.recall_accuracy = 1;
-        suppressedDims.push("recall_accuracy(未召回)");
-      }
-      if (check.name.includes("max_irrelevant") && scores.irrelevant_rejection !== undefined) {
-        scores.irrelevant_rejection = 1;
-        suppressedDims.push("irrelevant_rejection(无关召回超限)");
-      }
-      if (check.name.includes("recall_min") && scores.recall_accuracy !== undefined) {
-        scores.recall_accuracy = 1;
-        suppressedDims.push("recall_accuracy(相关召回不足)");
-      }
-    }
-    if (suppressedDims.length > 0) {
-      notes.push(
-        `程序失败导致 LLM 分数降级: ${suppressedDims.join("、")}（程序判定优先）`
-      );
-    }
   }
+  if (notTestedChecks.length > 0) {
+    notes.push(
+      `程序规则 ${notTestedChecks.length} 项证据缺失（NOT_TESTED）: ${notTestedChecks
+        .map((c) => c.name)
+        .join("、")}`
+    );
+  }
+
+  // 绝对状态（Review R3 §4.1）：程序 absolute_status 优先；LLM-only Case 由强约束决定
+  let absoluteStatus = programAbsoluteStatus ?? "PASS";
+  // 强约束 NOT_TESTED（强约束存在但未判定）→ 绝对状态 NOT_TESTED（普通规则不得覆盖）
+  const strongHasNotTested = declaredStrong.some((s) => strong[s] === "NOT_TESTED");
+  if (strongHasNotTested) absoluteStatus = "NOT_TESTED";
+  // 强约束明确 FAIL → 绝对状态 FAIL
+  const strongHasFail = declaredStrong.some((s) => strong[s] === "FAIL");
+  if (strongHasFail) absoluteStatus = "FAIL";
 
   return {
     strong,
@@ -425,5 +429,6 @@ export function mergeVerdicts(input: {
     notes,
     program_failed: failedChecks.length > 0,
     program_failures: programFailures,
+    absolute_status: absoluteStatus,
   };
 }

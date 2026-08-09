@@ -56,9 +56,9 @@ export default function EvalCasesPage() {
     <div className="mx-auto max-w-5xl space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-lg font-semibold text-[#1C1D21]">Case 管理</h2>
+          <h2 className="text-lg font-semibold text-[#1C1D21]">评测 Case 库 / 管理</h2>
           <p className="mt-0.5 text-sm text-[#70747D]">
-            种子 8 条（E001-E008）+ 线上 Bad Case / Trace 转回归
+            Case 定义管理页（非评测结果页，结果见「评测总览」）：种子 8 条（E001-E008）+ 线上 Bad Case / Trace 转回归
           </p>
         </div>
         <div className="flex items-center gap-2">
