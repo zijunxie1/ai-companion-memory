@@ -78,15 +78,21 @@
 > 终态协议（CR-C）：评测侧**不得用 memory_writes 非空/差值猜测终态**，
 > 只认 `write_status` 状态机轮询；超时按 NOT_TESTED 处理（见 §3.2）。
 
-#### 1.3.1 final_verdict 字段随 judge_type 变化（实现事实）
+#### 1.3.1 final_verdict 字段随判定路径变化（实现事实）
 
-| judge_type | final_verdict 保留字段 |
-|---|---|
-| program / llm | `{strong, scores, judge_type, notes, program_failed, program_failures, absolute_status, write_state}`（mergeVerdicts 产出，候选完整） |
-| human | `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`（judge/route.ts 重建，**候选字段不保留**；GSB/absolute 以重算后的 strong/scores 为准） |
+| 判定路径 | 触发条件 | final_verdict 保留字段 |
+|---|---|---|
+| 程序/LLM 候选 | judge_type = program / llm | `{strong, scores, judge_type, notes, program_failed, program_failures, absolute_status, write_state}`（mergeVerdicts 产出，候选完整） |
+| 等待人工判定 | **无程序规则且无 LLM 评分** → judge_type="human"（eval-llm-judge.ts:383），**但 final_verdict 仍保留全部候选字段**（mergeVerdicts 产出，未重建） | 同上（候选完整），notes 含"该 Case 无程序规则覆盖，等待人工判定" |
+| 已应用人工覆盖 | `human_override` 非空（judge/route.ts POST 后） | `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`（重建，**候选字段被删除**） |
 
-> ⚠️ absolute_status 的优先级定义（§3.3）适用于程序/LLM 判定路径；
-> 人工覆盖路径以人工给出的 strong/scores 为最终事实，不再套用程序优先级。
+> ⚠️ **准确条件**：字段结构差异的判定条件是「**human_override 是否非空**（已应用人工覆盖）」，
+> **不是** judge_type="human"——因为"等待人工判定"状态下 judge_type 同为 human 但候选字段完整。
+>
+> ⚠️ **absolute 计数语义**：人工覆盖重建后 `absolute_status` 被删除；
+> `eval-runner.ts` 的 summary 聚合**只读取** `final_verdict.absolute_status` 计数（不推导），
+> 因此**被人工覆盖的 Case 不进入 absolute 的 PASS/FAIL/NOT_TESTED 统计**（除非覆盖请求体显式提供并经上游重建保留——当前实现不保留）。
+> absolute_status 的优先级定义（§3.3）仅适用于程序/LLM 判定路径。
 
 ---
 
@@ -116,9 +122,10 @@ body: { strong?: Record<string,"PASS"|"FAIL">, scores?: Partial<Record<string,nu
 ```
 - 更新 human_override（{strong, scores, reason, judged_at}）+ final_verdict.judge_type=human + gsb 重算 + summary 重聚合
 - **completed_at 不回写**（避免 recalc 时间漂移，Reviewer #4 修复）
-- ⚠️ **final_verdict 重建语义**：人工覆盖后 final_verdict 仅保留 `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`；
-  `program_failed / program_failures / absolute_status / write_state` 等候选字段**不保留**（judge/route.ts 重建逻辑），
-  该结果 GSB/absolute 以重算后的 strong/scores 为准
+- ⚠️ **final_verdict 重建语义**：人工覆盖后 final_verdict 重建仅保留 `{strong, scores, judge_type:"human", notes:[...,"人工覆盖: <reason>"]}`；
+  `program_failed / program_failures / absolute_status / write_state` 等候选字段**被删除**（judge/route.ts 重建逻辑）
+- ⚠️ **GSB 重算**：覆盖后 recalculateRunGSBAndSummary 按重建后的 strong/scores 重算 GSB 与强约束汇总；
+  **absolute 计数**：由于 absolute_status 已删除且 summary 聚合不推导，该 Case **不进入 absolute 的 PASS/FAIL/NOT_TESTED 统计**（详见 §1.3.1）
 
 ### 2.4 Case 管理
 
