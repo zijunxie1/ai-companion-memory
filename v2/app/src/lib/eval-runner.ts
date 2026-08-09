@@ -244,6 +244,12 @@ export function compareGSB(
   const prevStrong = previous.final_verdict?.strong ?? {};
   const prevScores = previous.final_verdict?.scores ?? {};
 
+  // 0. 程序失败对比（Review #1+#2：程序失败优先于分数，防止"稳定失败"被包装成"没有退化"）
+  const curProgFailed = Boolean(current.program_failed);
+  const prevProgFailed = Boolean(previous.final_verdict?.program_failed);
+  if (curProgFailed && !prevProgFailed) return "Bad"; // 新失败
+  if (!curProgFailed && prevProgFailed) return "Good"; // 修复
+
   // 1. 强约束优先：PASS→FAIL = Bad；FAIL→PASS = Good
   const allStrongKeys = new Set([
     ...Object.keys(current.strong),
@@ -349,6 +355,8 @@ async function runOneCase(
       scores: merged.scores,
       judge_type: merged.judgeType,
       notes: merged.notes,
+      program_failed: merged.program_failed,
+      program_failures: merged.program_failures,
     };
 
     // 8. GSB 对比（与上一次 Run 同 Case）
@@ -515,10 +523,31 @@ export function buildSummary(results: EvalResult[]): RunSummary {
     }
   }
 
+  // 程序规则失败 Case（Review #2：失败必须显式呈现，不得被平均分掩盖）
+  const programFailures: RunSummary["program_failures"] = [];
+  const notTested: string[] = [];
+  for (const r of results) {
+    const cs = r.case_snapshot;
+    const fails = r.final_verdict?.program_failures ?? [];
+    if (fails.length > 0) {
+      programFailures.push({
+        case_id: cs.case_id,
+        title: cs.title,
+        rules: fails,
+      });
+    }
+    // 强约束 NOT_TESTED 的 Case
+    for (const [k, v] of Object.entries(r.final_verdict?.strong ?? {})) {
+      if (v === "NOT_TESTED") notTested.push(`${cs.case_id}(${k})`);
+    }
+  }
+
   return {
     gsb,
     strong,
     score_avg: scoreCount > 0 ? Math.round((scoreSum / scoreCount) * 10) / 10 : null,
+    program_failures: programFailures,
+    not_tested: notTested,
   };
 }
 
@@ -551,13 +580,13 @@ export async function recalculateRunGSBAndSummary(runId: string): Promise<void> 
     result.gsb = gsb;
   }
 
-  // 重算 summary
+  // 重算 summary（不更新 completed_at——Reviewer #4：避免时间漂移）
   const refreshed = await getRunResults(runId);
   const summary = buildSummary(refreshed);
   await updateEvalRun(runId, {
     status: run.status === "failed" ? "failed" : "completed",
     summary,
-    completedAt: run.completed_at,
+    // completedAt 不传（undefined）→ 保留原值
   });
   console.log(`[eval] run ${runId} summary recalculated: gsb=${JSON.stringify(summary.gsb)}`);
 }

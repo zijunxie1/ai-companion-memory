@@ -231,6 +231,20 @@ function CaseEvidenceCard({ result }: { result: EvalResult }) {
           )}
         </div>
 
+        {/* 程序失败标记（Review：失败显式可见） */}
+        {final.program_failed && (
+          <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2">
+            <p className="text-xs font-semibold text-red-700">
+              ✗ 程序规则 {final.program_failures?.length ?? 0} 项未通过
+            </p>
+            {(final.program_failures ?? []).map((f, i) => (
+              <p key={i} className="mt-0.5 text-xs text-red-600/80">
+                <span className="font-mono">{f.name}</span> — {f.detail}
+              </p>
+            ))}
+          </div>
+        )}
+
         {/* 分档分 */}
         {Object.keys(final.scores ?? {}).length > 0 && (
           <div className="flex flex-wrap gap-x-5 gap-y-1">

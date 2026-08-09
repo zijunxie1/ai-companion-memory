@@ -260,6 +260,51 @@ function LatestRunSummary({ run }: { run: EvalRun }) {
         )}
       </div>
 
+      {/* 程序规则失败（Review #2：首要位置，不被平均分掩盖） */}
+      {(summary?.program_failures?.length ?? 0) > 0 && (
+        <div className="rounded-xl border border-red-200 bg-red-50/60 p-5">
+          <div className="flex items-center gap-2">
+            <span className="rounded-md bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700">
+              {summary!.program_failures!.length} 条程序规则失败
+            </span>
+            <p className="text-xs text-red-600/80">
+              以下 Case 未通过确定性规则判定（不受 LLM 分数影响）
+            </p>
+          </div>
+          <div className="mt-3 space-y-2">
+            {summary!.program_failures!.map((f) => (
+              <div
+                key={f.case_id}
+                className="rounded-lg border border-red-100 bg-white px-3 py-2"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-semibold text-red-700">
+                    {f.case_id}
+                  </span>
+                  <span className="text-sm font-medium text-[#1C1D21]">{f.title}</span>
+                </div>
+                <div className="mt-1 space-y-0.5">
+                  {f.rules.map((r, i) => (
+                    <p key={i} className="text-xs text-red-600/80">
+                      ✗ <span className="font-mono">{r.name}</span> — {r.detail}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 强约束 NOT_TESTED（Review #2：无样本显示 NOT TESTED 且提示） */}
+      {(summary?.not_tested?.length ?? 0) > 0 && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50/60 px-5 py-3">
+          <p className="text-xs font-medium text-amber-700">
+            ⚠️ 未覆盖强约束（NOT TESTED）: {summary!.not_tested!.join("、")}
+          </p>
+        </div>
+      )}
+
       {/* GSB + 平均分 */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-xl border border-gray-100 bg-white p-5">

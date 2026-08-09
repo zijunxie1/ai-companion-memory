@@ -322,6 +322,8 @@ export function mergeVerdicts(input: {
   scores: Partial<Record<string, number>>;
   judgeType: "program" | "llm" | "human";
   notes: string[];
+  program_failed?: boolean;
+  program_failures?: Array<{ name: string; detail: string }>;
 } {
   const { programChecks, programStrong = {}, llmJudge, caseDef } = input;
   const strong: Record<string, "PASS" | "FAIL" | "NOT_TESTED"> = {};
@@ -376,15 +378,52 @@ export function mergeVerdicts(input: {
     notes.push("该 Case 无程序规则覆盖，等待人工判定");
   }
 
-  // 程序 check 摘要
+  // 程序 check 摘要 + 失败标记（Review：程序失败必须显式可见，不被 LLM 分数掩盖）
   const failedChecks = programChecks.filter((c) => !c.pass);
+  const programFailures = failedChecks.map((c) => ({
+    name: c.name,
+    detail: c.detail,
+  }));
   if (failedChecks.length > 0) {
     notes.push(
       `程序规则 ${failedChecks.length} 项未通过: ${failedChecks
         .map((c) => c.name)
         .join("、")}`
     );
+    // 程序失败时，LLM 分数不得掩盖失败：相关维度分数降级为 1 分，
+    // 并在 notes 中说明（避免 E002 写入失败却显示四维满分）
+    const suppressedDims: string[] = [];
+    for (const check of failedChecks) {
+      if (check.name.includes("must_write") && scores.recall_accuracy !== undefined) {
+        scores.recall_accuracy = 1;
+        suppressedDims.push("recall_accuracy(写入失败)");
+      }
+      if (check.name.includes("must_recall") && scores.recall_accuracy !== undefined) {
+        scores.recall_accuracy = 1;
+        suppressedDims.push("recall_accuracy(未召回)");
+      }
+      if (check.name.includes("max_irrelevant") && scores.irrelevant_rejection !== undefined) {
+        scores.irrelevant_rejection = 1;
+        suppressedDims.push("irrelevant_rejection(无关召回超限)");
+      }
+      if (check.name.includes("recall_min") && scores.recall_accuracy !== undefined) {
+        scores.recall_accuracy = 1;
+        suppressedDims.push("recall_accuracy(相关召回不足)");
+      }
+    }
+    if (suppressedDims.length > 0) {
+      notes.push(
+        `程序失败导致 LLM 分数降级: ${suppressedDims.join("、")}（程序判定优先）`
+      );
+    }
   }
 
-  return { strong, scores, judgeType, notes };
+  return {
+    strong,
+    scores,
+    judgeType,
+    notes,
+    program_failed: failedChecks.length > 0,
+    program_failures: programFailures,
+  };
 }
