@@ -1,6 +1,6 @@
 # TASK-003｜V3 Memory 评测体系
 
-> ⚠️ **本草案已被 [draft-phase2-bplus.md](./draft-phase2-bplus.md) 修正/部分取代。**
+> ⚠️ **本草案已被 B+ 修正/部分取代**（见 [draft-phase2-bplus.md](./draft-phase2-bplus.md)）。
 > 阶段 2 改为「方案 B+：8 Case 真实评测纵向闭环」执行（Chief 裁决 A-F），
 > 本文件的 4 个原始交付物（Before/After 面板 + LLM-as-Judge + 20 条 Case + Bad Case 面板）
 > 仅保留阶段 1 手动评测叙事，阶段 2 以 B+ 草案为准。
