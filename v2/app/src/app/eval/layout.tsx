@@ -26,7 +26,7 @@ export default function EvalLayout({
     href === "/eval" ? pathname === "/eval" : pathname.startsWith(href);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F6F7F9] md:flex-row">
+    <div className="eval-shell flex min-h-screen flex-col bg-[#F6F7F9] md:flex-row">
       {/* 移动端顶部导航条（<md） */}
       <header className="sticky top-0 z-20 border-b border-gray-200 bg-white md:hidden">
         <div className="flex items-center gap-2 px-4 py-2">

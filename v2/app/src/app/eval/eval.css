@@ -35,3 +35,49 @@
 .eval-touch {
   min-height: 2.75rem; /* 44px */
 }
+
+/* ============================================================
+   Review R5：eval-shell 作用域统一 44px 触摸目标
+   仅 <768px（移动端）生效，桌面保持紧凑密度；
+   覆盖常驻页 / 人工覆盖展开态 / 新增 Case 表单三类交互。
+   ============================================================ */
+@media (max-width: 767px) {
+  .eval-shell a,
+  .eval-shell button,
+  .eval-shell select,
+  .eval-shell input:not([type="hidden"]),
+  .eval-shell textarea {
+    min-height: 2.75rem; /* 44px */
+  }
+
+  .eval-shell a,
+  .eval-shell button,
+  .eval-shell select {
+    min-width: 2.75rem; /* 44px */
+  }
+
+  /* 文本链接/按钮需 inline-flex 才让 min-height 生效 */
+  .eval-shell a,
+  .eval-shell button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 图标类关闭按钮（宽高由 padding 撑到 44×44） */
+  .eval-shell button.icon-only,
+  .eval-shell a.icon-only {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+  }
+
+  /* 输入控件（select/input/textarea）保持块级，focus ring 不受影响 */
+  .eval-shell select,
+  .eval-shell input:not([type="hidden"]),
+  .eval-shell textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
