@@ -10,6 +10,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import type { EvalRun } from "@/lib/eval-types";
+import { buildSnapshotDisplayRows } from "@/lib/eval-snapshot-core";
 
 const STRONG_LABELS: Record<string, string> = {
   false_memory: "False Memory",
@@ -217,6 +218,10 @@ function LatestRunSummary({ run }: { run: EvalRun }) {
   // 强约束 4 类完整展示（无样本显示 NOT TESTED）
   const strongKeys = ["false_memory", "deletion", "safety", "privacy"];
 
+  // Config 快照展示行（4 列；兼容旧格式/旧键，未知 schema_version 标记）
+  const { rows: snapshotRows, unknownSchema: snapshotUnknownSchema } =
+    buildSnapshotDisplayRows(run.config_snapshot, run);
+
   return (
     <div className="space-y-4">
       {/* Run 信息栏 */}
@@ -421,20 +426,49 @@ function LatestRunSummary({ run }: { run: EvalRun }) {
         </div>
       </div>
 
-      {/* Config 快照（只读） */}
+      {/* Config 快照（只读，4 列：配置项 / 值 / 来源 / 状态或说明） */}
       <details className="rounded-xl border border-gray-100 bg-white px-5 py-3">
         <summary className="cursor-pointer text-xs font-medium text-[#70747D]">
           Config 快照（本次 Run 绑定，不可变）
+          {snapshotUnknownSchema && (
+            <span className="ml-2 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-600">
+              未知快照版本
+            </span>
+          )}
         </summary>
-        <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1.5 sm:grid-cols-3">
-          {Object.entries(run.config_snapshot ?? {}).map(([k, v]) => (
-            <div key={k} className="flex items-center justify-between text-xs">
-              <span className="text-[#70747D]">{k}</span>
-              <span className="max-w-[60%] truncate font-mono text-[#70747D]">
-                {typeof v === "object" ? JSON.stringify(v) : String(v)}
-              </span>
-            </div>
-          ))}
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[560px] text-left text-xs">
+            <thead>
+              <tr className="border-b border-gray-100 text-[10px] uppercase text-[#9CA3AF]">
+                <th className="py-1.5 pr-3 font-medium">配置项</th>
+                <th className="py-1.5 pr-3 font-medium">值</th>
+                <th className="py-1.5 pr-3 font-medium">来源</th>
+                <th className="py-1.5 font-medium">状态或说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              {snapshotRows.map((row) => (
+                <tr key={row.key} className="border-b border-gray-50 last:border-0">
+                  <td className="py-1.5 pr-3 font-mono text-[#70747D]">{row.key}</td>
+                  <td className="max-w-[240px] truncate py-1.5 pr-3 font-mono text-[#70747D]">
+                    {row.value}
+                  </td>
+                  <td className="py-1.5 pr-3">{row.sourceType}</td>
+                  <td className="py-1.5 text-[#70747D]">
+                    {row.status}
+                    {row.reason && (
+                      <span
+                        className="block max-w-[300px] truncate text-[10px] text-[#9CA3AF]"
+                        title={row.reason}
+                      >
+                        {row.reason}
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </details>
     </div>
