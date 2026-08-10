@@ -4,18 +4,44 @@
 
 /** Config 快照（每次 Run 绑定，不可变） */
 export interface EvalConfig {
-  chat_model: string; // "deepseek-v4-flash"（Dify Chatflow 实际模型）
-  extract_model: string; // mem0 抽取模型
-  embed_model: string; // "bge-small-zh-v1.5"
-  persona_prompt_hash: string; // Dify Persona 内容哈希
-  extract_prompt_hash: string; // mem0 抽取 Prompt 哈希
-  judge_rubric_version: string; // "v1.0"
-  recall_threshold: number | string; // 0.35 或 "unavailable"
-  recall_top_k: number | string; // 5 或 "unavailable"
-  write_mode: "sync" | "async" | "unavailable";
-  chatflow_version: string;
-  case_set_version: string;
+  chat_model: string; // Dify Chatflow 实际模型（declared / unavailable）
+  extract_model: string; // mem0 抽取模型（declared / unavailable）
+  embed_model: string; // mem0 embedding 模型（本任务固定 unavailable + reason，见契约）
+  persona_prompt_hash: string; // 旧键（兼容历史 Run；新快照同时写 persona_data_hash）
+  persona_data_hash?: string; // 新键：用户 Persona JSON 内容哈希（derived）
+  extract_prompt_hash: string; // mem0 抽取 Prompt 内容哈希（derived / unavailable）
+  judge_rubric_version: string; // "v1.0"（code，来自 JUDGE_RUBRIC_VERSION 常量）
+  judge_model?: string; // Judge 模型（code 默认 / declared env 覆盖）
+  judge_prompt_hash?: string; // Judge Prompt 内容哈希（derived）
+  recall_threshold: number | string; // 0.35（code，共享常量）或 "unavailable"
+  recall_top_k: number | string; // 5（code，共享常量）或 "unavailable"
+  write_mode: "sync" | "async" | "unavailable"; // "async"（code，共享常量）
+  chatflow_version: string; // Dify 工作流版本（declared / unavailable）
+  case_set_version: string; // "8-case-v1"（与 eval_runs 独立列同值）
+  user_isolation?: string; // "per_case"（Run 创建时一次性写入，不可变）
+  snapshot_schema_version?: number; // 2（code）
+  _snapshot_meta?: SnapshotMeta; // 全字段来源/状态登记（schema_version 2）
   [key: string]: unknown;
+}
+
+/** 快照字段状态（不可用是状态，不是证据来源） */
+export type SnapshotStatus = "available" | "unavailable" | "not_applicable";
+
+/** 证据来源分类（unavailable / not_applicable 时省略） */
+export type SnapshotSourceType = "observed" | "code" | "declared" | "derived";
+
+/** 单字段来源元数据 */
+export interface SnapshotFieldMeta {
+  status: SnapshotStatus;
+  source_type?: SnapshotSourceType; // unavailable / not_applicable 时省略
+  source_ref: string; // 证据位置：文件:行 / env 键 / 哈希来源
+  reason?: string; // unavailable / not_applicable 时必填
+}
+
+/** 快照元数据块（schema_version 2：顶层值兼容 + 来源登记分离） */
+export interface SnapshotMeta {
+  schema_version: number; // 当前 2；未知版本由 UI 标记"未知快照版本"
+  fields: Record<string, SnapshotFieldMeta>;
 }
 
 /** 前置条件项 */
