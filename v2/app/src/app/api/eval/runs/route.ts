@@ -28,15 +28,22 @@ export async function POST(request: NextRequest) {
     }
 
     let caseSetVersion = "8-case-v1";
+    let caseSetVersionOverridden = false;
     try {
       const body = await request.json();
-      if (body?.case_set_version) caseSetVersion = String(body.case_set_version);
+      if (body?.case_set_version) {
+        caseSetVersion = String(body.case_set_version);
+        caseSetVersionOverridden = true;
+      }
     } catch {
       // 无 body 也允许触发（默认版本）
     }
 
-    // 1. 捕获 Config 快照（当前系统配置，不可变绑定）
-    const configSnapshot = await captureConfigSnapshot(caseSetVersion);
+    // 1. 捕获 Config 快照（当前系统配置，不可变绑定；
+    //    case_set_version：默认值来源 code，请求覆盖来源 declared）
+    const configSnapshot = await captureConfigSnapshot(caseSetVersion, {
+      caseSetVersionOverridden,
+    });
 
     // 2. 创建 Run（status=running）
     const run = await createEvalRun(configSnapshot);

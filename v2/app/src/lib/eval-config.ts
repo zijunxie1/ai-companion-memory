@@ -38,7 +38,8 @@ export { hashContent };
  * - 其余字段：共享常量（code）/ env 声明（declared）/ 诚实边界（unavailable+reason）
  */
 export async function captureConfigSnapshot(
-  caseSetVersion = CASE_SET_VERSION_DEFAULT
+  caseSetVersion = CASE_SET_VERSION_DEFAULT,
+  options?: { caseSetVersionOverridden?: boolean }
 ): Promise<EvalConfig> {
   // Persona 内容哈希（users 表实时计算；读取失败 → unavailable + reason）
   let personaHash: string | null = null;
@@ -84,5 +85,6 @@ export async function captureConfigSnapshot(
     judgePrompt,
     judgeRubricVersion: JUDGE_RUBRIC_VERSION,
     caseSetVersion,
+    caseSetVersionOverridden: options?.caseSetVersionOverridden ?? false,
   });
 }

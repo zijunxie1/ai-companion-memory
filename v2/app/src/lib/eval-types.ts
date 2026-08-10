@@ -7,7 +7,7 @@ export interface EvalConfig {
   chat_model: string; // Dify Chatflow 实际模型（declared / unavailable）
   extract_model: string; // mem0 抽取模型（declared / unavailable）
   embed_model: string; // mem0 embedding 模型（本任务固定 unavailable + reason，见契约）
-  persona_prompt_hash: string; // 旧键（兼容历史 Run；新快照同时写 persona_data_hash）
+  persona_prompt_hash?: string; // 旧键（仅历史 Run 兼容；新快照不再写，展示层按 persona_data_hash 归并）
   persona_data_hash?: string; // 新键：用户 Persona JSON 内容哈希（derived）
   extract_prompt_hash: string; // mem0 抽取 Prompt 内容哈希（derived / unavailable）
   judge_rubric_version: string; // "v1.0"（code，来自 JUDGE_RUBRIC_VERSION 常量）

@@ -10,6 +10,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import type { EvalResult, EvalRun } from "@/lib/eval-types";
+import { buildSnapshotDisplayRows } from "@/lib/eval-snapshot-core";
 
 const DIM_CN: Record<string, string> = {
   recall_accuracy: "召回准确率",
@@ -125,6 +126,9 @@ export default function EvalRunDetailPage({
         </div>
       )}
 
+      {/* Config 快照（只读，4 列：配置项 / 值 / 来源 / 状态或说明；历史 Run 兼容） */}
+      <ConfigSnapshotCard run={run} />
+
       {/* 逐条 Case */}
       {results.length === 0 ? (
         <div className="rounded-xl border border-gray-100 bg-white p-10 text-center text-sm text-[#70747D]">
@@ -138,6 +142,58 @@ export default function EvalRunDetailPage({
         ))
       )}
     </div>
+  );
+}
+
+// ── Config 快照卡（4 列；与总览页共用 buildSnapshotDisplayRows，历史 Run 兼容） ──
+
+function ConfigSnapshotCard({ run }: { run: EvalRun }) {
+  const { rows, unknownSchema } = buildSnapshotDisplayRows(run.config_snapshot, run);
+  return (
+    <details className="rounded-xl border border-gray-100 bg-white px-5 py-3">
+      <summary className="cursor-pointer text-xs font-medium text-[#70747D]">
+        Config 快照（本次 Run 绑定，不可变）
+        {unknownSchema && (
+          <span className="ml-2 rounded bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-600">
+            未知快照版本
+          </span>
+        )}
+      </summary>
+      <div className="mt-3 overflow-x-auto">
+        <table className="w-full min-w-[560px] text-left text-xs">
+          <thead>
+            <tr className="border-b border-gray-100 text-[10px] uppercase text-[#9CA3AF]">
+              <th className="py-1.5 pr-3 font-medium">配置项</th>
+              <th className="py-1.5 pr-3 font-medium">值</th>
+              <th className="py-1.5 pr-3 font-medium">来源</th>
+              <th className="py-1.5 font-medium">状态或说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.key} className="border-b border-gray-50 last:border-0">
+                <td className="py-1.5 pr-3 font-mono text-[#70747D]">{row.key}</td>
+                <td className="max-w-[240px] truncate py-1.5 pr-3 font-mono text-[#70747D]">
+                  {row.value}
+                </td>
+                <td className="py-1.5 pr-3">{row.sourceType}</td>
+                <td className="py-1.5 text-[#70747D]">
+                  {row.status}
+                  {row.reason && (
+                    <span
+                      className="block max-w-[300px] truncate text-[10px] text-[#9CA3AF]"
+                      title={row.reason}
+                    >
+                      {row.reason}
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
   );
 }
 
