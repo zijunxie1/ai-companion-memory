@@ -18,10 +18,11 @@ import { callDifyChatflow } from "@/lib/dify-client";
 import {
   insertConversation,
   insertTrace,
+  finalizeTraceWrite,
   getUserPersona,
-  pool,
 } from "@/lib/db";
 import { env } from "@/lib/env";
+import { containsCrisis } from "@/lib/eval-crisis";
 import type { ChatRequest, ChatResponse } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
@@ -113,21 +114,46 @@ export async function POST(request: NextRequest) {
     };
 
     // Step 8: 异步抽取 + 写入 Memory（不阻塞用户响应）
+    // 终态协议（CR-C）：Trace 插入时已为 pending；
+    //   写入完成 → completed + disposition(written|no_write) + memory_writes
+    //   危机拦截 → completed + skipped_crisis（不调用 mem0.add，CR-A）
+    //   服务异常 → failed + write_error
     const conversationText = `用户: ${message}\nAI: ${difyResult.reply}`;
     void (async () => {
+      // CR-A：危机表达默认不写入长期 Memory——命中则跳过 mem0.add
+      if (containsCrisis(message)) {
+        await finalizeTraceWrite({
+          traceId,
+          status: "completed",
+          disposition: "skipped_crisis",
+          memoryWrites: [],
+        });
+        console.log(`[async] crisis detected, memory write skipped for trace ${traceId}`);
+        return;
+      }
       try {
         const memoryWrites = await mem0.add(user_id, conversationText, {
           source: "v2-chatflow",
           timestamp: new Date().toISOString(),
         });
-        // 更新 Trace 中的 memory_writes 字段
-        await pool.query(
-          `UPDATE traces SET memory_writes = $1 WHERE id = $2`,
-          [JSON.stringify(memoryWrites.candidates), traceId]
+        const candidates = memoryWrites.candidates ?? [];
+        await finalizeTraceWrite({
+          traceId,
+          status: "completed",
+          disposition: candidates.length > 0 ? "written" : "no_write",
+          memoryWrites: candidates,
+        });
+        console.log(
+          `[async] mem0 add completed for trace ${traceId} (${candidates.length} items, ${candidates.length > 0 ? "written" : "no_write"})`
         );
-        console.log(`[async] mem0 add completed for trace ${traceId}`);
       } catch (e) {
-        console.error(`[async] mem0 add failed for trace ${traceId}:`, e);
+        const msg = e instanceof Error ? e.message : "Unknown error";
+        await finalizeTraceWrite({
+          traceId,
+          status: "failed",
+          writeError: msg.slice(0, 500),
+        });
+        console.error(`[async] mem0 add failed for trace ${traceId}:`, msg);
       }
     })();
 
