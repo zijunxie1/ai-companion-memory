@@ -23,8 +23,8 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-00
 | `origin/main` | `c242338`（2026-08-11 PR #7 合并 gov-001/status-sync-final；主线收敛 + 治理文件入库完成） |
 | `origin/master` | `064f5b6`（已被 main 完全吸收） |
 | 分叉 | main 独有 17 / master 独有 0；master 已是 main 的祖先（`064f5b6` 即 merge-base） |
-| 当前本地分支 | `feature/task-005a-config-snapshot` @ `c242338`+8（TASK-005A 实施分支，等待 Review 3） |
-| 工作区（task-005a worktree） | 干净（.env 已复制且被 gitignore 排除；未跟踪文件仅任务目录 TASK-005A/ 待入库） |
+| 当前本地分支 | `feature/task-005a-config-snapshot` @ `c242338`+11（11 个 commit 已推送，PR #8 等待 Review 3 第三轮复审） |
+| 工作区（task-005a worktree） | 干净（.env 本地副本被 gitignore 排除；无未跟踪文件，任务文件已随分支入库） |
 
 主线已收敛：`main`（`c242338`）已通过 GOV-001A（PR #5 @ `4baabf0`）+ GOV-001B（PR #6 @ `5901c64`）+ 状态同步收尾（PR #7 @ `c242338`）完成主线收敛与治理文件入库，`master` 保留为归档引用。禁止 force push；master 退役需 Founder 单独裁决（D-MASTER-RETIRE）。
 

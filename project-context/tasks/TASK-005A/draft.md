@@ -208,7 +208,7 @@ type SnapshotMeta = {
 
 **停止条件**：若实现发现必须修改 schema、判定逻辑、阈值数值或产品行为才能达成目标 → 立即停止并提交 Change Request，不自行扩范围。
 
-## 8. 执行模式判断（预判；须 Founder 批准后走执行模式门正式确认）
+## 8. 执行模式判断（历史预判——已于 2026-08-11 经执行模式门确认并执行）
 
 ```text
 任务复杂度：中等（多文件联调：代码 + 契约 + 测试 + UI + 集成核验）
@@ -220,7 +220,7 @@ type SnapshotMeta = {
 任务分支：feature/task-005a-config-snapshot
 ```
 
-> 本轮**不唤醒 Builder**。执行模式须在 Founder 批准本 DRAFT 后，按 AGENTS.md 执行模式选择门正式确认。
+> （历史说明）本判断为 DRAFT 阶段的预判；Founder 已于 2026-08-11 确认 HANDOFF REQUIRED 长期 Builder 会话并完成实现。
 
 ## 9. 裁决记录（Founder 2026-08-11 已批准）
 
@@ -228,9 +228,9 @@ type SnapshotMeta = {
 2. ✅ **字段方案批准**：`persona_prompt_hash`→`persona_data_hash`（兼容历史旧键）；保留 `extract_prompt_hash`（只保存真实 Prompt 内容哈希）；`extract_prompt_version` 仅作可选独立声明字段；
 3. ✅ **CHAT_MODEL / CHATFLOW_VERSION 批准为 optional / declared** 配置项；未配置时必须显示 unavailable + reason，不得表述为 observed；
 4. ✅ **授权修正**（已落盘）：embed_model 在无共享版本化来源/只读运行接口前标 declared、不得裸硬编码；UI 来源枚举改为 observed/code/declared/derived（unavailable/not_applicable 只属 status）；
-5. ⏳ **执行模式**：Reviewer 推荐 HANDOFF REQUIRED 长期 Builder；待 Founder 在模式门上最终确认（见 §8）。
+5. ✅ **执行模式**：Founder 已于 2026-08-11 确认 HANDOFF REQUIRED 长期 Builder 会话（本任务已按此执行，实现完成）。
 
-## 10. 下一交接
+## 10. 下一交接（历史预判——已执行完毕）
 
-- 执行模式确认后：Founder 确认执行模式门 → 唤醒 Builder（先交实施计划，再实现）。
-- 本窗口等待执行模式确认，不启动任何 Builder / 实现。
+- （历史说明）原预判：执行模式确认后 → 唤醒 Builder（先交实施计划，再实现）；
+- 实际执行：执行模式已于 2026-08-11 确认；实施计划 v1.1 已批准；实现完成于 feature/task-005a-config-snapshot（PR #8），当前等待 Review 3 第三轮复审。

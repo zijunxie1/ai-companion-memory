@@ -3,7 +3,7 @@
 // ============================================================
 
 import { Pool } from "pg";
-import { env } from "./env";
+import { env } from "./env.ts";
 import type { Conversation, Trace } from "./types";
 
 const globalForPg = globalThis as unknown as { pool?: Pool };

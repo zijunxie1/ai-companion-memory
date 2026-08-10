@@ -17,12 +17,12 @@ required_reading:
   - eval/eval-contracts.md
   - eval/eval-policy-v1.md
 task_id: TASK-005A
-status: IMPLEMENTED（Review 3 首轮 CHANGES_REQUESTED 已修复完毕，待复审）
+status: IMPLEMENTED（Review 3 第二轮 CHANGES_REQUESTED 已修复完毕，PR #8 已创建，等待第三轮复审）
 execution_mode: persistent_session（HANDOFF REQUIRED）
 assigned_role: Builder
 branch: feature/task-005a-config-snapshot
 baseline: origin/main @ c242338
-report_version: v1.2（2026-08-11；v1.1 实现 + Review 3 修复轮）
+report_version: v1.3（2026-08-11；v1.2 + Review 3 第二轮修复轮）
 ```
 
 ---
@@ -88,6 +88,13 @@ build（next build）：成功
 - 首轮（v1.1）Run #16 证据同结构（persona 双键已按 Review 修正）；
 - **过程说明（诚实披露）**：Run #18 曾由 3001 端口**残留的旧代码测试服务**（v1.1 双键版本，首轮测试服务 kill 后子进程未退出）创建，快照含旧键；已定位根因（EADDRINUSE + 残留进程），清理后由新服务重新触发 Run #19 验证通过。该问题仅影响测试过程，不影响代码正确性。
 
+### 4.1 当前分支全链路证据（Review 3 第二轮，Run #23）
+
+- **链路**：当前分支服务（PORT=3001）同时提供 /api/eval/runs 与 /api/chat；Eval Runner 经 `EVAL_CHAT_API_URL=http://localhost:3001/api/chat` 调用**当前分支产品路径**（非 3000 旧服务），真实 8 Case，无 Mock；
+- **结果**：status=completed，results=8，error=None；无执行异常/LLM 错误；judge 分布 program 7 / llm 1；gsb good=1 / same=6 / bad=1（1 个程序规则 FAIL 为真实评测结果，如实呈现未隐藏）；
+- **快照**：write_mode=async；extract_prompt_hash=875129e48a7b1ae3（derived）；judge_prompt_hash=6bff2fcfcde01605（derived）；persona_prompt_hash 键不存在（单键）；case_set_version source_type=code；user_isolation=per_case；snapshot_schema_version=2；16 字段全登记；无 observed；
+- **独立列**：policy_version=v1.0 / case_set_version=8-case-v1。
+
 ## 5. 已知限制与诚实披露
 
 1. `.env` / `.env.local` 从主工作区复制用于本地集成核验（未读取内容、未入库、被 .gitignore 排除）；
@@ -100,11 +107,19 @@ build（next build）：成功
 
 未改 0.35 / top_k 5 / async 行为（async 行为由 WRITE_MODE 常量显式控制且值不变）；未改 Gate / 判定逻辑 / 数据库结构（无迁移）/ 产品行为；未创建影子配置；未硬编码模型名或哈希；未触碰密钥；TASK-004 保持 PAUSED；未启动 TASK-006；E004 结果未隐藏（如实记录）。
 
+## 6.5 第二轮复审修复（2026-08-11）
+
+| # | 意见 | 修复 | 验证 |
+|---|---|---|---|
+| 1 | DB 测试须调用生产 createEvalRun | 测试改为动态 import 生产 `createEvalRun` + `getEvalRun`（先设 DATABASE_URL 再加载 db.ts 顶层 Pool）；不再自行拼接 INSERT | 集成测试真实执行通过 |
+| 2 | 真实产品路径证据（当前分支服务调当前分支 /api/chat） | 以 `EVAL_CHAT_API_URL=http://localhost:3001/api/chat PORT=3001` 启动当前分支服务，Eval Runner 与产品路径均为当前分支代码 | Run #23（见 §4.1） |
+| 3 | 治理事实修正 | current-state 分支提交数/干净工作区；draft §8-§10 标历史预判/已确认；本报告更新 PR 状态 | 文件核对 |
+
 ## 7. 交接状态
 
 ```text
 ## 当前任务状态
-IMPLEMENTED（Review 3 修复轮完成，待复审）
+IMPLEMENTED（Review 3 第二轮修复完成；PR #8 已创建，等待第三轮复审）
 
 ## 当前负责人
 Builder（本窗口）；最终裁决：Founder
@@ -113,16 +128,16 @@ Builder（本窗口）；最终裁决：Founder
 否 — 等待独立 Reviewer 复审（Review 3 第二轮）
 
 ## 完成依据
-- 8 项 Review 意见全部修复并有对应测试/证据
-- 44/44 测试、lint/tsc/build 全绿、真实 8 Case Run 复验通过
-- 修复已提交推送（分支 feature/task-005a-config-snapshot）
+- 第二轮 3 项 Review 意见全部修复（DB 测试走生产函数、真实产品路径证据、治理事实）
+- 44/44 测试、lint/tsc/build 全绿、真实 8 Case Run（当前分支全链路）通过
+- PR #8 已创建（github.com/zijunxie1/ai-companion-memory/pull/8），修复已推送
 
 ## 下一交接对象
-独立 Reviewer（Review 3 复审）
+独立 Reviewer（Review 3 第三轮复审）
 
 ## 交接前仍缺少什么
 PR 创建（本轮 push 后创建）+ Founder 启动复审
 
 ## 建议动作
-Founder 将复审唤醒卡发送给独立 Reviewer
+Founder 将第三轮复审唤醒卡发送给独立 Reviewer
 ```
