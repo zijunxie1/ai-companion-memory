@@ -34,7 +34,7 @@ assigned_role:
 branch: feature/task-003-eval-system  # 原草案分支；实际实现分支：feature/task-003-eval-run-slice
 phase_2_status: MERGED      # 2026-08-11 随 GOV-001A PR #5 合并（@4baabf0）
 phase_2_branch: feature/task-003-eval-run-slice
-next: GOV-001B 状态同步（PR #6）合并完成 → TASK-005A 建立独立 DRAFT（Config Snapshot Completeness）
+next: GOV-001B 状态同步（PR #6 @ 5901c64）已合并 → TASK-005A 建立独立 DRAFT（Config Snapshot Completeness）
 superseded_by: draft-phase2-bplus.md
 ```
 

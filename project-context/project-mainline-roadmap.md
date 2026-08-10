@@ -157,7 +157,7 @@ Chief 汇总所有已完成任务与已知限制
 | 远端 `origin/master` | `064f5b6` | （历史快照）当时含 TASK-003 `0403107` 及文档路径修复 |
 | 分叉 | `11 / 29` | （历史快照）当时双方均有独有提交 |
 
-**2026-08-11 实际状态（Git 核验）**：GOV-001A PR #5（@`4baabf0`）已合并，`main` 已通过可审查集成吸收 `master` 全部内容；`master` 已是 `main` 的祖先（master 独有提交 = 0）。“TASK-003 MERGED” 现在可表述为“已合入默认主线”。禁止 force push；master 退役由 D-MASTER-RETIRE 单独裁决。
+**2026-08-11 实际状态（Git 核验）**：GOV-001A PR #5（@`4baabf0`）与 GOV-001B PR #6（@`5901c64`）均已合并，`main` 已通过可审查集成吸收 `master` 全部内容，且治理文件（AGENTS/current-state/decision-register/roadmap 等）已入库；`master` 已是 `main` 的祖先（master 独有提交 = 0）。“TASK-003 MERGED” 现在可表述为“已合入默认主线”。禁止 force push；master 退役由 D-MASTER-RETIRE 单独裁决。
 
 ### 3.2 产品成功标准冲突
 

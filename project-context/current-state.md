@@ -12,7 +12,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-003 阶段 2 已随 GOV-001A（PR #5）合入默认主线；项目处于产品收敛阶段，未 CLOSED。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-003 阶段 2 已随 GOV-001A（PR #5）合入默认主线；GOV-001 治理收尾已完成（A/B 均合并）；项目处于产品收敛阶段，未 CLOSED。
 
 ## Git 事实
 
@@ -20,13 +20,13 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-00
 |---|---|
 | 仓库 | `E:\正式作品` |
 | GitHub 默认分支 | `main` |
-| `origin/main` | `4baabf0`（2026-08-11 PR #5 合并，已吸收 master 全部内容） |
+| `origin/main` | `5901c64`（2026-08-11 PR #6 合并；主线收敛 + 治理文件入库全部完成） |
 | `origin/master` | `064f5b6`（已被 main 完全吸收） |
-| 分叉 | main 独有 13 / master 独有 0；master 已是 main 的祖先 |
+| 分叉 | main 独有 17 / master 独有 0；master 已是 main 的祖先（`064f5b6` 即 merge-base） |
 | 当前本地分支 | `feature/task-004-spike` @ `79e49ec` |
 | 工作区 | 非干净；存在治理文档修改及多批既有未跟踪原型/审计/实验文件 |
 
-主线已收敛：`main`（`4baabf0`）已通过可审查集成吸收 `master` 全部内容，`master` 保留为归档引用。禁止 force push；master 退役需 Founder 单独裁决。
+主线已收敛：`main`（`5901c64`）已通过 GOV-001A（PR #5 @ `4baabf0`）+ GOV-001B（PR #6 @ `5901c64`）完成主线收敛与治理文件入库，`master` 保留为归档引用。禁止 force push；master 退役需 Founder 单独裁决（D-MASTER-RETIRE）。
 
 ## 任务状态
 
@@ -37,7 +37,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-00
 | TASK-003 阶段 1 | 完成 | Baseline、Bad Case、After Baseline 与灰度方案 |
 | TASK-003 阶段 2 | MERGED | 8 Case 真实 Eval 工具已实现并复审；已随 PR #5 合入默认 `main`（2026-08-11；不 CLOSED，P1 整体未完成） |
 | TASK-004 | DRAFT / PAUSED | 三轮 Spike 未达标；物理删除有效，但未来可能重新抽取；不得宣称删除 Case 100% 通过 |
-| GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-11 合并）；GOV-001B：IN_REVIEW（PR #6 状态同步待复审） | 主线收敛已完成；状态同步待独立复审 |
+| GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-11 合并）；GOV-001B：MERGED（PR #6 @ `5901c64`，2026-08-11 合并） | 主线收敛 + 治理文件入库全部完成 |
 | TASK-005A | 未开始 | Config Snapshot Completeness；GOV-001 后的下一产品任务 |
 | TASK-006 | 未开始 | E004 无关召回 Gate；须在 005A 后推进 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
@@ -54,7 +54,7 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 
 ## 当前阻断与已知限制
 
-1. GOV-001A 主线收敛已完成（PR #5 @ `4baabf0`）；GOV-001B 状态同步与治理文件入库进行中；
+1. GOV-001 治理收尾全部完成（GOV-001A PR #5 @ `4baabf0`、GOV-001B PR #6 @ `5901c64` 均已合并）；后续任务状态须保持与 Git 同步；
 2. TASK-003 元数据已与远端对齐（MERGED @ `4baabf0`）；后续任务状态须保持与 Git 同步；
 3. Config 快照多个关键字段仍可能为 `unavailable`；
 4. E004 存在无关 Memory 召回；
@@ -65,14 +65,14 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 
 ## 当前建议动作
 
-1. 独立 Reviewer 复审 GOV-001B 状态同步 PR #6（治理文件入库、TASK-003 标 MERGED、一致性修复）；
-2. Founder 裁决合并 PR #6（治理文件入库）；
-3. 合并后为 TASK-005A 建立独立 DRAFT（Config Snapshot Completeness）；
-4. master 退役按 D-MASTER-RETIRE 单独裁决。
+1. 为 TASK-005A 建立独立 DRAFT（Config Snapshot Completeness；已获 Founder 授权进入 DRAFT 起草）；
+2. Founder 审阅 TASK-005A DRAFT 并批准验收标准（DRAFT → APPROVED）；
+3. 批准后按执行模式门判断 delegate_task 或长期 Builder 会话；
+4. master 退役按 D-MASTER-RETIRE 单独裁决（不阻塞主线）。
 
 ## 下一窗口唤醒卡（当前建议）
 
 - **目标角色**：Chief of Staff（本窗口）
-- **目的**：完成 GOV-001B 状态同步收尾（治理文件入库提交）后，为 TASK-005A 建立独立 DRAFT。
-- **Founder 何时发送**：GOV-001B 提交完成、准备推进下一产品任务时。
-- **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-001B 状态同步提交。
+- **目的**：GOV-001 收尾状态同步已完成；继续推进 TASK-005A 独立 DRAFT 起草与 Founder 审批。
+- **Founder 何时发送**：审阅本状态同步提交并决定是否合并后，进入 TASK-005A DRAFT 审批时。
+- **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、TASK-005A DRAFT。
