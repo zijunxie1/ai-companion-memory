@@ -41,7 +41,7 @@ required_reading:
 - `EvalConfig` 现有 **11 个正式字段**（eval-types.ts:6-18）：`chat_model`、`extract_model`、`embed_model`、`persona_prompt_hash`、`extract_prompt_hash`、`judge_rubric_version`、`recall_threshold`、`recall_top_k`、`write_mode`、`chatflow_version`、`case_set_version`
 - 产品侧代码事实（chat/route.ts）：召回阈值 `MIN_SCORE = 0.35`（:55）、召回条数 `mem0.search(user_id, message, 5)`（:57）、写入模式 async（:122 `void (async () => ...)`）
 - `JUDGE_RUBRIC_VERSION = "v1.0"` 常量已存在（eval-llm-judge.ts:12）；Judge 模型走 `env.JUDGE_MODEL`
-- 外部运行事实（Founder/Reviewer 实测，2026-08-11）：Dify 已发布工作流 3 个 LLM 节点均为 `deepseek-v4-flash`；Dify 工作流版本 `2026-07-26 01:02:55.290923`；mem0 实际抽取模型 `deepseek-v4-flash`；embedding `BAAI/bge-small-zh-v1.5`；Judge 模型 `deepseek-v4-flash`；Extract Prompt 内容 sha256 前 16 位 `875129e48a7b1ae3`；Judge Prompt 内容 sha256 前 16 位 `6bff2fcfcde01605`
+- 外部运行事实（Founder/Reviewer 实测，2026-08-11；**以下仅为历史核验记录，不是快照字段来源**）：Dify 已发布工作流 3 个 LLM 节点均为 `deepseek-v4-flash`；Dify 工作流版本 `2026-07-26 01:02:55.290923`；mem0 实际抽取模型 `deepseek-v4-flash`；embedding `BAAI/bge-small-zh-v1.5`（该模型名仅为历史核验记录，**不得进入快照代码**；快照 embed_model 按最终定稿为 unavailable + reason）；Judge 模型 `deepseek-v4-flash`；Extract Prompt 内容 sha256 前 16 位 `875129e48a7b1ae3`；Judge Prompt 内容 sha256 前 16 位 `6bff2fcfcde01605`
 
 ### 2.2 现状缺口（本任务要解决）
 
@@ -114,7 +114,7 @@ type SnapshotMeta = {
 |---|---|---|
 | `chat_model` | `declared`（Dify 内部，人工登记） | `.env.example` 声明 `CHAT_MODEL`（**optional / declared**，模板不填本机实际值）；未配置则 `unavailable`+reason |
 | `extract_model` | `declared`（当前无运行接口证据） | 从 mem0 部署声明采集（`deepseek-v4-flash`）；**不得称 observed**，除非存在只读配置接口或共享版本化配置来源 |
-| `embed_model` | `declared`（无共享版本化来源 / 只读运行接口前） | 从部署声明采集（`BAAI/bge-small-zh-v1.5`）；**不得在快照代码中裸硬编码**；不新增假 env；除非存在共享版本化配置来源或只读运行接口，否则不得标 observed/code |
+| `embed_model` | **unavailable + reason（最终口径，Founder 2026-08-11 定稿）** | embedding 模型硬编码于 `v2/mem0-server/main.py:44`（fastembed，无 env 覆盖）；应用侧无只读运行接口、无共享版本化配置来源；**不新增仅供快照读取的 env**；不得在快照代码中裸硬编码模型名；不把仓库注释表述为运行时观测 |
 | `persona_data_hash` | `derived` | **重命名**自 `persona_prompt_hash`（真实为用户 Persona JSON 内容哈希）；旧键兼容读 |
 | `extract_prompt_hash` | `derived`（仅当从真实 Prompt 内容计算） | **保留字段名**，必须保存真实内容哈希（当前核验值 `875129e48a7b1ae3`）；**不得把当前哈希裸硬编码进快照代码**——若 Builder 无法从版本化共享源获得 Prompt 原文，标 `unavailable`+reason 并提交边界说明 |
 | `extract_prompt_version` | 可选独立字段 | **可选**人工版本声明；版本号与内容哈希不得共用一个字段；无版本治理时可暂不增加 |
@@ -227,7 +227,7 @@ type SnapshotMeta = {
 1. ✅ **批准 TASK-005A DRAFT v2.1**，任务进入 APPROVED（执行模式门待确认）；
 2. ✅ **字段方案批准**：`persona_prompt_hash`→`persona_data_hash`（兼容历史旧键）；保留 `extract_prompt_hash`（只保存真实 Prompt 内容哈希）；`extract_prompt_version` 仅作可选独立声明字段；
 3. ✅ **CHAT_MODEL / CHATFLOW_VERSION 批准为 optional / declared** 配置项；未配置时必须显示 unavailable + reason，不得表述为 observed；
-4. ✅ **授权修正**（已落盘）：embed_model 在无共享版本化来源/只读运行接口前标 declared、不得裸硬编码；UI 来源枚举改为 observed/code/declared/derived（unavailable/not_applicable 只属 status）；
+4. ✅ **授权修正**（已落盘，最终定稿）：embed_model 无共享版本化来源/只读运行接口 → **unavailable + reason**，不新增 env、不硬编码模型名（不再表述为 declared）；UI 来源枚举改为 observed/code/declared/derived（unavailable/not_applicable 只属 status）；
 5. ✅ **执行模式**：Founder 已于 2026-08-11 确认 HANDOFF REQUIRED 长期 Builder 会话（本任务已按此执行，实现完成）。
 
 ## 10. 下一交接（历史预判——已执行完毕）

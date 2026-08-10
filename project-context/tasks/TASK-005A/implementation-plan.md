@@ -1,4 +1,4 @@
-# TASK-005A｜Config Snapshot Completeness — 实施计划（Review 2 提交稿，v1.1 修订版）
+# TASK-005A｜Config Snapshot Completeness — 实施计划（已批准版，v1.1）
 
 ```yaml
 required_reading:
@@ -17,10 +17,10 @@ required_reading:
   - eval/eval-contracts.md
   - eval/eval-policy-v1.md
 task_id: TASK-005A
-status: APPROVED（Founder 2026-08-11 批准 v2.1；本计划待 Review 2 批准）
+status: APPROVED（Founder 2026-08-11 批准 v2.1；本计划已于 2026-08-11 经 Review 2 批准，按此实现并完成）
 execution_mode: persistent_session（HANDOFF REQUIRED，Founder 已确认执行模式）
 assigned_role: Builder
-branch: feature/task-005a-config-snapshot（自 origin/main @ c242338 创建；**批准前不创建**）
+branch: feature/task-005a-config-snapshot（自 origin/main @ c242338 创建）
 plan_version: v1.1（2026-08-11 修订；v1.0 同日首版，Founder 打回后修订）
 ```
 

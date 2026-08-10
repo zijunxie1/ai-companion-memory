@@ -17,12 +17,12 @@ required_reading:
   - eval/eval-contracts.md
   - eval/eval-policy-v1.md
 task_id: TASK-005A
-status: IMPLEMENTED（Review 3 第二轮 CHANGES_REQUESTED 已修复完毕，PR #8 已创建，等待第三轮复审）
+status: IN_REVIEW（Review 3 第三轮 CHANGES_REQUESTED 已修复并推送，PR #8 等待下一轮复审）
 execution_mode: persistent_session（HANDOFF REQUIRED）
 assigned_role: Builder
 branch: feature/task-005a-config-snapshot
 baseline: origin/main @ c242338
-report_version: v1.3（2026-08-11；v1.2 + Review 3 第二轮修复轮）
+report_version: v1.4（2026-08-11；v1.3 + Review 3 第三轮治理修正轮）
 ```
 
 ---
@@ -35,7 +35,7 @@ report_version: v1.3（2026-08-11；v1.2 + Review 3 第二轮修复轮）
 | 2 | case_set_version 来源 | 默认值 → code；POST 请求参数覆盖 → declared（runs/route.ts 传覆盖标志） | T10h 两路径；集成核验 |
 | 3 | 新快照停止写 persona_prompt_hash | buildSnapshot 只写 persona_data_hash；类型改可选；展示层旧键归并保留 | T10g/T13；DB 集成测试断言 |
 | 4 | 历史 Run 详情页四列 | runs/[id]/page.tsx 新增 ConfigSnapshotCard（共用 buildSnapshotDisplayRows，旧格式未知来源） | T13；build/lint/tsc |
-| 5 | 数据库独立列写入测试 | 新增 eval-db-integration.test.ts（真实连接本地 PG，INSERT→断言字符串列→DELETE） | 44/44 全绿含此测试 |
+| 5 | 数据库独立列写入测试 | 新增 eval-db-integration.test.ts（**调用生产 createEvalRun/getEvalRun**，查询真实落库行，断言独立列字符串，finally 清理；不用自拼 INSERT） | 44/44 全绿含此测试 |
 | 6 | 治理事实 | current-state Git 主线版本（c242338）、draft 状态（IMPLEMENTED + 执行模式）、decision-register 待决矛盾清除、embed_model 最终语义（unavailable+reason，非 declared） | 文件核对 |
 | 7 | 实现报告落盘 | 本文件 | — |
 | 8 | 提交推送 + PR + 复审 | 见 §7 | — |
@@ -119,13 +119,13 @@ build（next build）：成功
 
 ```text
 ## 当前任务状态
-IMPLEMENTED（Review 3 第二轮修复完成；PR #8 已创建，等待第三轮复审）
+IN_REVIEW（Review 3 第三轮 CHANGES_REQUESTED 已修复并推送；PR #8 等待下一轮复审）
 
 ## 当前负责人
 Builder（本窗口）；最终裁决：Founder
 
 ## 当前阶段是否完成
-否 — 等待独立 Reviewer 复审（Review 3 第二轮）
+否 — 等待独立 Reviewer 复审（Review 3 第四轮）
 
 ## 完成依据
 - 第二轮 3 项 Review 意见全部修复（DB 测试走生产函数、真实产品路径证据、治理事实）
@@ -133,11 +133,11 @@ Builder（本窗口）；最终裁决：Founder
 - PR #8 已创建（github.com/zijunxie1/ai-companion-memory/pull/8），修复已推送
 
 ## 下一交接对象
-独立 Reviewer（Review 3 第三轮复审）
+独立 Reviewer（Review 3 下一轮复审）
 
 ## 交接前仍缺少什么
-PR 创建（本轮 push 后创建）+ Founder 启动复审
+无（PR #8 已创建，修复已推送；等待 Founder 启动下一轮复审）
 
 ## 建议动作
-Founder 将第三轮复审唤醒卡发送给独立 Reviewer
+Founder 将下一轮复审唤醒卡发送给独立 Reviewer
 ```
