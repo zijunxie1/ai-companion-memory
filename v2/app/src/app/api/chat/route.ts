@@ -23,6 +23,7 @@ import {
 } from "@/lib/db";
 import { env } from "@/lib/env";
 import { containsCrisis } from "@/lib/eval-crisis";
+import { RECALL_TOP_K, RECALL_THRESHOLD } from "@/lib/memory-config";
 import type { ChatRequest, ChatResponse } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
@@ -51,9 +52,9 @@ export async function POST(request: NextRequest) {
     // Step 1: 记录用户消息到对话表
     const userConvId = await insertConversation(user_id, "user", message);
 
-    // Step 2: mem0 语义召回（过滤低相似度结果）
-    const MIN_SCORE = 0.35; // 低于 35% 相似度的 Memory 不返回
-    const rawMemories = await mem0.search(user_id, message, 5);
+    // Step 2: mem0 语义召回（过滤低相似度结果；阈值/条数来自共享常量 memory-config.ts）
+    const MIN_SCORE = RECALL_THRESHOLD; // 低于阈值的 Memory 不返回
+    const rawMemories = await mem0.search(user_id, message, RECALL_TOP_K);
     const memories = rawMemories.filter((m) => (m.score ?? 0) >= MIN_SCORE);
     const usedMemory = memories.map((m) => ({
       ...m,
