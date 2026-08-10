@@ -2,7 +2,8 @@
 
 > 文档类型：**正式契约**（记录已合并并生效的实现事实，依据 AGENTS.md 红线 #2）
 > 事实来源：`v2/migrations/002_eval.sql`、`v2/migrations/003_eval_fixes.sql`（均已应用）、
->           `v2/app/src/lib/eval-db.ts`、`eval-runner.ts`、`eval-program-rules.ts`、`eval-types.ts`
+>           `v2/app/src/lib/eval-db.ts`、`eval-runner.ts`、`eval-program-rules.ts`、`eval-types.ts`、
+>           `eval-config.ts`、`eval-snapshot-core.ts`、`memory-config.ts`（TASK-005A 快照结构）
 > 更新规则：本契约只记录已生效实现。任何 schema/API/状态机变更必须同步更新本文件，禁止契约与代码漂移。
 > 关联策略文档：`eval/eval-policy-v1.md`（指标治理模板，版本化）
 
@@ -77,6 +78,40 @@
 
 > 终态协议（CR-C）：评测侧**不得用 memory_writes 非空/差值猜测终态**，
 > 只认 `write_status` 状态机轮询；超时按 NOT_TESTED 处理（见 §3.2）。
+
+#### 1.4.1 config_snapshot 结构（schema_version 2，TASK-005A）
+
+> 快照对象 = 顶层原字段（字符串/数值，保持历史兼容）+ `_snapshot_meta`（全字段来源/状态登记）。
+> 来源分类：`observed`（真实调用响应/运行证据——当前实现**无任何字段**标 observed，
+> 外部服务实际执行无法从应用侧观测）、`code`（决定产品行为的共用代码配置）、
+> `declared`（env/部署声明）、`derived`（由真实数据或代码内容计算的哈希）。
+> 状态：`available` / `unavailable` / `not_applicable`；后两者**省略 source_type 且必填 reason + source_ref**。
+
+| 字段 | 顶层值 | status / source_type | 来源（source_ref） |
+|---|---|---|---|
+| chat_model | env CHAT_MODEL 或 "unavailable" | available/declared 或 unavailable+reason | `.env CHAT_MODEL`（optional / declared） |
+| extract_model | env MEM0_LLM_MODEL 或 "unavailable" | available/declared 或 unavailable+reason | `env MEM0_LLM_MODEL`（mem0-server 部署声明，main.py:51 读取） |
+| embed_model | "unavailable" | unavailable + reason | `v2/mem0-server/main.py:44`（硬编码 fastembed；无只读接口/共享来源；不新增 env，Founder 2026-08-11 定稿） |
+| persona_data_hash（新键） | 哈希或 "unavailable" | available/derived 或 unavailable+reason | `users` 表 Persona JSON（getUserPersona 实时计算） |
+| persona_prompt_hash（旧键） | 同 persona_data_hash | — | 历史 Run 兼容；新快照双键同值 |
+| extract_prompt_hash | 哈希或 "unavailable" | available/derived 或 unavailable+reason | `v2/mem0-server/main.py:107-117`（repository source——仓库版本化源码中的 Prompt 内容，非运行容器观测） |
+| judge_model | env JUDGE_MODEL 或代码默认值 | available/code（默认）或 available/declared（env 覆盖） | `v2/app/src/lib/env.ts:27`（代码默认）；`env JUDGE_MODEL`（覆盖） |
+| judge_prompt_hash | 哈希 | available/derived | `eval-llm-judge.ts:15`（JUDGE_SYSTEM_PROMPT 导出常量，运行时原样发送） |
+| judge_rubric_version | 代码常量 "v1.0" | available/code | `eval-llm-judge.ts:12`（JUDGE_RUBRIC_VERSION） |
+| policy_version | 独立列（eval_runs.policy_version） | available/code（meta 登记） | `eval-db.ts createEvalRun`（与 judge_rubric_version 同源） |
+| recall_threshold | 0.35 | available/code | `memory-config.ts RECALL_THRESHOLD`（chat/route.ts:55 共用） |
+| recall_top_k | 5 | available/code | `memory-config.ts RECALL_TOP_K`（chat/route.ts:56 共用） |
+| write_mode | "async" | available/code | `memory-config.ts WRITE_MODE`（chat/route.ts:122 异步写入路径） |
+| chatflow_version | env CHATFLOW_VERSION 或 "unavailable" | available/declared 或 unavailable+reason | `.env CHATFLOW_VERSION`（optional / declared） |
+| case_set_version | 请求参数或 "8-case-v1" | available/code（meta 登记） | `api/eval/runs route.ts`（默认 8-case-v1；与 eval_runs.case_set_version 独立列同值） |
+| user_isolation | "per_case" | available/code | `eval-snapshot-core.ts USER_ISOLATION`（Run 创建时一次性写入） |
+| snapshot_schema_version | 2 | available/code | `eval-snapshot-core.ts SNAPSHOT_SCHEMA_VERSION` |
+
+兼容规则：
+- 旧 Run 快照（纯字符串/数值、无 meta）→ UI 按"未知来源"渲染，不报错；
+- `persona_prompt_hash` 旧键 → 展示归并到 `persona_data_hash`（值同源）；
+- `_snapshot_meta.schema_version` 未知 → UI 标记"未知快照版本"，不崩溃；
+- 快照不可变：Run 创建时一次性写入（含 user_isolation）；任何模块不得在创建后以 `config_snapshot || jsonb` 追加修改；写入失败不得静默忽略（Run 创建失败显式报错）。
 
 #### 1.3.1 final_verdict 字段随判定路径变化（实现事实）
 
@@ -189,3 +224,5 @@ absolute_status 优先级（高→低）：
 | 状态机 running/completed/failed | `eval-db.ts` | ✅ |
 | 终态四态 pending/completed/failed/timeout | `eval-runner.ts waitForTraceWriteFinal` | ✅ |
 | 三态 + absolute_status | `eval-types.ts` / `eval-program-rules.ts` | ✅ |
+| config_snapshot 结构（schema_version 2 + `_snapshot_meta`） | `eval-config.ts` / `eval-snapshot-core.ts` / `eval-types.ts` | ✅ |
+| 共享常量（0.35 / 5 / async）单一来源 | `memory-config.ts`（chat/route.ts 共用） | ✅ |
