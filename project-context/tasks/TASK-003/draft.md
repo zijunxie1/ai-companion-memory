@@ -1,17 +1,26 @@
 # TASK-003｜V3 Memory 评测体系
 
+> ⚠️ **本草案已被 B+ 修正/部分取代**（见 [draft-phase2-bplus.md](./draft-phase2-bplus.md)）。
+> 阶段 2 改为「方案 B+：8 Case 真实评测纵向闭环」执行（Chief 裁决 A-F），
+> 本文件的 4 个原始交付物（Before/After 面板 + LLM-as-Judge + 20 条 Case + Bad Case 面板）
+> 仅保留阶段 1 手动评测叙事，阶段 2 以 B+ 草案为准。
+
 ## 任务元数据
 
 ```yaml
 task_id: TASK-003
-status: APPROVED
+status: IN_PROGRESS        # 阶段2 已 REVIEW_APPROVED（@8f54211），待用户决定合并
 execution_mode: split
-  phase_1: user_build       # 用户手动跑评测
-  phase_2: persistent_session # Builder 搭效率工具
+  phase_1: user_build       # 用户手动跑评测（P1：**不得标记 CLOSED**，阶段1 未单独结项）
+  phase_2: persistent_session # Builder 搭效率工具（阶段2 已完成：REVIEW_APPROVED → 合并准备）
 assigned_role:
   phase_1: user
   phase_2: Builder
-branch: feature/task-003-eval-system
+branch: feature/task-003-eval-system  # 原草案分支；实际实现分支：feature/task-003-eval-run-slice
+phase_2_status: REVIEW_APPROVED      # 2026-08-10 最终独立 Review 通过，commit 8f54211
+phase_2_branch: feature/task-003-eval-run-slice
+next: 用户合并裁决 → [合并后] 新独立 Reviewer 四项复审 → 用户合并
+superseded_by: draft-phase2-bplus.md
 ```
 
 ---

@@ -4,6 +4,9 @@
 > 日期：2026-08-09
 > 输入：Kimi 执行的全链路设计（Chief 裁决 A-F + 16 修改源 + Config 快照 + 方案 B+）
 > 状态：**APPROVED**（用户 2026-08-09 批准），待交 Builder 执行
+>
+> **实现状态更新（2026-08-10）：阶段 2 已实现并 REVIEW_APPROVED（commit 8f54211），
+> 进入合并准备。实现契约见 `eval/eval-contracts.md`，指标策略见 `eval/eval-policy-v1.md`。**
 
 ---
 
