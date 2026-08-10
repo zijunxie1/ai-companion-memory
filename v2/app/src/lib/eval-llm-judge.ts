@@ -5,14 +5,14 @@
 // Prompt 设计来源：eval/llm-judge.md（v1.0）
 // ============================================================
 
-import { env } from "./env";
+import { env } from "./env.ts";
 import type { EvalCase, LLMJudgeResult } from "./eval-types";
-import { memoryText } from "./eval-program-rules";
+import { memoryText } from "./eval-program-rules.ts";
 
 export const JUDGE_RUBRIC_VERSION = "v1.0";
 
-/** Judge Prompt（来自 llm-judge.md §三，v1.0 版本化固定模板） */
-const JUDGE_SYSTEM_PROMPT = `你是一名严格的 AI Memory 系统评测裁判。你的任务是评估 AI 陪伴产品在单轮对话中 Memory 系统的表现。
+/** Judge Prompt（来自 llm-judge.md §三，v1.0 版本化固定模板；导出供快照计算内容哈希） */
+export const JUDGE_SYSTEM_PROMPT = `你是一名严格的 AI Memory 系统评测裁判。你的任务是评估 AI 陪伴产品在单轮对话中 Memory 系统的表现。
 
 <评分原则>
 你需要按照以下维度逐条评估。每个维度必须先分析再给分，禁止直接输出裸分数。
