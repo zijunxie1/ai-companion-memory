@@ -159,6 +159,8 @@ Chief 汇总所有已完成任务与已知限制
 
 **2026-08-11 实际状态（Git 核验）**：GOV-001A PR #5（@`4baabf0`）与 GOV-001B PR #6（@`5901c64`）均已合并，`main` 已通过可审查集成吸收 `master` 全部内容，且治理文件（AGENTS/current-state/decision-register/roadmap 等）已入库；`master` 已是 `main` 的祖先（master 独有提交 = 0）。“TASK-003 MERGED” 现在可表述为“已合入默认主线”。禁止 force push；master 退役由 D-MASTER-RETIRE 单独裁决。
 
+**2026-08-11 后续更新（本窗口核验）**：`origin/main` 现为 `4f93fa6`（PR #8 TASK-005A Rebase 合并）；分叉 = main 独有 34 / master 独有 0（merge-base = master HEAD `064f5b6`）。TASK-005A 状态 = MERGED（验证结论：QA_APPROVED_MAINLINE；未生产部署）。
+
 ### 3.2 产品成功标准冲突
 
 `project-context/product.md` 仍要求：
@@ -203,6 +205,8 @@ TASK-004 三轮 Spike 已证明：物理删除有效，但未来对话仍可能�
 
 ### Phase 1｜TASK-005A Config Snapshot Completeness
 
+> 状态（2026-08-11 补记）：**TASK-005A 已完成合并并完成主线 QA** —— PR #8 @ `4f93fa6` 于 2026-08-11 06:37（Asia/Shanghai）Rebase 合并；合并后主线 QA 通过（QA_APPROVED_MAINLINE，Run #28，E001—E008 全链路真实执行无新增执行错误，快照 16 字段及来源真实验证）；未进行生产部署；E004 无关召回问题移交 Phase 2（TASK-006）。
+
 **目标**：先建立“为什么结果变化”的证据能力，再优化评测结果。
 
 **原因**：当前多个关键字段为 `unavailable`。如果先调 Gate 把 E004 变绿，却不能说明改了什么，评测驱动开发的叙事不成立。
@@ -235,6 +239,8 @@ TASK-004 三轮 Spike 已证明：物理删除有效，但未来对话仍可能�
 ---
 
 ### Phase 2｜TASK-006 E004 无关召回 Gate
+
+> 状态（2026-08-11 补记）：**TASK-006 正在起草**（DRAFT v1.1 已由本窗口写入 `project-context/tasks/TASK-006/draft.md` 并按 Founder CHANGES_REQUESTED 修订，等待 Founder 审批；审批后经执行模式门确认执行方式，本窗口建议 HANDOFF REQUIRED 长期 Builder 会话）。主线顺序保持不变（005A → 006）。
 
 **目标**：完成第一条真实“评测暴露问题 → 产品修复 → 回归证明”的闭环。
 

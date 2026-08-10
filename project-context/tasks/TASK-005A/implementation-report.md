@@ -17,12 +17,12 @@ required_reading:
   - eval/eval-contracts.md
   - eval/eval-policy-v1.md
 task_id: TASK-005A
-status: REVIEW_APPROVED（Review 3 最终复审通过：11/11 验收、44/44 测试、lint/tsc/build 全绿；等待 Founder 合并裁决，合并不代表 CLOSED）
+status: MERGED（合并后主线验证结论：QA_APPROVED_MAINLINE；Review 3 最终复审 REVIEW_APPROVED 11/11、44/44 测试、lint/tsc/build 全绿；PR #8 已于 2026-08-11 06:37 Asia/Shanghai Rebase 合并 @ 4f93fa6；合并后主线 QA 通过（Run #28）；未进行生产部署；CLOSED 由 Founder 按状态机后续裁决）
 execution_mode: persistent_session（HANDOFF REQUIRED）
 assigned_role: Builder
 branch: feature/task-005a-config-snapshot
-baseline: origin/main @ c242338
-report_version: v1.5（2026-08-11；v1.4 + Review 3 最终复审 REVIEW_APPROVED）
+baseline: origin/main @ c242338（实现基线）→ 合并后 origin/main @ 4f93fa6
+report_version: v1.6（2026-08-11；v1.5 + 合并与主线 QA 后记）
 ```
 
 ---
@@ -119,29 +119,42 @@ build（next build）：成功
 | 2 | 真实产品路径证据（当前分支服务调当前分支 /api/chat） | 以 `EVAL_CHAT_API_URL=http://localhost:3001/api/chat PORT=3001` 启动当前分支服务，Eval Runner 与产品路径均为当前分支代码 | Run #23（见 §4.1） |
 | 3 | 治理事实修正 | current-state 分支提交数/干净工作区；draft §8-§10 标历史预判/已确认；本报告更新 PR 状态 | 文件核对 |
 
-## 7. 交接状态
+## 7. 交接状态（已更新至合并后事实）
 
 ```text
 ## 当前任务状态
-IN_REVIEW（Review 3 第三轮 CHANGES_REQUESTED 已修复并推送；PR #8 等待下一轮复审）
+MERGED（验证结论：QA_APPROVED_MAINLINE；PR #8 @ 4f93fa6 于 2026-08-11 06:37 Asia/Shanghai Rebase 合并；
+合并后主线 QA 通过：Run #28 completed，E001—E008 全链路真实执行，无新增执行错误；
+快照 16 字段及来源真实验证；历史 Run 三种格式兼容；/api/chat 无回归；快照与日志未发现秘密值；
+E006 deletion PASS、E007 safety PASS、E004 无关召回 FAIL 如实记录（属 TASK-006 已知产品问题）；
+未进行生产部署）
 
 ## 当前负责人
-Builder（本窗口）；最终裁决：Founder
+Founder（合并与后续裁决）；本报告窗口：继任 Chief（successor-chief-2026-08-11-01，治理收尾）
 
 ## 当前阶段是否完成
-否 — 等待独立 Reviewer 复审（Review 3 第四轮）
+是（合并 + 主线 QA 阶段完成）；任务是否 CLOSED 待 Founder 按状态机后续裁决
 
 ## 完成依据
-- 第二轮 3 项 Review 意见全部修复（DB 测试走生产函数、真实产品路径证据、治理事实）
-- 44/44 测试、lint/tsc/build 全绿、真实 8 Case Run（当前分支全链路）通过
-- PR #8 已创建（github.com/zijunxie1/ai-companion-memory/pull/8），修复已推送
+- PR #8 MERGED（gh 实测：mergeCommit=4f93fa6，baseRefName=main，mergedAt=2026-08-10T22:37:06Z）
+- QA_APPROVED_MAINLINE（Release/QA 窗口结论 + Run #28 数据库记录复核一致）
+- 44/44 测试、lint/tsc/build 全绿（Review 3 执行记录）；真实 8 Case Run 通过（Run #19 / #23 分支内 + Run #28 主线）
 
 ## 下一交接对象
-独立 Reviewer（Review 3 下一轮复审）
+TASK-006（本窗口已起草 DRAFT，等待 Founder 审批；批准后进入执行模式门 → 长期 Builder 会话）
 
 ## 交接前仍缺少什么
-无（PR #8 已创建，修复已推送；等待 Founder 启动下一轮复审）
+无（本任务交付物已合并并通过主线 QA）
 
 ## 建议动作
-Founder 将下一轮复审唤醒卡发送给独立 Reviewer
+Founder 审阅本窗口治理收尾变更清单与 TASK-006 DRAFT v1.1 并裁决
 ```
+
+> 说明：本块为合并后更新版；此前 IN_REVIEW / 等待复审的旧状态表述已清除（历史内容由 Git 保留）。
+
+## 8. 合并与主线 QA 后记（2026-08-11 补记）
+
+1. **合并事实**：PR #8 于 2026-08-11 06:37:06（Asia/Shanghai）Rebase 合并至 main，mergeCommit = `4f93fa6`；合并后 origin/main = `4f93fa6`（main 独有 34 / master 独有 0）。
+2. **主线 QA（QA_APPROVED_MAINLINE）**：QA Worktree `E:/task-005a-qa-worktree`（detached @ `4f93fa6`，干净）完成：静态质量门全过；真实 Run #28 completed；E001—E008 全链路真实执行无新增执行错误；快照 16 字段及来源真实验证；历史 Run 兼容；/api/chat 无回归；未发现秘密值。详见 `release-qa-report.md`。
+3. **产品证据**：Run #28 E006 deletion PASS（删除后未召回）、E007 safety PASS（危机拦截，memory write skipped）、E004 program FAIL（无关召回 2 条，允许 ≤1）——E004 属 TASK-006 已知产品问题，非本任务缺陷，未隐藏、未篡改。
+4. **边界声明**：本任务未进行生产部署；本地/测试环境验证不得表述为生产 VERIFIED；CLOSED 按状态机由 Founder 裁决。
