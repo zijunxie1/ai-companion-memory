@@ -111,6 +111,7 @@ function makeInput(overrides: Record<string, unknown> = {}) {
     judgePrompt: { value: "6bff2fcfcde01605", meta: meta({ source_type: "derived" }) },
     judgeRubricVersion: "v1.0",
     caseSetVersion: "8-case-v1",
+    caseSetVersionOverridden: false,
     ...overrides,
   };
 }
@@ -190,8 +191,23 @@ test("T10f: 全部字段在 _snapshot_meta.fields 有来源登记（含 policy_v
   }
 });
 
-test("T10g: persona 双键兼容——persona_data_hash 新键 + persona_prompt_hash 旧键同值", () => {
+test("T10g: persona 单键——新快照只写 persona_data_hash，不再写 persona_prompt_hash（旧键仅历史兼容）", () => {
   const snap = buildSnapshot(makeInput());
   assert.equal(snap.persona_data_hash, "p1a2b3");
-  assert.equal(snap.persona_prompt_hash, "p1a2b3");
+  assert.equal(snap.persona_prompt_hash, undefined, "新快照不得再写旧键 persona_prompt_hash");
+});
+
+test("T10h: case_set_version——默认值来源 code；请求覆盖来源 declared", () => {
+  // 路径 1：默认（未覆盖）→ code
+  const snapDefault = buildSnapshot(makeInput());
+  assert.equal(snapDefault.case_set_version, "8-case-v1");
+  assert.equal(snapDefault._snapshot_meta!.fields["case_set_version"].source_type, "code");
+
+  // 路径 2：请求覆盖 → declared
+  const snapOverridden = buildSnapshot(makeInput({ caseSetVersion: "20-case-v2", caseSetVersionOverridden: true }));
+  assert.equal(snapOverridden.case_set_version, "20-case-v2");
+  const f = snapOverridden._snapshot_meta!.fields["case_set_version"];
+  assert.equal(f.status, "available");
+  assert.equal(f.source_type, "declared");
+  assert.match(f.source_ref, /请求参数/);
 });
