@@ -2,7 +2,7 @@
 // 评测数据库操作 — eval_cases / eval_runs / eval_results
 // ============================================================
 
-import { pool } from "./db";
+import { pool } from "./db.ts";
 import type {
   EvalCase,
   EvalConfig,
