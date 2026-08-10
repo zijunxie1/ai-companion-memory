@@ -73,6 +73,6 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 ## 下一窗口唤醒卡（当前建议）
 
 - **目标角色**：独立 Reviewer（新窗口）
-- **目的**：TASK-005A 实施完成（IMPLEMENTED）；执行 Review 3 代码与行为审查。
+- **目的**：TASK-005A 处于 IN_REVIEW（Review 3 多轮 CHANGES_REQUESTED 均已修复并推送）；执行下一轮复审。
 - **Founder 何时发送**：准备审查 TASK-005A PR 时。
 - **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、TASK-005A DRAFT（v2.1）与实施计划（v1.1）、PR diff 与集成核验证据。

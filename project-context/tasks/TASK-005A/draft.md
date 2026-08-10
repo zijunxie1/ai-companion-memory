@@ -17,10 +17,10 @@ required_reading:
   - eval/eval-policy-v1.md
 ```
 
-> 文档类型：任务 DRAFT（**APPROVED → IMPLEMENTED**——Founder 2026-08-11 批准 v2.1 与字段方案；执行模式已确认 HANDOFF REQUIRED；实现完成，等待 Review 3）
+> 文档类型：任务 DRAFT（**APPROVED → IMPLEMENTED → IN_REVIEW**——Founder 2026-08-11 批准 v2.1 与字段方案；执行模式已确认 HANDOFF REQUIRED；实现完成，当前 IN_REVIEW，等待下一轮复审）
 > 起草日期：2026-08-11（v2.1 修订同日；同日获 Founder 批准）
 > 起草人：successor-chief-2026-08-10-01
-> 状态：**IMPLEMENTED**（执行模式已确认 HANDOFF REQUIRED；实施计划 v1.1 已批准；实现完成于 feature/task-005a-config-snapshot，2026-08-11；等待独立 Reviewer Review 3）
+> 状态：**IN_REVIEW**（执行模式已确认 HANDOFF REQUIRED；实施计划 v1.1 已批准；实现完成于 feature/task-005a-config-snapshot（PR #8），2026-08-11；Review 3 多轮 CHANGES_REQUESTED 均已修复，等待下一轮复审）
 > 依据：project-mainline-roadmap.md Phase 1 + 独立 Reviewer 结论（方向通过，v2.1 文字修订）+ Founder 批准
 > 状态约束：TASK-004 保持 PAUSED；主线顺序 GOV-001 → 005A → 006 → 007 → 005B 不变
 
@@ -233,4 +233,4 @@ type SnapshotMeta = {
 ## 10. 下一交接（历史预判——已执行完毕）
 
 - （历史说明）原预判：执行模式确认后 → 唤醒 Builder（先交实施计划，再实现）；
-- 实际执行：执行模式已于 2026-08-11 确认；实施计划 v1.1 已批准；实现完成于 feature/task-005a-config-snapshot（PR #8），当前等待 Review 3 第三轮复审。
+- 实际执行：执行模式已于 2026-08-11 确认；实施计划 v1.1 已批准；实现完成于 feature/task-005a-config-snapshot（PR #8），当前状态 IN_REVIEW（Review 3 多轮 CHANGES_REQUESTED 均已修复），等待下一轮复审。
