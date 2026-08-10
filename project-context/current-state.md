@@ -12,7 +12,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，但默认主线尚未吸收 TASK-003 阶段 2；项目处于治理与产品收敛阶段，未 CLOSED。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-003 阶段 2 已随 GOV-001A（PR #5）合入默认主线；项目处于产品收敛阶段，未 CLOSED。
 
 ## Git 事实
 
@@ -20,13 +20,13 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，但默�
 |---|---|
 | 仓库 | `E:\正式作品` |
 | GitHub 默认分支 | `main` |
-| `origin/main` | `4baabf0`（2026-08-10 PR #5 合并，已吸收 master 全部内容） |
-| `origin/master` | `064f5b6` |
-| 分叉 | main 独有 11 / master 独有 29；其中 11 组补丁等价，master 真正新增 18 |
+| `origin/main` | `4baabf0`（2026-08-11 PR #5 合并，已吸收 master 全部内容） |
+| `origin/master` | `064f5b6`（已被 main 完全吸收） |
+| 分叉 | main 独有 13 / master 独有 0；master 已是 main 的祖先 |
 | 当前本地分支 | `feature/task-004-spike` @ `79e49ec` |
 | 工作区 | 非干净；存在治理文档修改及多批既有未跟踪原型/审计/实验文件 |
 
-禁止将 `master` 已包含 TASK-003 等同于默认 `main` 已收敛。禁止 force push、删除 master 或在未批准方案下继续主线写操作。
+主线已收敛：`main`（`4baabf0`）已通过可审查集成吸收 `master` 全部内容，`master` 保留为归档引用。禁止 force push；master 退役需 Founder 单独裁决。
 
 ## 任务状态
 
@@ -35,9 +35,9 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，但默�
 | TASK-001 | CLOSED | Dify V1 Workflow 已完成 |
 | TASK-002 | CLOSED | 真实 Memory 闭环；`ef3edb2` 可由 `origin/main` 追溯 |
 | TASK-003 阶段 1 | 完成 | Baseline、Bad Case、After Baseline 与灰度方案 |
-| TASK-003 阶段 2 | MERGED | 8 Case 真实 Eval 工具已实现并复审；已随 PR #5 合入默认 `main`（不 CLOSED，P1 整体未完成） |
+| TASK-003 阶段 2 | MERGED | 8 Case 真实 Eval 工具已实现并复审；已随 PR #5 合入默认 `main`（2026-08-11；不 CLOSED，P1 整体未完成） |
 | TASK-004 | DRAFT / PAUSED | 三轮 Spike 未达标；物理删除有效，但未来可能重新抽取；不得宣称删除 Case 100% 通过 |
-| GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-10 合并）；GOV-001B：IN_PROGRESS（状态同步与治理文件入库） | 主线收敛已完成；状态同步进行中 |
+| GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-11 合并）；GOV-001B：IN_REVIEW（PR #6 状态同步待复审） | 主线收敛已完成；状态同步待独立复审 |
 | TASK-005A | 未开始 | Config Snapshot Completeness；GOV-001 后的下一产品任务 |
 | TASK-006 | 未开始 | E004 无关召回 Gate；须在 005A 后推进 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
@@ -65,10 +65,10 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 
 ## 当前建议动作
 
-1. 独立 Reviewer 复审 PR #5（集成内容、历史保全、CR-A/CR-C、契约迁移、质量门），并在 GitHub 留 review 结论；
-2. Founder 裁决合并 PR #5（主线收敛）；
-3. 合并后执行 GOV-001B 状态同步（TASK-003 标 MERGED、治理文件入库）；
-4. 状态同步后，再为 TASK-005A 建立独立 DRAFT。
+1. 独立 Reviewer 复审 GOV-001B 状态同步 PR #6（治理文件入库、TASK-003 标 MERGED、一致性修复）；
+2. Founder 裁决合并 PR #6（治理文件入库）；
+3. 合并后为 TASK-005A 建立独立 DRAFT（Config Snapshot Completeness）；
+4. master 退役按 D-MASTER-RETIRE 单独裁决。
 
 ## 下一窗口唤醒卡（当前建议）
 

@@ -35,7 +35,7 @@ required_reading:
 1. `current-state.md` GOV-001 行改为：
    `GOV-001A：IN_PROGRESS→IMPLEMENTED（PR #5 已创建，待独立 Reviewer 复审 + Founder 合并裁决）；GOV-001B（状态同步）未执行`
 2. `decision-register.md` D-GOV-001-A1 状态改为 `APPROVED`（Founder 2026-08-10 批准 A1 + GOV-001A 临时委派），结论追加：PR #5 已创建，待合并
-3. 更新"当前阻断"第 1 条：main/master 未收敛 → 收敛进行中（PR #5 待合并）
+3. 更新"当前阻断"第 1 条：main/master 未收敛 → 收敛进行中（PR #5 待合并）【历史执行动作，2026-08-11 PR #5 已合并，该动作已由实际合并取代】
 
 ## 修正项 2：GOV-001 计划缺 required_reading（MAJOR）
 
@@ -49,6 +49,7 @@ required_reading:
 required_reading:
   - AGENTS.md
   - project-context/context-manifest.md
+  - project-context/CHIEF-BOOTSTRAP.md
   - project-context/current-state.md
   - project-context/project-mainline-roadmap.md
   - project-context/role-wakeup-and-handoff.md

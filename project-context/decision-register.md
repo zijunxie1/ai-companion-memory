@@ -22,12 +22,12 @@
 | D-T003-BPLUS | TASK-003 阶段 2 范围 | APPROVED | 采用 B+：8 Case 真实纵向闭环；20 Case 延后，不把 8 Case 写成 P1 整体完成 | TASK-003 | `tasks/TASK-003/draft-phase2-bplus.md` |
 | D-T004-PAUSE | 删除后禁止复活 | PAUSED | 保持 DRAFT，不降低 E006；只有确定性产品语义或底层结构化过滤能力出现时重启 | TASK-004 | `tasks/TASK-004/spike-stop-record.md` |
 | D-ROADMAP-001 | 后续主线顺序 | APPROVED | GOV-001 → 005A → 006 → 007 → 005B → 完整度 → 按需 CR-B | P1 主线 | `project-mainline-roadmap.md` |
-| D-GOV-001-A1 | main/master 收敛 | APPROVED | A1 已批准（Founder 2026-08-10）并执行完毕：GOV-001A PR #5 已合并（@`4baabf0`，2026-08-10），main 已吸收 master 全部内容；GOV-001B 状态同步进行中 | Git / TASK-003 状态 | `current-state.md`、`tasks/GOV-001/implementation-plan.md`、PR #5 |
+| D-GOV-001-A1 | main/master 收敛 | APPROVED | A1 已批准（Founder 2026-08-10）并执行完毕：GOV-001A PR #5 已合并（@`4baabf0`，2026-08-11），main 已吸收 master 全部内容（master 独有 0）；GOV-001B 状态同步进行中 | Git / TASK-003 状态 | `current-state.md`、`tasks/GOV-001/implementation-plan.md`、PR #5 |
 | D-RESP-001 | Founder 友好回复与上下文恢复协议 | APPROVED | 使用产品摘要、完整决策看板、主决策、外部复核包、技术附录和合规自检；建立启动回执与文件化项目记忆 | 全部 Agent | `agent-response-protocol.md`、`context-manifest.md` |
 
 ## 当前待 Founder 决策
 
-（无 —— D-GOV-001-A1 已于 2026-08-10 批准并执行至 PR #5 待合并；当前无阻塞主线的待决事项。）
+（无 —— D-GOV-001-A1 已批准并执行完毕：PR #5 于 2026-08-11 合并，main 已收敛；当前无阻塞主线的待决事项。）
 
 ## 后续决策队列（当前不阻塞）
 
