@@ -23,18 +23,17 @@
 | D-T004-PAUSE | 删除后禁止复活 | PAUSED | 保持 DRAFT，不降低 E006；只有确定性产品语义或底层结构化过滤能力出现时重启 | TASK-004 | `tasks/TASK-004/spike-stop-record.md` |
 | D-ROADMAP-001 | 后续主线顺序 | APPROVED | GOV-001 → 005A → 006 → 007 → 005B → 完整度 → 按需 CR-B | P1 主线 | `project-mainline-roadmap.md` |
 | D-GOV-001-A1 | main/master 收敛 | APPROVED | A1 已批准（Founder 2026-08-10）并全部执行完毕：GOV-001A PR #5 已合并（@`4baabf0`，2026-08-11）；GOV-001B 状态同步 PR #6 已合并（@`5901c64`，2026-08-11）；main 已吸收 master 全部内容（master 独有 0），治理文件入库完成 | Git / TASK-003 状态 | `current-state.md`、`tasks/GOV-001/implementation-plan.md`、PR #5、PR #6 |
-| D-T005A-1 | TASK-005A Config Snapshot Completeness | APPROVED | DRAFT v2.1 已批准（Founder 2026-08-11）：字段方案（persona_prompt_hash→persona_data_hash 兼容旧键、保留 extract_prompt_hash 真实内容哈希、extract_prompt_version 可选独立字段）；CHAT_MODEL/CHATFLOW_VERSION 为 optional/declared；embed_model 无共享来源前标 declared 不裸硬编码；UI 来源枚举 observed/code/declared/derived；不改阈值/判定/schema/产品行为。实施计划 v1.1 已批准（Review 2 通过），实现已完成（IMPLEMENTED，2026-08-11）| TASK-005A | `tasks/TASK-005A/draft.md`（v2.1）、`implementation-plan.md`（v1.1）、`project-mainline-roadmap.md` Phase 1 |
+| D-T005A-1 | TASK-005A Config Snapshot Completeness | APPROVED | DRAFT v2.1 已批准（Founder 2026-08-11）：字段方案（persona_prompt_hash→persona_data_hash 兼容旧键、保留 extract_prompt_hash 真实内容哈希、extract_prompt_version 可选独立字段）；CHAT_MODEL/CHATFLOW_VERSION 为 optional/declared；embed_model 无共享版本化来源/只读运行接口 → **unavailable + reason**，不新增 env（Founder 2026-08-11 定稿，非 declared）；UI 来源枚举 observed/code/declared/derived；不改阈值/判定/schema/产品行为。实施计划 v1.1 已批准（Review 2 通过），实现已完成（IMPLEMENTED，2026-08-11）| TASK-005A | `tasks/TASK-005A/draft.md`（v2.1）、`implementation-plan.md`（v1.1）、`project-mainline-roadmap.md` Phase 1 |
 | D-RESP-001 | Founder 友好回复与上下文恢复协议 | APPROVED | 使用产品摘要、完整决策看板、主决策、外部复核包、技术附录和合规自检；建立启动回执与文件化项目记忆 | 全部 Agent | `agent-response-protocol.md`、`context-manifest.md` |
 
 ## 当前待 Founder 决策
 
-（无 —— D-GOV-001-A1 已批准并全部执行完毕（PR #5 / PR #6 已合并）；D-T005A-1 已批准（2026-08-11）；当前唯一待决为 TASK-005A 执行模式确认，见 D-T005A-1 后续队列，不阻塞主线审批。）
+（无 —— D-GOV-001-A1 已批准并全部执行完毕（PR #5 / PR #6 / PR #7 已合并）；D-T005A-1 已批准（2026-08-11）；TASK-005A 执行模式已确认（HANDOFF REQUIRED）并完成实现；当前待决为 Review 3 结果与合并裁决，属流程门，不阻塞主线审批。）
 
 ## 后续决策队列（当前不阻塞）
 
 | ID | 事项 | 何时需要决定 |
 |---|---|---|
-| D-T005A-MODE | TASK-005A 执行模式 | ✅ 已确认（2026-08-11）：HANDOFF REQUIRED 长期 Builder 会话（本任务已按此执行） | 已关闭 |
 | D-T004-SEMANTICS | 是否采用“删除后关闭自动写入，仅显式重新记忆”的确定性产品语义 | TASK-004 满足重启条件时 |
 | D-20CASE | 20 Case 的范围、样本结构和完成门 | TASK-007/005B 后 |
 | D-CRB | 是否建设指标配置、发布与历史兼容 | 固定模板真实阻塞版本决策时 |

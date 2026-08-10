@@ -93,7 +93,7 @@
 | extract_model | env MEM0_LLM_MODEL 或 "unavailable" | available/declared 或 unavailable+reason | `env MEM0_LLM_MODEL`（mem0-server 部署声明，main.py:51 读取） |
 | embed_model | "unavailable" | unavailable + reason | `v2/mem0-server/main.py:44`（硬编码 fastembed；无只读接口/共享来源；不新增 env，Founder 2026-08-11 定稿） |
 | persona_data_hash（新键） | 哈希或 "unavailable" | available/derived 或 unavailable+reason | `users` 表 Persona JSON（getUserPersona 实时计算） |
-| persona_prompt_hash（旧键） | 同 persona_data_hash | — | 历史 Run 兼容；新快照双键同值 |
+| persona_prompt_hash（旧键） | 仅历史 Run | — | 历史 Run 兼容；**新快照不再写该键**（单键），展示层按 persona_data_hash 归并 |
 | extract_prompt_hash | 哈希或 "unavailable" | available/derived 或 unavailable+reason | `v2/mem0-server/main.py:107-117`（repository source——仓库版本化源码中的 Prompt 内容，非运行容器观测） |
 | judge_model | env JUDGE_MODEL 或代码默认值 | available/code（默认）或 available/declared（env 覆盖） | `v2/app/src/lib/env.ts:27`（代码默认）；`env JUDGE_MODEL`（覆盖） |
 | judge_prompt_hash | 哈希 | available/derived | `eval-llm-judge.ts:15`（JUDGE_SYSTEM_PROMPT 导出常量，运行时原样发送） |
@@ -101,15 +101,15 @@
 | policy_version | 独立列（eval_runs.policy_version） | available/code（meta 登记） | `eval-db.ts createEvalRun`（与 judge_rubric_version 同源） |
 | recall_threshold | 0.35 | available/code | `memory-config.ts RECALL_THRESHOLD`（chat/route.ts:55 共用） |
 | recall_top_k | 5 | available/code | `memory-config.ts RECALL_TOP_K`（chat/route.ts:56 共用） |
-| write_mode | "async" | available/code | `memory-config.ts WRITE_MODE`（chat/route.ts:122 异步写入路径） |
+| write_mode | "async" | available/code | `memory-config.ts WRITE_MODE`（chat/route.ts Step 8 产品写入路径与快照**共同消费**同一只读来源，非影子配置） |
 | chatflow_version | env CHATFLOW_VERSION 或 "unavailable" | available/declared 或 unavailable+reason | `.env CHATFLOW_VERSION`（optional / declared） |
-| case_set_version | 请求参数或 "8-case-v1" | available/code（meta 登记） | `api/eval/runs route.ts`（默认 8-case-v1；与 eval_runs.case_set_version 独立列同值） |
+| case_set_version | 请求参数或 "8-case-v1" | available/code（默认）或 available/declared（请求覆盖） | `api/eval/runs route.ts`（默认 8-case-v1 → code；请求参数覆盖 → declared；与 eval_runs.case_set_version 独立列同值） |
 | user_isolation | "per_case" | available/code | `eval-snapshot-core.ts USER_ISOLATION`（Run 创建时一次性写入） |
 | snapshot_schema_version | 2 | available/code | `eval-snapshot-core.ts SNAPSHOT_SCHEMA_VERSION` |
 
 兼容规则：
 - 旧 Run 快照（纯字符串/数值、无 meta）→ UI 按"未知来源"渲染，不报错；
-- `persona_prompt_hash` 旧键 → 展示归并到 `persona_data_hash`（值同源）；
+- `persona_prompt_hash` 旧键 → 新快照**不再写**（单键 `persona_data_hash`），展示层按旧键归并兼容历史 Run；
 - `_snapshot_meta.schema_version` 未知 → UI 标记"未知快照版本"，不崩溃；
 - 快照不可变：Run 创建时一次性写入（含 user_isolation）；任何模块不得在创建后以 `config_snapshot || jsonb` 追加修改；写入失败不得静默忽略（Run 创建失败显式报错）。
 
