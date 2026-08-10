@@ -38,7 +38,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-00
 | TASK-003 阶段 2 | MERGED | 8 Case 真实 Eval 工具已实现并复审；已随 PR #5 合入默认 `main`（2026-08-11；不 CLOSED，P1 整体未完成） |
 | TASK-004 | DRAFT / PAUSED | 三轮 Spike 未达标；物理删除有效，但未来可能重新抽取；不得宣称删除 Case 100% 通过 |
 | GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-11 合并）；GOV-001B：MERGED（PR #6 @ `5901c64`，2026-08-11 合并） | 主线收敛 + 治理文件入库全部完成 |
-| TASK-005A | 未开始 | Config Snapshot Completeness；GOV-001 后的下一产品任务 |
+| TASK-005A | IMPLEMENTED | Config Snapshot Completeness；DRAFT v2.1 与实施计划 v1.1 已批准（2026-08-11）；实现完成（feature/task-005a-config-snapshot），等待独立 Reviewer（Review 3）|
 | TASK-006 | 未开始 | E004 无关召回 Gate；须在 005A 后推进 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -65,14 +65,14 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 
 ## 当前建议动作
 
-1. 为 TASK-005A 建立独立 DRAFT（Config Snapshot Completeness；已获 Founder 授权进入 DRAFT 起草）；
-2. Founder 审阅 TASK-005A DRAFT 并批准验收标准（DRAFT → APPROVED）；
-3. 批准后按执行模式门判断 delegate_task 或长期 Builder 会话；
+1. Founder 唤醒独立 Reviewer 审查 TASK-005A PR（代码/测试/契约/治理文件同 PR，分支 feature/task-005a-config-snapshot）；
+2. Review 通过后 Founder 裁决合并（Rebase）；
+3. 合并后由 Release / QA 做部署验证（如需）；
 4. master 退役按 D-MASTER-RETIRE 单独裁决（不阻塞主线）。
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：Chief of Staff（本窗口）
-- **目的**：GOV-001 收尾状态同步已完成；继续推进 TASK-005A 独立 DRAFT 起草与 Founder 审批。
-- **Founder 何时发送**：审阅本状态同步提交并决定是否合并后，进入 TASK-005A DRAFT 审批时。
-- **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、TASK-005A DRAFT。
+- **目标角色**：独立 Reviewer（新窗口）
+- **目的**：TASK-005A 实施完成（IMPLEMENTED）；执行 Review 3 代码与行为审查。
+- **Founder 何时发送**：准备审查 TASK-005A PR 时。
+- **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、TASK-005A DRAFT（v2.1）与实施计划（v1.1）、PR diff 与集成核验证据。
