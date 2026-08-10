@@ -38,7 +38,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，TASK-00
 | TASK-003 阶段 2 | MERGED | 8 Case 真实 Eval 工具已实现并复审；已随 PR #5 合入默认 `main`（2026-08-11；不 CLOSED，P1 整体未完成） |
 | TASK-004 | DRAFT / PAUSED | 三轮 Spike 未达标；物理删除有效，但未来可能重新抽取；不得宣称删除 Case 100% 通过 |
 | GOV-001 | GOV-001A：MERGED（PR #5 @ `4baabf0`，2026-08-11 合并）；GOV-001B：MERGED（PR #6 @ `5901c64`，2026-08-11 合并） | 主线收敛 + 治理文件入库全部完成 |
-| TASK-005A | IN_REVIEW | Config Snapshot Completeness；DRAFT v2.1 与实施计划 v1.1 已批准（2026-08-11）；实现完成（feature/task-005a-config-snapshot，PR #8）；Review 3 三轮 CHANGES_REQUESTED 均已修复并推送，等待下一轮复审 |
+| TASK-005A | REVIEW_APPROVED | Config Snapshot Completeness；DRAFT v2.1 与实施计划 v1.1 已批准（2026-08-11）；实现完成（feature/task-005a-config-snapshot，PR #8）；Review 3 最终复审通过（11/11 验收，2026-08-11），等待 Founder 合并裁决；合并不代表 CLOSED，合并后需 Release / QA 验证 |
 | TASK-006 | 未开始 | E004 无关召回 Gate；须在 005A 后推进 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -73,6 +73,6 @@ GOV-001 → TASK-005A → TASK-006 → TASK-007 → TASK-005B
 ## 下一窗口唤醒卡（当前建议）
 
 - **目标角色**：独立 Reviewer（新窗口）
-- **目的**：TASK-005A 处于 IN_REVIEW（Review 3 多轮 CHANGES_REQUESTED 均已修复并推送）；执行下一轮复审。
+- **目的**：TASK-005A 已 REVIEW_APPROVED；等待 Founder 对 PR #8 做合并裁决（Rebase and merge）。
 - **Founder 何时发送**：准备审查 TASK-005A PR 时。
 - **必须附带**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、TASK-005A DRAFT（v2.1）与实施计划（v1.1）、PR diff 与集成核验证据。
