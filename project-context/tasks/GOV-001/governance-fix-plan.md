@@ -12,7 +12,7 @@ required_reading:
   - project-context/tasks/GOV-001/implementation-plan.md
 ```
 
-> 文档类型：治理修正方案（已批准并执行；GOV-001A 已合并，本方案随 GOV-001B 落盘入库）
+> 文档类型：治理修正方案（已批准并执行；GOV-001A PR #5 与 GOV-001B PR #6 均已合并，本方案随 GOV-001B 落盘入库）
 > 日期：2026-08-10
 > 依据：context-manifest.md §5（required_reading）+ current-state.md（权威状态）+ decision-register.md（决策登记）
 > 修正范围：仅治理文档，不修改产品代码、不合并、不部署
