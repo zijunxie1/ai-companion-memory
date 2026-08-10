@@ -9,7 +9,7 @@
 
 ```yaml
 task_id: TASK-003
-status: IN_PROGRESS        # 阶段2 已 REVIEW_APPROVED（@8f54211），待用户决定合并
+status: MERGED              # 阶段2 已随 GOV-001A PR #5 合入默认 main（@4baabf0）；P1 整体不 CLOSED
 execution_mode: split
   phase_1: user_build       # 用户手动跑评测（P1：**不得标记 CLOSED**，阶段1 未单独结项）
   phase_2: persistent_session # Builder 搭效率工具（阶段2 已完成：REVIEW_APPROVED → 合并准备）
@@ -17,9 +17,9 @@ assigned_role:
   phase_1: user
   phase_2: Builder
 branch: feature/task-003-eval-system  # 原草案分支；实际实现分支：feature/task-003-eval-run-slice
-phase_2_status: REVIEW_APPROVED      # 2026-08-10 最终独立 Review 通过，commit 8f54211
+phase_2_status: MERGED      # 2026-08-10 随 GOV-001A PR #5 合并（@4baabf0）
 phase_2_branch: feature/task-003-eval-run-slice
-next: 用户合并裁决 → [合并后] 新独立 Reviewer 四项复审 → 用户合并
+next: GOV-001A PR #5 合并 → GOV-001B 状态同步（TASK-003 标 MERGED，不 CLOSED）→ 后续任务
 superseded_by: draft-phase2-bplus.md
 ```
 
