@@ -17,12 +17,12 @@ required_reading:
   - eval/eval-contracts.md
   - eval/eval-policy-v1.md
 task_id: TASK-005A
-status: IN_REVIEW（Review 3 第三轮 CHANGES_REQUESTED 已修复并推送，PR #8 等待下一轮复审）
+status: REVIEW_APPROVED（Review 3 最终复审通过：11/11 验收、44/44 测试、lint/tsc/build 全绿；等待 Founder 合并裁决，合并不代表 CLOSED）
 execution_mode: persistent_session（HANDOFF REQUIRED）
 assigned_role: Builder
 branch: feature/task-005a-config-snapshot
 baseline: origin/main @ c242338
-report_version: v1.4（2026-08-11；v1.3 + Review 3 第三轮治理修正轮）
+report_version: v1.5（2026-08-11；v1.4 + Review 3 最终复审 REVIEW_APPROVED）
 ```
 
 ---
