@@ -38,6 +38,7 @@ function newSnapshot(): EvalConfig {
     },
     judgeRubricVersion: "v1.0",
     caseSetVersion: "8-case-v1",
+    caseSetVersionOverridden: false,
   });
 }
 
@@ -143,4 +144,38 @@ test("T11: eval-runner.ts 不再包含 config_snapshot || 静默追加（快照�
     !runnerSrc.includes("UPDATE eval_runs SET config_snapshot"),
     "eval-runner 不得再对 config_snapshot 发起创建后 UPDATE"
   );
+});
+
+// ── T12：WRITE_MODE 非影子配置——产品写入路径与快照共同消费同一只读来源 ──
+test("T12a: memory-config.ts WRITE_MODE 为 async（产品行为与快照同源）", () => {
+  const cfgSrc = readFileSync(resolve(__dirname, "memory-config.ts"), "utf8");
+  assert.match(cfgSrc, /export const WRITE_MODE\s*=\s*"async"/);
+});
+
+test("T12b: chat/route.ts 产品写入路径实际消费 WRITE_MODE（import + 分支判断）", () => {
+  const chatSrc = readFileSync(resolve(__dirname, "../app/api/chat/route.ts"), "utf8");
+  assert.match(chatSrc, /import[^;]*WRITE_MODE/, "产品路径必须 import WRITE_MODE");
+  assert.match(
+    chatSrc,
+    /if \(WRITE_MODE === "async"\)/,
+    "产品异步写入路径必须由 WRITE_MODE 控制（WRITE_MODE=async → fire-and-forget）"
+  );
+  // 快照 write_mode 与产品路径同源（buildSnapshot 直接读同一常量）
+  const snap = newSnapshot();
+  assert.equal(snap.write_mode, "async");
+});
+
+// ── T13：历史 Run 详情渲染（旧格式 → 未知来源；与详情页共用同一展示函数） ──
+test("T13: 历史 Run 旧格式快照经详情页同一函数渲染——来源未知、不崩溃、policy 取独立列", () => {
+  const { rows, unknownSchema } = buildSnapshotDisplayRows(
+    legacySnapshot() as EvalConfig,
+    { policy_version: "v1.0" }
+  );
+  assert.equal(unknownSchema, true, "历史 Run 无 meta → 标记未知快照版本");
+  assert.ok(rows.length >= 11, "历史快照字段全量展示");
+  assert.ok(rows.every((r) => r.status === "未知来源"), "历史格式全部显示未知来源");
+  assert.equal(rows.find((r) => r.key === "policy_version")!.value, "v1.0");
+  // 新快照不再写旧键，但展示层仍兼容旧键（历史 Run 的 persona_prompt_hash 归并展示）
+  const personaRow = rows.find((r) => r.key === "persona_data_hash");
+  assert.equal(personaRow!.value, "old-persona-hash");
 });
