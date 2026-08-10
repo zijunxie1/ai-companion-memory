@@ -413,16 +413,8 @@ async function runOneCase(
  */
 export async function executeEvalRun(runId: string): Promise<void> {
   try {
-    // config_snapshot 记录 per_case 隔离策略（不再写入单一 eval_user_id）
-    try {
-      await pool.query(
-        `UPDATE eval_runs SET config_snapshot = config_snapshot || $2::jsonb WHERE id = $1`,
-        [runId, JSON.stringify({ user_isolation: "per_case" })]
-      );
-    } catch {
-      // 非关键，忽略
-    }
-
+    // 注：user_isolation 已在 Run 创建时随 config_snapshot 一次性写入（TASK-005A），
+    // 此处不再追加修改——快照不可变契约。
     const cases = await getEvalCases(true);
     console.log(`[eval] run ${runId} started, ${cases.length} cases (per-case user isolation)`);
 
