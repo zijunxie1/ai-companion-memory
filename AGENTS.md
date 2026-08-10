@@ -1,7 +1,84 @@
 # AGENTS.md
 
 > 本文件是所有 AI Agent 进入本项目时的强制执行章程。
-> 完整规则见 project-context/ 下的三份文件。
+> 完整项目上下文入口见 `project-context/context-manifest.md`。
+> 规则版本：`2026-08-10.4`
+
+## 每次工作前的强制阅读
+
+所有 Agent（Chief of Staff、Builder、Reviewer、Release / QA，以及临时子 Agent）在以下任一情况发生时，必须先完成启动阅读，再进行分析、规划、修改、审查、合并或部署：
+
+- 新开窗口或新会话；
+- 首次进入本仓库；
+- 接手新的 TASK；
+- 从其他角色或 Agent 接手工作；
+- 上下文压缩、丢失或无法准确复述当前状态；
+- 中断后恢复工作，且仓库或任务状态可能已经变化。
+
+### 固定必读文件
+
+1. `AGENTS.md`（本文件）；
+2. `project-context/context-manifest.md`（完整阅读顺序和角色专项上下文）；
+3. `project-context/CHIEF-BOOTSTRAP.md`（Chief 必读；其他角色了解当前 Chief 身份与继任边界）；
+4. `project-context/current-state.md`（最近一次核验的项目状态）；
+5. `project-context/product.md`（已批准的产品目标与成功标准）；
+6. `project-context/project-mainline-roadmap.md`（项目主线、优先级、角色窗口与偏航恢复规则）；
+7. `project-context/handoff-and-task-state-machine.md`（状态机、Review 门和交接规则）；
+8. `project-context/agent-response-protocol.md`（Founder 友好回复与决策完整性规范）；
+9. `project-context/role-wakeup-and-handoff.md`（非驻留 Agent 的唤醒、休眠检查点和人工接力规则）；
+10. `project-context/decision-register.md`（已批准、待决、暂停和否决的重大决策）；
+11. 当前任务目录下的 DRAFT、决策、验收标准、最新交接包和 Review 结论；
+12. 当前任务涉及的正式契约文件。
+
+### 启动核对要求
+
+阅读后必须先用只读方式核对：
+
+- 当前 Git 分支、远端跟踪关系和工作区状态；
+- 当前任务状态是否与 Git、代码、测试和契约一致；
+- 当前角色被允许执行什么、禁止执行什么；
+- 是否存在未裁决冲突、Change Request 或已知限制。
+
+如果任一必读文件缺失、互相冲突，或者仓库事实与任务状态不一致，必须遵守红线 #3：停止写操作、列出冲突并上报，不得根据聊天记忆自行补全。
+
+### 启动回执与上下文恢复
+
+新窗口、新任务、角色交接、上下文压缩后恢复或仓库状态可能变化时，第一份实质性输出必须先给出 `## 先说人话（30 秒）`，随后给出 `project-context/context-manifest.md` 规定的“启动回执”。启动回执不得挤占面向 Founder 的第一部分。
+
+- 启动回执必须基于重新读取文件和只读核对，不能只复制上一次回复；
+- 上下文压缩摘要只能帮助定位文件，不能作为任务批准、Git 状态或产品事实的唯一来源；
+- Agent 无法确认当前状态时必须重新执行启动阅读，不得凭记忆继续；
+- 缺少启动回执时不得进入代码修改、Review 结论、合并或部署。
+- 新任或新窗口 Chief 还必须读取 `CHIEF-BOOTSTRAP.md`，明确自己是继任者还是原角色恢复，并在获得 Founder 接管确认前保持只读核对状态。
+
+## 面向 Founder 的回复规范
+
+所有重要决策、计划、进度、异常、完成和交接回复必须遵守 `project-context/agent-response-protocol.md`：
+
+- 第一部分必须是 `## 先说人话（30 秒）`，用 3—6 句非技术语言说明：现在的问题、为什么重要、这一步做什么/不做什么、Founder 要不要操作；
+- “先说人话”区域禁止出现 commit SHA、Git 命令、文件路径、PR 编号、Worktree、Schema、状态机缩写和未解释的英文术语；
+- Founder 只阅读“先说人话”区域，也必须能够理解现状并做出当前决策；
+- 先解释正在解决的产品问题、为什么重要和对用户的影响；
+- 一次突出一个当前主决策，同时完整列出关联决策、后续决策、建议、机会和未知问题；
+- 不得为了简化表达遗漏替代方案或不利证据；
+- Git、commit、文件、命令和原始日志放在技术附录；
+- 重大决策提供可复制的“外部模型复核包”；
+- 无需 Founder 操作时明确写“你现在不需要操作”；
+- 相同进程、相同事件 ID 或状态未变化的通知只汇报一次，避免重复打扰；
+- 回复前执行协议中的“回复合规自检”。
+
+重要状态变化必须同步更新 `project-context/current-state.md`；重大决策必须同步更新 `project-context/decision-register.md`。未写入文件的聊天结论不得作为跨会话长期事实。
+
+## 非驻留 Agent 与人工唤醒
+
+默认所有角色窗口都是休眠的：只有 Founder 向该窗口发送消息后，Agent 才开始工作。不得声称 Chief、Builder、Reviewer 或 Release 会自动监听、自动接力或自动检查过程。
+
+- 当前活跃角色在休眠前必须按 `project-context/role-wakeup-and-handoff.md` 落盘状态并输出“下一窗口唤醒卡”；
+- Founder 决定是否以及何时把唤醒卡发送给下一角色；
+- 下一角色被唤醒后重新读取项目文件并输出启动回执；
+- Reviewer 只在被 Founder 唤醒后执行事后 Review 门，不是持续监督者；
+- 没有活跃 Agent 时，`current-state.md`、决策登记和任务状态不会自动更新；
+- 普通 Hermes 编码会话通常在启动时注入根目录 `AGENTS.md`，但使用的是启动时快照；旧会话可能保留旧规则，且被引用的 `project-context` 文件不会自动全部读取。因此每张唤醒卡仍必须显式要求核对 `AGENTS.md` 版本并读取 `context-manifest.md`；重大规则更新后必要时新开同角色窗口。
 
 ## 角色与权限
 
@@ -27,6 +104,7 @@
 8. **不引入未经批准的新依赖。** 不接触生产密钥。不自行部署。不做无关重构。
 9. **Change Request 遇到边界冲突时必须停止。** 提交 CR，不绕过限制自行扩大范围。
 10. **每次交接必须提供结构化交接包。** 不依赖聊天记忆。
+11. **交接必须声明必读上下文。** 新建或实质修订的任务、Builder 交接和 Reviewer 交接文件必须包含 `required_reading`；缺失时不得开始执行。
 
 ## 任务状态机
 
@@ -104,6 +182,8 @@ HANDOFF REQUIRED
 
 任务达到 APPROVED 后，Chief of Staff 必须先输出以下判断，等待用户确认执行模式：
 
+在技术字段之前，必须先按 Founder 回复协议说明：当前解决什么产品问题、为什么需要这种执行方式、会改变什么、不会改变什么，以及用户只需要决定什么。不得直接以下列表开头。
+
 ```text
 ## 执行模式判断
 
@@ -150,6 +230,8 @@ Reviewer 默认适合临时委派（全新子 Agent），以保证独立视角�
 - 架构审查需要反复对抗；
 - 需要用户多次确认风险取舍；
 - 审查范围超过单次上下文可以安全处理的程度。
+
+Reviewer 在被 Founder 唤醒进入 Review 后，还必须追溯检查过程合规：启动回执、`required_reading`、当前状态版本、决策登记和 Founder 回复协议是否被遵守。缺失但尚未造成事实错误时至少为 MAJOR；已经导致越界、错误主线、错误状态或验收削弱时为 BLOCKER。该检查是 Review 门，不是实时监控。
 
 ---
 

@@ -1,5 +1,20 @@
 # TASK-003｜V3 Memory 评测体系
 
+```yaml
+required_reading:
+  - AGENTS.md
+  - project-context/context-manifest.md
+  - project-context/CHIEF-BOOTSTRAP.md
+  - project-context/current-state.md
+  - project-context/project-mainline-roadmap.md
+  - project-context/role-wakeup-and-handoff.md
+  - project-context/decision-register.md
+  - project-context/tasks/TASK-003/draft-phase2-bplus.md
+  - project-context/tasks/TASK-003/review-report-final.md
+  - eval/eval-contracts.md
+  - eval/eval-policy-v1.md
+```
+
 > ⚠️ **本草案已被 B+ 修正/部分取代**（见 [draft-phase2-bplus.md](./draft-phase2-bplus.md)）。
 > 阶段 2 改为「方案 B+：8 Case 真实评测纵向闭环」执行（Chief 裁决 A-F），
 > 本文件的 4 个原始交付物（Before/After 面板 + LLM-as-Judge + 20 条 Case + Bad Case 面板）
@@ -9,17 +24,17 @@
 
 ```yaml
 task_id: TASK-003
-status: IN_PROGRESS        # 阶段2 已 REVIEW_APPROVED（@8f54211），待用户决定合并
+status: MERGED              # 阶段2 已随 GOV-001A PR #5 合入默认 main（@4baabf0，2026-08-11）；P1 整体不 CLOSED
 execution_mode: split
   phase_1: user_build       # 用户手动跑评测（P1：**不得标记 CLOSED**，阶段1 未单独结项）
-  phase_2: persistent_session # Builder 搭效率工具（阶段2 已完成：REVIEW_APPROVED → 合并准备）
+  phase_2: persistent_session # Builder 搭效率工具（阶段2 已完成：MERGED）
 assigned_role:
   phase_1: user
   phase_2: Builder
 branch: feature/task-003-eval-system  # 原草案分支；实际实现分支：feature/task-003-eval-run-slice
-phase_2_status: REVIEW_APPROVED      # 2026-08-10 最终独立 Review 通过，commit 8f54211
+phase_2_status: MERGED      # 2026-08-11 随 GOV-001A PR #5 合并（@4baabf0）
 phase_2_branch: feature/task-003-eval-run-slice
-next: 用户合并裁决 → [合并后] 新独立 Reviewer 四项复审 → 用户合并
+next: GOV-001B 状态同步（PR #6）合并完成 → TASK-005A 建立独立 DRAFT（Config Snapshot Completeness）
 superseded_by: draft-phase2-bplus.md
 ```
 
