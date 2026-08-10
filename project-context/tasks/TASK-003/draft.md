@@ -11,6 +11,8 @@ required_reading:
   - project-context/decision-register.md
   - project-context/tasks/TASK-003/draft-phase2-bplus.md
   - project-context/tasks/TASK-003/review-report-final.md
+  - eval/eval-contracts.md
+  - eval/eval-policy-v1.md
 ```
 
 > ⚠️ **本草案已被 B+ 修正/部分取代**（见 [draft-phase2-bplus.md](./draft-phase2-bplus.md)）。
