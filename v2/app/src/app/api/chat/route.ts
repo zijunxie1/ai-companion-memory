@@ -23,7 +23,7 @@ import {
 } from "@/lib/db";
 import { env } from "@/lib/env";
 import { containsCrisis } from "@/lib/eval-crisis";
-import { RECALL_TOP_K, RECALL_THRESHOLD } from "@/lib/memory-config";
+import { RECALL_TOP_K, RECALL_THRESHOLD, WRITE_MODE } from "@/lib/memory-config";
 import type { ChatRequest, ChatResponse } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
@@ -114,13 +114,15 @@ export async function POST(request: NextRequest) {
       latency_ms: latencyMs,
     };
 
-    // Step 8: 异步抽取 + 写入 Memory（不阻塞用户响应）
+    // Step 8: Memory 写入——模式来自共享只读配置 memory-config.ts（WRITE_MODE=async →
+    // fire-and-forget 不阻塞用户响应；快照 write_mode 与此同源，非影子配置）
     // 终态协议（CR-C）：Trace 插入时已为 pending；
     //   写入完成 → completed + disposition(written|no_write) + memory_writes
     //   危机拦截 → completed + skipped_crisis（不调用 mem0.add，CR-A）
     //   服务异常 → failed + write_error
     const conversationText = `用户: ${message}\nAI: ${difyResult.reply}`;
-    void (async () => {
+    if (WRITE_MODE === "async") {
+      void (async () => {
       // CR-A：危机表达默认不写入长期 Memory——命中则跳过 mem0.add
       if (containsCrisis(message)) {
         await finalizeTraceWrite({
@@ -156,7 +158,8 @@ export async function POST(request: NextRequest) {
         });
         console.error(`[async] mem0 add failed for trace ${traceId}:`, msg);
       }
-    })();
+      })();
+    }
 
     return NextResponse.json(response);
   } catch (error) {

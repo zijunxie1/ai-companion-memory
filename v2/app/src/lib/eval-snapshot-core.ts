@@ -110,6 +110,8 @@ export interface SnapshotInput {
   judgePrompt: FieldResult; // judge prompt 哈希（derived）
   judgeRubricVersion: string; // JUDGE_RUBRIC_VERSION 常量
   caseSetVersion: string;
+  /** true = 由 POST /api/eval/runs 请求参数覆盖（declared）；false = 默认值（code） */
+  caseSetVersionOverridden: boolean;
 }
 
 /** 组装完整快照：顶层兼容值 + _snapshot_meta（schema_version 2，全字段来源登记） */
@@ -164,10 +166,19 @@ export function buildSnapshot(input: SnapshotInput): EvalConfig {
     ".env CHATFLOW_VERSION（optional / declared）",
     "Dify 工作流版本无法从程序读取；部署方可在 .env 登记 CHATFLOW_VERSION"
   );
-  const caseSet = codeField(
-    input.caseSetVersion,
-    "api/eval/runs route.ts 默认 8-case-v1（可被请求参数覆盖）；eval_runs.case_set_version 独立列同值"
-  );
+  const caseSet = input.caseSetVersionOverridden
+    ? {
+        value: input.caseSetVersion,
+        meta: {
+          status: "available" as const,
+          source_type: "declared" as const,
+          source_ref: "POST /api/eval/runs 请求参数 case_set_version（覆盖默认值）",
+        },
+      }
+    : codeField(
+        input.caseSetVersion,
+        "api/eval/runs route.ts 默认 8-case-v1（eval_runs.case_set_version 独立列同值）"
+      );
   const userIsolation = codeField(
     USER_ISOLATION,
     "eval-runner.ts 环境隔离策略（每 Case 独立 eval 用户）；Run 创建时一次性写入，不可变"
@@ -208,8 +219,7 @@ export function buildSnapshot(input: SnapshotInput): EvalConfig {
     extract_model: String(extractModel.value),
     embed_model: String(embed.value),
     // ── Prompt 层 ──
-    persona_prompt_hash: String(input.persona.value), // 旧键兼容（新键 persona_data_hash 同值）
-    persona_data_hash: String(input.persona.value),
+    persona_data_hash: String(input.persona.value), // 新键（v2.1 字段方案）；旧键仅历史兼容，新快照不再写
     extract_prompt_hash: String(input.extractPrompt.value),
     judge_rubric_version: input.judgeRubricVersion,
     judge_model: String(judgeModel.value),
