@@ -22,7 +22,7 @@ branch: codex/gov-chief-001
 baseline_ref: origin/main
 baseline_commit: 02efd2d337380e2fc331901f52fd6a02886be149
 approval_stage: 已完成（2026-08-12）——Review 1 批准 DRAFT v1.0、执行模式 delegated 已确认、Review 2 批准本计划 v1.0
-implementation_authority: task_scoped_only（GOV-CHIEF-001 任务级实施授权生效；原六个正式治理文件 + Founder 批准的两个限定同步文件 + 任务本地证据；提交、推送、创建 PR、唤醒 Reviewer、合并仍需 Founder 另行授权）
+implementation_authority: task_scoped_only（GOV-CHIEF-001 任务级实施授权生效；原六个正式治理文件 + Founder 批准的两个限定同步文件 + 任务本地证据。提交、推送、创建 PR 已按后续授权完成（commit 0b26ad3/4084fd1，PR #11 OPEN）；合并仍待 Founder 另行授权）
 scope_extension_authority: Founder 2026-08-12 批准首轮 Review 打回修复增加 project-mainline-roadmap.md 与 tasks/TASK-006/route-b-decision.md；仅同步角色边界和治理顺序
 ```
 
@@ -119,5 +119,5 @@ scope_extension_authority: Founder 2026-08-12 批准首轮 Review 打回修复�
 
 - 本计划已获 Founder Review 2 批准（2026-08-12），实现计划 Review 2 已完成；
 - **实施授权生效**：可修改原六个正式治理文件、两个已批准的限定同步文件及任务本地证据并完成验证；
-- **仍待 Founder 另行授权**：提交、推送、创建 PR、唤醒 Reviewer、合并或部署；
-- 实施完成后必须停在 IMPLEMENTED，提供实现报告和 Reviewer 交接文件，不得自行宣布 Review 完成。
+- **历史计划阶段限制（已按实发生）**：提交、推送、创建 PR、唤醒 Reviewer 当时需另行授权——后续 Founder 已授权提交、推送、创建 PR（commit `0b26ad3`、`4084fd1` 已推送，PR #11 OPEN）；独立复审已完成并通过（REVIEW_APPROVED，见 `review-report.md`）；
+- **当前事实**：REVIEW_APPROVED；PR #11 OPEN；尚未合并；待 Founder 合并裁决。不得再要求重新唤醒 Reviewer。

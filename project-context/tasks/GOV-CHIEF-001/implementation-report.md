@@ -82,8 +82,8 @@ baseline_commit: 02efd2d337380e2fc331901f52fd6a02886be149
 - `feature/task-006-e004-gate` 实际指向 `0762a17`（已按 Git 事实修正记录）；
 - CHIEF-BOOTSTRAP.md `execution_authority` 已改为 `task_scoped_only`（所有写入仍须具体任务授权）；
 - `E:\task-006-measurement-tmp\` 与历史 Worktree 未触碰；
-- 未提交、未推送、未创建 PR、未唤醒 Reviewer、未合并。
-- 首轮 Reviewer 结论当前来自 Founder 转述的聊天记录，未伪造为 Reviewer 自己落盘的正式报告；复审仍需独立 Reviewer 重新核验完整 diff。
+- **当前状态（2026-08-12 复审后）**：REVIEW_APPROVED；两个提交（`0b26ad3`、`4084fd1`）已推送；PR #11 OPEN；尚未合并；待 Founder 合并裁决。
+- 首轮 Reviewer 结论当前来自 Founder 转述的聊天记录，未伪造为 Reviewer 自己落盘的正式报告；复审结论现落盘于 `review-report.md`（独立复审已完成并通过）。
 - 原始 Builder 历史启动回执没有仓库证据；当前只能证明本轮修复会话已重新完成启动流程。
 
 ## 6. 回滚
