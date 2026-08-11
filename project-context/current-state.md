@@ -4,7 +4,7 @@
 >
 > 最近只读核验：2026-08-12（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
 > 核验方式：本地 `git fetch origin main` / `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件，以及 `E:\task-006-measurement-tmp\` 文件清单与元数据；未查询数据库、未调用外部模型。
-> 本快照以本次核验时的 `origin/main @ 3412c3c` 为基础；GOV-CHIEF-001 与 GOV-COMM-001 均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
+> 本快照以本次核验时的 `origin/main @ 980bfa5` 为基础；GOV-CHIEF-001、GOV-COMM-001 及其状态同步均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已完成独立复审并合入正式主线。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已完成独立复审并合入正式主线；GOV-002 上下文完整性护栏已批准并实施中（Review 2 已批准，待 Review 3）。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-12 执行 Chief 重新核验）
 
@@ -22,7 +22,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，未联网刷新） |
-| `origin/main`（本次核验快照） | `3412c3c90ac73363b2d54998311bcd9ca39da10b`（GOV-COMM-001 已 Rebase 合并，2026-08-12；含 PR #10、PR #11 与 GOV-COMM-001 全部治理事实；读取时必须重新核验最新 tip） |
+| `origin/main`（本次核验快照） | `980bfa5424f31c49a36aa3b56e546d5ba65074c4`（GOV-COMM-001 状态同步 PR #13 合并后；GOV-002 实施基线；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6945b4b5f62075354270b3999edf1ca17a`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 37 / master 独有 0；merge-base = master HEAD（`064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
@@ -49,7 +49,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在。Founder 已批准路线 B（不外发用户数据的本地/规则/检索路线）；外部 Gate 不进入产品。临时计划 v1.4 与 CR-01 v1.2 均未批准；没有产品代码、实施 Worktree或正式 Reviewer 报告；任务不进入 IN_PROGRESS |
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
-| GOV-002 | 未开始（规划基础已获 Founder 同意） | 候选任务：上下文完整性护栏；必须单独形成正式 DRAFT、分支、PR 和 Review，在 GOV-COMM-001 完成后 |
+| GOV-002 | **实施中（IMPLEMENTED 待 Review 3）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；实施分支 `codex/gov-002`（基线 `980bfa5`），8 文件已改（context-manifest / AGENTS / role-wakeup / agent-response-protocol / role-handoff-template / decision-register / current-state / draft.md），V1—V7 验证通过；待独立 Reviewer Review 3 与 Founder 合并裁决 |
 | TASK-006 本地 Gate Spike | 未开始（规划基础已获 Founder 同意） | 候选独立 Spike；不得外发用户数据，不接入产品；必须在 GOV-002 后单独批准和执行 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -90,13 +90,13 @@ TASK-006 内部后续规划顺序：
 
 ## 当前建议动作
 
-1. GOV-COMM-001 已 Rebase 合并（`3412c3c`）；下一项只可单独起草 GOV-002 DRAFT；
-2. GOV-002 完成后再起草本地 Gate Spike；
+1. GOV-002 已实施（分支 `codex/gov-002`，8 文件，V1—V7 通过）；下一项为独立 Reviewer Review 3（已按 GOV-COMM-001 模式交接），通过后由 Founder 合并裁决；
+2. GOV-002 合并后再单独起草本地 Gate Spike；
 3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务。
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：执行 Chief（GOV-002 DRAFT）。
-- **本次只需要它完成**：基于已合并的 GOV-COMM-001，单独起草 GOV-002 的目标、非目标、风险、验收与执行模式判断；不得把草案当作实施授权。
-- **不得执行**：修改产品代码、TASK-006、外部补测、合并或部署；不得自动唤醒其他角色。
-- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-COMM-001 合并后的任务证据、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、TASK-006 的 DRAFT 与路线 B 裁决。
+- **目标角色**：独立 Reviewer（GOV-002 Review 3）。
+- **本次只需要它完成**：对照 GOV-002 验收标准（draft.md §5 的 7 项 + §5.1 沟通六条）审查 8 文件 diff、验证证据与启动回执/required_reading 合规；输出 REVIEW_APPROVED 或 CHANGES_REQUESTED；不修改代码。
+- **不得执行**：修改产品代码、TASK-006、合并、部署或自行扩大审查范围。
+- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-002 `draft.md` 与实现报告、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、GOV-COMM-001 任务证据。
