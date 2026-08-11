@@ -3,10 +3,12 @@
 > 作用：定义所有 Agent 在开始工作、角色交接或上下文恢复时必须读取的项目事实。
 >
 > 本文件是阅读入口，不替代产品定义、任务说明和正式契约。
+>
+> **本文件是启动与恢复流程的唯一权威来源**（新窗口继承顺序、上下文压缩恢复流程、启动回执）；其他文件只引用本文件，不重复全文。
 
-## 1. 固定阅读顺序
+## 1. 新窗口继承流程（固定阅读顺序）
 
-所有角色先按以下顺序完整阅读：
+所有角色在新窗口/新会话/接手任务时，先按以下顺序完整阅读（**新窗口继承流程**）：
 
 1. `AGENTS.md` — 权限、红线和工作门；
 2. `project-context/context-manifest.md` — 本清单；
@@ -15,11 +17,13 @@
 5. `project-context/product.md` — 已批准的产品目标和成功标准；
 6. `project-context/project-mainline-roadmap.md` — 主线顺序、角色边界和偏航恢复；
 7. `project-context/handoff-and-task-state-machine.md` — 状态机和交接规则；
-8. `project-context/agent-response-protocol.md` — Founder 友好回复和决策完整性规则；
-9. `project-context/role-wakeup-and-handoff.md` — 休眠窗口的人工唤醒和交接规则；
+8. `project-context/agent-response-protocol.md` — Founder 友好回复和决策完整性规则（回复分级 L1/L2/L3 唯一权威）；
+9. `project-context/role-wakeup-and-handoff.md` — 休眠窗口的人工唤醒和交接规则（交接卡结构唯一权威）；
 10. `project-context/decision-register.md` — 已批准、待决和否决的重大决策；
 11. 当前任务目录中的最新 DRAFT、裁决、交接包和 Review；
 12. 当前任务涉及的正式契约、实现和测试。
+
+新 Agent 不得向 Founder 重复整份背景：只需简短确认理解（先说人话 + 启动回执），然后直接执行。
 
 如果文件内容与 Git、代码、数据库或测试冲突，以“停止写操作并上报”为准，不自行选择一个版本继续。
 
@@ -79,18 +83,22 @@ Chief 类型：执行 Chief（日常职责）/ 决策 Chief（八类升级裁决
 - 距离上次活动较久，仓库可能被其他 Agent 修改；
 - `current-state.md` 的 commit 或时间与仓库不匹配。
 
-恢复步骤：
+### 4.1 恢复流程（八步，按顺序执行）
 
-1. 重新读取本清单全部固定文件；
-2. Chief 重新确认 `CHIEF-BOOTSTRAP.md` 中的角色实例和继任关系；
-3. 重新执行只读 Git 状态、远端和当前任务核对；
-4. 对照 `decision-register.md`，不得重新启用已否决方案；
-5. 先输出“先说人话”，再输出新的启动回执；
-6. 将新事实更新到任务交接或 `current-state.md` 后再继续。
+发生压缩或记忆不确定时，**先停止写操作**，再按以下顺序恢复：
 
-聊天压缩摘要只能用于定位文件，不能作为产品事实、任务批准或 Git 状态的唯一证据。
+1. 停止写操作；
+2. 重读 `AGENTS.md`；
+3. 重读 `project-context/context-manifest.md`（本文件）；
+4. 重读 `project-context/current-state.md`；
+5. 重读当前任务和最新交接包；
+6. 重做 Git 只读核验（分支 / HEAD / Worktree / 工作区）；
+7. 重新说明当前项目位置和工作；
+8. 无冲突后继续。
 
-## 4.1 非驻留窗口说明
+> **聊天摘要只能用于定位文件，不能作为任务批准、Git 状态或正式决策的唯一证据。**
+
+## 4.2 非驻留窗口说明
 
 本清单不会主动触发任何 Agent 阅读。Chief、Builder、Reviewer 和 Release 只有收到 Founder 消息后才会运行。每次角色交接必须使用 `role-wakeup-and-handoff.md` 的唤醒卡；下一角色收到卡片后再执行本清单。
 
