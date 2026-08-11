@@ -29,6 +29,7 @@
 | D-RESP-001 | Founder 友好回复与上下文恢复协议 | APPROVED | 使用产品摘要、完整决策看板、主决策、外部复核包、技术附录和合规自检；建立启动回执与文件化项目记忆 | 全部 Agent | `agent-response-protocol.md`、`context-manifest.md` |
 | D-GOV-CHIEF-001 | 执行 Chief / 决策 Chief 角色拆分与状态校准 | APPROVED | Founder 于 2026-08-12 批准 GOV-CHIEF-001 DRAFT v1.0、同意 delegated、批准实现计划 v1.0；并批准 Reviewer 打回后的范围扩展，仅用于同步路线图与 TASK-006 路线裁决中的角色边界和治理顺序。原 Chief 转为决策 Chief（只处理八类升级事项），新实例 `operational-chief-2026-08-12-01` 为执行 Chief（日常职责）；八类升级条件与升级卡固定结构落盘于 `role-wakeup-and-handoff.md` §5.1；治理顺序 = GOV-CHIEF-001 → GOV-COMM-001 → GOV-002（只确定 TASK-006 内部前置治理顺序，不改变产品任务顺序）。任务执行事实：PR #11 已 Rebase 合并（`42786da`），执行完成（详见 `current-state.md` 与实现报告） | 全部 Agent / TASK-006 前置治理 | `tasks/GOV-CHIEF-001/draft.md`、`tasks/GOV-CHIEF-001/implementation-plan.md`、`tasks/GOV-CHIEF-001/implementation-report.md`、`tasks/GOV-CHIEF-001/review-report.md`、`CHIEF-BOOTSTRAP.md`、`role-wakeup-and-handoff.md`、`project-mainline-roadmap.md`、`tasks/TASK-006/route-b-decision.md`、`current-state.md` |
 | D-GOV-COMM-001 | Founder 沟通、角色交接与上下文恢复规范（回复分级 L1/L2/L3 + 自包含交接卡 + 继承/恢复流程） | APPROVED | Founder 2026-08-12 三项审批全部通过：Review 1 批准 DRAFT v1.2（治理顺序 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002）、同意 delegated、Review 2 批准 implementation-plan v1.4（含两次打回修正：状态事实/提交范围/L1 长度/版本元数据 + 三处文字残留清理）。**唯一权威来源映射**：回复格式 → `agent-response-protocol.md`；交接流程与交接卡结构 → `role-wakeup-and-handoff.md`（模板 `templates/role-handoff-template.md`）；启动与恢复流程 → `context-manifest.md`。任务执行事实：14 文件完成、V1—V9 验证通过、最终独立复审 REVIEW_APPROVED（0/0/0）后，已 Rebase 合并进 `origin/main`（`3412c3c`）。决策状态保持 APPROVED；任务执行状态 = MERGED | 全部 Agent / TASK-006 前置治理 | `tasks/GOV-COMM-001/draft.md`（v1.4）、`tasks/GOV-COMM-001/implementation-plan.md`（v1.4）、`tasks/GOV-COMM-001/review-report.md`、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、`context-manifest.md`、`current-state.md` |
+| D-GOV-002-SCOPE | 上下文完整性护栏的正式范围、阻断/告警规则和执行模式 | APPROVED | DRAFT v1.2 已获 Founder 批准（2026-08-12，附带沟通体验修订 must_add 5 条 + scope_add 2 文件）；执行模式 delegated 已确认；Review 2 实现计划已批准（2026-08-12）。范围：C1—C6 上下文核验、W1—W3 告警、B1—B3 阻断、统一治理包版本纪律，落盘于 `context-manifest.md` §3.1—§3.4；沟通体验六条落盘于 `agent-response-protocol.md` §5.1 与 `templates/role-handoff-template.md`。不修改产品代码、TASK-006 状态、主线顺序；不实现本地 Gate Spike。任务执行状态：实施中（分支 `codex/gov-002`，详见 `tasks/GOV-002/` 与实现报告） | 全部 Agent / TASK-006 前置治理 | `tasks/GOV-002/draft.md`（v1.2）、`context-manifest.md`、`agent-response-protocol.md`、`templates/role-handoff-template.md`、`AGENTS.md`、`current-state.md` |
 
 ## 当前待 Founder 决策
 
@@ -36,7 +37,7 @@
 - ✅ TASK-006 路线 B 与后续规划顺序已批准；见 D-T006-ROUTE-B；
 - ✅ **GOV-CHIEF-001 已执行完毕**（2026-08-12）：三项审批通过、独立复审 REVIEW_APPROVED、PR #11 已 Rebase 合并（`42786da`）；见 D-GOV-CHIEF-001；
 - ✅ **GOV-COMM-001 已执行完毕**（2026-08-12）：三项审批通过、独立复审 REVIEW_APPROVED（0/0/0）、已 Rebase 合并进 `origin/main`（`3412c3c`）；见 D-GOV-COMM-001；
-- **GOV-002**：GOV-COMM-001 已完成；正式任务 DRAFT、范围、验收和执行模式仍需单独裁决；
+- ✅ **GOV-002 已批准并实施中**（2026-08-12）：DRAFT v1.2 已批准、delegated 已确认、Review 2 实现计划已批准；见 D-GOV-002-SCOPE；
 - **TASK-006 本地 Gate Spike**：本次只批准其作为 GOV-002 后的规划基础；正式任务 DRAFT、候选机制、验收、停止条件和执行模式仍需单独裁决；
 - TASK-005A 是否 CLOSED：合并后主线 QA 已通过，但当前保持 MERGED（QA_APPROVED_MAINLINE），不得自行改为生产 VERIFIED 或 CLOSED。
 
@@ -45,7 +46,6 @@
 | ID | 事项 | 何时需要决定 |
 |---|---|---|
 | D-T004-SEMANTICS | 是否采用“删除后关闭自动写入，仅显式重新记忆”的确定性产品语义 | TASK-004 满足重启条件时 |
-| D-GOV-002-SCOPE | 上下文完整性护栏的正式范围、阻断/告警规则和执行模式 | TASK-006 治理同步合并后 |
 | D-T006-LOCAL-SPIKE | 本地 Gate Spike 的候选机制、盲测、严格墙钟延迟和资源门 | GOV-002 完成后 |
 | D-T006-IMPLEMENT | 本地 Spike 通过后是否批准新的 Change Request 与产品实施计划 | Spike 证据通过独立 Review 后 |
 | D-20CASE | 20 Case 的范围、样本结构和完成门 | TASK-007/005B 后 |
