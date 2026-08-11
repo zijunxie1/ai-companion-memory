@@ -1,7 +1,7 @@
-# GOV-COMM-001｜Builder → Reviewer 交接文件（handoff-builder-to-reviewer.md v1.3）
+# GOV-COMM-001｜Builder → Reviewer 交接文件（handoff-builder-to-reviewer.md v1.3，历史快照）
 
-> 状态：**IMPLEMENTED（第三次限定修复完成），等待 Founder 决定发送给独立 Reviewer 最终复审**。三轮 Review：CHANGES_REQUESTED（首轮五项 CR）→ CHANGES_REQUESTED（二轮两项）→ 第三次限定修复（仅 CHIEF-BOOTSTRAP.md 一行 3—6 → 3—5 句），记录见 implementation-report.md v1.3。
-> 本文件为自包含 Reviewer 交接包；Founder 决定何时发送给独立 Reviewer。
+> ⚠️ **历史快照，不可作为当前状态。** 本文件记录最终复审前的 Builder → Reviewer 交接；独立复审已通过，GOV-COMM-001 已 Rebase 合并进正式主线（`3412c3c`）。
+> 下方交接包、步骤和状态保留其原始时点，不能再用于唤醒 Reviewer。
 
 ```yaml
 required_reading:
@@ -19,13 +19,15 @@ required_reading:
   - project-context/tasks/GOV-COMM-001/implementation-plan.md
   - project-context/tasks/GOV-COMM-001/implementation-report.md
 task_id: GOV-COMM-001
-status: IMPLEMENTED（第三次限定修复完成，待最终复审）
+status: 历史快照（当时为 IMPLEMENTED 待最终复审；当前任务已 MERGED）
 handoff_from: Governance Builder
 handoff_to: 独立 Reviewer
 handoff_version: v1.3（2026-08-12；v1.2 → v1.3：第三次限定修复——CHIEF-BOOTSTRAP.md 一行 3—6 → 3—5 句）
 handoff_date: 2026-08-12
 branch: codex/gov-comm-001
 baseline_commit: 42786dadaafd1d1c15e44d1998b646a426c65cdf
+merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b
+snapshot_status: 历史交接包（不可作为当前状态或再次发送）
 cr_status: CHANGES_REQUESTED（首轮）→ CR1 → CHANGES_REQUESTED（二轮）→ CR2 → 第三次限定修复完成，待最终复审
 ```
 

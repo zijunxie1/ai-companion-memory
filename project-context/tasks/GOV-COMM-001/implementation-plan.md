@@ -1,8 +1,10 @@
 # GOV-COMM-001｜实现计划（implementation-plan.md v1.4）
 
+> 合并后状态：本计划已执行，GOV-COMM-001 已 MERGED（`3412c3c`）。下方计划步骤和实施前事实保留其原始时点，不作为当前任务状态。
+
 ```yaml
 task_id: GOV-COMM-001
-status: APPROVED 并已执行（Review 2 ✅ 批准 implementation-plan v1.4；实施完成，任务停在 IMPLEMENTED 待独立复审）
+status: APPROVED 并已执行（独立复审 REVIEW_APPROVED（0/0/0）后，任务已 MERGED）
 execution_mode: delegated 临时委派（Founder 2026-08-12 已同意并执行）
 branch: codex/gov-comm-001
 worktree: E:/gov-comm-001-worktree
@@ -15,11 +17,12 @@ required_reading:
   - project-context/tasks/GOV-COMM-001/draft.md
 implementation_baseline_ref: origin/main
 implementation_baseline_commit: 42786dadaafd1d1c15e44d1998b646a426c65cdf（2026-08-12 核验；GOV-CHIEF-001 PR #11 合并后正式 main）
+merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b（GOV-COMM-001 已 Rebase 合并）
 baseline_contains: GOV-CHIEF-001 PR #11 已 Rebase 合并（执行/决策 Chief 拆分为正式治理事实）
 baseline_verified_at: 2026-08-12
 baseline_stop_condition: 若实施前 origin/main 前进或权威文件变化，必须从最新 origin/main 重新核验或更新本分支后再继续
 precondition: ✅ 已满足（GOV-CHIEF-001 已完成、经独立 Review 并合入正式主线——PR #11 已合并）
-approval_stage: 三项审批全部完成（2026-08-12）——① Review 1 ✅ 批准 DRAFT v1.2；② 执行模式 ✅ 同意 delegated；③ Review 2 ✅ 批准本计划 v1.4（曾两次打回：状态事实/提交范围/L1 长度/版本元数据 + 三处文字残留，均已修正）。执行阶段经三轮限定 CR 修复，现为 IMPLEMENTED 待独立复审
+approval_stage: 三项审批全部完成（2026-08-12）——① Review 1 ✅ 批准 DRAFT v1.2；② 执行模式 ✅ 同意 delegated；③ Review 2 ✅ 批准本计划 v1.4。执行阶段经三轮限定 CR 修复、最终独立复审 REVIEW_APPROVED（0/0/0）与 Founder 合并，现为 MERGED
 review2_revision: v1.4（2026-08-12 四项打回意见修正：① 状态事实按真实 Git 校准、不声称已同步；② 三份规划文件纳入允许/V7/PR；③ L1 总长 3—5 句硬约束；④ 标题/版本/审批阶段统一。后续三轮 CR 修复为执行阶段修订）
 ```
 
@@ -219,8 +222,8 @@ review2_revision: v1.4（2026-08-12 四项打回意见修正：① 状态事实�
 
 ## 12. 预计 commit 和 PR 边界
 
-- 本阶段（IMPLEMENTED 待复审）：不提交。全部变更留在工作区；
-- **实施已完成**：本计划通过 Review 2（前置条件已满足）后执行完毕，任务停在 IMPLEMENTED；
+- 本计划的实施、独立复审与 Founder 合并均已完成；正式主线合并提交为 `3412c3c`；
+- **实施已完成**：本计划通过 Review 2（前置条件已满足）后执行完毕，原任务已由 IMPLEMENTED → REVIEW_APPROVED → MERGED；
 - 实施阶段：**单个 commit**（或按文件逻辑分组的小 commit）承载全部治理变更：
   - 8 个现有治理文件：`AGENTS.md`、`CHIEF-BOOTSTRAP.md`、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、`context-manifest.md`、`current-state.md`、`decision-register.md`、`handoff-and-task-state-machine.md`；
   - 1 个新建模板：`templates/role-handoff-template.md`；
@@ -238,4 +241,4 @@ review2_revision: v1.4（2026-08-12 四项打回意见修正：① 状态事实�
 - **GOV-CHIEF-001**：✅ 前置已完成（PR #11 合并，执行/决策 Chief 为正式治理事实）；
 - GOV-002（上下文完整性护栏）：另行起草 DRAFT、分支、PR、Review，在 GOV-COMM-001 之后；
 - 交接卡模板的落地使用：本任务只建立模板文件，各角色从下一个任务开始按模板执行；
-- 独立 Review：必经步骤；由 Founder 决定何时把交接卡发送给 Reviewer。
+- 独立 Review：已完成并通过；本计划作为历史实施计划保留，不再等待 Reviewer。

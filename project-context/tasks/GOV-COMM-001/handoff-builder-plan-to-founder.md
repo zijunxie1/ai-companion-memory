@@ -1,7 +1,7 @@
 # GOV-COMM-001｜Builder → Founder 规划修正交接包（v1.4，历史快照）
 
 > ⚠️ **历史快照，不可作为当前状态。** 本文件记录 2026-08-12 实现计划 Review 2 重新提交时的规划状态（当时 Review 2 尚未批准、实施尚未开始）。
-> **当前状态以 `implementation-report.md`、`handoff-builder-to-reviewer.md`、`current-state.md`、`decision-register.md` 为准**：Review 2 已批准（implementation-plan v1.4）、实施已完成（14 个文件）、任务 IMPLEMENTED 待独立复审。
+> **当前状态以 `current-state.md`、`decision-register.md` 和 `review-report.md` 为准**：独立复审已通过，GOV-COMM-001 已 Rebase 合并进正式主线（`3412c3c`）。
 > 依据：AGENTS.md 临时子 Agent 持久化要求（10 项）+ 交接包自包含要求。
 
 ```yaml
@@ -19,7 +19,8 @@ handoff_version: v1.4（2026-08-12；v1.3 → v1.4：按四项打回意见修正
 handoff_date: 2026-08-12
 handoff_from: Governance Builder（formalized_by；方案责任角色为执行 Chief）
 handoff_to: Founder（实现计划 Review 2 重新提交，历史节点）
-snapshot_status: 历史快照（记录 Review 2 重新提交时点；当前状态已推进至 IMPLEMENTED 待独立复审，见上方警示）
+snapshot_status: 历史快照（记录 Review 2 重新提交时点；当前任务已推进至 MERGED，见上方警示）
+merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b
 ```
 
 ---

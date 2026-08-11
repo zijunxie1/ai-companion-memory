@@ -1,5 +1,7 @@
 # GOV-COMM-001｜Founder 沟通、角色交接与上下文恢复规范（DRAFT v1.4）
 
+> 合并后状态：本任务已 MERGED（`3412c3c`）。下方的方案、验收与执行权限保留其批准和实施时点；当前任务状态以前置元数据、§9 与 §19 为准。
+
 ```yaml
 required_reading:
   - AGENTS.md
@@ -14,20 +16,21 @@ required_reading:
   - project-context/decision-register.md
   - project-context/tasks/TASK-006/draft.md
   - project-context/tasks/TASK-006/route-b-decision.md
-doc_type: 任务 DRAFT（Governance；**Review 1 已批准**——Founder 2026-08-12 批准 DRAFT v1.2；**Review 2 已批准**——implementation-plan v1.4；**实施完成，IMPLEMENTED 待独立复审**；当前 v1.4 为证据同步版）
+doc_type: 任务 DRAFT（Governance；三项审批、实施与独立复审均已完成；任务已 MERGED；v1.4 保留原方案与证据）
 task_id: GOV-COMM-001
-status: IMPLEMENTED（实施完成，待独立复审；Review 1 ✅ / 执行模式 ✅ / Review 2 ✅ 均已批准）
+status: MERGED（Review 1 ✅ / 执行模式 ✅ / Review 2 ✅；独立复审 REVIEW_APPROVED（0/0/0）后已合入正式主线）
 draft_version: v1.4（2026-08-12；v1.3 → v1.4：GOV-CHIEF-001 已合入正式主线，前置条件满足，基线更新至最新 main；后续三轮 CR 修复与证据同步均为执行阶段修订，方案本体未变）
 draft_date: 2026-08-12
 方案责任角色: 执行 Chief（任务方案的方向与批准责任归属执行 Chief；当前实例见 CHIEF-BOOTSTRAP.md）
 formalized_by: Governance Builder（仅负责文件整理与落盘，不是任务方向的决策者）
-approval_stage: 三项审批全部完成（2026-08-12）——① 任务方案 Review 1：✅ 批准 DRAFT v1.2；② 执行模式：✅ 同意 delegated；③ 实现计划 Review 2：✅ 批准 implementation-plan v1.4（曾两次打回：状态事实/提交范围/L1 长度/版本元数据 + 三处文字残留，均已修正）。执行阶段经三轮限定 CR 修复（CHANGES_REQUESTED → 修复 → CHANGES_REQUESTED → 修复 → 第三次限定修复），现为 IMPLEMENTED 待独立复审
-execution_authority: 已按 implementation-plan v1.4 完成实施（6→8 个治理文件 + 1 模板 + 3 规划 + 2 证据，合计 14 个）；停在 IMPLEMENTED，实施授权已执行完毕，合并/推送/PR 仍待 Founder 授权
+approval_stage: 三项审批全部完成（2026-08-12）——① 任务方案 Review 1：✅ 批准 DRAFT v1.2；② 执行模式：✅ 同意 delegated；③ 实现计划 Review 2：✅ 批准 implementation-plan v1.4。执行阶段经三轮限定 CR 修复并获最终独立复审 REVIEW_APPROVED（0/0/0）；Founder 已合并，现为 MERGED
+execution_authority: 已按 implementation-plan v1.4 完成实施（6→8 个治理文件 + 1 模板 + 3 规划 + 2 证据，合计 14 个）；合并事实已发生，后续只可按单独任务推进 GOV-002
 implementation_baseline_ref: origin/main
 implementation_baseline_commit: 42786dadaafd1d1c15e44d1998b646a426c65cdf
+merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b
 baseline_contains: GOV-CHIEF-001 PR #11 已 Rebase 合并（执行/决策 Chief 拆分为正式治理事实）
 baseline_verified_at: 2026-08-12
-baseline_note: 若实施前 origin/main 前进，必须停止并重新核验基线后再继续
+baseline_note: `42786da` 是原实施基线；合并后正式主线事实以 `3412c3c` 为准
 basis: TASK-006 前置治理；Founder 2026-08-12 授权起草 DRAFT 与 implementation-plan；PR #10 已合入的治理事实（TASK-006 APPROVED、路线 B APPROVED、D-RESP-001 APPROVED）
 ```
 
@@ -256,9 +259,9 @@ DRAFT（本文件）
 → MERGED（Founder 合并裁决后）
 ```
 
-- 当前状态：**IMPLEMENTED**（实施完成，待独立复审）；Review 1 ✅ / 执行模式 ✅ / Review 2 ✅ 均已批准；GOV-CHIEF-001 前置条件已满足；
-- **Builder 完成规则修改后停在 IMPLEMENTED**，不能自行宣布 Review 已完成；
-- 独立 Review 是完成和合并前的**必经步骤**；Founder 决定**何时**把交接卡发送给 Reviewer 窗口，而不是决定**是否需要** Review。
+- 当前状态：**MERGED**；Review 1 ✅ / 执行模式 ✅ / Review 2 ✅、独立复审 REVIEW_APPROVED（0/0/0）与 Founder 合并均已完成；
+- 原 Builder 已在 IMPLEMENTED 停止，独立 Review 已完成；本任务不再需要 Reviewer 唤醒。
+- 后续工作只能单独起草 GOV-002；不得把 GOV-002 或产品实现混入本任务。
 
 ## 10. 允许和禁止修改文件
 
@@ -313,7 +316,7 @@ DRAFT（本文件）
 
 ## 13. 验收标准
 
-1. 三个审批动作状态：Review 1 ✅ 已批准（DRAFT v1.2）；执行模式 ✅ 已同意（delegated）；Review 2 ✅ 已批准（implementation-plan v1.4）——实施已完成，任务停在 IMPLEMENTED 待独立复审；
+1. 三个审批动作状态：Review 1 ✅ 已批准（DRAFT v1.2）；执行模式 ✅ 已同意（delegated）；Review 2 ✅ 已批准（implementation-plan v1.4）——实施、独立复审与 Founder 合并均已完成，任务为 MERGED；
 2. 实施完成后，全部变更落在 §10.1 允许列表内（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件，合计 14 个）；
 3. `agent-response-protocol.md` 成为回复格式唯一权威，`role-wakeup-and-handoff.md` 成为交接流程唯一权威，`context-manifest.md` 成为启动/恢复流程唯一权威；各文件互相引用一致，无重复全文模板；
 4. 普通回复模板（L1）3—5 句可说人话，不含技术术语（用模板校验样例验证）；
@@ -356,7 +359,7 @@ DRAFT（本文件）
 - 需要新增权限、依赖或外部服务；
 - 需要重排主线或修改 TASK-006。
 
-## 16. 执行权限（当前，2026-08-12 恢复规划后）
+## 16. 历史执行权限（2026-08-12 恢复规划后）
 
 Founder 2026-08-12 授权边界（含恢复规划授权）：
 
@@ -379,10 +382,10 @@ Founder 2026-08-12 授权边界（含恢复规划授权）：
 | V5 | 单一权威来源无重复 | grep 对比四个权威文件：同一规则只出现一次全文，其余为引用 | 无重复全文 |
 | V6 | 产品代码和 TASK-006 无变化 | git diff 限定路径：v2/、eval/、migrations/、tasks/TASK-006/ 零差异 | 零差异 |
 | V7 | 允许列表内修改 | git diff 文件清单 ⊆ §10.1 允许列表（含任务目录过程证据文件） | 文件清单一致 |
-| V8 | 状态同步 | current-state.md / decision-register.md 已记录本任务；任务停在 IMPLEMENTED 等待 Review | 记录正确、状态合规 |
+| V8 | 状态同步 | current-state.md / decision-register.md 已记录本任务；实施阶段停在 IMPLEMENTED 并在独立复审后合并 | 记录正确、状态合规 |
 | V9 | 交接卡实际渲染 | 在实际聊天平台发送 L2 样例，检查渲染结果 | 显示为单一完整代码框（` ```text ` 开头/结尾），可一键整体复制，不只显示语言标签 |
 
-## 18. 执行模式判断（预判——待 Founder 确认，独立于 Review 1/2）
+## 18. 历史执行模式判断（当时预判；现已确认、执行并合并）
 
 ```text
 任务：GOV-COMM-001 Founder 沟通、角色交接与上下文恢复规范
@@ -400,10 +403,10 @@ Founder 2026-08-12 授权边界（含恢复规划授权）：
 
 ## 19. 下一交接
 
-- 本窗口已停止：等待独立复审；
-- 审批状态：Review 1 ✅ 已批准（DRAFT v1.2）；执行模式 ✅ 已同意（delegated）；Review 2 ✅ 已批准（implementation-plan v1.4）；**前置条件 ✅ 已满足**（GOV-CHIEF-001 PR #11 已 Rebase 合并，基线 = `42786da`）；
-- 实施已完成（14 个文件），任务停在 **IMPLEMENTED**，不自行宣布 Review 完成；
-- 下一步：Founder 决定何时发交接卡给独立 Reviewer → Reviewer 完成 IN_REVIEW → Founder 合并裁决。
+- 本任务已完成独立复审并 **MERGED**（`3412c3c`）；本段保留审批与实施历史。
+- 审批状态：Review 1 ✅ 已批准（DRAFT v1.2）；执行模式 ✅ 已同意（delegated）；Review 2 ✅ 已批准（implementation-plan v1.4）；独立复审 ✅ REVIEW_APPROVED（0/0/0）；
+- 实施已完成（14 个文件）并已合入正式主线；
+- 下一步：单独起草 GOV-002 DRAFT；不得把 GOV-002 内容回写到本任务。
 
 ---
 
@@ -420,5 +423,5 @@ Founder 2026-08-12 授权边界（含恢复规划授权）：
 实施已完成：14 个文件（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件
 + 2 份过程证据文件），V1—V9 验证通过；经三轮限定 CR 修复。
 
-当前状态：IMPLEMENTED，待独立复审；合并/推送/PR 仍待 Founder 授权。
+历史节点结束后，GOV-COMM-001 已于 `3412c3c` 合入正式主线；当前后续事项为单独起草 GOV-002。
 ```

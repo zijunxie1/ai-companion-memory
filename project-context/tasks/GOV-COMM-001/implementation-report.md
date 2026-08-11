@@ -1,6 +1,6 @@
 # GOV-COMM-001｜实现报告（implementation-report.md v1.4）
 
-> 状态：**IMPLEMENTED（最终复审 REVIEW_APPROVED 已落盘，待 Founder 合并裁决）**——独立复审结论 REVIEW_APPROVED（0/0/0），落盘于 `review-report.md`；仓库仍刻意停在 IMPLEMENTED，合并由 Founder 裁决。
+> 状态：**MERGED**——独立复审结论 REVIEW_APPROVED（0/0/0）后，GOV-COMM-001 已 Rebase 合并进正式主线（`3412c3c`）。下方实施记录保留原实施时点的证据。
 > 基线：origin/main @ `42786dadaafd1d1c15e44d1998b646a426c65cdf`（GOV-CHIEF-001 PR #11 合并后正式 main）。
 
 ```yaml
@@ -13,15 +13,27 @@ required_reading:
   - project-context/tasks/GOV-COMM-001/draft.md
   - project-context/tasks/GOV-COMM-001/implementation-plan.md
 task_id: GOV-COMM-001
-status: IMPLEMENTED（最终复审 REVIEW_APPROVED 已落盘，待 Founder 合并裁决）
+status: MERGED（独立复审 REVIEW_APPROVED（0/0/0）后已合入正式主线）
 report_version: v1.4（2026-08-12；v1.3 → v1.4：最终复审 REVIEW_APPROVED（0/0/0）落盘，待 Founder 合并裁决）
 report_date: 2026-08-12
 builder: Governance Builder（delegated，Founder 2026-08-12 授权实施；三轮限定 CR 修复）
 branch: codex/gov-comm-001
 worktree: E:/gov-comm-001-worktree
 baseline_commit: 42786dadaafd1d1c15e44d1998b646a426c65cdf
-cr_status: CHANGES_REQUESTED（首轮）→ CR1 → CHANGES_REQUESTED（二轮）→ CR2 → 第三次限定修复 → 最终复审 REVIEW_APPROVED（0/0/0）→ 待 Founder 合并裁决
+merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b
+cr_status: CHANGES_REQUESTED（首轮）→ CR1 → CHANGES_REQUESTED（二轮）→ CR2 → 第三次限定修复 → 最终复审 REVIEW_APPROVED（0/0/0）→ MERGED
 ```
+
+---
+
+## 合并后状态同步记录（本分支）
+
+- **唯一目的**：记录已发生的 GOV-COMM-001 合并事实，不修改沟通规范、产品目标或后续任务内容；
+- **事实依据**：`origin/main @ 3412c3c` 已包含 GOV-COMM-001 的 14 个治理文件与独立复审报告；
+- **实际范围**：`current-state.md`、`decision-register.md` 与 GOV-COMM-001 任务目录内 6 份状态/证据文件，共 8 个 Markdown 文件；其中 Builder → Founder 历史交接包也同步了“当前已 MERGED”指向，避免其历史正文误作当前状态；
+- **禁止范围**：产品代码、TASK-006、GOV-002、评测、迁移、路线图与沟通规则正文均为零变化；
+- **验证**：合并提交、任务状态一致性、限定路径差异和 `git diff --check` 均由本分支在提交前重新核验；
+- **停止点**：提交、推送并创建纯状态同步 PR 后，停在独立 Review 前。
 
 ---
 
@@ -162,17 +174,16 @@ REVIEW_APPROVED→Founder 合并；CHANGES_REQUESTED→原 Builder
 ## 7. 已知限制
 
 - 本任务为纯治理文档变更，无代码/测试/构建；
-- current-state 已按真实 Git 事实校准（`42786da`），校准完成且任务状态同步；
-- 未提交、未推送、未创建 PR、未唤醒 Reviewer、未合并；
-- 独立 Review 为完成和合并前必经步骤；由 Founder 决定何时发送交接文件。
+- 实施时 current-state 已按当时真实 Git 事实校准（`42786da`）；合并后事实以 `3412c3c` 为准，并由合并后状态同步记录；
+- 原实施、提交、Review 与合并均已完成；本报告不是当前工作入口；
+- 独立 Review 已通过；后续工作需另行起草 GOV-002。
 
 ## 8. 回滚
 
-- 纯 Markdown 治理变更，无代码/数据/迁移；未合并时放弃分支即可；
-- 若需回滚单个文件：`git checkout origin/main -- <file>` 恢复主线版本。
+- 纯 Markdown 治理变更，无代码/数据/迁移；已合并后如需回滚，必须单独起草回滚任务、经 Review 与 Founder 批准后以新 PR 实施；
 
 ## 9. 下一步
 
-1. 任务停在 **IMPLEMENTED**，不自行宣布 Review 完成；
-2. Founder 决定是否发送 `handoff-builder-to-reviewer.md` 给独立 Reviewer；
-3. Reviewer 完成后由 Founder 决定合并。
+1. GOV-COMM-001 已 **MERGED**（`3412c3c`）；
+2. 单独起草 GOV-002 DRAFT；
+3. GOV-002 完成后再起草 TASK-006 本地 Gate Spike。

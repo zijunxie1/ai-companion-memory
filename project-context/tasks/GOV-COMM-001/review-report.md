@@ -2,6 +2,7 @@
 
 > 本文档为**独立 Reviewer 的原样结论**，由 Founder 2026-08-12 授权落盘。落盘 Agent 仅执行文件整理，不改写、不代审、不添加自身审查结论。
 > 结论：**REVIEW_APPROVED**（BLOCKER 0 / MAJOR 0 / MINOR 0）——本报告不代表已合并或已在正式主线生效；合并仍由 Founder 裁决。
+> 合并后记录：Founder 已作出合并裁决；GOV-COMM-001 已 Rebase 合并进正式主线（`3412c3c`）。上方及下方 Reviewer 原始结论保留其作出时点，不被改写。
 
 ```yaml
 required_reading:
@@ -28,6 +29,8 @@ review_date: 2026-08-12
 reviewer: 独立 Reviewer（独立窗口；非 Builder、非收尾 Agent）
 branch: codex/gov-comm-001
 baseline_commit: 42786dadaafd1d1c15e44d1998b646a426c65cdf
+post_merge_commit: 3412c3c90ac73363b2d54998311bcd9ca39da10b
+post_merge_status: MERGED（本字段为合并后事实；不改写本报告 REVIEW_APPROVED 原结论）
 ```
 
 ## 最终复审结论（独立 Reviewer 原样结论）
