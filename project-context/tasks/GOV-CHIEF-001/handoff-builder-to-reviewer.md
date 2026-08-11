@@ -1,6 +1,6 @@
-# GOV-CHIEF-001｜Builder → Reviewer 复审交接文件（v1.3）
+# GOV-CHIEF-001｜Builder → Reviewer 复审交接文件（v1.4，历史快照）
 
-> 状态：**IMPLEMENTED（首轮打回项已修复），等待 Founder 决定发送给独立 Reviewer 复审**。状态、路线图、治理顺序和过程证据修复见 implementation-report.md v1.3。
+> 状态：**历史 Reviewer 交接快照**——本文件记录修复后提交 Reviewer 复审时的交接材料；独立复审已完成并通过（REVIEW_APPROVED，0 BLOCKER / 0 MAJOR / 0 MINOR），**最终结论以 `review-report.md` 为准**。本快照不表示 Reviewer 尚未被唤醒或复审未发生。
 > 本文件为自包含 Reviewer 交接包；Founder 决定何时发送给独立 Reviewer。
 
 ```yaml
@@ -17,15 +17,16 @@ required_reading:
   - project-context/tasks/GOV-CHIEF-001/draft.md
   - project-context/tasks/GOV-CHIEF-001/implementation-plan.md
   - project-context/tasks/GOV-CHIEF-001/implementation-report.md
+  - project-context/tasks/GOV-CHIEF-001/review-report.md
   - project-context/tasks/GOV-CHIEF-001/handoff-chief-to-founder.md
   - project-context/tasks/GOV-CHIEF-001/recovery-startup-receipt-2026-08-12.md
   - project-context/tasks/TASK-006/draft.md
   - project-context/tasks/TASK-006/route-b-decision.md
 task_id: GOV-CHIEF-001
-status: IMPLEMENTED（首轮 Review 打回项已修复，待独立复审）
+status: REVIEW_APPROVED（历史交接快照；最终结论见 review-report.md）
 handoff_from: Governance Builder
 handoff_to: 独立 Reviewer
-handoff_version: v1.3（2026-08-12；记录首轮 CHANGES_REQUESTED 修复与限定范围扩展）
+handoff_version: v1.4（2026-08-12；标记为历史快照，指向 review-report.md）
 handoff_date: 2026-08-12
 branch: codex/gov-chief-001
 baseline_commit: 02efd2d337380e2fc331901f52fd6a02886be149
@@ -52,7 +53,7 @@ P1 Alice Memory 作品集项目，TASK-006（E004 无关召回）保持 APPROVED
 ## 5. 当前事实
 
 - origin/main = `02efd2d`（PR #10 已 Rebase 合并，2026-08-12 00:34 Asia/Shanghai）；
-- GOV-CHIEF-001 三项审批已完成（Founder 2026-08-12）：DRAFT v1.0 / delegated / 实现计划 v1.0；首轮 Review = CHANGES_REQUESTED；Founder 已授权同一临时 Builder 修复并限定增加 roadmap 与 route-b-decision；任务执行状态 = IMPLEMENTED（打回项已修复，待独立复审）；
+- GOV-CHIEF-001 三项审批已完成（Founder 2026-08-12）：DRAFT v1.0 / delegated / 实现计划 v1.0；首轮 Review = CHANGES_REQUESTED；Founder 已授权同一临时 Builder 修复并限定增加 roadmap 与 route-b-decision；修复后经独立复审通过，任务执行状态 = REVIEW_APPROVED（结论见 review-report.md），待 Founder 合并裁决；
 - 原六个治理入口已完成；roadmap 与 route-b-decision 已按 Founder 限定授权同步；AGENTS.md 已由 Founder 在 Hermes 审批弹窗中确认并补完；
 - CHIEF-BOOTSTRAP.md execution_authority = task_scoped_only（所有写入仍须具体任务授权）；
 - `feature/task-006-e004-gate` 指向 `0762a17`（历史分支，未推进）；
@@ -60,9 +61,9 @@ P1 Alice Memory 作品集项目，TASK-006（E004 无关召回）保持 APPROVED
 
 ## 6. 已完成和未完成
 
-已完成：原六个治理入口；roadmap 角色拆分与 §5.1 路由；roadmap / decision-register / route-b-decision 内部治理顺序统一；current-state 下一步校正；规划审批交接改为历史快照；本次修复恢复回执；实现报告（v1.3）与本交接文件（v1.3）。
+已完成：原六个治理入口；roadmap 角色拆分与 §5.1 路由；roadmap / decision-register / route-b-decision 内部治理顺序统一；current-state 下一步校正；规划审批交接改为历史快照；本次修复恢复回执；实现报告（v1.4）与本交接文件（v1.4，历史快照）。
 
-未完成：提交/推送/PR/合并（未授权）；独立复审（等待 Founder 决定发送本文件）。
+未完成（本快照视角）：提交/推送/PR 已于复审通过后完成（commit `0b26ad3`、PR #11）；最终合并（未授权，待 Founder 裁决）。独立复审已完成——本文件为历史快照，最终结论以 review-report.md 为准。
 
 ## 7. 已批准决策
 
@@ -104,7 +105,7 @@ Founder 已在聊天中拆分 Chief 职责；角色拆分 ≠ 继任；八类升
 
 ## 14. 验收标准
 
-见 draft.md §10（11 项）——重点：六个治理文件角色引用一致；CHIEF-BOOTSTRAP 明确原 Chief 转决策 Chief、新实例执行 Chief、聊天授权与正式落盘区别；不写易失效窗口 ID；current-state 与 Git 事实一致；TASK-006 保持 APPROVED；治理顺序正确；未混入 GOV-COMM-001/GOV-002/产品代码；一个分支一个 PR；Builder 停在 IMPLEMENTED。
+见 draft.md §10（11 项）——重点：六个治理文件角色引用一致；CHIEF-BOOTSTRAP 明确原 Chief 转决策 Chief、新实例执行 Chief、聊天授权与正式落盘区别；不写易失效窗口 ID；current-state 与 Git 事实一致；TASK-006 保持 APPROVED；治理顺序正确；未混入 GOV-COMM-001/GOV-002/产品代码；一个分支一个 PR；独立复审已通过（REVIEW_APPROVED，见 review-report.md）。
 
 ## 15. 停止条件
 
@@ -141,7 +142,7 @@ GOV-CHIEF-001/handoff-builder-to-reviewer.md、TASK-006/draft.md、TASK-006/rout
 - current-state 是否与 Git 事实一致（origin/main = 02efd2d）；
 - TASK-006 是否保持 APPROVED、E004 是否未解决；
 - roadmap 是否已拆分执行/决策 Chief，普通事项和八类升级是否统一路由到 role-wakeup §5.1；
-- decision-register 是否只把 D-GOV-CHIEF-001 标为 APPROVED，任务状态是否另记为 IMPLEMENTED；
+- decision-register 是否只把 D-GOV-CHIEF-001 标为 APPROVED，任务状态是否另记为 REVIEW_APPROVED；
 - current-state 下一步是否已改为独立复审后由 Founder 合并裁决；
 - roadmap、decision-register、route-b-decision 是否统一为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002 → 本地 Gate Spike，且未改变产品任务顺序或路线 B；
 - handoff-chief-to-founder 是否明确为历史规划快照；

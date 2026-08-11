@@ -93,6 +93,6 @@ baseline_commit: 02efd2d337380e2fc331901f52fd6a02886be149
 
 ## 7. 下一步
 
-1. 任务停在 **IMPLEMENTED（首轮打回项已修复）**，不自行宣布复审通过；
-2. Founder 决定何时把更新后的 `handoff-builder-to-reviewer.md` 发送给独立 Reviewer；
-3. Reviewer 复审通过后，由 Founder 决定提交、推送、创建 PR 与合并。
+1. 独立复审已通过（REVIEW_APPROVED，0 BLOCKER / 0 MAJOR / 0 MINOR），结论落盘于 `review-report.md`；
+2. 等待 Founder 合并裁决（PR #11 已创建，未合并）；合并仍由 Founder 单独决定；
+3. 合并后恢复 GOV-COMM-001 实现计划 Review 2（按已授权更新基线/前置/边界后重新提交）。

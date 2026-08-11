@@ -15,7 +15,7 @@ required_reading:
   - project-context/tasks/TASK-006/draft.md
   - project-context/tasks/TASK-006/route-b-decision.md
 task_id: GOV-CHIEF-001
-status: IMPLEMENTED（首轮 Review 打回项已修复，待独立复审）
+status: REVIEW_APPROVED（独立复审通过，待 Founder 合并裁决；计划内容不变）
 plan_version: v1.1（v1.0 Founder 2026-08-12 批准；v1.1 只纳入 Founder 已批准的首轮 Review 修复范围扩展）
 execution_mode: delegated（Founder 2026-08-12 确认）
 branch: codex/gov-chief-001
