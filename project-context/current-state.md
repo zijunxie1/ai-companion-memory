@@ -95,7 +95,7 @@ TASK-006 内部后续规划顺序：
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：独立 Reviewer（仅在 Founder 决定再次唤醒后；当前修复已有可审查工作区 diff，尚未提交或创建 PR）。
-- **本次只需要它完成**：核对治理文件 diff 是否只记录已发生事实（origin/main = `02efd2d`、PR #10 已完成、Chief 角色拆分），TASK-006 是否保持 APPROVED，路线 B 是否被准确表述为“无用户数据外发的待验证路线”，以及是否错误宣称产品已修复。
-- **不得执行**：修改文件、产品实现、外部补测、任务状态变化、合并或部署。
-- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-CHIEF-001 `draft.md` 与 `implementation-plan.md`、TASK-006 `draft.md` 与 `route-b-decision.md`、完整 diff。
+- **目标角色**：Founder（合并裁决）——GOV-CHIEF-001 已 REVIEW_APPROVED，两个提交已推送，PR #11 OPEN 未合并；下一责任人为 Founder，决定是否合并。独立复审已完成，无需再唤醒独立 Reviewer。
+- **本次只需要它完成**：决定是否合并 PR #11（Rebase 合并）。
+- **不得执行**：无（本卡面向 Founder 裁决，非 Agent 任务）。
+- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-CHIEF-001 `draft.md`、`implementation-plan.md`、`implementation-report.md`、`review-report.md`、TASK-006 `draft.md` 与 `route-b-decision.md`、PR #11 diff。

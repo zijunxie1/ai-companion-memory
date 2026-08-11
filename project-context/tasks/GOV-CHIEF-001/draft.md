@@ -24,7 +24,7 @@ branch: codex/gov-chief-001
 worktree: C:/Users/admin/.codex/worktrees/e546/正式作品
 baseline_ref: origin/main
 baseline_commit: 02efd2d337380e2fc331901f52fd6a02886be149
-execution_authority: task_scoped_only（GOV-CHIEF-001 任务级实施授权，2026-08-12 Founder 三项审批；提交、推送、创建 PR、唤醒 Reviewer、合并仍需 Founder 另行授权；CHIEF-BOOTSTRAP.md 不得写为通用授权）
+execution_authority: task_scoped_only（GOV-CHIEF-001 任务级实施授权，2026-08-12 Founder 三项审批；提交、推送、创建 PR 已按后续授权发生（commit 0b26ad3/4084fd1，PR #11 OPEN）；合并仍待 Founder 另行授权；CHIEF-BOOTSTRAP.md 不得写为通用授权）
 authorization_basis: Founder 2026-08-12 明确批准 GOV-CHIEF-001 DRAFT v1.0、同意 delegated、批准实现计划 v1.0，并确认三项审批有效
 scope_extension_authority: Founder 2026-08-12 在首轮 Reviewer CHANGES_REQUESTED 后明确要求“一起修复掉”；批准增加 project-mainline-roadmap.md 与 tasks/TASK-006/route-b-decision.md，仅同步角色边界和治理顺序
 formal_effect: approved_2026-08-12（正式生效以合入正式主线为准）
@@ -234,8 +234,13 @@ formal_effect: approved_2026-08-12（正式生效以合入正式主线为准）
 - ✅ 授权更新三份规划文件记录审批（本文件、implementation-plan.md、handoff-chief-to-founder.md）；
 - ✅ 实施授权生效：可按实现计划修改六个正式治理文件并完成验证。
 
-**仍待 Founder 另行授权**：提交、推送、创建 PR、唤醒 Reviewer、合并或部署。
+**历史授权边界（2026-08-12 三项审批时点）**：提交、推送、创建 PR、唤醒 Reviewer、合并或部署当时需 Founder 另行授权——**该限制后续已按实发生**：
+
+- ✅ 2026-08-12：Founder 授权落盘复审报告、提交、推送并创建 PR（commit `0b26ad3`、`4084fd1` 已推送，PR #11 OPEN）；
+- ✅ 独立复审已完成并通过（REVIEW_APPROVED，见 `review-report.md`）；
+- ✅ 复审后状态同步已提交推送（PR #11 已更新至 `4084fd1`）；
+- ❌ **合并仍未授权**：由 Founder 决定是否合并 PR #11。
 
 **首轮 Review 后补充授权**：Founder 已批准增加 `project-mainline-roadmap.md` 与 `tasks/TASK-006/route-b-decision.md`，但只允许同步角色边界和治理顺序；原产品边界全部保持。
 
-**当前下一步**：打回修复完成后停在 IMPLEMENTED → Founder 决定何时发送更新后的 Reviewer 交接卡 → 独立复审 → Founder 合并裁决。
+**当前下一步**：REVIEW_APPROVED；PR #11 OPEN；尚未合并。下一责任人 = Founder，决定是否合并。不得再要求重新唤醒 Reviewer（独立复审已完成）。
