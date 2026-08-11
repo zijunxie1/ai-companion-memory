@@ -95,7 +95,7 @@ TASK-006 内部后续规划顺序：
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：Founder（合并裁决）——GOV-CHIEF-001 已 REVIEW_APPROVED，两个提交已推送，PR #11 OPEN 未合并；下一责任人为 Founder，决定是否合并。独立复审已完成，无需再唤醒独立 Reviewer。
+- **目标角色**：Founder（合并裁决）——GOV-CHIEF-001 已 REVIEW_APPROVED，当前分支已推送，PR #11 OPEN、尚未合并；当前 head 以远端 PR 为准；下一责任人为 Founder，决定是否合并。独立复审已完成，无需再唤醒独立 Reviewer。
 - **本次只需要它完成**：决定是否合并 PR #11（Rebase 合并）。
 - **不得执行**：无（本卡面向 Founder 裁决，非 Agent 任务）。
 - **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-CHIEF-001 `draft.md`、`implementation-plan.md`、`implementation-report.md`、`review-report.md`、TASK-006 `draft.md` 与 `route-b-decision.md`、PR #11 diff。
