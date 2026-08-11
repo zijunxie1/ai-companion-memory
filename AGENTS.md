@@ -19,7 +19,7 @@
 
 1. `AGENTS.md`（本文件）；
 2. `project-context/context-manifest.md`（完整阅读顺序和角色专项上下文）；
-3. `project-context/CHIEF-BOOTSTRAP.md`（Chief 必读；其他角色了解当前 Chief 身份与继任边界）；
+3. `project-context/CHIEF-BOOTSTRAP.md`（Chief 必读；其他角色了解执行 Chief / 决策 Chief 身份与拆分边界）；
 4. `project-context/current-state.md`（最近一次核验的项目状态）；
 5. `project-context/product.md`（已批准的产品目标与成功标准）；
 6. `project-context/project-mainline-roadmap.md`（项目主线、优先级、角色窗口与偏航恢复规则）；
@@ -49,7 +49,7 @@
 - 上下文压缩摘要只能帮助定位文件，不能作为任务批准、Git 状态或产品事实的唯一来源；
 - Agent 无法确认当前状态时必须重新执行启动阅读，不得凭记忆继续；
 - 缺少启动回执时不得进入代码修改、Review 结论、合并或部署。
-- 新任或新窗口 Chief 还必须读取 `CHIEF-BOOTSTRAP.md`，明确自己是继任者还是原角色恢复，并在获得 Founder 接管确认前保持只读核对状态。
+- 新任或新窗口 Chief 还必须读取 `CHIEF-BOOTSTRAP.md`，明确自己是执行 Chief 还是决策 Chief、与前任会话的关系（继任 / 原窗口恢复 / 角色拆分），并在获得 Founder 接管确认前保持只读核对状态；遇八类升级事项必须按 `role-wakeup-and-handoff.md` §5.1 形成升级卡，不得自行收敛。
 
 ## 面向 Founder 的回复规范
 
@@ -83,10 +83,13 @@
 ## 角色与权限
 
 - **用户**：Founder / CEO / 最终审批人。产品方向、主分支合并、生产部署、不可逆操作由用户决定。
-- **AI Chief of Staff**：分析、质疑、拆解、规划、协调。不自行改变产品目标、不合并主分支、不部署、不接触密钥。
+- **执行 Chief of Staff**（日常 Chief）：分析、质疑、拆解、规划、协调。不自行改变产品目标、不合并主分支、不部署、不接触密钥。遇八类升级事项（产品目标/隐私合规/主线/延迟目标/新依赖/范围扩大/证据冲突/TASK-006 重定义）**不得自行收敛**，必须停止相关写操作、形成升级卡，由 Founder 人工转发到决策 Chief 窗口；执行 Chief 不能自动联系、唤醒或假定决策 Chief 已看到升级内容（详见 `project-context/role-wakeup-and-handoff.md` §5.1）。身份与拆分关系以 `project-context/CHIEF-BOOTSTRAP.md` 为准。
+- **决策 Chief of Staff**（原 Chief 窗口）：只裁决升级卡中的唯一问题，不接管日常执行；结论只有经 Founder 明确采纳后才生效。Founder 仍是唯一最终审批人。
 - **Builder Agent**：在独立分支实现，增加测试，通过构建和检查。不直接修改主分支，不超范围修改。
 - **Reviewer Agent**：独立审查，对照验收标准检查。默认只审查不修改代码。
 - **Release / QA Agent**：部署验证、健康检查、冒烟测试。生产部署仍需用户批准。
+
+> 非驻留边界：所有角色窗口默认休眠，只有 Founder 向对应窗口发送消息后才会工作。不存在自动监听、自动接力、自动 Review 或自动状态更新（见 `project-context/role-wakeup-and-handoff.md`）。
 
 ## 红线（所有 Agent 强制遵守）
 

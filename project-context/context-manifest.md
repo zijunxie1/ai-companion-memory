@@ -28,7 +28,8 @@
 | 角色 | 除固定清单外必须读取 |
 |---|---|
 | Founder / CEO | Founder 摘要、决策看板；技术附录按需阅读 |
-| Chief of Staff | `CHIEF-BOOTSTRAP.md`、当前状态、完整决策登记、产品目标、路线图、当前任务全部历史裁决 |
+| 执行 Chief of Staff | `CHIEF-BOOTSTRAP.md`、当前状态、完整决策登记、产品目标、路线图、当前任务全部历史裁决；八类升级条件与升级卡结构（`role-wakeup-and-handoff.md` §5.1） |
+| 决策 Chief of Staff | `CHIEF-BOOTSTRAP.md`、当前状态、完整决策登记、产品目标、路线图、升级卡结构与相关历史裁决；只裁决升级卡中的唯一问题 |
 | Builder | 已批准任务、验收标准、允许/禁止范围、相关契约、原 Builder 交接和当前 diff |
 | Reviewer | 已批准任务、契约、Builder 报告、完整 diff、测试与运行证据；不得只读 Builder 摘要 |
 | UX / Design Reviewer | Design Spec、真实页面、用户评论、Browser 证据、数据来源说明 |
@@ -57,7 +58,9 @@ AGENTS 规则版本：
 
 ```text
 Chief 身份实例：
-与前任会话的关系：继任 / 原窗口恢复
+与前任会话的关系：继任 / 原窗口恢复 / 角色拆分（执行 Chief / 决策 Chief）
+Chief 类型：执行 Chief（日常职责）/ 决策 Chief（八类升级裁决）
+升级路由确认：遇到八类升级事项时形成升级卡，由 Founder 人工转发，不自动联系
 继任核对状态：verifying / active
 历史归因边界：不会把前任工作表述为自己亲历
 ```

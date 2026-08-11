@@ -8,7 +8,7 @@
 >
 > 项目根目录：`E:\正式作品`
 >
-> 适用角色：Chief of Staff、长期 Builder、独立 Reviewer、Release / QA
+> 适用角色：执行 Chief of Staff、决策 Chief of Staff、长期 Builder、独立 Reviewer、Release / QA
 
 > 强制阅读：所有 Agent 在新开窗口、接手项目或开始新任务前必须完整阅读本文件；本文件不替代当前任务说明和正式契约。
 
@@ -58,7 +58,8 @@
 | 窗口 / 角色 | 应该做什么 | 不应该做什么 | 固定产出 |
 |---|---|---|---|
 | **Founder / CEO（用户）** | 决定产品方向、任务优先级、范围取舍、主线方案、是否合并与部署 | 不需要代替 Builder 解决实现细节；不把口头同意自动视为已经合并 | 裁决文本、任务批准/否决、合并与部署授权 |
-| **Chief of Staff** | 读取项目事实；质疑需求；维护大方向；拆分单一可审查任务；定义目标、非目标、风险、验收门和停止条件；处理 Change Request | 不写产品实现；不自行选择主线；不把 DRAFT 写成已实现事实；不越过 Founder 批准 | DRAFT、决策包、优先级、Chief→Builder 交接包、固定状态报告 |
+| **执行 Chief of Staff** | 读取项目事实；质疑需求；维护已批准方向；拆分单一可审查任务；定义目标、非目标、风险、验收门和停止条件；处理普通 Change Request；安排人工交接 | 不写产品实现；不自行选择或重排主线；不把 DRAFT 写成已实现事实；不越过 Founder 批准；遇八类升级事项不得自行收敛 | DRAFT、普通决策包、优先级、Chief→Builder 交接包、固定状态报告；八类事项按 `role-wakeup-and-handoff.md` §5.1 形成升级卡 |
+| **决策 Chief of Staff** | 只裁决 Founder 人工转发的升级卡中的唯一问题；对八类重大事项给出选项与建议 | 不接管日常执行；不自动监听或唤醒其他角色；裁决未经 Founder 明确采纳不得视为生效 | 决策 Chief 升级卡裁决；最终审批权仍归 Founder |
 | **Git / Governance Builder** | 只执行已批准的分支收敛方案；保全历史；解决明确冲突；形成可审查 PR | 不自行决定 main/master；不 force push；不顺便改产品功能 | Git 审计、冲突解决记录、测试结果、PR、回滚点 |
 | **长期 Builder** | 先提交实施计划；在独立分支实现一个任务；同步代码、测试、迁移和契约；记录失败尝试与已知限制 | 不修改任务目标；不降低验收标准；不跨任务顺手重构；不直接合并主线；不自己宣布 Review 通过 | 实施计划、代码与测试、Builder 实现报告、commit/PR、Change Request |
 | **独立 Reviewer** | 从新窗口读取任务、契约、diff 和证据；逐项复核验收；主动找回归、数据不一致、越界和“为了变绿”的修改 | 默认不修改代码；不沿用 Builder 的自我结论；不把测试通过等同于产品正确；不批准合并 | Review 报告、BLOCKER/MAJOR/MINOR、`REVIEW_APPROVED` 或 `CHANGES_REQUESTED` |
@@ -133,7 +134,8 @@ Chief 汇总所有已完成任务与已知限制
 
 | 插曲 | 处理窗口 |
 |---|---|
-| 需求、范围、优先级或成功标准冲突 | Chief → Founder |
+| 普通需求澄清、既有批准范围内的拆解或普通 Change Request | 执行 Chief → Founder（需要审批时） |
+| 产品目标/隐私合规/主线/延迟目标/新依赖或架构/范围扩大或护栏削弱/权威证据冲突/TASK-006 重定义 | 执行 Chief 按 `role-wakeup-and-handoff.md` §5.1 形成升级卡 → Founder 人工转发决策 Chief；不得自动联系 |
 | main/master、提交丢失、合并冲突 | Git Builder；方案先由 Chief/Founder批准 |
 | 实现 Bug、测试失败、局部性能问题 | 当前长期 Builder |
 | 任务范围外的新接口、新表、新依赖 | Builder 提 CR → Chief → Founder |
@@ -246,17 +248,18 @@ TASK-004 三轮 Spike 已证明：物理删除有效，但未来对话仍可能�
 
 **技术路线裁决**：简单阈值无法可靠分离正负候选；外部模型 Gate 虽有正向离线分类证据，但隐私边界、严格墙钟延迟、失败回退和证据治理不足以支持产品化。后续只验证无用户数据外发的本地模型、规则或检索方案，不自行给出法律合规结论。
 
-**TASK-006 内部执行顺序**：
+**TASK-006 内部执行顺序**（2026-08-12 Founder 已批准的前置治理顺序；不改变产品任务顺序，也不改变路线 B 的技术结论）：
 
 ```text
-当前事实同步
+GOV-CHIEF-001 角色拆分与状态校准
+→ GOV-COMM-001 沟通与交接规范
 → GOV-002 上下文完整性护栏（独立治理任务）
 → TASK-006 本地相关性 Gate Spike（独立、限时、无外发、不接产品）
 → Spike 通过后重新起草 Change Request 与实施计划
 → Founder 批准后才允许产品实现
 ```
 
-GOV-002 与本地 Gate Spike 当前只获得规划基础批准，仍须各自形成正式任务文件、分支、单一问题 PR 和独立 Review。不得在同一实施分支串联多个相互依赖的功能 PR。
+GOV-CHIEF-001、GOV-COMM-001、GOV-002 与本地 Gate Spike 各自使用独立任务、分支、单一问题 PR 和独立 Review；前一项合入正式主线后，后一项才按各自批准门继续。该顺序只是在 TASK-006 内部增加治理前置，不把 TASK-006 标为产品实现中，不允许绕过 TASK-006 启动 TASK-007 / TASK-005B。不得在同一实施分支串联多个相互依赖的功能 PR。
 
 **必须保护的行为**：
 
@@ -369,6 +372,10 @@ GOV-001
 TASK-005A Config 快照
   ↓
 TASK-006 E004 Gate
+  ├─ GOV-CHIEF-001（角色与状态治理）
+  ├─ GOV-COMM-001（沟通与交接治理）
+  ├─ GOV-002（上下文完整性治理）
+  └─ 本地 Gate Spike（通过后仍需新 CR 与实施计划）
   ↓
 TASK-007 设计收敛
   ↓
