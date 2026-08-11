@@ -14,9 +14,9 @@ required_reading:
   - project-context/decision-register.md
   - project-context/tasks/TASK-006/draft.md
   - project-context/tasks/TASK-006/route-b-decision.md
-doc_type: 任务 DRAFT（Governance；Founder 2026-08-12 三项审批已通过；首轮 Review 打回范围扩展已获 Founder 批准并修复）
+doc_type: 任务 DRAFT（Governance；Founder 2026-08-12 三项审批已通过；首轮 Review 打回范围扩展已获 Founder 批准并修复；独立复审 REVIEW_APPROVED）
 task_id: GOV-CHIEF-001
-status: IMPLEMENTED（首轮 Review 打回项已修复，待独立复审）
+status: REVIEW_APPROVED（独立复审通过，待 Founder 合并裁决；PR #11 已创建未合并）
 draft_version: v1.0（2026-08-12；Founder 三项审批：Review 1 批准 DRAFT、同意 delegated、Review 2 批准实现计划 v1.0）
 draft_date: 2026-08-12
 owner: Operational Chief
