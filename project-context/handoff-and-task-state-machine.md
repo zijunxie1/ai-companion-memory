@@ -383,7 +383,7 @@ Builder 完成后由独立 Reviewer 执行。
 
 ## 9. 固定状态报告
 
-要求 Chief of Staff 和每个执行 Agent 在重要节点输出：
+**仅用于 L3 完整汇报**（任务完成、阻塞、需 Founder 决策或重大风险时；回复分级见 `project-context/agent-response-protocol.md` §0）。要求 Chief of Staff 和每个执行 Agent 在重要节点输出：
 
 ```text
 ## 当前任务状态
@@ -410,6 +410,8 @@ User / Chief of Staff / Builder / Reviewer / Release
 继续当前 Agent / 新开同角色会话 /
 交接另一 Agent / 请求用户裁决
 ```
+
+**L1 普通回复与 L2 普通交接不附加本固定状态报告**：L1 总长 3—5 句（`agent-response-protocol.md` §0.1/§0.2）；L2 只含简短说明 + 一张完整十七字段交接卡（`role-wakeup-and-handoff.md` §3.1）。
 
 ---
 

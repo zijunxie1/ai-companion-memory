@@ -4,6 +4,7 @@
 >
 > 最近只读核验：2026-08-12（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
 > 核验方式：本地 `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件，以及 `E:\task-006-measurement-tmp\` 文件清单与元数据；本次未联网刷新远端、未查询数据库、未调用外部模型。
+> 本快照已按 2026-08-12 GOV-CHIEF-001 合入后的真实 Git 事实校准（origin/main = `42786da`、PR #11 已完成）。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
@@ -13,7 +14,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10 治理同步已合并，`origin/main = 02efd2d`。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief；GOV-CHIEF-001 独立复审通过（REVIEW_APPROVED 已落盘于 `tasks/GOV-CHIEF-001/review-report.md`），尚未合并，待 Founder 合并裁决。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10 与 PR #11 治理同步均已合并，`origin/main = 42786da`。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已批准并实施完成（Review 1/执行模式/Review 2 均通过；IMPLEMENTED，待独立 Review）。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-12 执行 Chief 重新核验）
 
@@ -21,12 +22,13 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，未联网刷新） |
-| `origin/main` | `02efd2d337380e2fc331901f52fd6a02886be149`（PR #10 已 Rebase 合并，2026-08-12；含 TASK-006 路线 B 治理事实同步；上一记录 `0762a17` 已过期） |
+| `origin/main` | `42786dadaafd1d1c15e44d1998b646a426c65cdf`（GOV-CHIEF-001 PR #11 已 Rebase 合并，2026-08-12；含 PR #10 与 PR #11 全部治理事实；此前记录的 `02efd2d` 已由 GOV-CHIEF-001 合入后校准） |
 | `origin/master` | `064f5b6945b4b5f62075354270b3999edf1ca17a`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 37 / master 独有 0；merge-base = master HEAD（`064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
-| 治理任务分支 | `codex/gov-chief-001`（Worktree `C:/Users/admin/.codex/worktrees/e546/正式作品`，自 origin/main @ `02efd2d` 创建；GOV-CHIEF-001 独立复审通过 REVIEW_APPROVED，待 Founder 合并裁决） |
-| GOV-COMM-001 分支 | `codex/gov-comm-001`（Worktree `E:/gov-comm-001-worktree`，自 origin/main @ `02efd2d` 创建；APPROVED，等待 GOV-CHIEF-001 合入后恢复 Review 2） |
+| PR #11 GOV-CHIEF-001 | **已合并**：执行/决策 Chief 角色拆分与状态校准已 Rebase 合并进 `origin/main`（治理提交 `a420b62` + 3 个状态同步提交，最终 `42786da`） |
+| 治理任务分支 | `codex/gov-chief-001` 已合并（PR #11，REVIEW_APPROVED → MERGED） |
+| GOV-COMM-001 分支 | `codex/gov-comm-001`（Worktree `E:/gov-comm-001-worktree`，自 origin/main @ `42786da` 创建；IMPLEMENTED，待独立 Review） |
 | TASK-006 规划分支 | `feature/task-006-draft` @ `982d8a1`（Worktree `E:/task-006-plan-worktree`，干净；历史规划分支，DRAFT 已以 `0762a17` 进入 origin/main） |
 | TASK-006 实施分支 | `feature/task-006-e004-gate` 指向 `0762a17`（历史分支，未推进；无实施 Worktree、无产品实现差异） |
 | 其他 Worktree | `E:/gov-001-worktree` 干净；`E:/gov-001b-worktree` 干净；`E:/gov-001c-worktree` 有历史治理改动；`E:/task-005a-worktree` 干净；全部保持不动 |
@@ -45,8 +47,8 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-001 | GOV-001A：MERGED；GOV-001B：MERGED | 主线收敛和治理文件入库已完成 |
 | TASK-005A | MERGED（QA_APPROVED_MAINLINE） | PR #8 @ `4f93fa6` 已合并并完成本地/测试主线 QA；Run #28 证明快照能力，E004 FAIL 如实记录；未进行生产部署，是否 CLOSED 待后续裁决 |
 | TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在。Founder 已批准路线 B（不外发用户数据的本地/规则/检索路线）；外部 Gate 不进入产品。临时计划 v1.4 与 CR-01 v1.2 均未批准；没有产品代码、实施 Worktree或正式 Reviewer 报告；任务不进入 IN_PROGRESS |
-| GOV-CHIEF-001 | **REVIEW_APPROVED（独立复审通过，待 Founder 合并裁决）** | 执行 Chief / 决策 Chief 角色拆分与状态校准；三项审批已完成（2026-08-12）。首轮独立 Review 打回项已修复并经独立复审通过（0 BLOCKER / 0 MAJOR / 0 MINOR，结论落盘于 `tasks/GOV-CHIEF-001/review-report.md`）；D-GOV-CHIEF-001 决策保持 APPROVED，与任务执行状态分开。尚未合并、未在正式主线生效；合入后 GOV-COMM-001 恢复 Review 2 |
-| GOV-COMM-001 | **APPROVED（实施暂停）** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 暂不批准（current-state 旧记录 + 计划禁止改 Git 事实表冲突，已修正 v1.2）；前置条件 = GOV-CHIEF-001 合入正式主线 |
+| GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
+| GOV-COMM-001 | **IMPLEMENTED（最终复审 REVIEW_APPROVED 已落盘，待 Founder 合并裁决）** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；前置条件已满足（GOV-CHIEF-001 已合入）；已按 implementation-plan v1.4 + 三轮限定授权完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**（落盘于 `tasks/GOV-COMM-001/review-report.md`）；仓库停在 IMPLEMENTED，合并由 Founder 裁决 |
 | GOV-002 | 未开始（规划基础已获 Founder 同意） | 候选任务：上下文完整性护栏；必须单独形成正式 DRAFT、分支、PR 和 Review，在 GOV-COMM-001 完成后 |
 | TASK-006 本地 Gate Spike | 未开始（规划基础已获 Founder 同意） | 候选独立 Spike；不得外发用户数据，不接入产品；必须在 GOV-002 后单独批准和执行 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
@@ -88,14 +90,13 @@ TASK-006 内部后续规划顺序：
 
 ## 当前建议动作
 
-1. 独立复审已通过（REVIEW_APPROVED 落盘于 `tasks/GOV-CHIEF-001/review-report.md`），GOV-CHIEF-001 待 Founder 合并裁决；
-2. Founder 裁决合并后，恢复 GOV-COMM-001 实现计划 Review 2（已授权更新基线/前置/边界后重新提交）；
-3. GOV-COMM-001 完成后单独起草 GOV-002；GOV-002 完成后再起草本地 Gate Spike；
-4. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务。
+1. GOV-COMM-001 最终独立复审 REVIEW_APPROVED（0/0/0）已落盘于 `tasks/GOV-COMM-001/review-report.md`：由 Founder 裁决是否 Rebase 合并 codex/gov-comm-001；
+2. GOV-COMM-001 合入后单独起草 GOV-002；GOV-002 完成后再起草本地 Gate Spike；
+3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务。
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：Founder（合并裁决）——GOV-CHIEF-001 已 REVIEW_APPROVED，当前分支已推送，PR #11 OPEN、尚未合并；当前 head 以远端 PR 为准；下一责任人为 Founder，决定是否合并。独立复审已完成，无需再唤醒独立 Reviewer。
-- **本次只需要它完成**：决定是否合并 PR #11（Rebase 合并）。
-- **不得执行**：无（本卡面向 Founder 裁决，非 Agent 任务）。
-- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-CHIEF-001 `draft.md`、`implementation-plan.md`、`implementation-report.md`、`review-report.md`、TASK-006 `draft.md` 与 `route-b-decision.md`、PR #11 diff。
+- **目标角色**：独立 Reviewer（GOV-COMM-001 已 IMPLEMENTED；由 Founder 决定发送交接文件，进入只读审查）。
+- **本次只需要它完成**：对照 GOV-COMM-001 验收标准（draft §13）与 V1—V9 验证矩阵只读审查治理文件变更；独立 Review 是完成和合并前的必经步骤；Founder 决定何时发送交接卡，而非决定是否需要 Review。
+- **不得执行**：修改文件、产品实现、外部补测、任务状态变化、合并或部署。
+- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-COMM-001 任务目录全部文件（draft/implementation-plan/implementation-report/handoff）、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、完整 diff。

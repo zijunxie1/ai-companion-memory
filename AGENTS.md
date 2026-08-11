@@ -53,19 +53,19 @@
 
 ## 面向 Founder 的回复规范
 
-所有重要决策、计划、进度、异常、完成和交接回复必须遵守 `project-context/agent-response-protocol.md`：
+所有重要决策、计划、进度、异常、完成和交接回复必须遵守 `project-context/agent-response-protocol.md`（**回复格式的唯一权威来源**）：
 
-- 第一部分必须是 `## 先说人话（30 秒）`，用 3—6 句非技术语言说明：现在的问题、为什么重要、这一步做什么/不做什么、Founder 要不要操作；
+- **回复分级（L1/L2/L3）**：普通回复（L1）只说人话 3—5 句；普通交接（L2）只说人话 + 一张可复制交接卡；只有任务完成、阻塞、需 Founder 决策或重大风险时才完整汇报（L3）。分级定义与全部模板见 `project-context/agent-response-protocol.md`；
+- 第一部分必须是 `## 先说人话（30 秒）`，用 3—5 句非技术语言说明：现在的问题、为什么重要、这一步做什么/不做什么、Founder 要不要操作；
 - “先说人话”区域禁止出现 commit SHA、Git 命令、文件路径、PR 编号、Worktree、Schema、状态机缩写和未解释的英文术语；
-- Founder 只阅读“先说人话”区域，也必须能够理解现状并做出当前决策；
-- 先解释正在解决的产品问题、为什么重要和对用户的影响；
-- 一次突出一个当前主决策，同时完整列出关联决策、后续决策、建议、机会和未知问题；
-- 不得为了简化表达遗漏替代方案或不利证据；
-- Git、commit、文件、命令和原始日志放在技术附录；
-- 重大决策提供可复制的“外部模型复核包”；
-- 无需 Founder 操作时明确写“你现在不需要操作”；
-- 相同进程、相同事件 ID 或状态未变化的通知只汇报一次，避免重复打扰；
+- 无需 Founder 操作时明确写“你现在不需要操作”；相同进程、相同事件 ID 或状态未变化的通知只汇报一次，避免重复打扰；
 - 回复前执行协议中的“回复合规自检”。
+
+**唯一权威来源映射**（正文只在权威文件出现一次，其他文件只引用）：
+
+- 回复格式（L1/L2/L3 与全部模板）→ `project-context/agent-response-protocol.md`；
+- 交接流程（交接卡结构、唤醒卡、交接检查点）→ `project-context/role-wakeup-and-handoff.md`；交接卡填写模板 → `project-context/templates/role-handoff-template.md`；
+- 启动与恢复流程（新窗口继承顺序、上下文压缩恢复、启动回执）→ `project-context/context-manifest.md`。
 
 重要状态变化必须同步更新 `project-context/current-state.md`；重大决策必须同步更新 `project-context/decision-register.md`。未写入文件的聊天结论不得作为跨会话长期事实。
 
@@ -276,7 +276,7 @@ branch: feature/task-xxx-xxx
 
 ## 固定状态报告
 
-每次重要节点输出：
+**仅用于 L3 完整汇报**（任务完成、阻塞、需 Founder 决策或重大风险时；见 `project-context/agent-response-protocol.md` §2）。每次重要节点输出：
 
 ```text
 ## 当前任务状态
@@ -287,3 +287,5 @@ branch: feature/task-xxx-xxx
 ## 交接前仍缺少什么
 ## 建议动作
 ```
+
+**L1 普通回复与 L2 普通交接不附加本固定状态报告**（L1 总长 3—5 句；L2 只含简短说明 + 一张完整十七字段交接卡）。
