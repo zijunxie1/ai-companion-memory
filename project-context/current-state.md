@@ -3,8 +3,8 @@
 > 快照性质：工作状态索引，不替代 Git、代码、数据库、正式契约或任务裁决。
 >
 > 最近只读核验：2026-08-12（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
-> 核验方式：本地 `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件，以及 `E:\task-006-measurement-tmp\` 文件清单与元数据；本次未联网刷新远端、未查询数据库、未调用外部模型。
-> 本快照已按 2026-08-12 GOV-CHIEF-001 合入后的真实 Git 事实校准（origin/main = `42786da`、PR #11 已完成）。
+> 核验方式：本地 `git fetch origin main` / `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件，以及 `E:\task-006-measurement-tmp\` 文件清单与元数据；未查询数据库、未调用外部模型。
+> 本快照以本次核验时的 `origin/main @ 3412c3c` 为基础；GOV-CHIEF-001 与 GOV-COMM-001 均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10 与 PR #11 治理同步均已合并，`origin/main = 42786da`。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已批准并实施完成（Review 1/执行模式/Review 2 均通过；IMPLEMENTED，待独立 Review）。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已完成独立复审并合入正式主线。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-12 执行 Chief 重新核验）
 
@@ -22,13 +22,13 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，未联网刷新） |
-| `origin/main` | `42786dadaafd1d1c15e44d1998b646a426c65cdf`（GOV-CHIEF-001 PR #11 已 Rebase 合并，2026-08-12；含 PR #10 与 PR #11 全部治理事实；此前记录的 `02efd2d` 已由 GOV-CHIEF-001 合入后校准） |
+| `origin/main`（本次核验快照） | `3412c3c90ac73363b2d54998311bcd9ca39da10b`（GOV-COMM-001 已 Rebase 合并，2026-08-12；含 PR #10、PR #11 与 GOV-COMM-001 全部治理事实；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6945b4b5f62075354270b3999edf1ca17a`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 37 / master 独有 0；merge-base = master HEAD（`064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
 | PR #11 GOV-CHIEF-001 | **已合并**：执行/决策 Chief 角色拆分与状态校准已 Rebase 合并进 `origin/main`（治理提交 `a420b62` + 3 个状态同步提交，最终 `42786da`） |
 | 治理任务分支 | `codex/gov-chief-001` 已合并（PR #11，REVIEW_APPROVED → MERGED） |
-| GOV-COMM-001 分支 | `codex/gov-comm-001`（Worktree `E:/gov-comm-001-worktree`，自 origin/main @ `42786da` 创建；IMPLEMENTED，待独立 Review） |
+| GOV-COMM-001 | **已合并**：沟通与交接规范经独立复审 REVIEW_APPROVED（0/0/0）后 Rebase 合并进 `origin/main`（`3412c3c`）；源分支仅作历史引用，不再承载当前工作 |
 | TASK-006 规划分支 | `feature/task-006-draft` @ `982d8a1`（Worktree `E:/task-006-plan-worktree`，干净；历史规划分支，DRAFT 已以 `0762a17` 进入 origin/main） |
 | TASK-006 实施分支 | `feature/task-006-e004-gate` 指向 `0762a17`（历史分支，未推进；无实施 Worktree、无产品实现差异） |
 | 其他 Worktree | `E:/gov-001-worktree` 干净；`E:/gov-001b-worktree` 干净；`E:/gov-001c-worktree` 有历史治理改动；`E:/task-005a-worktree` 干净；全部保持不动 |
@@ -48,7 +48,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | TASK-005A | MERGED（QA_APPROVED_MAINLINE） | PR #8 @ `4f93fa6` 已合并并完成本地/测试主线 QA；Run #28 证明快照能力，E004 FAIL 如实记录；未进行生产部署，是否 CLOSED 待后续裁决 |
 | TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在。Founder 已批准路线 B（不外发用户数据的本地/规则/检索路线）；外部 Gate 不进入产品。临时计划 v1.4 与 CR-01 v1.2 均未批准；没有产品代码、实施 Worktree或正式 Reviewer 报告；任务不进入 IN_PROGRESS |
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
-| GOV-COMM-001 | **IMPLEMENTED（最终复审 REVIEW_APPROVED 已落盘，待 Founder 合并裁决）** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；前置条件已满足（GOV-CHIEF-001 已合入）；已按 implementation-plan v1.4 + 三轮限定授权完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**（落盘于 `tasks/GOV-COMM-001/review-report.md`）；仓库停在 IMPLEMENTED，合并由 Founder 裁决 |
+| GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | 未开始（规划基础已获 Founder 同意） | 候选任务：上下文完整性护栏；必须单独形成正式 DRAFT、分支、PR 和 Review，在 GOV-COMM-001 完成后 |
 | TASK-006 本地 Gate Spike | 未开始（规划基础已获 Founder 同意） | 候选独立 Spike；不得外发用户数据，不接入产品；必须在 GOV-002 后单独批准和执行 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
@@ -90,13 +90,13 @@ TASK-006 内部后续规划顺序：
 
 ## 当前建议动作
 
-1. GOV-COMM-001 最终独立复审 REVIEW_APPROVED（0/0/0）已落盘于 `tasks/GOV-COMM-001/review-report.md`：由 Founder 裁决是否 Rebase 合并 codex/gov-comm-001；
-2. GOV-COMM-001 合入后单独起草 GOV-002；GOV-002 完成后再起草本地 Gate Spike；
+1. GOV-COMM-001 已 Rebase 合并（`3412c3c`）；下一项只可单独起草 GOV-002 DRAFT；
+2. GOV-002 完成后再起草本地 Gate Spike；
 3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务。
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：独立 Reviewer（GOV-COMM-001 已 IMPLEMENTED；由 Founder 决定发送交接文件，进入只读审查）。
-- **本次只需要它完成**：对照 GOV-COMM-001 验收标准（draft §13）与 V1—V9 验证矩阵只读审查治理文件变更；独立 Review 是完成和合并前的必经步骤；Founder 决定何时发送交接卡，而非决定是否需要 Review。
-- **不得执行**：修改文件、产品实现、外部补测、任务状态变化、合并或部署。
-- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-COMM-001 任务目录全部文件（draft/implementation-plan/implementation-report/handoff）、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、完整 diff。
+- **目标角色**：执行 Chief（GOV-002 DRAFT）。
+- **本次只需要它完成**：基于已合并的 GOV-COMM-001，单独起草 GOV-002 的目标、非目标、风险、验收与执行模式判断；不得把草案当作实施授权。
+- **不得执行**：修改产品代码、TASK-006、外部补测、合并或部署；不得自动唤醒其他角色。
+- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-COMM-001 合并后的任务证据、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、TASK-006 的 DRAFT 与路线 B 裁决。
