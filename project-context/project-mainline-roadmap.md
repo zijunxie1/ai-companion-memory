@@ -159,7 +159,7 @@ Chief 汇总所有已完成任务与已知限制
 
 **2026-08-11 实际状态（Git 核验）**：GOV-001A PR #5（@`4baabf0`）与 GOV-001B PR #6（@`5901c64`）均已合并，`main` 已通过可审查集成吸收 `master` 全部内容，且治理文件（AGENTS/current-state/decision-register/roadmap 等）已入库；`master` 已是 `main` 的祖先（master 独有提交 = 0）。“TASK-003 MERGED” 现在可表述为“已合入默认主线”。禁止 force push；master 退役由 D-MASTER-RETIRE 单独裁决。
 
-**2026-08-11 后续更新（本窗口核验）**：`origin/main` 现为 `4f93fa6`（PR #8 TASK-005A Rebase 合并）；分叉 = main 独有 34 / master 独有 0（merge-base = master HEAD `064f5b6`）。TASK-005A 状态 = MERGED（验证结论：QA_APPROVED_MAINLINE；未生产部署）。
+**2026-08-12 后续更新（本窗口核验）**：本地远端跟踪引用 `origin/main` 现为 `0762a17`（含 TASK-005A 治理收尾与 TASK-006 DRAFT v1.1 APPROVED）；分叉 = main 独有 36 / master 独有 0（merge-base = master HEAD `064f5b6`）。TASK-005A 状态 = MERGED（验证结论：QA_APPROVED_MAINLINE；未生产部署）；TASK-006 状态 = APPROVED，E004 产品问题仍未解决。
 
 ### 3.2 产品成功标准冲突
 
@@ -240,11 +240,23 @@ TASK-004 三轮 Spike 已证明：物理删除有效，但未来对话仍可能�
 
 ### Phase 2｜TASK-006 E004 无关召回 Gate
 
-> 状态（2026-08-11 补记）：**TASK-006 正在起草**（DRAFT v1.1 已由本窗口写入 `project-context/tasks/TASK-006/draft.md` 并按 Founder CHANGES_REQUESTED 修订，等待 Founder 审批；审批后经执行模式门确认执行方式，本窗口建议 HANDOFF REQUIRED 长期 Builder 会话）。主线顺序保持不变（005A → 006）。
+> 状态（2026-08-12 核验）：**TASK-006 = APPROVED，尚未产品实现**。DRAFT v1.1 已进入 `origin/main`；Founder 已批准决策包路线 B：不将外部模型 Gate 接入用户产品路径，转为不外发用户查询、Memory 或其他用户数据的本地模型、规则或检索路线。外部 Gate 仅保留为离线研究证据；临时实施计划 v1.4 与 CR-01 v1.2 未批准。主线顺序保持不变（005A → 006 → 007 → 005B）。
 
 **目标**：完成第一条真实“评测暴露问题 → 产品修复 → 回归证明”的闭环。
 
-**规划原则**：不要预设“调高阈值一定可行”。先测量 E004 与 E001 等正向召回 Case 的分数分布，再选择阈值、过滤或 Gate 方案。
+**技术路线裁决**：简单阈值无法可靠分离正负候选；外部模型 Gate 虽有正向离线分类证据，但隐私边界、严格墙钟延迟、失败回退和证据治理不足以支持产品化。后续只验证无用户数据外发的本地模型、规则或检索方案，不自行给出法律合规结论。
+
+**TASK-006 内部执行顺序**：
+
+```text
+当前事实同步
+→ GOV-002 上下文完整性护栏（独立治理任务）
+→ TASK-006 本地相关性 Gate Spike（独立、限时、无外发、不接产品）
+→ Spike 通过后重新起草 Change Request 与实施计划
+→ Founder 批准后才允许产品实现
+```
+
+GOV-002 与本地 Gate Spike 当前只获得规划基础批准，仍须各自形成正式任务文件、分支、单一问题 PR 和独立 Review。不得在同一实施分支串联多个相互依赖的功能 PR。
 
 **必须保护的行为**：
 
@@ -262,7 +274,9 @@ TASK-004 三轮 Spike 已证明：物理删除有效，但未来对话仍可能�
 - Config 快照能指出具体策略变化；
 - Builder 报告包含失败尝试、停止条件和 Before / After 证据。
 
-**停止条件**：若正负 Case 分数无法安全分离，或修 E004 必然造成 E001 明显退化，立即提交 Change Request，不继续为了变绿而调参。
+本地 Gate Spike 通过只证明技术可行，不满足上述产品退出条件，也不把 TASK-006 改为完成。产品实现必须另经 Founder 批准的新 Change Request 与实施计划。
+
+**停止条件**：若本地候选机制无法达到独立盲测、严格墙钟延迟、资源和强约束要求，或修 E004 必然造成 E001 明显退化，停止 Spike 并返回 Chief / Founder；不得改用外部模型、削弱验收或默认绕过 TASK-006 启动后续主线任务。
 
 ---
 
