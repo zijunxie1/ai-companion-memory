@@ -1,0 +1,170 @@
+{
+  "generated_at": "2026-08-12T01:22:11.559Z",
+  "audit_log": "E:\\task-006-spike-worktree\\project-context\\tasks\\TASK-006\\spike\\data\\audit\\network-calibration-1786497730073.log",
+  "rounds": [
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E001",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.69835734,
+        0.40345278
+      ]
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E002",
+      "poolSize": 1,
+      "retrieved": 1,
+      "scores": [
+        0.7930542
+      ]
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E003",
+      "poolSize": 1,
+      "retrieved": 1,
+      "scores": [
+        0.46107388
+      ]
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E004",
+      "poolSize": 3,
+      "retrieved": 3,
+      "scores": [
+        0.43353188,
+        0.33587933,
+        0.32601857
+      ]
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E005",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.81083095,
+        0.631058
+      ]
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E001",
+      "poolSize": 3,
+      "retrieved": 3,
+      "scores": [
+        0.72172356,
+        0.45131412,
+        0.41871208
+      ]
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E002",
+      "poolSize": 1,
+      "retrieved": 1,
+      "scores": [
+        0.7487749
+      ]
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E003",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.5853259,
+        0.44384214
+      ]
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E004",
+      "poolSize": 3,
+      "retrieved": 3,
+      "scores": [
+        0.41590416,
+        0.3647042,
+        0.30820572
+      ]
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E005",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.7936634,
+        0.59974676
+      ]
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E001",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.69081336,
+        0.45236793
+      ]
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E002",
+      "poolSize": 1,
+      "retrieved": 1,
+      "scores": [
+        0.7935213
+      ]
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E003",
+      "poolSize": 1,
+      "retrieved": 1,
+      "scores": [
+        0.5853259
+      ]
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E004",
+      "poolSize": 3,
+      "retrieved": 3,
+      "scores": [
+        0.4161354,
+        0.3596266,
+        0.32101393
+      ]
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E005",
+      "poolSize": 2,
+      "retrieved": 2,
+      "scores": [
+        0.7660996,
+        0.62536246
+      ]
+    }
+  ]
+}

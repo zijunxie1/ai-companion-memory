@@ -1,0 +1,61 @@
+{
+  "round": 3,
+  "run": 29,
+  "caseId": "E005",
+  "userId": "eval-af5b9054-E005-cknp",
+  "query": "我不是不喜欢你问，我只是不想每次都解释",
+  "poolSize": 2,
+  "poolPreview": [
+    "用户不喜欢别人反复追问自己为什么",
+    "用户澄清：不是不喜欢别人提问，只是不想每次都解释原因，希望能自由选择是否回答，而不是被反复盘问"
+  ],
+  "results": [
+    {
+      "id": "ce19236d-e5a8-4313-8480-0cca4a147ec3",
+      "memory": "用户澄清：不是不喜欢别人提问，只是不想每次都解释原因，希望能自由选择是否回答，而不是被反复盘问",
+      "score": 0.7660996,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "8a09d252-9e34-4a64-9350-1c24523afa69",
+      "memory": "用户不喜欢别人反复追问自己为什么",
+      "score": 0.62536246,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "ce19236d-e5a8-4313-8480-0cca4a147ec3",
+          "memory": "用户澄清：不是不喜欢别人提问，只是不想每次都解释原因，希望能自由选择是否回答，而不是被反复盘问",
+          "hash": "a55fe4c1bf2e422f05f920eb40adfc0d",
+          "metadata": {
+            "source": "v2-chatflow",
+            "timestamp": "2026-08-11T00:33:28.894Z"
+          },
+          "score": 0.7660996,
+          "created_at": "2026-08-11T00:33:35.088820+00:00",
+          "updated_at": "2026-08-11T00:33:35.088820+00:00",
+          "user_id": "eval-af5b9054-E005-cknp",
+          "attributed_to": "user"
+        },
+        {
+          "id": "8a09d252-9e34-4a64-9350-1c24523afa69",
+          "memory": "用户不喜欢别人反复追问自己为什么",
+          "hash": "43376c60c8a680a4b63627e3ec0d4fc4",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E005"
+          },
+          "score": 0.62536246,
+          "created_at": "2026-08-11T00:33:19.084628+00:00",
+          "updated_at": "2026-08-11T00:33:19.084628+00:00",
+          "user_id": "eval-af5b9054-E005-cknp",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:11.559Z"
+}

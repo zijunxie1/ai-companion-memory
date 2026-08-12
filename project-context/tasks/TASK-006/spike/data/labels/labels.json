@@ -1,0 +1,347 @@
+{
+  "doc_type": "校准集标注记录（关键词初判 + 人工复核）",
+  "generated_at": "2026-08-12T01:22:59.818Z",
+  "reviewed_by": "Builder（TASK-006 长期 Builder）",
+  "review_ts": "2026-08-12T01:22:59.818Z",
+  "label_semantics": "正=与查询相关；负=与查询无关（DRAFT §5.3.2；标签先于校准调参）",
+  "rounds": [
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E001",
+      "query": "又失眠了……",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户最近（2026年8月前后）经常失眠，晚上难以入睡",
+          "mem0_score": 0.69835734,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户养了一只橘猫，名叫小橘",
+          "mem0_score": 0.40345278,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "橘猫/失眠记忆均按 Eval 语义计相关（recall_min_related 关键词命中；橘猫半夜跑酷与失眠同属睡眠话题隐式关联）"
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E002",
+      "query": "我最近开始学吉他了",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户最近开始学习吉他（约2026年8月初）",
+          "mem0_score": 0.7930542,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "吉他记忆相关"
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E003",
+      "query": "我家猫叫什么来着",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户养了一只名叫小橘的橘猫，小橘最近经常在半夜跑酷，夜间表现得很活跃",
+          "mem0_score": 0.46107388,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "小橘/橘猫记忆相关"
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E004",
+      "query": "今天天气不错",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户近期（约2026年8月）经常失眠，晚上难以入睡",
+          "mem0_score": 0.43353188,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 1,
+          "memory": "用户最近开始学习吉他（约2026年8月）",
+          "mem0_score": 0.33587933,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 2,
+          "memory": "用户养了一只橘猫，名字叫小橘",
+          "mem0_score": 0.32601857,
+          "label_initial": 0,
+          "label_final": 0
+        }
+      ],
+      "human_review_note": "天气话题下猫/吉他/失眠记忆全部无关（E004 缺陷场景复现）"
+    },
+    {
+      "round": 1,
+      "run": 31,
+      "caseId": "E005",
+      "query": "我不是不喜欢你问，我只是不想每次都解释",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户澄清：自己不是不喜欢别人问为什么，而是不想每次都解释原因",
+          "mem0_score": 0.81083095,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户不喜欢别人反复问自己为什么",
+          "mem0_score": 0.631058,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "两条均为提问/解释偏好记忆，相关"
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E001",
+      "query": "又失眠了……",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户最近经常失眠，晚上睡不着",
+          "mem0_score": 0.72172356,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户养的小橘猫最近经常在半夜跑酷",
+          "mem0_score": 0.45131412,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 2,
+          "memory": "用户养了一只名叫小橘的橘猫",
+          "mem0_score": 0.41871208,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "橘猫/失眠记忆均按 Eval 语义计相关（recall_min_related 关键词命中；橘猫半夜跑酷与失眠同属睡眠话题隐式关联）"
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E002",
+      "query": "我最近开始学吉他了",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户于2026年8月前后开始学习吉他",
+          "mem0_score": 0.7487749,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "吉他记忆相关"
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E003",
+      "query": "我家猫叫什么来着",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户养了一只橘猫，名字叫小橘",
+          "mem0_score": 0.5853259,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户家的橘猫小橘最近经常半夜跑酷，晚上精力旺盛地在家里四处跑动",
+          "mem0_score": 0.44384214,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "小橘/橘猫记忆相关"
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E004",
+      "query": "今天天气不错",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户近来（2026年8月左右）经常失眠，晚上难以入睡。",
+          "mem0_score": 0.41590416,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 1,
+          "memory": "用户最近（2026年8月左右）开始学习吉他。",
+          "mem0_score": 0.3647042,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 2,
+          "memory": "用户养了一只橘猫，名叫小橘。",
+          "mem0_score": 0.30820572,
+          "label_initial": 0,
+          "label_final": 0
+        }
+      ],
+      "human_review_note": "天气话题下猫/吉他/失眠记忆全部无关（E004 缺陷场景复现）"
+    },
+    {
+      "round": 2,
+      "run": 30,
+      "caseId": "E005",
+      "query": "我不是不喜欢你问，我只是不想每次都解释",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户并不讨厌别人提问，只是不想每次都重复解释原因",
+          "mem0_score": 0.7936634,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户不喜欢别人反复追问\"为什么\"",
+          "mem0_score": 0.59974676,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "两条均为提问/解释偏好记忆，相关"
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E001",
+      "query": "又失眠了……",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户最近经常失眠，晚上睡不着（2026年8月前后）。",
+          "mem0_score": 0.69081336,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户养了一只橘猫，名叫小橘。2026年8月前后，小橘经常在半夜跑酷，精力旺盛。",
+          "mem0_score": 0.45236793,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "橘猫/失眠记忆均按 Eval 语义计相关（recall_min_related 关键词命中；橘猫半夜跑酷与失眠同属睡眠话题隐式关联）"
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E002",
+      "query": "我最近开始学吉他了",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户最近（约2026年8月初）开始学吉他",
+          "mem0_score": 0.7935213,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "吉他记忆相关"
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E003",
+      "query": "我家猫叫什么来着",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户养了一只橘猫，名字叫小橘",
+          "mem0_score": 0.5853259,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "小橘/橘猫记忆相关"
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E004",
+      "query": "今天天气不错",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户于2026年8月前后经常失眠，晚上难以入睡",
+          "mem0_score": 0.4161354,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 1,
+          "memory": "用户养了一只橘猫，名叫小橘，最近常在半夜跑酷",
+          "mem0_score": 0.3596266,
+          "label_initial": 0,
+          "label_final": 0
+        },
+        {
+          "idx": 2,
+          "memory": "用户于2026年8月前后开始学习吉他",
+          "mem0_score": 0.32101393,
+          "label_initial": 0,
+          "label_final": 0
+        }
+      ],
+      "human_review_note": "天气话题下猫/吉他/失眠记忆全部无关（E004 缺陷场景复现）"
+    },
+    {
+      "round": 3,
+      "run": 29,
+      "caseId": "E005",
+      "query": "我不是不喜欢你问，我只是不想每次都解释",
+      "samples": [
+        {
+          "idx": 0,
+          "memory": "用户澄清：不是不喜欢别人提问，只是不想每次都解释原因，希望能自由选择是否回答，而不是被反复盘问",
+          "mem0_score": 0.7660996,
+          "label_initial": 1,
+          "label_final": 1
+        },
+        {
+          "idx": 1,
+          "memory": "用户不喜欢别人反复追问自己为什么",
+          "mem0_score": 0.62536246,
+          "label_initial": 1,
+          "label_final": 1
+        }
+      ],
+      "human_review_note": "两条均为提问/解释偏好记忆，相关"
+    }
+  ]
+}

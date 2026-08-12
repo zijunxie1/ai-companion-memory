@@ -1,0 +1,40 @@
+{
+  "round": 1,
+  "run": 31,
+  "caseId": "E002",
+  "userId": "eval-5dcf9e52-E002-5hgz",
+  "query": "我最近开始学吉他了",
+  "poolSize": 1,
+  "poolPreview": [
+    "用户最近开始学习吉他（约2026年8月初）"
+  ],
+  "results": [
+    {
+      "id": "614959ec-67df-4a10-9aed-2fa797cf3033",
+      "memory": "用户最近开始学习吉他（约2026年8月初）",
+      "score": 0.7930542,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "614959ec-67df-4a10-9aed-2fa797cf3033",
+          "memory": "用户最近开始学习吉他（约2026年8月初）",
+          "hash": "bfabef17fe4699f61059bbd83e981cd7",
+          "metadata": {
+            "source": "v2-chatflow",
+            "timestamp": "2026-08-11T00:41:40.089Z"
+          },
+          "score": 0.7930542,
+          "created_at": "2026-08-11T00:41:44.186588+00:00",
+          "updated_at": "2026-08-11T00:41:44.186588+00:00",
+          "user_id": "eval-5dcf9e52-E002-5hgz",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:10.168Z"
+}

@@ -1,0 +1,82 @@
+{
+  "round": 2,
+  "run": 30,
+  "caseId": "E001",
+  "userId": "eval-c2fdbb64-E001-67vc",
+  "query": "又失眠了……",
+  "poolSize": 3,
+  "poolPreview": [
+    "用户养的小橘猫最近经常在半夜跑酷",
+    "用户养了一只名叫小橘的橘猫",
+    "用户最近经常失眠，晚上睡不着"
+  ],
+  "results": [
+    {
+      "id": "a69df9ef-f66c-40c0-ad1c-40d0a02e2083",
+      "memory": "用户最近经常失眠，晚上睡不着",
+      "score": 0.72172356,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "0aaa839c-2445-4838-bb03-5cc6a9fede95",
+      "memory": "用户养的小橘猫最近经常在半夜跑酷",
+      "score": 0.45131412,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "5874c471-9dca-4780-b343-1c67b8486c5f",
+      "memory": "用户养了一只名叫小橘的橘猫",
+      "score": 0.41871208,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "a69df9ef-f66c-40c0-ad1c-40d0a02e2083",
+          "memory": "用户最近经常失眠，晚上睡不着",
+          "hash": "492b8decfae9509b1546de0e3aaf9988",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E001"
+          },
+          "score": 0.72172356,
+          "created_at": "2026-08-11T00:35:37.838868+00:00",
+          "updated_at": "2026-08-11T00:35:37.838868+00:00",
+          "user_id": "eval-c2fdbb64-E001-67vc",
+          "attributed_to": "user"
+        },
+        {
+          "id": "0aaa839c-2445-4838-bb03-5cc6a9fede95",
+          "memory": "用户养的小橘猫最近经常在半夜跑酷",
+          "hash": "7353303efe8ca7e1ed9b0efaf2b88f31",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E001"
+          },
+          "score": 0.45131412,
+          "created_at": "2026-08-11T00:35:37.838847+00:00",
+          "updated_at": "2026-08-11T00:35:37.838847+00:00",
+          "user_id": "eval-c2fdbb64-E001-67vc",
+          "attributed_to": "user"
+        },
+        {
+          "id": "5874c471-9dca-4780-b343-1c67b8486c5f",
+          "memory": "用户养了一只名叫小橘的橘猫",
+          "hash": "fe21409ccd3e81db8d5a814424b1849b",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E001"
+          },
+          "score": 0.41871208,
+          "created_at": "2026-08-11T00:35:31.943424+00:00",
+          "updated_at": "2026-08-11T00:35:31.943424+00:00",
+          "user_id": "eval-c2fdbb64-E001-67vc",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:10.617Z"
+}
