@@ -3,6 +3,8 @@
 > 状态：方案内容已获 Founder 批准（APPROVED，2026-08-12，附带沟通体验修订 must_add 5 条 + scope_add 2 文件）。
 > 本文件已由 Governance Builder 落盘为 `project-context/tasks/GOV-002/draft.md`（2026-08-12，分支 `codex/gov-002`）；
 > 内容以本文件及 Founder 批准裁决为准，实施范围以 §7 七文件落盘表与 Review 2 批准的实现计划为准。
+>
+> **M1 注释（2026-08-12 合并后修正）**：draft 内部章节编号与 `context-manifest.md` 实际落盘编号不同，以 context-manifest 为准（C1 统一版本 → context-manifest §3.4；W/B 告警阻断 → context-manifest §3.3；C1—C6 六要素 → context-manifest §3.1）。
 
 ```yaml
 required_reading:
