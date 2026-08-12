@@ -32,6 +32,7 @@
 | D-GOV-002-SCOPE | 上下文完整性护栏的正式范围、阻断/告警规则和执行模式 | APPROVED | DRAFT v1.2 已获 Founder 批准（2026-08-12，附带沟通体验修订 must_add 5 条 + scope_add 2 文件）；执行模式 delegated 已确认；Review 2 实现计划已批准（2026-08-12）。范围：C1—C6 上下文核验、W1—W3 告警、B1—B3 阻断、统一治理包版本纪律，落盘于 `context-manifest.md` §3.1—§3.4；沟通体验六条落盘于 `agent-response-protocol.md` §5.1 与 `templates/role-handoff-template.md`。不修改产品代码、TASK-006 状态、主线顺序；不实现本地 Gate Spike。任务执行事实：PR #14 已 Rebase 合并（`011168f`，2026-08-12），任务状态 MERGED；决策状态保持 APPROVED。合并后修正见 D-GOV-002-POSTMERGE | 全部 Agent / TASK-006 前置治理 | `tasks/GOV-002/draft.md`（v1.2）、`context-manifest.md`、`agent-response-protocol.md`、`templates/role-handoff-template.md`、`AGENTS.md`、`current-state.md` |
 | D-GOV-002-POSTMERGE | GOV-002 合并后修正（A 类遗留 + B 类展示结构） | APPROVED | Founder 2026-08-12 授权补充修复并重新复审：PR #14 已合并（`011168f`）后，Review 3 遗留 6 项（MA1 + M1—M4 + 状态同步）与 B 类交接卡展示结构变更（§0.3/§3.1/templates 3 文件）并入同一 PR（PR #15，分支 `codex/gov-002-post-merge`）；统一治理版本升级至 **2026-08-12.2**；不拆 GOV-003；PR #15 在 REVIEW_APPROVED 前禁止合并 | 全部 Agent / TASK-006 前置治理 | `tasks/GOV-002/draft.md`（v1.2）、`tasks/GOV-002/implementation-report.md`（§9）、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、`templates/role-handoff-template.md`、`context-manifest.md`、`current-state.md`、PR #15 |
 | D-T006-LOCAL-SPIKE | TASK-006 本地相关性 Gate Spike（第一轮 STOPPED/FAILED；第二轮候选范围 DRAFT v1.2 APPROVED） | **APPROVED（第二轮）** | 第一轮：Spike STOPPED/FAILED（停止条件 9），Founder 裁决 A，收尾 PR #17 已合并（`b975302`）。**第二轮（2026-08-12）**：公开方案调研完成（`spike-r2-research.md`，4 方案：bge-reranker/ColBERT/RRF/sentence-transformers）；**Founder 批准 DRAFT v1.2 候选范围并附带 8 项约束**（§0.2 逐条落盘：候选 A 仅批"本地 cross-encoder 重排"方向、不批具体模型；"零新增依赖"改待核验；Review 2 须含模型事实报告；模型确认前禁运行候选 A；候选 A 权重缺失只停候选 A、候选 B 独立继续，仅无任何候选可执行才整轮停；停止条件 6/10 语义统一；"冻结早于候选设计"指早于 Builder 实现/参数/调优；许可证按模型卡记录）；**执行模式已确认**：HANDOFF REQUIRED / persistent_session；规划 PR（DRAFT+调研+决策登记+状态同步）待建，合并后从 origin/main 创建 `feature/task-006-r2-spike`；合并前不创建实施分支、不唤醒 Builder、不开始实验 | TASK-006 | `tasks/TASK-006/spike-r2-candidate-draft.md`（v1.2+§0.2/§11.1）、`tasks/TASK-006/spike-r2-research.md`、`tasks/TASK-006/spike-stop-cr.md`、`current-state.md` |
+| D-T006-R3-SPIKE | TASK-006 第三轮「检索后相关性判断」对照 Spike（DRAFT v1.1） | **APPROVED** | Founder 2026-08-12 批准 DRAFT v1.1（经 v1.0 打回五项修订：任务拆分 / REST 事实定级 / 主·补充实验分离 / 完成度分档 / 样本规模与措辞）。方案 A 零新增依赖基线（mem0 2.0.13 阈值能力）/ 方案 B 本地 Cross-Encoder 重排（仅批方向，具体模型未批）/ 方案 C 外部大模型相关性裁判（效果上限对照，不代表获准生产）三方案对照；**主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端召回）分离、分表不混表**；**完成度分档**：三方案均获授权并运行＝完整对比；B/C 未获授权或不可执行＝部分证据，不得宣称第三轮完整通过，返回 Founder；冻结候选池规模与类别分布（明确相关≥8 / 明确无关≥8 / 容易混淆≥8 / 应返回零条≥3 场景 / 关键记忆≥5，总≥30）；关键记忆防漏独立门；不沿用 P95>200ms 淘汰旧前提。**未批准**：GOV-003（已拆独立分支 `feature/gov-003-register`）、任何模型下载、外部模型调用、真实数据外发、延迟目标。批准后先落盘 + 单一规划 PR；规划合入 main 后**单独提交执行模式判断**；此前禁建实施分支、禁唤醒 Builder、禁下载模型、禁外部调用 | TASK-006 | `tasks/TASK-006/spike-r3-candidate-draft.md`（v1.1）、规划 PR（待建） |
 
 ## 当前待 Founder 决策
 
@@ -41,6 +42,7 @@
 - ✅ **GOV-COMM-001 已执行完毕**（2026-08-12）：三项审批通过、独立复审 REVIEW_APPROVED（0/0/0）、已 Rebase 合并进 `origin/main`（`3412c3c`）；见 D-GOV-COMM-001；
 - ✅ **GOV-002 已合并，合并后修正待复审**（2026-08-12）：DRAFT v1.2 已批准、delegated 已确认、Review 2 已批准；PR #14 已合并（`011168f`）；合并后修正 PR #15 CHANGES_REQUESTED → 补充修复完成，待同一 Reviewer 复审；见 D-GOV-002-SCOPE 与 D-GOV-002-POSTMERGE；
 - ✅ **TASK-006 本地 Gate Spike 已裁决**（2026-08-12）：DRAFT v1.2 已批准并执行，Spike 停止（STOPPED/FAILED，停止条件 9）；**Founder 裁决选项 A**（接受失败结论；禁止补 H4 词表/重跑冻结 holdout/重启外部模型路线）；收尾 PR 待建并交独立 Reviewer；见 D-T006-LOCAL-SPIKE 与 CR-T006-SPIKE-STOP-01；
+- ✅ **TASK-006 第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 已批准**（2026-08-12）：三方案对照、主/补充实验分离、完成度分档、样本规模与关键记忆防漏门；模型下载、外部调用、真实数据外发、延迟目标均未批准；见 D-T006-R3-SPIKE；
 - TASK-005A 是否 CLOSED：合并后主线 QA 已通过，但当前保持 MERGED（QA_APPROVED_MAINLINE），不得自行改为生产 VERIFIED 或 CLOSED。
 
 ## 后续决策队列（当前不阻塞）
@@ -49,6 +51,9 @@
 |---|---|---|
 | D-T004-SEMANTICS | 是否采用"删除后关闭自动写入，仅显式重新记忆"的确定性产品语义 | TASK-004 满足重启条件时 |
 | D-T006-IMPLEMENT | 本地 Spike 通过后是否批准新的 Change Request 与产品实施计划 | Spike 证据通过独立 Review 后 |
+| D-T006-R3-EXEC | 第三轮 Spike 执行模式（delegated vs persistent_session） | 规划 PR 合入 main 并只读核验成功后，单独提交判断 |
+| D-T006-R3-B-MODEL | 方案 B 具体模型与下载授权 | 实施前，模型事实报告（名称/版本/哈希/许可证/缓存来源/接口/资源）产出后 |
+| D-T006-R3-C-EXT | 方案 C 外部调用与数据外发政策（含真实用户记忆是否外发） | 方案 C 实施前，单独 Change Request |
 | D-20CASE | 20 Case 的范围、样本结构和完成门 | TASK-007/005B 后 |
 | D-CRB | 是否建设指标配置、发布与历史兼容 | 固定模板真实阻塞版本决策时 |
 | D-MASTER-RETIRE | 是否删除远端 master | 新 main 合并、验证并保留归档引用后单独裁决 |
