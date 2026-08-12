@@ -160,24 +160,26 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 ## 18. 阶段 1 完成记录（2026-08-13）
 
-- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；Review 2 打回修订完成（v1.1，见下）；
-- **Review 2 打回修订**（CHANGES_REQUESTED，0 BLOCKER / 2 MAJOR / 1 MINOR，已全部修复）：MAJOR-1 交叉引用 S7→S6（实施计划 §S1 注 + 本交接包 §6 分阶段推进同步）；MAJOR-2 S4 运行范围明确为校准部分（~70%），holdout（~30%）只在 S6 一次性运行；MINOR-1 S6.3 holdout 种子立即清理 + S7 显式排除 holdout；
-- **未完成**：S0 预装检查及后续全部实测阶段（等待实施计划批准）；
-- **Git 状态**：实施计划 v1.1 + 交接文件已提交并推送，远端头 = 本地 = `8640ca7`（`origin/feature/task-006-r3-spike`）；
-- **下一窗口**：Founder/Reviewer Review 2（复审实施计划 v1.1）。
+- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；Review 2 打回修订完成（v1.1）；实施计划 v1.1 已获 Founder 批准；
+- **Review 2 打回修订**（CHANGES_REQUESTED，0 BLOCKER / 2 MAJOR / 1 MINOR，已全部修复）：MAJOR-1 交叉引用 S7→S6；MAJOR-2 S4 运行范围明确为校准部分（~70%），holdout（~30%）只在 S6 一次性运行；MINOR-1 S6.3 holdout 种子立即清理 + S7 显式排除 holdout；
+- **S0 预装检查已完成**（2026-08-13，见 `spike-r3/preflight-check.md`）：共享依赖 P1–P4、P6 全部通过；**方案 B 专属 P5-A 未通过**（无 reranker 权重，候选级停止）；**方案 C 未获外部调用授权**（P5-B 跳过）；docker diff 零产品代码改动；
+- **当前阻塞**：方案 B/C 均不可执行 → 按 DRAFT §8.0 只能形成部分证据，需 Founder 裁决是否补授权/缩小范围/停止（见 preflight-check.md 下一步）；
+- **未完成**：S1 冻结候选池及后续全部实测阶段（等待 Founder 裁决 B/C 授权）；
+- **Git 状态**：需 commit + push（新增 `spike-r3/preflight-check.md` + 交接文件更新）；
+- **下一窗口**：Founder（裁决方案 B/C 授权去向）。
 
-## 19. 下一窗口唤醒卡（Review 2 复审）
+## 19. 下一窗口唤醒卡（Founder 裁决 B/C 授权）
 
 先说人话（30 秒）：
-第三轮 Spike 实施计划已经按 Reviewer 打回意见修订完毕——调参只看校准数据、正式测试只运行一次、用完马上清理、测速不碰正式测试数据，三处问题都改了。现在需要 Reviewer 复审 v1.1，只核对这 2 MAJOR + 1 MINOR 是否落实，确认后 Builder 才能开始实际操作。你现在只需把这张卡发给 Reviewer。
+预装检查做完了：机器上的共享组件都正常，但方案 B 需要的重排模型权重本机没有（要下载得你单独批准），方案 C 要调外部模型（也得你单独批准）。现在只剩方案 A 能跑，它只能当"零依赖基线"。按规则我无权自己砍掉 B/C，所以现在把三个选择摆给你：只跑 A 拿部分证据、批准 B 下载、批准 C 外部调用、或者停掉这轮。
 
 直接复制给下一个角色（≤10 行短卡）：
 
-目标角色：Founder / Reviewer（Review 2 复审）
-本次唯一目标：复审 TASK-006 第三轮 Spike 实施计划 v1.1（仅核对 2 MAJOR + 1 MINOR 是否已落实）
-任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md（v1.1，§0 修订记录）
-分支：feature/task-006-r3-spike @ 8640ca7（worktree E:/task-006-r3-spike-worktree）
-允许执行：只读核验 + 复审/再打回实施计划
-禁止执行：任何实测、下载模型、外部调用
-验收：MAJOR-1（S7→S6 交叉引用）、MAJOR-2（S4=校准部分、S6=holdout 一次性）、MINOR-1（S6 种子立即清理 + S7 排除 holdout）均已落实；无遗留乱码/过期状态
-停止条件：仍有未落实问题 → 继续打回 Builder 修订
+目标角色：Founder（裁决方案 B/C 授权去向）
+本次唯一目标：裁决第三轮 Spike 方案 B/C 是否补授权（或只跑 A / 停止）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/preflight-check.md（下一步四选项）
+分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
+允许执行：Founder 裁决
+禁止执行：Builder 在裁决前不进入 S1、不下载、不外部调用
+验收：Founder 明确选择其一——只跑 A / 批 B 下载 / 批 C 外部调用 / 停止本轮
+停止条件：Builder 不得自行缩成单方案或跳过未授权方案
