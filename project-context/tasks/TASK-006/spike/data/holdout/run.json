@@ -1,0 +1,185 @@
+{
+  "doc_type": "holdout 一次性运行（步骤④）",
+  "frozen_mechanism": {
+    "candidate": "candidate-2",
+    "w1": 0.8,
+    "w2": 0.2,
+    "threshold": 0.05,
+    "theme_hash": "bd4cc70c84dca5a578f25aef6460d213a6b8fe9e4c3d414fab7780169b960a7b"
+  },
+  "holdout_hash": "307d266374f850e3abc282182e15b9f7c398f5417de4bd7326896cbea1ab0336",
+  "run_timestamp": "2026-08-12T01:32:58.538Z",
+  "audit_log": "E:\\task-006-spike-worktree\\project-context\\tasks\\TASK-006\\spike\\data\\audit\\network-holdout-1786498378364.log",
+  "scenario_results": [
+    {
+      "id": "H1",
+      "type": "多义词（苹果：水果 vs 公司）",
+      "userId": "eval-spike-h1-10bq",
+      "query": "今天买的苹果特别脆，吃完心情好",
+      "retrieved": 2,
+      "samples": [
+        {
+          "memory": "用户爱吃红富士苹果，每周买一箱放冰箱",
+          "mem0_score": 0.63990957,
+          "label": 1,
+          "score": 0.8642464985994398,
+          "comp": 1,
+          "lex": 0.3212324929971989,
+          "qCategory": "food",
+          "mCategory": "food",
+          "predicted": 1
+        },
+        {
+          "memory": "用户是苹果公司的产品经理，最近在筹备新品发布会",
+          "mem0_score": 0.5062748,
+          "label": 0,
+          "score": 0.04765367965367965,
+          "comp": 0,
+          "lex": 0.23826839826839824,
+          "qCategory": "food",
+          "mCategory": "other",
+          "predicted": 0
+        }
+      ],
+      "unknown_count": 0,
+      "f1": 1,
+      "precision": 1,
+      "recall": 1,
+      "margin": 0.8165928189457602,
+      "passes": true
+    },
+    {
+      "id": "H2",
+      "type": "他人属性（朋友分手）",
+      "userId": "eval-spike-h2-0rjc",
+      "query": "我最近总睡不好，有什么办法",
+      "retrieved": 2,
+      "samples": [
+        {
+          "memory": "用户最近睡眠质量差，尝试睡前喝热牛奶助眠",
+          "mem0_score": 0.68320096,
+          "label": 1,
+          "score": 0.8561305285716858,
+          "comp": 1,
+          "lex": 0.28065264285842895,
+          "qCategory": "health",
+          "mCategory": "health",
+          "predicted": 1
+        },
+        {
+          "memory": "朋友小张最近和交往三年的对象分手了，情绪很低落",
+          "mem0_score": 0.42949578,
+          "label": 0,
+          "score": 0.04079986983114282,
+          "comp": 0,
+          "lex": 0.20399934915571408,
+          "qCategory": "health",
+          "mCategory": "other",
+          "predicted": 0
+        }
+      ],
+      "unknown_count": 0,
+      "f1": 1,
+      "precision": 1,
+      "recall": 1,
+      "margin": 0.815330658740543,
+      "passes": true
+    },
+    {
+      "id": "H3",
+      "type": "语义隐式关联（失眠与猫半夜跑酷）",
+      "userId": "eval-spike-h3-8fqn",
+      "query": "晚上又没睡好，天亮才睡着",
+      "retrieved": 2,
+      "samples": [
+        {
+          "memory": "用户养了一只三花猫，猫一到半夜就在房间跑酷踩脸",
+          "mem0_score": 0.42941326,
+          "label": 1,
+          "score": 0.42822510822510823,
+          "comp": 0.5,
+          "lex": 0.14112554112554115,
+          "qCategory": "health",
+          "mCategory": "pet",
+          "predicted": 1
+        },
+        {
+          "memory": "用户最近在学做戚风蛋糕，周末烤了一个很成功",
+          "mem0_score": 0.3514281,
+          "label": 0,
+          "score": 0.028225108225108233,
+          "comp": 0,
+          "lex": 0.14112554112554115,
+          "qCategory": "health",
+          "mCategory": "hobby",
+          "predicted": 0
+        }
+      ],
+      "unknown_count": 0,
+      "f1": 1,
+      "precision": 1,
+      "recall": 1,
+      "margin": 0.4,
+      "passes": true
+    },
+    {
+      "id": "H4",
+      "type": "天气变体泛化（下雨）",
+      "userId": "eval-spike-h4-4vro",
+      "query": "外面下好大的雨，没法出门了",
+      "retrieved": 3,
+      "samples": [
+        {
+          "memory": "用户最近阴雨天膝盖会疼，老毛病了",
+          "mem0_score": 0.570462,
+          "label": 1,
+          "score": 0.04900349650349651,
+          "comp": 0,
+          "lex": 0.24501748251748254,
+          "qCategory": "other",
+          "mCategory": "other",
+          "predicted": 0
+        },
+        {
+          "memory": "用户周末报了一个咖啡拉花课程，正在练习",
+          "mem0_score": 0.3793878,
+          "label": 0,
+          "score": 0.03715863084284137,
+          "comp": 0,
+          "lex": 0.18579315421420686,
+          "qCategory": "other",
+          "mCategory": "hobby",
+          "predicted": 0
+        },
+        {
+          "memory": "用户家养了一只金毛犬，特别爱吃零食",
+          "mem0_score": 0.32395244,
+          "label": 0,
+          "score": 0.04037844508432744,
+          "comp": 0,
+          "lex": 0.20189222542163718,
+          "qCategory": "other",
+          "mCategory": "food",
+          "predicted": 0
+        }
+      ],
+      "unknown_count": 0,
+      "f1": 0,
+      "precision": 0,
+      "recall": 0,
+      "margin": 0.00862505141916907,
+      "passes": false
+    }
+  ],
+  "merged": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 1,
+    "precision": 1,
+    "recall": 0.75,
+    "f1": 0.8571428571428571,
+    "margin": 0.0013498168498168595,
+    "passes": false
+  },
+  "note": "一次性运行，运行后无任何调参；若 holdout 不达标不得回头调参重跑，直接标记候选失败并如实记录（DRAFT §5.3 步骤④）"
+}

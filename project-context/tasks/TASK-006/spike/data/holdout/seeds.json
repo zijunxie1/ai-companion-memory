@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-08-12T01:32:51.305Z",
+  "seeds": [
+    {
+      "scenario": "H1",
+      "userId": "eval-spike-h1-10bq",
+      "seedIndex": 0,
+      "text": "用户是苹果公司的产品经理，最近在筹备新品发布会",
+      "memoryId": "21dbf2f6-d494-4e20-abd8-688a77cd71d8",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H1",
+      "userId": "eval-spike-h1-10bq",
+      "seedIndex": 1,
+      "text": "用户爱吃红富士苹果，每周买一箱放冰箱",
+      "memoryId": "44c6c7ab-5641-4967-91e2-f427938f92d0",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H2",
+      "userId": "eval-spike-h2-0rjc",
+      "seedIndex": 0,
+      "text": "朋友小张最近和交往三年的对象分手了，情绪很低落",
+      "memoryId": "8a8ffab9-0134-447f-8ace-e649a4646f84",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H2",
+      "userId": "eval-spike-h2-0rjc",
+      "seedIndex": 1,
+      "text": "用户最近睡眠质量差，尝试睡前喝热牛奶助眠",
+      "memoryId": "c3ffad5c-8457-4f36-b52a-f059cd28e31b",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H3",
+      "userId": "eval-spike-h3-8fqn",
+      "seedIndex": 0,
+      "text": "用户养了一只三花猫，猫一到半夜就在房间跑酷踩脸",
+      "memoryId": "c41530c2-3600-401d-ba3d-7e084c43ebea",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H3",
+      "userId": "eval-spike-h3-8fqn",
+      "seedIndex": 1,
+      "text": "用户最近在学做戚风蛋糕，周末烤了一个很成功",
+      "memoryId": "8e613c81-43de-4af4-a97a-2eae43f46897",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 0,
+      "text": "用户家养了一只金毛犬，特别爱吃零食",
+      "memoryId": "cc3d3c68-076e-4bcb-859c-c5ed4f3925c5",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 1,
+      "text": "用户周末报了一个咖啡拉花课程，正在练习",
+      "memoryId": "bf3d8c11-e103-48cf-bd02-36329a32c3a0",
+      "addedCount": 1
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 2,
+      "text": "用户最近阴雨天膝盖会疼，老毛病了",
+      "memoryId": "ba2a17d3-7ec6-4670-bf2c-8d9730d60dc0",
+      "addedCount": 1
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "doc_type": "holdout 种子清理记录",
+  "cleanup_timestamp": "2026-08-12T01:33:36.558Z",
+  "audit_log": "E:\\task-006-spike-worktree\\project-context\\tasks\\TASK-006\\spike\\data\\audit\\network-cleanup-1786498413598.log",
+  "delete_results": [
+    {
+      "scenario": "H1",
+      "userId": "eval-spike-h1-10bq",
+      "seedIndex": 0,
+      "memoryId": "21dbf2f6-d494-4e20-abd8-688a77cd71d8",
+      "deleted": true
+    },
+    {
+      "scenario": "H1",
+      "userId": "eval-spike-h1-10bq",
+      "seedIndex": 1,
+      "memoryId": "44c6c7ab-5641-4967-91e2-f427938f92d0",
+      "deleted": true
+    },
+    {
+      "scenario": "H2",
+      "userId": "eval-spike-h2-0rjc",
+      "seedIndex": 0,
+      "memoryId": "8a8ffab9-0134-447f-8ace-e649a4646f84",
+      "deleted": true
+    },
+    {
+      "scenario": "H2",
+      "userId": "eval-spike-h2-0rjc",
+      "seedIndex": 1,
+      "memoryId": "c3ffad5c-8457-4f36-b52a-f059cd28e31b",
+      "deleted": true
+    },
+    {
+      "scenario": "H3",
+      "userId": "eval-spike-h3-8fqn",
+      "seedIndex": 0,
+      "memoryId": "c41530c2-3600-401d-ba3d-7e084c43ebea",
+      "deleted": true
+    },
+    {
+      "scenario": "H3",
+      "userId": "eval-spike-h3-8fqn",
+      "seedIndex": 1,
+      "memoryId": "8e613c81-43de-4af4-a97a-2eae43f46897",
+      "deleted": true
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 0,
+      "memoryId": "cc3d3c68-076e-4bcb-859c-c5ed4f3925c5",
+      "deleted": true
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 1,
+      "memoryId": "bf3d8c11-e103-48cf-bd02-36329a32c3a0",
+      "deleted": true
+    },
+    {
+      "scenario": "H4",
+      "userId": "eval-spike-h4-4vro",
+      "seedIndex": 2,
+      "memoryId": "ba2a17d3-7ec6-4670-bf2c-8d9730d60dc0",
+      "deleted": true
+    }
+  ],
+  "verify_cleared": [
+    {
+      "userId": "eval-spike-h1-10bq",
+      "remaining": 0,
+      "remainingTexts": []
+    },
+    {
+      "userId": "eval-spike-h2-0rjc",
+      "remaining": 0,
+      "remainingTexts": []
+    },
+    {
+      "userId": "eval-spike-h3-8fqn",
+      "remaining": 0,
+      "remainingTexts": []
+    },
+    {
+      "userId": "eval-spike-h4-4vro",
+      "remaining": 0,
+      "remainingTexts": []
+    }
+  ],
+  "all_cleared": true
+}
