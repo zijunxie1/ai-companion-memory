@@ -35,7 +35,7 @@ execution_mode: persistent_session（已确认）
 assigned_role: Builder（长期会话）
 assigned_session: TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike
 branch: feature/task-006-r3-spike
-plan_version: v1.0
+plan_version: v1.1
 author: Builder（TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike）
 date: 2026-08-13
 ```
@@ -483,7 +483,7 @@ mem0 Python API search(threshold=t)
 ### 11.3 Change Request 触发条件
 
 - 需要超出 DRAFT v1.1 批准范围的改动；
-- 方案 B 需要下载新模型（未批�权重 → CR 请求 Founder 批准）；
+- 方案 B 需要下载新模型（未批准权重 → CR 请求 Founder 批准）；
 - 方案 C 需要外部调用（未批准 → 独立 CR + Founder 批准外部调用与数据外发政策）；
 - 需要扩大候选机制范围（新增方案须 CR）；
 - 实验结果不收敛但需要继续调整。

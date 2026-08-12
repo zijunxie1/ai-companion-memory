@@ -163,21 +163,21 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 - **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；Review 2 打回修订完成（v1.1，见下）；
 - **Review 2 打回修订**（CHANGES_REQUESTED，0 BLOCKER / 2 MAJOR / 1 MINOR，已全部修复）：MAJOR-1 交叉引用 S7→S6（实施计划 §S1 注 + 本交接包 §6 分阶段推进同步）；MAJOR-2 S4 运行范围明确为校准部分（~70%），holdout（~30%）只在 S6 一次性运行；MINOR-1 S6.3 holdout 种子立即清理 + S7 显式排除 holdout；
 - **未完成**：S0 预装检查及后续全部实测阶段（等待实施计划批准）；
-- **Git 状态**：实施计划 v1.1 + 交接文件已修改；需 commit + push；
+- **Git 状态**：实施计划 v1.1 + 交接文件已提交并推送，远端头 = 本地 = `8640ca7`（`origin/feature/task-006-r3-spike`）；
 - **下一窗口**：Founder/Reviewer Review 2（复审实施计划 v1.1）。
 
-## 19. 下一窗口唤醒卡（Review 2）
+## 19. 下一窗口唤醒卡（Review 2 复审）
 
 先说人话（30 秒）：
-第三轮 Spike 的 Builder 已经完成了实施计划文档。这份计划详细写了三种方案怎么测、按什么顺序、用什么指标，但还没做任何实测。现在需要你或 Reviewer 审查这份计划，确认没问题后 Builder 才能开始实际操作。你现在只需要看一眼计划并决定是否批准。
+第三轮 Spike 实施计划已经按 Reviewer 打回意见修订完毕——调参只看校准数据、正式测试只运行一次、用完马上清理、测速不碰正式测试数据，三处问题都改了。现在需要 Reviewer 复审 v1.1，只核对这 2 MAJOR + 1 MINOR 是否落实，确认后 Builder 才能开始实际操作。你现在只需把这张卡发给 Reviewer。
 
 直接复制给下一个角色（≤10 行短卡）：
 
-目标角色：Founder / Reviewer（Review 2）
-本次唯一目标：审批 TASK-006 第三轮 Spike 实施计划（implementation-plan.md v1.0）
-任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md
-分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
-允许执行：只读核验 + 审批/打回实施计划
+目标角色：Founder / Reviewer（Review 2 复审）
+本次唯一目标：复审 TASK-006 第三轮 Spike 实施计划 v1.1（仅核对 2 MAJOR + 1 MINOR 是否已落实）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md（v1.1，§0 修订记录）
+分支：feature/task-006-r3-spike @ 8640ca7（worktree E:/task-006-r3-spike-worktree）
+允许执行：只读核验 + 复审/再打回实施计划
 禁止执行：任何实测、下载模型、外部调用
-验收：实施计划覆盖 DRAFT §6 全部要求（主/补分表、三方案评估顺序、冻结候选池规模、模型事实报告要求、延迟/资源/费用测量方案、验收逐项对标）
-停止条件：实施计划不完整或与 DRAFT v1.1 冲突 → 打回 Builder 修订
+验收：MAJOR-1（S7→S6 交叉引用）、MAJOR-2（S4=校准部分、S6=holdout 一次性）、MINOR-1（S6 种子立即清理 + S7 排除 holdout）均已落实；无遗留乱码/过期状态
+停止条件：仍有未落实问题 → 继续打回 Builder 修订
