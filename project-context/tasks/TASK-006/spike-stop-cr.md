@@ -20,12 +20,16 @@ required_reading:
 doc_type: Change Request / 决策包（八类升级事项第 5 条：引入新架构/候选范围重裁；停止条件 9 触发）
 task_id: TASK-006（内部 Spike：TASK-006-SPIKE-LOCAL-GATE）
 cr_id: CR-T006-SPIKE-STOP-01
-status: NEEDS_DECISION（等待 Founder 裁决）
+status: DECIDED（Founder 2026-08-12 裁决：选项 A——接受第一轮 Spike 失败结论；禁止补 H4 词表、重跑冻结 holdout、重启外部模型路线）
 prepared_by: operational-chief-2026-08-12-01（执行 Chief，依据 Builder 停止报告 + 证据核验）
 prepared_date: 2026-08-12
 stop_condition_triggered: DRAFT v1.2 §9 停止条件 9（两个正式候选都失败）
-decision_scope: 候选范围/路线重裁（是否再开第二轮 Spike、调整候选机制、或改路线）
+decision_scope: 候选范围/路线重裁（第二轮 Spike 候选范围 DRAFT 在收尾 PR 合入后另行起草）
 founder_options: 3（A 接受失败/重裁范围 / B 豁免冻结补词重跑 / C 回到外部 Gate 离线路线重议）
+founder_decision: A（2026-08-12）——接受失败结论；禁止补 H4 词表、重跑冻结 holdout、重启外部模型路线
+spike_status: STOPPED/FAILED（两候选均未通过 §8 全部门；**不等于 TASK-006 失败或完成**；TASK-006 保持 APPROVED）
+closeout_pr: 单一收尾 PR（待建；状态写 STOPPED/FAILED；交独立 Reviewer 核对证据/冻结纪律/清理结果/零产品改动）
+next_step: 收尾 PR 由 Founder 合并后，执行 Chief 再起草第二轮 Spike 候选范围 DRAFT（针对词法不可分与手工词表覆盖不足提出新机制，**不预先选定方案**）；新 DRAFT 批准前不唤醒 Builder、不修改产品/评测规则
 ```
 
 ---
@@ -72,13 +76,15 @@ founder_options: 3（A 接受失败/重裁范围 / B 豁免冻结补词重跑 / 
 
 **执行 Chief 推荐：A。** 依据：Spike 的产出是诚实证据而非可行方案；继续硬调会把 Spike 变成过拟合表演；候选 2 的失败点（词表缺口）同时暴露了"手工主题体系覆盖不完"这一可改进方向，为下一轮候选设计提供了明确输入。
 
-## 6. 需要 Founder 决定什么（唯一问题）
+## 6. Founder 裁决记录（2026-08-12，选项 A）
 
-**是否接受 Spike 失败结论，并按选项 A（或 B/C）裁决 TASK-006 候选范围/路线？**
+- **Founder 裁决：A——接受第一轮本地 Gate Spike 失败结论**；
+- **禁止**：补 H4 词表、重跑冻结 holdout、重启外部模型路线；
+- **收尾**：推送本地完整证据 + 停止报告 + 本裁决记录（不得误报远端状态）；创建**单一收尾 PR**，状态写 **STOPPED/FAILED**（**不得写成 TASK-006 已失败或已完成**）；交独立 Reviewer 核对证据、冻结纪律、清理结果及零产品改动；
+- **下一步（收尾 PR 由 Founder 合并后）**：执行 Chief 起草第二轮 Spike 候选范围 DRAFT——针对**词法不可分**与**手工词表覆盖不足**提出新机制，**不得预先选定方案**；新 DRAFT 批准前不唤醒 Builder、不修改产品/评测规则；
+- 在收尾 PR 合并前：不开启第二轮 Spike、不调整候选范围、不修改产品代码/评测规则、不重新启用已冻结机制调参。
 
-- 回复"接受 A"→ 执行 Chief 依据本 CR 起草第二轮 Spike 候选范围 DRAFT（新机制方向、新冻结纪律），另行 Review 与批准；
-- 回复"B"/"C"→ 按对应选项流程处理（B 需明确豁免冻结纪律；C 需重出决策包）；
-- 在 Founder 裁决前：不开启第二轮 Spike、不调整候选范围、不修改产品代码/评测规则、不重新启用已冻结机制调参。
+> 裁决前的"唯一问题"已由 Founder 于 2026-08-12 以选项 A 答复，本 CR 关闭（DECIDED）。
 
 ## 7. 证据索引（全部入库，可复现）
 
