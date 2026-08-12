@@ -1,0 +1,66 @@
+{
+  "doc_type": "候选 2 主题体系（theme-system）",
+  "version": "v1.0",
+  "basis": "仅使用 8 Case 校准集文本（E001-E005 检索样本）与通用主题知识人工归纳；禁止使用 holdout 场景内容（DRAFT v1.2 §3 候选 2 / §5.3 步骤①）",
+  "categories": [
+    {
+      "id": "pet",
+      "name": "宠物",
+      "keywords": ["猫", "橘猫", "小橘", "跑酷", "半夜", "宠物", "狗", "动物"],
+      "source": "校准集文本（猫/橘猫/小橘/跑酷/半夜）+ 通用知识（宠物/狗/动物）"
+    },
+    {
+      "id": "health",
+      "name": "健康/睡眠",
+      "keywords": ["失眠", "睡不着", "睡眠", "入睡", "睡"],
+      "source": "校准集文本（失眠/睡不着/睡眠/入睡/睡）"
+    },
+    {
+      "id": "hobby",
+      "name": "兴趣/技能",
+      "keywords": ["吉他", "学习", "学", "练习", "课程", "兴趣"],
+      "source": "校准集文本（吉他/学习/学）+ 通用知识（练习/课程/兴趣）"
+    },
+    {
+      "id": "comm",
+      "name": "沟通/提问偏好",
+      "keywords": ["问", "解释", "为什么", "提问", "回答", "追问"],
+      "source": "校准集文本（问/解释/为什么）+ 通用知识（提问/回答/追问）"
+    },
+    {
+      "id": "weather",
+      "name": "天气/日常",
+      "keywords": ["天气", "今天", "不错"],
+      "source": "校准集文本（天气/今天/不错）。注意：不包含『雨/下雨/阴』等未见于校准集的天气表达（泛化由 holdout 验证）"
+    },
+    {
+      "id": "food",
+      "name": "饮食/消费",
+      "keywords": ["吃", "买", "水果", "食物"],
+      "source": "通用主题知识（饮食/消费类通用词，服务多义词等泛化场景）"
+    },
+    {
+      "id": "other",
+      "name": "其他（兜底）",
+      "keywords": [],
+      "source": "无词表命中的文本归类为其他；其他类别不产生相关性信号（与其他类目相容度=0，包括自身）"
+    }
+  ],
+  "compat_matrix": {
+    "pet":    { "pet": 1, "health": 0.5, "hobby": 0, "comm": 0, "weather": 0, "food": 0, "other": 0 },
+    "health": { "pet": 0.5, "health": 1, "hobby": 0, "comm": 0, "weather": 0, "food": 0, "other": 0 },
+    "hobby":  { "pet": 0, "health": 0, "hobby": 1, "comm": 0, "weather": 0, "food": 0, "other": 0 },
+    "comm":   { "pet": 0, "health": 0, "hobby": 0, "comm": 1, "weather": 0, "food": 0, "other": 0 },
+    "weather":{ "pet": 0, "health": 0, "hobby": 0, "comm": 0, "weather": 1, "food": 0, "other": 0 },
+    "food":   { "pet": 0, "health": 0, "hobby": 0, "comm": 0, "weather": 0, "food": 1, "other": 0 },
+    "other":  { "pet": 0, "health": 0, "hobby": 0, "comm": 0, "weather": 0, "food": 0, "other": 0 }
+  },
+  "matrix_rationale": {
+    "pet_x_health_0.5": "宠物行为可能影响主人睡眠（通用知识）；校准集 E001 验证：『又失眠了……』召回橘猫半夜跑酷记忆被标为相关",
+    "weather_x_all_0": "天气与其余类别无关联（通用知识）；校准集 E004 验证：天气话题下宠物/健康/兴趣记忆全部无关",
+    "other_x_other_0": "无主题信息时不产生相关性信号（保守；防止无命中文本对误判为相关）",
+    "note": "矩阵与权重仅可在校准阶段（步骤②）于校准集上调整；校准完成即冻结（步骤③）"
+  },
+  "weights_initial": { "w1": 0.7, "w2": 0.3 },
+  "score_formula": "score = w1 * comp + w2 * lex（comp∈{0,0.5,1}；lex∈[0,1] 为与候选 1 同源的词法统计特征均值）"
+}
