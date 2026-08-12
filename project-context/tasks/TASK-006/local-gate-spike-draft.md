@@ -21,10 +21,10 @@ required_reading:
   - v2/app/src/lib/memory-config.ts
   - v2/app/src/lib/eval-program-rules.ts（E001/E004 程序判定）
   - v2/app/src/app/api/chat/route.ts（召回与写入产品路径）
-doc_type: 任务 DRAFT（独立 Spike 草案；**未批准**——本文件不构成任何实施授权）
+doc_type: 任务 DRAFT（独立 Spike 草案；**已批准**——Founder 2026-08-12 批准 DRAFT v1.2；任务方案 Review 通过；执行模式门待确认）
 task_id: TASK-006（内部 Spike；不改变 TASK-006 状态）
 spike_id: TASK-006-SPIKE-LOCAL-GATE
-status: DRAFT（等待 Founder Review 1 再裁）
+status: APPROVED（Founder 2026-08-12 批准 DRAFT v1.2；任务方案 Review 通过；执行模式门待确认——确认前不唤醒 Builder、不创建实施分支、不开始 Spike）
 draft_version: v1.2（2026-08-12；v1.1 + Founder Review 1 第二轮 CHANGES_REQUESTED 五项修订：至少一个候选通过即可 / Spearman 降级为"非冗余诊断" / 候选 2 机制不得按 holdout 设计且冻结顺序明确 / 增量算法修正 / Reviewer 核对结论归属修正）
 drafter: operational-chief-2026-08-12-01（执行 Chief）
 draft_date: 2026-08-12
@@ -262,13 +262,16 @@ state_constraint: TASK-006 保持 APPROVED；TASK-004 保持 PAUSED；不启动 
 
 > 本窗口只提出建议；**执行模式必须在 DRAFT 批准后单独确认**（Founder Review 1 第 8 条），本审批卡不询问执行模式。
 
-## 11. 待 Founder 裁决事项（Review 1 重新审批）
+## 11. Founder 批准记录（Review 1 通过，2026-08-12）
 
-1. **是否批准 DRAFT v1.2**（候选两机制含非冗余诊断与可执行定义、至少一个候选通过即形成结论、限时 5 工作日/3 轮、四步冻结顺序（holdout 冻结 → 校准 → 机制冻结 → holdout 一次性运行）、延迟增量 P95 ≤ 200ms / 总预算 ≤ 1000ms（处理组−基线口径）、资源 ≤ 512MB、校准+holdout 双 F1 ≥ 0.9 且分离边际 > 0.1、合成数据与 loopback-only 网络、预装检查、证据落盘 `TASK-006/spike/`）。
-
-> 执行模式确认、Spike 分支创建等事项在 DRAFT 批准后另行裁决。
+- Founder 于 2026-08-12 批准 **DRAFT v1.2**（任务方案 Review 通过）：候选两机制（含非冗余诊断与可执行定义）、至少一个候选通过即形成"存在可行候选"结论、限时 5 工作日/3 轮、四步冻结顺序（holdout 冻结 → 校准 → 机制冻结 → holdout 一次性运行）、延迟增量 P95 ≤ 200ms / 总预算 ≤ 1000ms（处理组−基线口径）、资源 ≤ 512MB、校准+holdout 双 F1 ≥ 0.9 且分离边际 > 0.1、合成数据与 loopback-only 网络、预装检查、证据落盘 `TASK-006/spike/`，随批准生效；
+- 本任务状态 = **APPROVED**（D-T006-LOCAL-SPIKE）；
+- **执行模式门待确认**：确认前不唤醒 Builder、不创建实施分支（`feature/task-006-local-gate-spike`）、不开始 Spike；
+- 执行模式确认后：Spike 实施从 origin/main 新建独立分支执行；本 DRAFT 分支仅承载 DRAFT 与批准事实。
 
 ## 12. 下一交接
 
-- Founder 批准 DRAFT v1.2（Review 1）→ 执行模式门单独确认 → 唤醒长期 Builder 会话（先交实施计划，含测量脚本设计与候选评估顺序，再执行）；
-- 本窗口在 Founder 裁决前停止，不自行进入实施计划或 Builder 阶段。
+- **下一步 = 执行模式确认卡**（单独提交，等待 Founder 确认）；
+- Founder 确认执行模式 → 唤醒长期 Builder 会话（先交实施计划，含测量脚本设计与候选评估顺序，再执行）；
+- 执行模式确认前：不唤醒 Builder、不创建实施分支、不开始 Spike；
+- 本窗口在 Founder 确认执行模式前停止。
