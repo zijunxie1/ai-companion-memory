@@ -40,7 +40,7 @@ scope: 本地召回重排（reranking）、相关性过滤、多信号融合；�
 | 依赖与模型 | 需要 cross-encoder 模型权重（本地缓存）；**fastembed（Qdrant）原生支持 `TextCrossEncoder.rerank(query, documents)`**——项目 mem0-server 已用 fastembed，推理能力可能在本地依赖链中；**但 reranker 权重 ≠ 已缓存的 bge-small-zh-v1.5 embedding 权重，是否已缓存属预装检查项** |
 | 延迟资源 | base 版"lightweight, fast inference"（官方）；CPU 可跑；确切毫秒数需预装检查后实测（DRAFT §6 口径） |
 | 数据边界 | ✅ 无外发；输入仅本地合成数据 |
-| 可复用部分 | 思路可直接作为候选 A 的成熟替代：**本地 cross-encoder 相关性重排**；fastembed 接口零新增依赖（权重预装核验后） |
+| 可复用部分 | 思路可作为候选 A 的方向参考：**本地 cross-encoder 相关性重排**；fastembed 接口与 reranker 权重是否可用/已缓存，**均属待预装检查核验的事实**（§5.4 P5），不得表述为既成事实 |
 
 ### 方案 2：ColBERT / ColBERTv2（Stanford）—— late-interaction 多向量检索
 
@@ -85,10 +85,10 @@ scope: 本地召回重排（reranking）、相关性过滤、多信号融合；�
 
 | 判断项 | 结论 | 依据 |
 |---|---|---|
-| 候选 A 处理 | **重新定义**：从"手搓多维交互特征"改为**本地 cross-encoder 相关性重排（bge-reranker 系，经 fastembed TextCrossEncoder 本地推理）** | 方案 1/4：cross-encoder 重排是成熟标准做法，直接输出相关性分数，判别力强于手搓交互特征；fastembed 原生支持 → 零新增依赖（权重预装核验后）；保留非冗余诊断 + "单一余弦=冗余基线"纪律 |
+| 候选 A 处理 | **重新定义**：从"手搓多维交互特征"改为**本地 cross-encoder 相关性重排（bge-reranker 系方向，经 fastembed TextCrossEncoder 本地推理）** | 方案 1/4：cross-encoder 重排是成熟标准做法，直接输出相关性分数，判别力强于手搓交互特征；fastembed 接口与 reranker 权重是否可用/已缓存，**均属待预装检查核验的事实**（§5.4 P5），不得表述为既成事实；保留非冗余诊断 + "单一余弦=冗余基线"纪律 |
 | 候选 B 处理 | **保留方向、收敛实现**：保留"数据驱动主题空间（k-means 原型聚类）"为唯一方法（针对 R2 不依赖手工词表）；**不引入 RRF 或 ColBERT 作为第二实现** | 方案 2/3：ColBERT 需新模型新索引（违反"仅已预装"）；RRF 是融合层而非词表替代，且 Founder Review 1 第 2 条要求候选 B 单一方法；k-means 数据驱动空间对"未见过表达"（如"下雨"）经 embedding 自然映射，不因词表未命中归零 |
 | 候选 A/B 独立性 | 不变 | 各自适用门独立；A 降级不影响 B（DRAFT v1.1 §8） |
-| 新依赖/模型 | **不引入**：候选 A 的 reranker 权重属"预装检查"项——**若未缓存则停止并提交依赖裁决**，不自行下载；候选 B 用现有 fastembed embedding | DRAFT §5.4 预装检查纪律 + Founder 裁决 A"不下载不安装" |
+| 新依赖/模型 | **不下载、不安装、不替换**（约束 4/5）：候选 A 的 reranker 权重属"预装检查"项——**是否已缓存属待核验事实**，若未缓存则只停止候选 A 并提交依赖裁决，不自行下载；候选 B 依赖的 fastembed embedding 能力是否可用同样待预装检查核验 | DRAFT §5.4 预装检查纪律 + Founder 裁决 A"不下载不安装" |
 | 数据边界 | 不变 | 仅合成数据 + loopback + 零外发 |
 
 ## 4. 证据来源清单（全部只读抓取，2026-08-12）
