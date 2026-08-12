@@ -158,3 +158,25 @@ E004 缺陷仍存在（Run #28 天气话题召回无关记忆）。第一轮两�
 - **阶段 2（Spike）完成后**：Builder → 独立 Reviewer（Review 3：核验冻结记录/提交历史/模型事实报告/验收逐项/零产品改动）；
 - Reviewer 输出结论后返回 Founder 裁决（Spike 是否通过、是否进入 TASK-006 新 CR 与实施计划）；
 - 本交接包由 Founder 人工转发唤醒 Builder；Builder 完成后按角色交接规则返回。
+
+---
+
+## 18. 启动核验记录与窗口回复约束（Builder 窗口，2026-08-12）
+
+**本轮启动核验（完整版落盘于此；聊天不再展开）**：
+- 身份：TASK-006｜Builder｜第二轮本地相关性 Gate Spike（第二轮 Builder，新干净窗口；本窗口固定身份，不切换 Chief/Reviewer）
+- 统一规则版本（C1）：2026-08-12.2（worktree AGENTS.md 头部实测）
+- 正式主线（C3）：origin/main @ `9ab87f2`（`git ls-remote origin main` 实测 = 本地 origin/main；master `064f5b6` 已并入 main 归档）
+- 上下文来源（C6）：正式主线文件（worktree `E:\task-006-r2-spike-worktree`）+ 远端 ls-remote/rev-parse + 任务目录文件；未依赖聊天摘要
+- 分支/工作区：`feature/task-006-r2-spike` @ `e9a9de0`（`dcb7646..e9a9de0` 已推送 origin），worktree 干净
+- 允许：仅修正 required_reading 漏列 product.md（已完成）；提交/推送 spike 分支
+- 禁止：预装检查、确定候选 A 模型、下载安装、写脚本、建 holdout、任何实测、改产品代码、合并
+- 告警：W1 current-state.md 主线记录（`011168f`）滞后于实测 `9ab87f2`（Chief 待同步）；W2 历史 feature/task-004-spike 脏工作区未触碰
+- 结论：可以继续（阶段 1 收尾，等待 Review 2）；Founder 批准前不进入阶段 2
+
+**窗口回复约束（Founder 2026-08-12 指令，本窗口强制）**：
+1. 本窗口固定身份 TASK-006 第二轮 Builder，不得切换为 Chief 或 Reviewer；
+2. 启动核验完整版写入本交接文件，聊天只报告：身份、正式基线、是否可继续；
+3. 阶段完成回复只允许：3 句大白话 + 底部最多 6 行纯文本短卡；
+4. 整条回复不超过 500 字；每行只写一个字段，不展开文件清单、Git 证据或合规自检；
+5. 需要执行 Chief 接手时只生成短卡，由 Founder 转发；本窗口不自行切换角色。
