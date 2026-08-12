@@ -5,7 +5,7 @@ freeze_type: mechanism
 candidate: candidate-2（本地主题类别 Gate）
 version: v1.0
 freeze_timestamp: 2026-08-12T09:27:57+08:00（UTC 2026-08-12T01:27:57Z）
-git_commit: <S6 提交号（写入后回填）>
+git_commit: 7e6f414（S6 机制冻结提交；theme-system.json 与校准证据同提交入库）
 score_function_hash: sha256=bd4cc70c84dca5a578f25aef6460d213a6b8fe9e4c3d414fab7780169b960a7b（theme-system.json）
 score_function: score = w1·comp + w2·lex（theme-engine.mjs themeScore；lex = features.mjs f1—f5 均值）
 parameters:
