@@ -1,0 +1,82 @@
+{
+  "round": 3,
+  "run": 29,
+  "caseId": "E004",
+  "userId": "eval-af5b9054-E004-ilqn",
+  "query": "今天天气不错",
+  "poolSize": 3,
+  "poolPreview": [
+    "用户于2026年8月前后经常失眠，晚上难以入睡",
+    "用户于2026年8月前后开始学习吉他",
+    "用户养了一只橘猫，名叫小橘，最近常在半夜跑酷"
+  ],
+  "results": [
+    {
+      "id": "195e5879-7b75-46c5-ab75-dadd3c58acc8",
+      "memory": "用户于2026年8月前后经常失眠，晚上难以入睡",
+      "score": 0.4161354,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "aab46890-680a-4946-81ff-f3c0154f9e05",
+      "memory": "用户养了一只橘猫，名叫小橘，最近常在半夜跑酷",
+      "score": 0.3596266,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "9235e42b-db85-4bdb-a9b2-83427cca8fc0",
+      "memory": "用户于2026年8月前后开始学习吉他",
+      "score": 0.32101393,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "195e5879-7b75-46c5-ab75-dadd3c58acc8",
+          "memory": "用户于2026年8月前后经常失眠，晚上难以入睡",
+          "hash": "33edc3b808411e5ce842afd9f37f4b01",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E004"
+          },
+          "score": 0.4161354,
+          "created_at": "2026-08-11T00:32:43.726724+00:00",
+          "updated_at": "2026-08-11T00:32:43.726724+00:00",
+          "user_id": "eval-af5b9054-E004-ilqn",
+          "attributed_to": "user"
+        },
+        {
+          "id": "aab46890-680a-4946-81ff-f3c0154f9e05",
+          "memory": "用户养了一只橘猫，名叫小橘，最近常在半夜跑酷",
+          "hash": "fecf790133f5ce31a9d04303b5db329b",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E004"
+          },
+          "score": 0.3596266,
+          "created_at": "2026-08-11T00:32:24.071773+00:00",
+          "updated_at": "2026-08-11T00:32:24.071773+00:00",
+          "user_id": "eval-af5b9054-E004-ilqn",
+          "attributed_to": "user"
+        },
+        {
+          "id": "9235e42b-db85-4bdb-a9b2-83427cca8fc0",
+          "memory": "用户于2026年8月前后开始学习吉他",
+          "hash": "b2687187666b91dfb533672923a89ad5",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E004"
+          },
+          "score": 0.32101393,
+          "created_at": "2026-08-11T00:32:30.008297+00:00",
+          "updated_at": "2026-08-11T00:32:30.008297+00:00",
+          "user_id": "eval-af5b9054-E004-ilqn",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:11.390Z"
+}

@@ -1,0 +1,61 @@
+{
+  "round": 2,
+  "run": 30,
+  "caseId": "E003",
+  "userId": "eval-c2fdbb64-E003-3lij",
+  "query": "我家猫叫什么来着",
+  "poolSize": 2,
+  "poolPreview": [
+    "用户养了一只橘猫，名字叫小橘",
+    "用户家的橘猫小橘最近经常半夜跑酷，晚上精力旺盛地在家里四处跑动"
+  ],
+  "results": [
+    {
+      "id": "c5108e9d-939b-4b11-957b-ab1075afa51b",
+      "memory": "用户养了一只橘猫，名字叫小橘",
+      "score": 0.5853259,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "e35a75f0-2a7a-4d16-b341-4e5f3203d7d6",
+      "memory": "用户家的橘猫小橘最近经常半夜跑酷，晚上精力旺盛地在家里四处跑动",
+      "score": 0.44384214,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "c5108e9d-939b-4b11-957b-ab1075afa51b",
+          "memory": "用户养了一只橘猫，名字叫小橘",
+          "hash": "75b379358c65b29539370064eafb2054",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E003"
+          },
+          "score": 0.5853259,
+          "created_at": "2026-08-11T00:36:41.794165+00:00",
+          "updated_at": "2026-08-11T00:36:41.794165+00:00",
+          "user_id": "eval-c2fdbb64-E003-3lij",
+          "attributed_to": "user"
+        },
+        {
+          "id": "e35a75f0-2a7a-4d16-b341-4e5f3203d7d6",
+          "memory": "用户家的橘猫小橘最近经常半夜跑酷，晚上精力旺盛地在家里四处跑动",
+          "hash": "3fe4c777a9ad5cad99b8e3e327cf48e1",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E003"
+          },
+          "score": 0.44384214,
+          "created_at": "2026-08-11T00:36:41.794188+00:00",
+          "updated_at": "2026-08-11T00:36:41.794188+00:00",
+          "user_id": "eval-c2fdbb64-E003-3lij",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:10.765Z"
+}

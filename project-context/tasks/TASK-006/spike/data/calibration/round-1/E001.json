@@ -1,0 +1,61 @@
+{
+  "round": 1,
+  "run": 31,
+  "caseId": "E001",
+  "userId": "eval-5dcf9e52-E001-asfz",
+  "query": "又失眠了……",
+  "poolSize": 2,
+  "poolPreview": [
+    "用户养了一只橘猫，名叫小橘",
+    "用户最近（2026年8月前后）经常失眠，晚上难以入睡"
+  ],
+  "results": [
+    {
+      "id": "cdd89cd7-8aa8-4af6-a165-23b658843042",
+      "memory": "用户最近（2026年8月前后）经常失眠，晚上难以入睡",
+      "score": 0.69835734,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    },
+    {
+      "id": "2b91f79c-58ef-4e24-abe1-26369bb88197",
+      "memory": "用户养了一只橘猫，名叫小橘",
+      "score": 0.40345278,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "cdd89cd7-8aa8-4af6-a165-23b658843042",
+          "memory": "用户最近（2026年8月前后）经常失眠，晚上难以入睡",
+          "hash": "9983ef689139ecf803eea04c59bceb55",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E001"
+          },
+          "score": 0.69835734,
+          "created_at": "2026-08-11T00:40:47.515418+00:00",
+          "updated_at": "2026-08-11T00:40:47.515418+00:00",
+          "user_id": "eval-5dcf9e52-E001-asfz",
+          "attributed_to": "user"
+        },
+        {
+          "id": "2b91f79c-58ef-4e24-abe1-26369bb88197",
+          "memory": "用户养了一只橘猫，名叫小橘",
+          "hash": "d3f74603554b138a166eb18362523bd4",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E001"
+          },
+          "score": 0.40345278,
+          "created_at": "2026-08-11T00:40:42.033133+00:00",
+          "updated_at": "2026-08-11T00:40:42.033133+00:00",
+          "user_id": "eval-5dcf9e52-E001-asfz",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:10.138Z"
+}

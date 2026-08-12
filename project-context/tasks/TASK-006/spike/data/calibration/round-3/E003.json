@@ -1,0 +1,40 @@
+{
+  "round": 3,
+  "run": 29,
+  "caseId": "E003",
+  "userId": "eval-af5b9054-E003-4q48",
+  "query": "我家猫叫什么来着",
+  "poolSize": 1,
+  "poolPreview": [
+    "用户养了一只橘猫，名字叫小橘"
+  ],
+  "results": [
+    {
+      "id": "ff3269db-d767-45b3-bc9e-2a305b672679",
+      "memory": "用户养了一只橘猫，名字叫小橘",
+      "score": 0.5853259,
+      "raw_keys": "id,memory,hash,metadata,score,created_at,updated_at,user_id,attributed_to"
+    }
+  ],
+  "raw_response": {
+    "memories": {
+      "results": [
+        {
+          "id": "ff3269db-d767-45b3-bc9e-2a305b672679",
+          "memory": "用户养了一只橘猫，名字叫小橘",
+          "hash": "75b379358c65b29539370064eafb2054",
+          "metadata": {
+            "source": "eval-seed",
+            "case_id": "E003"
+          },
+          "score": 0.5853259,
+          "created_at": "2026-08-11T00:31:58.110132+00:00",
+          "updated_at": "2026-08-11T00:31:58.110132+00:00",
+          "user_id": "eval-af5b9054-E003-4q48",
+          "attributed_to": "user"
+        }
+      ]
+    }
+  },
+  "ts": "2026-08-12T01:22:11.229Z"
+}
