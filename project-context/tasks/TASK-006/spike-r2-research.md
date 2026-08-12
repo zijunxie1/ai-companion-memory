@@ -36,7 +36,7 @@ scope: 本地召回重排（reranking）、相关性过滤、多信号融合；�
 | 问题匹配度 | **高**：官方定位即"embedding 检索后对 top-k 文档重排"；直接输出 query+document 的相关性分数（非向量相似度），正对"相关性过滤"需求；对"语义上是否相关"的判别力显著强于双编码器余弦 |
 | 纯本地能力 | ✅ 完全本地推理（cross-encoder 前向）；无 API 依赖 |
 | 中文支持 | ✅ bge-reranker-base/large（xlm-roberta）明确支持中英；v2-m3 多语言；v2-minicpm-layerwise 中英表现好且 8–40 层可选加速 |
-| 许可证 | ✅ FlagEmbedding 仓库 MIT；模型卡 v2-m3 标 apache-2.0；学术/商用免费 |
+| 许可证 | ✅ 分两层记录（批准约束 8：仓库许可证 ≠ 模型许可证）：FlagEmbedding **代码仓库** MIT；**具体权重以各自 HuggingFace 模型卡为准**——如 bge-reranker-v2-m3 模型卡标 apache-2.0；bge-reranker-base/large 模型卡许可须以模型卡实际标注为准（本报告不代断）；学术/商用授权以模型卡条款为准 |
 | 依赖与模型 | 需要 cross-encoder 模型权重（本地缓存）；**fastembed（Qdrant）原生支持 `TextCrossEncoder.rerank(query, documents)`**——项目 mem0-server 已用 fastembed，推理能力可能在本地依赖链中；**但 reranker 权重 ≠ 已缓存的 bge-small-zh-v1.5 embedding 权重，是否已缓存属预装检查项** |
 | 延迟资源 | base 版"lightweight, fast inference"（官方）；CPU 可跑；确切毫秒数需预装检查后实测（DRAFT §6 口径） |
 | 数据边界 | ✅ 无外发；输入仅本地合成数据 |
