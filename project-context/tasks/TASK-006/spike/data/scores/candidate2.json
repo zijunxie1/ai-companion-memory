@@ -1,0 +1,349 @@
+{
+  "doc_type": "候选 2 校准评估（S5，步骤②）",
+  "candidate": "candidate-2",
+  "mechanism": "本地主题类别 Gate：score = w1·comp + w2·lex（0-1 连续）",
+  "theme_system": {
+    "file": "theme-system.json",
+    "version": "v1.0",
+    "basis": "仅使用 8 Case 校准集文本（E001-E005 检索样本）与通用主题知识人工归纳；禁止使用 holdout 场景内容（DRAFT v1.2 §3 候选 2 / §5.3 步骤①）"
+  },
+  "generated_at": "2026-08-12T01:27:45.993Z",
+  "sample_count": 29,
+  "weight_grid": [
+    {
+      "w1": 0.5,
+      "w2": 0.5
+    },
+    {
+      "w1": 0.6,
+      "w2": 0.4
+    },
+    {
+      "w1": 0.7,
+      "w2": 0.3
+    },
+    {
+      "w1": 0.8,
+      "w2": 0.2
+    }
+  ],
+  "calibration_attempts": [
+    {
+      "w1": 0.5,
+      "w2": 0.5,
+      "merged": {
+        "threshold": 0.05,
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.24278846153846154
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.2732051282051282
+        },
+        {
+          "round": 2,
+          "n": 11,
+          "threshold": 0.05,
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.24278846153846154
+        },
+        {
+          "round": 3,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.25621323529411766
+        }
+      ],
+      "passes_quality": true
+    },
+    {
+      "w1": 0.6,
+      "w2": 0.4,
+      "merged": {
+        "threshold": 0.05,
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.29423076923076924
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.31856410256410256
+        },
+        {
+          "round": 2,
+          "n": 11,
+          "threshold": 0.05,
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.29423076923076924
+        },
+        {
+          "round": 3,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.3049705882352941
+        }
+      ],
+      "passes_quality": true
+    },
+    {
+      "w1": 0.7,
+      "w2": 0.3,
+      "merged": {
+        "threshold": 0.05,
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.3456730769230769
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.3639230769230769
+        },
+        {
+          "round": 2,
+          "n": 11,
+          "threshold": 0.05,
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.3456730769230769
+        },
+        {
+          "round": 3,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.35372794117647055
+        }
+      ],
+      "passes_quality": true
+    },
+    {
+      "w1": 0.8,
+      "w2": 0.2,
+      "merged": {
+        "threshold": 0.05,
+        "tp": 20,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.39711538461538465
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.4092820512820513
+        },
+        {
+          "round": 2,
+          "n": 11,
+          "threshold": 0.05,
+          "tp": 8,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.39711538461538465
+        },
+        {
+          "round": 3,
+          "n": 9,
+          "threshold": 0.05,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "margin": 0.40248529411764705
+        }
+      ],
+      "passes_quality": true
+    }
+  ],
+  "best_parameters": {
+    "w1": 0.8,
+    "w2": 0.2,
+    "threshold": 0.05,
+    "merged": {
+      "threshold": 0.05,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "margin": 0.39711538461538465
+    },
+    "per_round": [
+      {
+        "round": 1,
+        "n": 9,
+        "threshold": 0.05,
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.4092820512820513
+      },
+      {
+        "round": 2,
+        "n": 11,
+        "threshold": 0.05,
+        "tp": 8,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.39711538461538465
+      },
+      {
+        "round": 3,
+        "n": 9,
+        "threshold": 0.05,
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "margin": 0.40248529411764705
+      }
+    ]
+  },
+  "calibration_verdict": {
+    "passed": true,
+    "best": {
+      "w1": 0.8,
+      "w2": 0.2,
+      "threshold": 0.05,
+      "f1": 1,
+      "margin": 0.39711538461538465
+    }
+  },
+  "category_breakdown": {
+    "health->health": {
+      "n": 3,
+      "pos": 3,
+      "neg": 0
+    },
+    "health->pet": {
+      "n": 4,
+      "pos": 4,
+      "neg": 0
+    },
+    "hobby->hobby": {
+      "n": 3,
+      "pos": 3,
+      "neg": 0
+    },
+    "pet->pet": {
+      "n": 4,
+      "pos": 4,
+      "neg": 0
+    },
+    "weather->health": {
+      "n": 3,
+      "pos": 0,
+      "neg": 3
+    },
+    "weather->hobby": {
+      "n": 3,
+      "pos": 0,
+      "neg": 3
+    },
+    "weather->pet": {
+      "n": 3,
+      "pos": 0,
+      "neg": 3
+    },
+    "comm->comm": {
+      "n": 6,
+      "pos": 6,
+      "neg": 0
+    }
+  }
+}
