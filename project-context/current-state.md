@@ -4,27 +4,27 @@
 >
 > 最近只读核验：2026-08-12（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
 > 核验方式：本地 `git fetch origin main` / `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件，以及 `E:\task-006-measurement-tmp\` 文件清单与元数据；未查询数据库、未调用外部模型。
-> 本快照以本次核验时的 `origin/main @ 980bfa5` 为基础；GOV-CHIEF-001、GOV-COMM-001 及其状态同步均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
+> 本快照以本次核验时的 `origin/main @ 011168f` 为基础；GOV-CHIEF-001、GOV-COMM-001、GOV-002 及其状态同步均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
 > 非自动更新：本文件只有在某个角色被 Founder 唤醒并实际写入时才会变化。每次读取必须重新用 Git 和任务文件核对。
 
-> 上下文规则版本：`2026-08-10.4`
+> 上下文规则版本：`2026-08-12.2`
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已完成独立复审并合入正式主线；GOV-002 上下文完整性护栏已批准并实施中（Review 2 已批准，待 Review 3）。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；外部模型 Gate 只保留为离线研究证据。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入，正式治理事实）；GOV-COMM-001 沟通与交接规范已完成独立复审并合入正式主线；GOV-002 上下文完整性护栏已合并（PR #14 @ `011168f`），合并后修正（A 类遗留 + B 类展示结构）实施中。治理顺序为 GOV-CHIEF-001 → GOV-COMM-001 → GOV-002，之后是 TASK-006 本地 Gate Spike。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-12 执行 Chief 重新核验）
 
 | 项 | 当前核验值 |
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
-| GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，未联网刷新） |
-| `origin/main`（本次核验快照） | `980bfa5424f31c49a36aa3b56e546d5ba65074c4`（GOV-COMM-001 状态同步 PR #13 合并后；GOV-002 实施基线；读取时必须重新核验最新 tip） |
+| GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，核验以 `git fetch origin main` 结果为准） |
+| `origin/main`（本次核验快照） | `011168f8c39d116a400df22f5df6207492b50b2f`（GOV-002 PR #14 已 Rebase 合并，2026-08-12；合并后修正基线；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6945b4b5f62075354270b3999edf1ca17a`（已被 main 完全吸收，保留为归档引用） |
-| 分叉 | main 独有 37 / master 独有 0；merge-base = master HEAD（`064f5b6`） |
+| 分叉 | main 独有 44 / master 独有 0；merge-base = master HEAD（`064f5b6`）（2026-08-12 GOV-002 合并后实测 `git rev-list --count 064f5b6..011168f`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
 | PR #11 GOV-CHIEF-001 | **已合并**：执行/决策 Chief 角色拆分与状态校准已 Rebase 合并进 `origin/main`（治理提交 `a420b62` + 3 个状态同步提交，最终 `42786da`） |
 | 治理任务分支 | `codex/gov-chief-001` 已合并（PR #11，REVIEW_APPROVED → MERGED） |
@@ -49,7 +49,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在。Founder 已批准路线 B（不外发用户数据的本地/规则/检索路线）；外部 Gate 不进入产品。临时计划 v1.4 与 CR-01 v1.2 均未批准；没有产品代码、实施 Worktree或正式 Reviewer 报告；任务不进入 IN_PROGRESS |
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
-| GOV-002 | **实施中（IMPLEMENTED 待 Review 3）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；实施分支 `codex/gov-002`（基线 `980bfa5`），8 文件已改（context-manifest / AGENTS / role-wakeup / agent-response-protocol / role-handoff-template / decision-register / current-state / draft.md），V1—V7 验证通过；待独立 Reviewer Review 3 与 Founder 合并裁决 |
+| GOV-002 | **MERGED** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；实施分支 `codex/gov-002`，PR #14 已 Rebase 合并（`011168f`，2026-08-12）；合并后修正（A 类遗留 + B 类展示结构）在分支 `codex/gov-002-post-merge` 实施中，待 Review 3 |
 | TASK-006 本地 Gate Spike | 未开始（规划基础已获 Founder 同意） | 候选独立 Spike；不得外发用户数据，不接入产品；必须在 GOV-002 后单独批准和执行 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |

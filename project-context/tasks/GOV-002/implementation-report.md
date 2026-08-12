@@ -2,13 +2,13 @@
 
 ```yaml
 task_id: GOV-002
-status: IMPLEMENTED（待 Review 3）
+status: MERGED（PR #14 @ 011168f，2026-08-12）；合并后修正 IN_PROGRESS → IMPLEMENTED（codex/gov-002-post-merge，待 Review 3）
 execution_mode: delegated
 assigned_role: Governance Builder
-branch: codex/gov-002
-baseline: origin/main @ 980bfa5424f31c49a36aa3b56e546d5ba65074c4
-baseline_verified_at: 2026-08-12（git fetch + ls-remote 双确认，remote == origin/main == 980bfa5，0/0 分叉）
-approvals: DRAFT v1.2 APPROVED（Founder 2026-08-12）；delegated 已确认；Review 2 实现计划已批准
+branch: codex/gov-002（初始实施）→ codex/gov-002-post-merge（合并后修正）
+baseline: origin/main @ 980bfa5424f31c49a36aa3b56e546d5ba65074c4（初始实施）；origin/main @ 011168f（合并后修正）
+baseline_verified_at: 2026-08-12（git fetch + ls-remote 双确认，remote == origin/main，0/0 分叉）
+approvals: DRAFT v1.2 APPROVED（Founder 2026-08-12）；delegated 已确认；Review 2 实现计划已批准；合并后修正（A 类遗留 + B 类展示结构）已批准并入同一 PR
 required_reading:
   - AGENTS.md
   - project-context/context-manifest.md
@@ -85,3 +85,57 @@ required_reading:
 - 分支：`codex/gov-002`（从 origin/main @ 980bfa5 创建；worktree `E:/gov-002-worktree`）
 - 工作区干净度：实施前干净；实施后仅本任务 8 文件变更
 - 未触碰：主检出 `E:\正式作品`（feature/task-004-spike，历史脏检出）、其他 worktree、产品代码
+
+---
+
+## 9. 合并后修正记录（A 类遗留 + B 类展示结构，2026-08-12）
+
+> 状态：PR #14 已由 Founder Rebase 合并（`011168f`）；合并后修正已在分支 `codex/gov-002-post-merge` 实施（独立 worktree `E:/gov-002-post-merge-worktree`，基线 `011168f`），统一治理版本升级至 **2026-08-12.2**。
+
+### 9.1 合并事实
+
+- merger：Founder（Rebase 合并，2026-08-12）；
+- merge commit：`011168f8c39d116a400df22f5df6207492b50b2f`（PR #14）；
+- 合并后核验：fetch 后 origin/main == 011168f，0/0 分叉。
+
+### 9.2 A 类遗留项处理（Review 3 遗留 + 状态同步）
+
+| ID | 处理 |
+|---|---|
+| MA1 | context-manifest §3.3 互斥保证补排除条款：W3 仅指版本号元数据未升级事实本身；因版本未升级导致的旧文件内容与权威文件语义冲突走 B1 |
+| M1 | draft.md 头部补注释：draft 内部章节编号与 context-manifest 实际编号不同（C1 → §3.4，W/B → §3.3，C1—C6 → §3.1），以 context-manifest 为准 |
+| M2 | current-state 分叉计数校准：实测 `git rev-list --count 064f5b6..011168f` = **44**（原 37 → 44），master 独有 0 |
+| M3 | current-state 核验方式表述统一：删除"未联网刷新"残留，与 `git fetch origin main` 一致 |
+| M4 | 渲染异常终极降级：短纯文本卡仍被截断时，正文一句话给出交接文档文件路径（agent-response-protocol §5.1 规则 5 + templates 规则 4） |
+| A3/A4 | current-state GOV-002 → MERGED（PR #14 @ `011168f`）；decision-register D-GOV-002-SCOPE 补执行事实（MERGED，决策保持 APPROVED） |
+
+### 9.3 B 类展示结构变更（Founder 批准并入）
+
+| ID | 文件 | 变更 |
+|---|---|---|
+| B1 | agent-response-protocol.md | §0.3 删除"强制 text 代码框 + 聊天完整十七字段卡"；改为完整内容落交接文件 + 聊天 ≤10 行短卡；§5.1 规则 4 改为"底部单个 YAML 框（实测后）否则纯文本"；规则 5 补 M4 降级；§7.2 L2 自检同步 |
+| B2 | role-wakeup-and-handoff.md | §3.1 补"完整卡写文件 + 聊天短卡"结构说明；十七字段语义不变；§5.1 升级流程未动 |
+| B3 | templates/role-handoff-template.md | 头部改"落盘为交接文件 + 短卡"；删除强制 ```text 框要求；规则 6 条（含 YAML 实测、M4 降级）；十七字段模板本体保留 |
+
+### 9.4 合并后修正验证（V1—V8）
+
+| 验证 | 结果 |
+|---|---|
+| V1 单一权威（B/W 仅 context-manifest；MA1 存在） | ✅ |
+| V2 回执 C1/C3/C6（未被破坏） | ✅ |
+| V3 版本纪律（AGENTS.md = 2026-08-12.2，同一 commit） | ⚠️ AGENTS.md 受保护文件审批超时未写入，见下方说明 |
+| V4 沟通规则（§0.3/§5.1 新措辞；templates 无强制 text 框残留；短卡 ≤10 行定义） | ✅ |
+| V5 十七字段语义（字段名与语义未改） | ✅ |
+| V6 用例走查（A/B/C 仍告警；MA1：版本脱节+内容矛盾 → B1） | ✅ |
+| V7 零越界（v2/、eval/、migrations/、TASK-006/、roadmap、product、CHIEF-BOOTSTRAP、state-machine 零变化） | ✅ |
+| V8 红线 #6（同一 PR 同步；git diff --check） | ✅ |
+
+### 9.5 V3 阻塞说明（须 Founder 处理）
+
+`AGENTS.md` 为 Hermes 受保护 agent 指令文件：本次版本号写入（2026-08-12.1 → 2026-08-12.2）在桌面端弹出审批但**超时未获同意**，按规则不重试、不绕过。因此本 PR 的 AGENTS.md 版本号**仍为 2026-08-12.1**，V3 未完全通过。处理选项：
+
+1. Founder 在桌面端重新允许对 `AGENTS.md` 的一次性写入（重新触发审批）后，Builder 补一个仅含版本号的小 commit 进本 PR；或
+2. Founder 手动编辑 `AGENTS.md` 版本行为 `2026-08-12.2` 后推送；或
+3. 维持 2026-08-12.1 合并，把版本升级作为下次治理变更处理（需另行批准）。
+
+**除 AGENTS.md 版本号外，本 PR 其余 7 个文件的修改均已落盘并验证。**
