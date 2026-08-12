@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；**方案 C（外部大模型相关性裁判）仅批准作合成数据效果上限对照，真实数据外发与外部调用仍未授权**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 已获 Founder 批准（2026-08-12，规划 PR 待建；模型下载/外部调用/真实数据外发/延迟目标均未批准）**。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；**方案 C（外部大模型相关性裁判）仅批准作合成数据效果上限对照，真实数据外发与外部调用仍未授权**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 已获 Founder 批准（2026-08-12，规划 PR #19 已创建 OPEN，待合并；模型下载/外部调用/真实数据外发/延迟目标均未批准）**。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-12 执行 Chief 重新核验）
 
@@ -51,7 +51,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
-| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选范围 **APPROVED**（候选 A 只停候选 A、候选 B 暂停）；**第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 APPROVED**（Founder 2026-08-12，规划 PR 待建） | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：调研完成，候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向（模型未批）/ 方案 C 外部大模型效果上限对照（仅合成数据）；主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端）分表；完成度分档（B/C 未授权只能形成部分证据）；模型下载、外部调用、真实数据外发、延迟目标均未批准。**当前动作**：批准落盘 + 单一规划 PR（DRAFT v1.1 + 决策登记 + 状态同步 → main）；规划合入后**单独提交执行模式判断**；此前禁建实施分支、禁唤醒 Builder、禁下载模型、禁外部调用；见 D-T006-R3-SPIKE |
+| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选范围 **APPROVED**（候选 A 只停候选 A、候选 B 暂停）；**第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 APPROVED**（Founder 2026-08-12，规划 PR #19 OPEN 待合并） | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：调研完成，候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向（模型未批）/ 方案 C 外部大模型效果上限对照（仅合成数据）；主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端）分表；完成度分档（B/C 未授权只能形成部分证据）；模型下载、外部调用、真实数据外发、延迟目标均未批准。**当前动作**：规划 PR #19 已创建（OPEN，待 Founder 合并）；规划合入后**单独提交执行模式判断**；此前禁建实施分支、禁唤醒 Builder、禁下载模型、禁外部调用；见 D-T006-R3-SPIKE |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
 
