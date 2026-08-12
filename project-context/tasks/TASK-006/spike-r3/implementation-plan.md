@@ -134,9 +134,9 @@ date: 2026-08-13
 | P2 | mem0 版本 = 2.0.13 | `docker exec v2-mem0-server python -c "import mem0; print(mem0.__version__)"` | 同上 |
 | P3 | PostgreSQL（ai_companion）loopback 可达、评测表存在 | `docker ps` 确认 `v2-postgres` Up（healthy）；`pg_isready`；`select count(*) from eval_cases`（只读，应 = 8） | 同上 |
 | P4 | Node/npm 现有依赖满足脚本运行 | `node --version`（≥ 22）；检查 `v2/app/node_modules` 中 `pg` 解析可用（worktree 无 node_modules，只读复用主仓库已预装依赖） | 影响部分能力，按实际判定 |
-| P6 | 网络边界：脚本环境确认仅 loopback | `env \| grep -i proxy`；fetch 白名单仅 `127.0.0.1/::1/localhost`；fetch 包装审计 | 方案 C 外部调用属审批后例外 |
+| P6 | 网络边界：默认禁止外部访问；方案 C 获准后仅放行指定 DeepSeek 地址，其余外部访问仍禁止 | `env \| grep -i proxy`（本机存在 `127.0.0.1:7890` 代理与真实外网出口）；实验脚本 fetch 白名单默认仅 loopback，方案 C 获准后追加白名单指定 DeepSeek 地址 | 方案 C 外部调用属审批后例外 |
 
-> **P6 特别说明**：当前环境存在 `HTTP_PROXY/HTTPS_PROXY=http://127.0.0.1:7890`（loopback 本机代理）。方案 C 若获授权进入实验，须**单独审计**其发送内容与白名单接口，并将其外部调用行为与 P6 网络隔离纪律的一致性如实记录。
+> **P6 特别说明（Founder 裁决修正，2026-08-13）**：本机实际存在代理（`HTTP_PROXY/HTTPS_PROXY/ALL_PROXY=http://127.0.0.1:7890`）与真实外网出口，因此不得再写"仅 loopback"。正确表述 = **默认禁止外部访问；方案 C 获准后仅放行已批准 DeepSeek 地址，其余外部访问仍禁止**。方案 C 实验须单独审计发送内容与白名单接口，并如实记录调用次数/延迟/费用/失败。
 
 ### 3.2 候选专属依赖
 
@@ -255,7 +255,7 @@ mem0 Python API search(threshold=t)
 
 - 仅合成评测数据 + 评测专用 user_id；
 - 不读取/复制/落盘真实用户内容；
-- 禁止非 loopback 网络（方案 C 外部调用除外——若获批，单独审计发送内容与白名单）；
+- 默认禁止外部访问（方案 C 获准后仅放行指定 DeepSeek 地址，其余外部访问仍禁止）；
 - 零外发种子写入走容器内 `add(..., infer=False)`；REST `POST /memories` 禁用；
 - 种子运行后立即清理并核验清零；
 - fetch 包装审计 + 容器网络面核验 + `docker diff` 零产品改动证据。

@@ -158,28 +158,28 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 ---
 
-## 18. 阶段 1 完成记录（2026-08-13）
+## 18. 阶段记录（2026-08-13）
 
-- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；Review 2 打回修订完成（v1.1）；实施计划 v1.1 已获 Founder 批准；
-- **Review 2 打回修订**（CHANGES_REQUESTED，0 BLOCKER / 2 MAJOR / 1 MINOR，已全部修复）：MAJOR-1 交叉引用 S7→S6；MAJOR-2 S4 运行范围明确为校准部分（~70%），holdout（~30%）只在 S6 一次性运行；MINOR-1 S6.3 holdout 种子立即清理 + S7 显式排除 holdout；
-- **S0 预装检查已完成**（2026-08-13，见 `spike-r3/preflight-check.md`）：共享依赖 P1–P4、P6 全部通过；**方案 B 专属 P5-A 未通过**（无 reranker 权重，候选级停止）；**方案 C 未获外部调用授权**（P5-B 跳过）；docker diff 零产品代码改动；
-- **当前阻塞**：方案 B/C 均不可执行 → 按 DRAFT §8.0 只能形成部分证据，需 Founder 裁决是否补授权/缩小范围/停止（见 preflight-check.md 下一步）；
-- **未完成**：S1 冻结候选池及后续全部实测阶段（等待 Founder 裁决 B/C 授权）；
-- **Git 状态**：需 commit + push（新增 `spike-r3/preflight-check.md` + 交接文件更新）；
-- **下一窗口**：Founder（裁决方案 B/C 授权去向）。
+- **已完成**：启动回执；Review 2 实施计划落盘 v1.0 → v1.1（打回修订）；实施计划 v1.1 获 Founder 批准；S0 预装检查完成（`spike-r3/preflight-check.md`）；方案 B 模型选择决策卡落盘（`spike-r3/b-model-selection-card.md`，D-T006-R3-B-MODEL）；
+- **Founder 裁决（2026-08-13）**：保留 A；**有条件批准 C**（仅合成数据调用现有 DeepSeek `deepseek-chat`，整批候选单次判断、≤100 次、费用≤10 元、零真实数据、完整记录字段/次数/延迟/费用/失败）；**B 下载暂缓**，先只读形成模型选择卡对比两个模型；P6 表述修正（"仅 loopback" → "默认禁外联，C 仅白名单放行 DeepSeek"）；
+- **B 模型选择卡结论**：推荐候选 B-1 `BAAI/bge-reranker-base`（fastembed 0.8.0 与 mem0 2.0.13 唯一同时原生支持；ONNX 推理 onnxruntime 已预装；零新增依赖；1.04GB；mit）；候选 B-2 v2-m3 无 fastembed 支持、需新增 sentence-transformers+torch，不推荐；
+- **冻结纪律（Founder 明确）**：B 裁决前不得进入 S1、不得创建/查看 holdout、不得运行 A/C 正式实验；
+- **当前阻塞**：等待 Founder 裁决 D-T006-R3-B-MODEL（方案 B 下载授权）；
+- **Git 状态**：需 commit + push（新增 `preflight-check.md`、`b-model-selection-card.md`、P6 修正）；
+- **下一窗口**：Founder（裁决 D-T006-R3-B-MODEL）。
 
-## 19. 下一窗口唤醒卡（Founder 裁决 B/C 授权）
+## 19. 下一窗口唤醒卡（Founder 裁决 D-T006-R3-B-MODEL）
 
 先说人话（30 秒）：
-预装检查做完了：机器上的共享组件都正常，但方案 B 需要的重排模型权重本机没有（要下载得你单独批准），方案 C 要调外部模型（也得你单独批准）。现在只剩方案 A 能跑，它只能当"零依赖基线"。按规则我无权自己砍掉 B/C，所以现在把三个选择摆给你：只跑 A 拿部分证据、批准 B 下载、批准 C 外部调用、或者停掉这轮。
+方案 B 的模型选择卡做好了。结论很简单：本机两条现成路线都只认 bge-reranker-base 这一个模型（约 1GB、MIT 许可、零新增依赖），另一个 v2-m3 虽然更出名但要额外装一堆依赖，不划算。现在请你裁决要不要批准下载 base 这个模型——批了之后三方案就齐了，才能冻结同一套测试题开始正式测试。
 
 直接复制给下一个角色（≤10 行短卡）：
 
-目标角色：Founder（裁决方案 B/C 授权去向）
-本次唯一目标：裁决第三轮 Spike 方案 B/C 是否补授权（或只跑 A / 停止）
-任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/preflight-check.md（下一步四选项）
+目标角色：Founder（裁决 D-T006-R3-B-MODEL）
+本次唯一目标：裁决方案 B 是否下载候选 B-1 bge-reranker-base（推荐）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/b-model-selection-card.md（§6 待裁决选项）
 分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
 允许执行：Founder 裁决
-禁止执行：Builder 在裁决前不进入 S1、不下载、不外部调用
-验收：Founder 明确选择其一——只跑 A / 批 B 下载 / 批 C 外部调用 / 停止本轮
-停止条件：Builder 不得自行缩成单方案或跳过未授权方案
+禁止执行：Builder 在裁决前不进入 S1、不下载、不跑 A/C 实验
+验收：Founder 明确选择其一——批 B-1 / 批 B-2 / 两个都测 / 维持不下载
+停止条件：Builder 不得自行下载任何权重

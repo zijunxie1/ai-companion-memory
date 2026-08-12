@@ -20,7 +20,7 @@ conclusion: 共享依赖全部通过；方案 B 专属依赖 P5-A 未通过（�
 | P4 | Node/npm 现有依赖满足脚本运行 | ✅ | node **v22.23.2**；pg **8.22.0**（经主仓库 `E:\正式作品\v2\app\node_modules` 解析，worktree 无 node_modules，只读复用，不安装任何包） |
 | P5-A | 方案 B 专属：fastembed 缓存含 reranker/cross-encoder 权重 | ❌ | 容器内 `/tmp/fastembed_cache/` 仅 `models--Qdrant--bge-small-zh-v1.5`（embedding）与 `models--Qdrant--bm25`；全容器 find 无任何 `*reranker*` / `*cross*encoder*` / `*bge-reranker*` 目录；`HF_HOME` 与 `TRANSFORMERS_CACHE` 均为空 |
 | P5-B | 方案 C 专属：外部模型接口连通性 | ⏭️ 跳过 | **方案 C 未获 Founder 外部调用授权**（D-T006-R3-C-EXT 待决）→ 按实施计划 §7 S0.3，跳过 P5-B，标记方案 C 不可执行；本检查未发起任何外部调用 |
-| P6 | 网络边界：仅 loopback | ✅ | `HTTP_PROXY/HTTPS_PROXY/ALL_PROXY=http://127.0.0.1:7890`（loopback 本机代理）；`NO_PROXY=127.0.0.1,localhost,::1`；脚本 fetch 白名单仅 loopback |
+| P6 | 网络边界：默认禁止外部访问；方案 C 获准后仅放行指定 DeepSeek 地址，其余外部访问仍禁止 | ✅ | `HTTP_PROXY/HTTPS_PROXY/ALL_PROXY=http://127.0.0.1:7890`（本机代理，存在真实外网出口）；`NO_PROXY=127.0.0.1,localhost,::1`；实验脚本 fetch 白名单默认仅 loopback，方案 C 获准后追加 DeepSeek 白名单 |
 
 ## S0.4 docker diff 核验（零产品改动）
 
