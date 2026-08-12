@@ -6,6 +6,7 @@ required_reading:
   - project-context/context-manifest.md
   - project-context/CHIEF-BOOTSTRAP.md
   - project-context/current-state.md
+  - project-context/product.md
   - project-context/decision-register.md
   - project-context/project-mainline-roadmap.md
   - project-context/handoff-and-task-state-machine.md
