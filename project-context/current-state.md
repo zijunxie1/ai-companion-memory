@@ -50,7 +50,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（合并后修正实施中，PR #15 待复审）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`，2026-08-12）。合并后修正（A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）在分支 `codex/gov-002-post-merge` 实施，PR #15 CHANGES_REQUESTED → 补充修复完成，待同一 Reviewer 复审；统一治理版本目标 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
-| TASK-006 本地 Gate Spike | **STOPPED/FAILED**（两候选均失败；Founder 已裁决选项 A；收尾 PR 待合并） | 独立 Spike 已执行并停止（停止条件 9）：候选 1 词法信号边际全负、候选 2 holdout H4 天气变体失败（合并 F1=0.8571/边际 0.0013）；未形成"存在可行候选"结论；**不等于 TASK-006 失败或完成（TASK-006 保持 APPROVED）**；Founder 裁决 A（接受失败；禁止补词/重跑/外部路线）；收尾 PR 交独立 Reviewer 核对后由 Founder 合并，之后起草第二轮候选范围 DRAFT（针对词法不可分 + 手工词表覆盖不足，不预先选定方案）；新 DRAFT 批准前不唤醒 Builder、不修改产品/评测规则；见 D-T006-LOCAL-SPIKE / CR-T006-SPIKE-STOP-01 |
+| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选范围 **APPROVED**（DRAFT v1.2 + 8 项约束；执行模式已确认） | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：调研完成（4 方案），Founder 批准 DRAFT v1.2 候选范围（候选 A = cross-encoder 重排方向，具体模型待确认；候选 B = k-means 聚类；8 项约束逐条落盘）；执行模式 = HANDOFF REQUIRED / persistent_session；规划 PR（DRAFT+调研+决策登记+状态同步）待建并合并，之后从 origin/main 创建 `feature/task-006-r2-spike`；规划 PR 合并前不创建实施分支、不唤醒 Builder、不开始实验；见 D-T006-LOCAL-SPIKE |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
 
@@ -91,7 +91,7 @@ TASK-006 内部后续规划顺序：
 ## 当前建议动作
 
 1. GOV-002 已实施并合并（PR #14 @ `011168f`）；合并后修正 PR #15 已并入 origin/main（`920ae72`/`5de2714`，统一治理版本 2026-08-12.2）；
-2. **TASK-006 本地 Gate Spike = STOPPED/FAILED（停止条件 9），Founder 已裁决选项 A（2026-08-12）**：接受失败结论；禁止补 H4 词表、重跑冻结 holdout、重启外部模型路线；创建单一收尾 PR（状态 STOPPED/FAILED，含本地完整证据 + 停止报告 + 裁决记录）交独立 Reviewer 核对证据/冻结纪律/清理结果/零产品改动；**收尾 PR 由 Founder 合并后**，执行 Chief 起草第二轮候选范围 DRAFT（针对词法不可分 + 手工词表覆盖不足，不预先选定方案）；新 DRAFT 批准前不唤醒 Builder、不修改产品/评测规则；
+2. **TASK-006 第二轮本地 Gate Spike：候选范围 DRAFT v1.2 已批准（2026-08-12，8 项约束），执行模式已确认 HANDOFF REQUIRED / persistent_session**：规划 PR（DRAFT v1.2 + 调研报告 + 决策登记 + 状态同步 → main，仅规划与治理文件）待建并合并；**规划 PR 合入并只读核验成功后**，从最新 origin/main 创建实施分支 `feature/task-006-r2-spike`，落盘 Builder 交接文件，唤醒长期 Builder（首次唯一目标 = Review 2 实施计划）；Review 2 前禁止预装检查、确定候选 A 模型、下载/安装、写脚本、建 holdout 及任何实测；
 3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务。
 
 ## 下一窗口唤醒卡（当前建议）
