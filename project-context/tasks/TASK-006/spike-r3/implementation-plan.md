@@ -45,6 +45,15 @@ date: 2026-08-13
 
 ---
 
+## 0. 修订记录
+
+| 版本 | 日期 | 触发 | 修订内容 |
+|---|---|---|---|
+| v1.0 | 2026-08-13 | 首次落盘 | Review 2 初版 |
+| v1.1 | 2026-08-13 | Review 2 CHANGES_REQUESTED（0 BLOCKER / 2 MAJOR / 1 MINOR） | MAJOR-1：S1 注交叉引用 S7→S6（holdout 一次性运行步骤号修正）；MAJOR-2：明确 S4 运行范围 = 校准部分（约 70%），holdout 部分（约 30%）不接触、S6 一次性运行；MINOR-1：S6 新增 holdout 种子立即清理（S6.3），S7 显式排除 holdout（场景 = 校准部分或独立性能合成场景） |
+
+---
+
 ## 1. 当前事实与待验证假设
 
 ### 1.1 已核验事实（证据锚点）
@@ -290,9 +299,9 @@ mem0 Python API search(threshold=t)
 | S1.3 | 构建冻结 holdout（若使用独立 holdout 样本；§6.2 要求不复用第一/二轮原文） | `holdout-freeze.md` + `holdout-definition.json` |
 | S1.4 | Git 提交冻结记录（提交号+时间戳+哈希） | Git 历史 |
 
-> **冻结候选池 vs holdout**：候选池 = 主实验三方案共享的固定判断输入（S1 冻结，全方案共享，同口径比较）；holdout = 独立于校准集的一次性验证集（S1 冻结，S7 一次性运行）。冻结候选池本身也含 labeled pairs，用于校准集确定阈值 + holdout 评估分离质量（DRAFT §6.3）。
+> **冻结候选池 vs holdout**：冻结候选池 = 主实验三方案共享的固定判断输入（S1 冻结，全方案共享，同口径比较），由**校准部分（约 70%）**与**holdout 部分（约 30%）**两部分组成；holdout 部分 = 独立于校准集的一次性验证集（S1 冻结，**S6** 一次性运行）。冻结候选池本身含 labeled pairs，校准部分用于确定阈值（S2/S3），holdout 部分用于一次性验证泛化（S6）（DRAFT §6.3）。
 >
-> **隔离纪律**：候选设计（阈值确定、机制参数）只接触校准集部分（候选池中约 70%），holdout（候选池中约 30%）只一次性运行。具体比例在 S1 冻结时锁定并记录。
+> **隔离纪律**：候选设计（阈值确定、机制参数）只接触校准部分（候选池中约 70%），holdout 部分（候选池中约 30%）只一次性运行。具体比例在 S1 冻结时锁定并记录。
 
 ### S2/S3: 校准集核验与标注（阶段 4）
 
@@ -304,16 +313,18 @@ mem0 Python API search(threshold=t)
 | S3.2 | 方案 B 用校准集确定 cross-encoder 阈值 + ρ 非冗余诊断（若 B 可执行） | 校准结果 + ρ 值 |
 | S3.3 | 方案 C 用校准集确定外部模型相关性分数阈值（若 C 可执行） | 校准结果 |
 
-### S4: 主实验三方案评估（阶段 5）
+### S4: 主实验三方案评估（阶段 5）—— 在冻结候选池的**校准部分（约 70%）**上运行
+
+> **运行范围（修正 MAJOR-2）**：S4 的三类判断器只在**校准部分**上运行，holdout 部分（约 30%）在 S4 阶段**不接触**；holdout 部分的判断结果在 S6 一次性运行时才产生。主实验指标表中的"校准集 + 冻结 holdout 分别报告"分两部分数据来源：校准部分指标来自本步骤（S4），holdout 部分指标来自 S6。
 
 | 步骤 | 内容 | 产出 |
 |---|---|---|
-| S4.1 | 方案 A-主：在**完整冻结候选池**上用"检索 score + 校准阈值"判断每对保留/过滤 → P/R/F1/分离边际/误删率/零条准确率/保留数量 | `data/main-experiment/scheme-a.json` |
-| S4.2 | 方案 B：在**同一冻结候选池**上用 cross-encoder 分数 + 校准阈值判断 → 同口径指标（若 B 可执行） | `data/main-experiment/scheme-b.json` |
-| S4.3 | 方案 C：在**同一冻结候选池**上批量提交外部模型 → 返回标签 + 相关性分数 + 校准阈值判断 → 同口径指标（若 C 可执行） | `data/main-experiment/scheme-c.json` |
-| S4.4 | 关键记忆独立门：逐方案检查 §6.4 指定的 ≥ 5 条关键相关记忆是否被保留 | `data/main-experiment/key-memory-gate.json` |
+| S4.1 | 方案 A-主：在冻结候选池的**校准部分**上用"检索 score + 校准阈值"判断每对保留/过滤 → P/R/F1/分离边际/误删率/零条准确率/保留数量 | `data/main-experiment/scheme-a.json` |
+| S4.2 | 方案 B：在**同一校准部分**上用 cross-encoder 分数 + 校准阈值判断 → 同口径指标（若 B 可执行） | `data/main-experiment/scheme-b.json` |
+| S4.3 | 方案 C：在**同一校准部分**上批量提交外部模型 → 返回标签 + 相关性分数 + 校准阈值判断 → 同口径指标（若 C 可执行） | `data/main-experiment/scheme-c.json` |
+| S4.4 | 关键记忆独立门：逐方案检查校准部分正向场景中 §6.4 指定的 ≥ 5 条关键相关记忆是否被保留（holdout 部分关键记忆在 S6 一并检查） | `data/main-experiment/key-memory-gate.json` |
 
-> **主实验指标表**（三方案同口径，一张表）按 DRAFT §6.3 主实验指标表全量填写。
+> **主实验指标表**（三方案同口径，一张表）按 DRAFT §6.3 主实验指标表全量填写；校准部分指标来自 S4，holdout 部分指标来自 S6 一次性运行，两部分**分别报告、不合并计算**。
 
 ### S4.5: 补充实验（方案 A 端到端，独立成表）
 
@@ -337,14 +348,17 @@ mem0 Python API search(threshold=t)
 
 | 步骤 | 内容 | 产出 |
 |---|---|---|
-| S6.1 | 用 S5 冻结的机制对 holdout 部分一次性运行（**运行后禁止继续调参**） | `data/holdout-runs/{scheme}-holdout.json` |
-| S6.2 | 逐方案 holdout F1 / 分离边际 / 零条准确率 / 误删率 | 同上 |
+| S6.1 | 用 S5 冻结的机制对 holdout 部分一次性运行（**运行后禁止继续调参**；holdout 部分在 S4 阶段未接触，保证真正一次性） | `data/holdout-runs/{scheme}-holdout.json` |
+| S6.2 | 逐方案 holdout F1 / 分离边际 / 零条准确率 / 误删率；检查 holdout 部分正向场景关键记忆独立门 | 同上 |
+| S6.3 | **holdout 种子立即清理并核验清零**（holdout 使用完毕后不存活到 S7，避免 S7 延迟测量重复读取 holdout 场景） | `data/holdout-runs/cleanup.json` |
 
 ### S7: 延迟/资源/费用测量（阶段 7）
 
+> **场景限定（修正 MINOR-1）**：S7 延迟测量**不读取冻结 holdout**——holdout 已在 S6 一次性运行并清理。S7 使用**校准部分场景或独立性能合成场景**做真实检索延迟测量。
+
 | 步骤 | 内容 | 产出 |
 |---|---|---|
-| S7.1 | 预热 5 次；每场景有效样本 ≥ 30；P95 = `ceil(0.95×N)` | `data/latency/{scheme}-latency.json` |
+| S7.1 | 预热 5 次；每场景有效样本 ≥ 30（场景 = 校准部分场景或独立性能合成场景，**排除 holdout**）；P95 = `ceil(0.95×N)` | `data/latency/{scheme}-latency.json` |
 | S7.2 | 增量 = 处理组 − 基线（基线 = 仅本地检索；处理组 = 同一次检索 + 判断器） | 同上 |
 | S7.3 | 方案 C 费用估算：调用次数 × token × 单价（公开定价为线索，实测为准） | `data/latency/scheme-c-cost.json` |
 | S7.4 | CPU/内存/磁盘占用：峰值 RSS、CPU 耗时、权重/缓存磁盘占用 | `data/latency/resource-{a,b,c}.json` |

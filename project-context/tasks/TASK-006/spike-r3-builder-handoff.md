@@ -71,7 +71,7 @@ E004 缺陷仍存在（Run #28 天气话题召回无关记忆）。第一轮两�
 
 已完成：调研（两份公开方案报告）、DRAFT v1.1 批准（五项打回修订）、执行模式确认、规划 PR #19 合入、实施分支 `feature/task-006-r3-spike` 创建（@ 6660ca2）。
 
-未完成（长期会话全部工作，分阶段推进）：**阶段 1（首次唤醒）= 仅提交 Review 2 实施计划** → 批准后：S0 预装检查（共享/专属依赖）→ S0.5 方案 B 模型事实报告（候选 A 专属门）→ S1 holdout 冻结 → S2/S3 校准集核验与标注 → S4 主实验三方案评估 → 补充实验 Mem0 阈值端到端 → S6 机制冻结 → S7 holdout 一次性运行 → S8 延迟/资源/费用测量 → S9 网络审计 → S10 Spike 报告。
+未完成（长期会话全部工作，分阶段推进）：**阶段 1（首次唤醒）= 仅提交 Review 2 实施计划** → 批准后：S0 预装检查（共享/专属依赖）→ S0.5 方案 B 模型事实报告（候选 A 专属门）→ S1 holdout 冻结 → S2/S3 校准集核验与标注 → S4 主实验三方案评估（校准部分）→ S4.5 补充实验 Mem0 阈值端到端 → S5 机制冻结 → S6 holdout 一次性运行（后立即清理种子）→ S7 延迟/资源/费用测量（排除 holdout）→ S8 网络审计 → S9 Spike 报告。
 
 ## 7. 已批准决策
 
@@ -160,10 +160,11 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 ## 18. 阶段 1 完成记录（2026-08-13）
 
-- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；
+- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；Review 2 打回修订完成（v1.1，见下）；
+- **Review 2 打回修订**（CHANGES_REQUESTED，0 BLOCKER / 2 MAJOR / 1 MINOR，已全部修复）：MAJOR-1 交叉引用 S7→S6（实施计划 §S1 注 + 本交接包 §6 分阶段推进同步）；MAJOR-2 S4 运行范围明确为校准部分（~70%），holdout（~30%）只在 S6 一次性运行；MINOR-1 S6.3 holdout 种子立即清理 + S7 显式排除 holdout；
 - **未完成**：S0 预装检查及后续全部实测阶段（等待实施计划批准）；
-- **Git 状态**：实施计划文件已创建于 worktree `E:/task-006-r3-spike-worktree`；需 commit + push；
-- **下一窗口**：Founder/Reviewer Review 2（审批实施计划）。
+- **Git 状态**：实施计划 v1.1 + 交接文件已修改；需 commit + push；
+- **下一窗口**：Founder/Reviewer Review 2（复审实施计划 v1.1）。
 
 ## 19. 下一窗口唤醒卡（Review 2）
 
