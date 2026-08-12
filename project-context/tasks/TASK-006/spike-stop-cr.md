@@ -28,7 +28,7 @@ decision_scope: 候选范围/路线重裁（第二轮 Spike 候选范围 DRAFT �
 founder_options: 3（A 接受失败/重裁范围 / B 豁免冻结补词重跑 / C 回到外部 Gate 离线路线重议）
 founder_decision: A（2026-08-12）——接受失败结论；禁止补 H4 词表、重跑冻结 holdout、重启外部模型路线
 spike_status: STOPPED/FAILED（两候选均未通过 §8 全部门；**不等于 TASK-006 失败或完成**；TASK-006 保持 APPROVED）
-closeout_pr: 单一收尾 PR（待建；状态写 STOPPED/FAILED；交独立 Reviewer 核对证据/冻结纪律/清理结果/零产品改动）
+closeout_pr: 单一收尾 PR #17（OPEN，REVIEW_APPROVED——独立 Reviewer 2026-08-12 核对四件事一致，建议合并；合并裁决归 Founder）
 next_step: 收尾 PR 由 Founder 合并后，执行 Chief 再起草第二轮 Spike 候选范围 DRAFT（针对词法不可分与手工词表覆盖不足提出新机制，**不预先选定方案**）；新 DRAFT 批准前不唤醒 Builder、不修改产品/评测规则
 ```
 
