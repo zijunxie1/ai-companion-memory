@@ -26,7 +26,10 @@ required_reading:
 doc_type: 任务 DRAFT（第二轮 Spike 候选范围草案；**未批准**——本文件不构成任何实施授权）
 task_id: TASK-006（内部第二轮 Spike：TASK-006-SPIKE-LOCAL-GATE-R2）
 spike_id: TASK-006-SPIKE-LOCAL-GATE-R2
-status: APPROVED（Founder 2026-08-12 批准 DRAFT v1.2 候选范围，附带 8 项批准约束；执行模式门待单独确认；批准前不创建实施分支、不唤醒 Builder、不开始实验）
+status: APPROVED（Founder 2026-08-12 批准 DRAFT v1.2 候选范围，附带 8 项批准约束；执行模式已确认 HANDOFF REQUIRED / persistent_session；规划 PR 待建，合并前不创建实施分支、不唤醒 Builder、不开始实验）
+execution_mode: persistent_session（HANDOFF REQUIRED，Founder 2026-08-12 确认）
+assigned_role: Builder（长期会话，尚未唤醒）
+assigned_session: TASK-006｜Builder｜第二轮本地相关性 Gate Spike（暂不创建）
 draft_version: v1.2（2026-08-12；v1.1 + 公开方案调研后候选修订：候选 A 重新定义为本地 cross-encoder 相关性重排方向；候选 B 保留 k-means 单一方法；**Founder 批准附带 8 项约束见 §0.2**）
 drafter: operational-chief-2026-08-12-01（执行 Chief）
 draft_date: 2026-08-12
@@ -289,11 +292,21 @@ P1 mem0-server loopback 可达 → P2 版本 → P3 PostgreSQL/评测表 → P4 
 
 - Founder 2026-08-12 批准 DRAFT v1.2 候选范围，**附带 8 项约束**（§0.2 逐条落盘）；
 - 批准内容：候选 A = 本地 cross-encoder 相关性重排**方向**（具体模型未批准，待预装检查后确认）；候选 B = embedding 校准集原型聚类 k-means（保留）；两候选并行验证、不预先选定；调研报告 `spike-r2-research.md` 为方向依据；
-- **执行模式门待单独确认**（不在本文件询问）；
-- **批准后、执行模式确认前**：不创建实施分支、不唤醒 Builder、不开始实验。
+- **执行模式已确认**：HANDOFF REQUIRED / persistent_session（Founder 2026-08-12）；
+- **规划 PR**：DRAFT v1.2 + 调研报告 + 决策登记 + 状态同步组成单一规划 PR（目标 main，仅规划与治理文件）；PR 合并后从最新 origin/main 创建实施分支 `feature/task-006-r2-spike`；
+- **规划 PR 合并前**：不创建实施分支、不唤醒 Builder、不开始实验。
+
+## 11.1 执行模式确认记录（2026-08-12）
+
+- Founder 确认执行模式：**HANDOFF REQUIRED —— 长期 Builder 会话（execution_mode: persistent_session）**；
+- 确认后暂缓动作：**不创建实施分支、不唤醒 Builder、不开始实验**；
+- 规划 PR 合入主线并只读核验成功后：从最新 `origin/main` 创建实施分支 `feature/task-006-r2-spike`，在实施分支落盘完整 Builder 交接文件；
+- **首次唤醒唯一目标**：只提交 **Review 2 实施计划**；Review 2 前禁止预装检查、确定候选 A 模型、下载或安装、写脚本、建立 holdout 及任何实测（DRAFT §7 禁止 13/14 + 批准约束 4）；
+- 建议 Builder 会话名称：`TASK-006｜Builder｜第二轮本地相关性 Gate Spike`。
 
 ## 12. 下一交接
 
-- **下一步 = 执行模式确认卡**（单独提交，等待 Founder 确认）；
-- Founder 确认执行模式 → 从 origin/main 创建实施分支 → 唤醒长期 Builder 会话（先交实施计划：含模型事实报告要求、预装检查清单、候选评估顺序，再执行）；
-- 本窗口在 Founder 确认执行模式前停止。
+- **当前等待**：规划 PR（DRAFT v1.2 + 调研报告 + 决策登记 + 状态同步 → main）合入主线并只读核验成功；
+- 规划 PR 合并后：从最新 origin/main 创建实施分支 `feature/task-006-r2-spike` → 落盘 Builder 交接文件 → 唤醒长期 Builder（首次唯一目标 = Review 2 实施计划，含模型事实报告要求、预装检查清单、候选评估顺序）；
+- 规划 PR 合并前：不创建实施分支、不唤醒 Builder、不开始实验；
+- 本窗口在返回 PR 链接与文件清单后停止。
