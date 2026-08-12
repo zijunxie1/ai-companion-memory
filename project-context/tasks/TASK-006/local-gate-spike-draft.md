@@ -24,7 +24,10 @@ required_reading:
 doc_type: 任务 DRAFT（独立 Spike 草案；**已批准**——Founder 2026-08-12 批准 DRAFT v1.2；任务方案 Review 通过；执行模式门待确认）
 task_id: TASK-006（内部 Spike；不改变 TASK-006 状态）
 spike_id: TASK-006-SPIKE-LOCAL-GATE
-status: APPROVED（Founder 2026-08-12 批准 DRAFT v1.2；任务方案 Review 通过；执行模式门待确认——确认前不唤醒 Builder、不创建实施分支、不开始 Spike）
+status: APPROVED（Founder 2026-08-12 批准 DRAFT v1.2；任务方案 Review 通过；执行模式已确认 HANDOFF REQUIRED / persistent_session——确认后暂不唤醒 Builder、不创建实施分支，等待规划 PR 合入主线）
+execution_mode: persistent_session（HANDOFF REQUIRED，Founder 2026-08-12 确认）
+assigned_role: Builder（长期会话，尚未唤醒）
+assigned_session: TASK-006｜Builder｜本地相关性 Gate Spike（暂不创建）
 draft_version: v1.2（2026-08-12；v1.1 + Founder Review 1 第二轮 CHANGES_REQUESTED 五项修订：至少一个候选通过即可 / Spearman 降级为"非冗余诊断" / 候选 2 机制不得按 holdout 设计且冻结顺序明确 / 增量算法修正 / Reviewer 核对结论归属修正）
 drafter: operational-chief-2026-08-12-01（执行 Chief）
 draft_date: 2026-08-12
@@ -269,9 +272,17 @@ state_constraint: TASK-006 保持 APPROVED；TASK-004 保持 PAUSED；不启动 
 - **执行模式门待确认**：确认前不唤醒 Builder、不创建实施分支（`feature/task-006-local-gate-spike`）、不开始 Spike；
 - 执行模式确认后：Spike 实施从 origin/main 新建独立分支执行；本 DRAFT 分支仅承载 DRAFT 与批准事实。
 
+## 11.1 执行模式确认记录（2026-08-12）
+
+- Founder 2026-08-12 确认执行模式：**HANDOFF REQUIRED —— 长期 Builder 会话（execution_mode: persistent_session）**；
+- 确认后的暂缓动作（Founder 指示）：**暂不唤醒 Builder、不创建实施分支**；
+- 规划 PR：本草案分支 `feature/task-006-local-gate-spike-draft` 推送并创建**单一规划 PR（目标 main）**，仅含 DRAFT、decision-register、current-state 三个文件，**不得包含产品代码或 Spike 实现**；
+- **实施闸门**：仅当规划 PR 合入主线并只读核验成功后，才允许从最新 `origin/main` 创建实施分支 `feature/task-006-local-gate-spike` 并唤醒长期 Builder；
+- 建议 Builder 会话名称：`TASK-006｜Builder｜本地相关性 Gate Spike`。
+
 ## 12. 下一交接
 
-- **下一步 = 执行模式确认卡**（单独提交，等待 Founder 确认）；
-- Founder 确认执行模式 → 唤醒长期 Builder 会话（先交实施计划，含测量脚本设计与候选评估顺序，再执行）；
-- 执行模式确认前：不唤醒 Builder、不创建实施分支、不开始 Spike；
-- 本窗口在 Founder 确认执行模式前停止。
+- **当前等待**：规划 PR（本草案分支 → main，仅 DRAFT/decision-register/current-state 三文件）合入主线并只读核验成功；
+- 规划 PR 合入并核验后：从最新 `origin/main` 创建实施分支 `feature/task-006-local-gate-spike`，唤醒长期 Builder 会话（`TASK-006｜Builder｜本地相关性 Gate Spike`，先交实施计划，含测量脚本设计与候选评估顺序，再执行）；
+- 执行模式已确认（HANDOFF REQUIRED / persistent_session）；**在规划 PR 合入前：不创建实施分支、不唤醒 Builder、不开始 Spike**；
+- 本窗口在返回 PR 链接与核验结果后停止。
