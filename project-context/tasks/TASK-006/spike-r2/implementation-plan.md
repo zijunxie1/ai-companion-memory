@@ -155,7 +155,7 @@ spike-r2/
 │   ├── freeze-mechanism.mjs      # 对候选机制实现 + 参数做哈希锁定 → mechanism-freeze.md
 │   ├── seed-holdout.mjs          # 按冻结定义零外发写入合成种子（docker exec + add infer=False；仅 holdout 允许）
 │   ├── run-holdout.mjs           # 冻结机制对冻结 holdout 一次性运行（运行时核验冻结哈希，不一致 exit(2)）
-│   ├── cleanup-holdout.mjs       # 删除 holdout 种子并核验清零（qdrant scroll filter + getAll）
+│   ├── cleanup-holdout.mjs       # 删除 holdout 种子并核验清零（S8b 执行；qdrant scroll filter + getAll）
 │   ├── measure-latency.mjs       # 延迟/资源测量（预热 5、N≥30、基线/处理组/增量、P95、RSS/CPU）
 │   └── network-audit.mjs         # 运行期网络审计 → data/audit/
 └── data/                         # 原始数据（全部随分支入库）
@@ -184,8 +184,9 @@ S3 标签：关键词初判 + 人工复核（fail-fast 断言）→ data/labels/
 S4 候选 B：语料 (a)+(b) → 嵌入 → k-means → k/阈值网格（仅校准集）→ F1/边际/波动
 S5 候选 A（模型确认后）：rerank → ρ 诊断 + 冗余降级自检 → 阈值 → F1/边际/波动
 S6 机制冻结（每正式候选；哈希）→ mechanism-freeze.md（commit）
-S7 holdout 一次性运行（seed → run → cleanup；冻结机制 × 冻结 holdout）
-S8 延迟/资源测量（S6 后对冻结机制测）
+S7 holdout 一次性运行（seed → run；冻结机制 × 冻结 holdout；质量测试，**不清理**）
+S8 延迟/资源测量（S6 后对冻结机制测；holdout 种子仍在，可做含 holdout 场景的真实检索）
+S8b holdout 种子清理（S8 测完即清理 → cleanup-holdout 删除并核验清零）
 S9 网络/数据边界审计
 S10 报告 + 全部证据 commit + governance-sync-summary.md
 ```
@@ -261,15 +262,16 @@ S0 预装检查 → S0.5 模型事实报告（候选 A）→ S1 holdout 冻结�
 → S2/S3 校准集核验与标注（共用数据）
 → S4 候选 B：语料构建 + k-means + 校准调参 + 校准评估（步骤②）
 → S5 候选 A（模型确认后）：rerank + ρ 诊断 + 校准评估
-→ S6 机制冻结（步骤③，每正式候选）→ S7 holdout 一次性运行（步骤④）
-→ S8 延迟/资源 → S9 网络审计 → S10 报告
+→ S6 机制冻结（步骤③，每正式候选）→ S7 holdout 一次性质量运行（步骤④，不清理）
+→ S8 延迟/资源测量（holdout 种子仍在）→ S8b 种子清理并核验清零
+→ S9 网络审计 → S10 报告
 ```
 
 理由：
 
 1. **holdout 冻结最早（S1）**：满足 DRAFT §5.3 四步顺序不可颠倒；冻结提交先于任何 Builder 实现/调优提交（隔离纪律，Reviewer 核对提交历史）。
 2. **候选 B 先于候选 A（S4 → S5）**：① 候选 B 只依赖共享依赖（embedding 缓存 + 静态已批准语料），无未确认模型，不受模型事实确认门阻塞，可立即执行；② 候选 A 的执行受 Founder/决策 Chief 模型确认门约束（S0.5），时序天然靠后，且其 ρ 诊断必须先有 A 分数、无法早于确认门；③ 两候选互相独立（DRAFT §8 候选独立性），评估顺序不改变各自适用门/通过门判定；④ B 先行产出的校准 F1/边际为 A 提供同数据、同标签、同口径的对照基线。
-3. **延迟/资源测量在机制冻结后（S8）**：只对冻结机制测（保证测的就是最终提交的机制）；测量本身不改变机制。
+3. **延迟/资源测量在机制冻结后、种子清理前（S8 在 S7 之后、S8b 之前）**：只对冻结机制测（保证测的就是最终提交的机制）；holdout 种子在 S7 质量测试后仍保留，S8 可对正式场景 + holdout 场景做真实检索测量；测量本身不改变机制；S8 测完立即清理种子（S8b），不延长 holdout 种子存活窗口。
 4. **S0.5 确认门不阻塞 B**：等待模型确认期间继续 S4 候选 B，不空等（A 的确认门与 B 的执行互不依赖）。
 
 ---
@@ -372,7 +374,7 @@ Builder 只提供冻结记录 + 提交历史（时间戳/提交号/哈希）；*
 | H-R2-3 | 语义隐式关联（新隐式因果，示例"熬夜看球→白天犯困"） | 无表面词重叠的隐式因果关联应判相关；无关干扰记忆应判无关 | 相关 1 条 / 无关 1 条 |
 | H-R2-4 | 未见过表达泛化（**新天气表达**，示例"起风降温"类；禁止复用 H4 原文与 E004 原文） | 第一轮失败类型（新天气表达）的泛化：新天气表达不得召回宠物/兴趣类无关记忆；含真实天气关联的记忆应判相关（验证非纯词法信号） | 相关 1 条 / 无关 ≥2 条 |
 
-- 每场景使用全新评测专用 user（`eval-spike-r2-h<1-4>-<rand>`，合成种子经 §11.3 零外发路径写入，S7 运行后立即删除并核验清零）；
+- 每场景使用全新评测专用 user（`eval-spike-r2-h<1-4>-<rand>`，合成种子经 §11.3 零外发路径写入，S8b 清理后立即删除并核验清零）；
 - 不写入正式 eval_cases、不修改正式 8 Case；holdout 内容在 S1 哈希冻结前**不用于任何机制设计/实现/调优**；
 - H-R2-4 的种子记忆使用与校准集不同的具体内容（新宠物/兴趣/健康样本），避免字面量复用。
 
@@ -385,7 +387,7 @@ Builder 只提供冻结记录 + 提交历史（时间戳/提交号/哈希）；*
 | 口径项 | 落地 |
 |---|---|
 | 预热 | 机制函数先执行 5 次，结果丢弃 |
-| 样本次数 | 每场景有效测量 N ≥ 30（场景 = E001、E004 + holdout 4 场景，≥6 个；N 与理由写入报告） |
+| 样本次数 | 每场景有效测量 N ≥ 30（场景 = E001、E004 + holdout 4 场景，≥6 个；N 与理由写入报告；**holdout 种子须在测量期间存活，S8b 清理在测完后执行**） |
 | P95 | 有效样本升序排序取 `ceil(0.95 × N)` 位（nearest-rank）；报告 P50/P90/P95/P99/max |
 | 进程边界 | 只计时候选机制函数调用本身（不含脚本启动、DB 连接、模型加载）；资源以子进程峰值 RSS 或运行前后差值记录 |
 | 基线值 | 仅执行本地检索 `mem0.search(user, query, top_k=5)`；同一样本、同一检索执行 |
@@ -405,19 +407,20 @@ Builder 只提供冻结记录 + 提交历史（时间戳/提交号/哈希）；*
 
 1. **fetch 包装**（lib/fetch-audit.mjs）：全局包装 fetch，每次调用记录 URL + 时间戳 + 结果码到 `data/audit/network-<阶段>-<ts>.log`；目标 host ∉ {127.0.0.1, ::1, localhost} → **立即中止运行并报错**（零容忍）；
 2. **容器网络面核验（P6）**：`docker inspect v2-mem0-server` env 确认 `MEM0_LLM_BASE_URL` 存在 → **REST `POST /memories` 一律禁用**（会触发容器内部 LLM 外发，脚本侧 fetch 审计拦不到）——见 §11.3 零外发路径；
-3. **运行期审计**：校准评分、holdout 运行、延迟测量全程在包装下执行，审计日志随证据入库（校准/holdout/清理三阶段 + 延迟阶段）；
+3. **运行期审计**：校准评分、holdout 运行、延迟测量全程在包装下执行，审计日志随证据入库（校准/holdout/延迟/清理四阶段）；
 4. **环境审计**：P6 记录宿主代理变量状态（R1 实测 loopback 代理 7890 + NO_PROXY）；脚本配置 `config.mjs` 中所有目标 URL 硬编码为 loopback；
 5. **数据边界**：仅合成评测数据；不读取/复制/落盘真实用户内容（不读 traces/conversations/users 真实行、不读日志真实输入）；
-6. **种子清理核验**：holdout 种子 S7 后删除，`qdrant scroll filter user_id` 逐 user 验证 0 剩余（更底层，直接打向量库）+ `mem0.getAll` 复核 + cleanup.json 记录；
+6. **种子清理核验**：holdout 种子 S8b（延迟测量完成后）删除，`qdrant scroll filter user_id` 逐 user 验证 0 剩余（更底层，直接打向量库）+ `mem0.getAll` 复核 + cleanup.json 记录；
 7. **零产品改动合规证据**：`docker diff v2-mem0-server` 输出作为"未改产品代码"证据（应仅 A=新增，无 C 修改产品文件）。
 
-### 11.3 零外发种子写入（S7 seed-holdout.mjs）
+### 11.3 零外发种子写入（S7 seed-holdout.mjs）与清理（S8b cleanup-holdout.mjs）
 
 ```js
 // 宿主 Node 脚本：docker exec -i 传 JSON，stdin 进、stdout 回（沿用第一轮验证配方）
 // 容器内: sys.path.insert(0,'/app'); from main import _build_config; from mem0 import Memory
 //         m = Memory.from_config(_build_config()); m.add(text, user_id=..., infer=False)  // 纯本地，不调 LLM
-// 输出 'SEED_JSON:' 前缀行区分容器日志；清理仍走 REST DELETE（只删点，不触发 LLM）
+// 输出 'SEED_JSON:' 前缀行区分容器日志；清理走 REST DELETE（只删点，不触发 LLM）
+// 时序：S7 写入种子 → S7 质量测试 → S8 延迟/资源测量（种子仍在）→ S8b 清理并核验清零
 ```
 
 ---
@@ -430,7 +433,7 @@ Builder 只提供冻结记录 + 提交历史（时间戳/提交号/哈希）；*
 | 2 各候选适用门独立 | 候选 A：校准集 ρ < 0.9 + 冗余降级自检（实现非单一余弦）；候选 B：数据驱动定义核对（单一方法 k-means、输入仅 (a)(b)、无人工词表/未批准语料/模型/依赖） | data/scores/、报告、mechanism-freeze.md |
 | 3 每个正式候选 0–1 连续分数 + ≥3 轮测量 | 两候选均输出 0–1 分数；3 轮校准（复用第一轮 3 轮样本，来源声明）分布/边际/波动如实记录 | data/calibration、data/scores |
 | 4 校准集 F1 ≥ 0.9 且边际 > 0.1（每候选分别） | 每候选各自评估（3 轮逐轮 + 合并） | data/scores/metrics.json |
-| 5 冻结 holdout 一次性运行 F1 ≥ 0.9 且边际 > 0.1 | 四步顺序执行（S1→S2/3→S6→S7）；一次性运行；运行时哈希断言；运行后无继续调参提交（Reviewer 核对提交历史） | holdout-freeze.md、mechanism-freeze.md、data/holdout |
+| 5 冻结 holdout 一次性运行 F1 ≥ 0.9 且边际 > 0.1 | 四步顺序执行（S1→S2/3→S6→S7 质量运行）；一次性运行；运行时哈希断言；运行后无继续调参提交（Reviewer 核对提交历史）；种子保留至 S8b 清理 | holdout-freeze.md、mechanism-freeze.md、data/holdout |
 | 6 延迟门 | 增量 P95 ≤ 200ms、总预算 ≤ 1000ms | data/latency |
 | 7 资源门 | 峰值 RSS ≤ 512MB、CPU ≤ 500ms | data/latency |
 | 8 网络与数据边界 | fetch 包装审计 + 容器网络面核验 + 零外发种子 + 种子清理核验（qdrant scroll 0 剩余）+ docker diff | data/audit、cleanup.json |
@@ -457,9 +460,10 @@ S4  候选 B：语料 (a)+(b) 构建 → 嵌入 → k-means → k/阈值网格�
 S5  候选 A（模型确认后）：rerank → ρ 诊断（≥0.9 → 降级冗余基线，仅 A）+ 冗余降级自检 → 阈值 → F1/边际/波动
     （校准不达标 → 候选级停止，记录失败）
 S6  机制冻结（步骤③）：mechanism-freeze.md（每正式候选；哈希）→ commit
-S7  holdout 一次性运行（步骤④）：seed-holdout（零外发）→ run-holdout（运行时哈希断言，exit(2) 保护）→ cleanup-holdout（删除并核验清零）；运行后禁止继续调参
-S8  延迟/资源测量（冻结机制）：预热 5、N≥30、基线/处理组/增量、P95 nearest-rank、RSS/CPU → data/latency
-S9  网络/数据边界审计 → data/audit（三阶段 + 延迟）
+S7  holdout 一次性质量运行（步骤④）：seed-holdout（零外发写入）→ run-holdout（运行时哈希断言，exit(2) 保护）→ 质量结果记录；**不清理种子**（保留至 S8b）；运行后禁止继续调参
+S8  延迟/资源测量（冻结机制；holdout 种子仍在）：预热 5、N≥30、基线/处理组/增量、P95 nearest-rank、RSS/CPU → data/latency
+S8b holdout 种子清理：cleanup-holdout（删除并核验清零：qdrant scroll + getAll）；审计日志入 data/audit
+S9  网络/数据边界审计 → data/audit（校准/holdout/延迟/清理四阶段）
 S10 Spike 报告（验收逐项对标、诚实声明、governance-sync-summary.md）→ spike-report.md → 全部证据 commit → 结构化实现报告 + 下一窗口唤醒卡
 ```
 
@@ -508,7 +512,7 @@ S10 Spike 报告（验收逐项对标、诚实声明、governance-sync-summary.m
 ## 15. 提交边界与证据落盘
 
 - 唯一分支：`feature/task-006-r2-spike`；不合并、不部署、不 force push；
-- 提交策略：每阶段（S0/S0.5/S1/S3/S6/S7/S10）一个证据 commit，commit message 标注阶段与冻结事实（时间戳/哈希）；
+- 提交策略：每阶段（S0/S0.5/S1/S3/S6/S7/S8/S8b/S10）一个证据 commit，commit message 标注阶段与冻结事实（时间戳/哈希）；
 - **不创建 PR**：Review 2 由 Founder 在本窗口审查；Review 3（代码与行为 Review）与合并裁决按交接包 §17 由独立 Reviewer 与 Founder 执行；
 - 分支 diff 相对 origin/main 必须仅含 `project-context/tasks/TASK-006/` 文档与 `spike-r2/` 文件（验收 9）；
 - 全部证据（脚本 + 原始数据 + 报告 + 冻结记录 + 模型事实报告 + 审计）随分支入库，可复现；
