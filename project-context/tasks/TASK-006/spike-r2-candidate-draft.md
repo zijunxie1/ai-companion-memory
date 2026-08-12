@@ -1,4 +1,4 @@
-# TASK-006｜第二轮本地相关性 Gate Spike 候选范围 DRAFT（v1.1）
+# TASK-006｜第二轮本地相关性 Gate Spike 候选范围 DRAFT（v1.2）
 
 ```yaml
 required_reading:
@@ -27,12 +27,12 @@ doc_type: 任务 DRAFT（第二轮 Spike 候选范围草案；**未批准**—�
 task_id: TASK-006（内部第二轮 Spike：TASK-006-SPIKE-LOCAL-GATE-R2）
 spike_id: TASK-006-SPIKE-LOCAL-GATE-R2
 status: DRAFT（等待 Founder Review 1 再裁）
-draft_version: v1.1（2026-08-12；v1.0 + Founder Review 1 CHANGES_REQUESTED 六项修订：候选 A 数学差异/候选 B 单一方法/候选 B 输入来源/两候选分别定义/§8 独立通过门/holdout 隔离审计）
+draft_version: v1.2（2026-08-12；v1.1 + 公开方案调研后候选修订：候选 A 重新定义为本地 cross-encoder 相关性重排（bge-reranker 系，经 fastembed TextCrossEncoder）；候选 B 保留 k-means 单一方法并附调研依据；新增调研报告引用）
 drafter: operational-chief-2026-08-12-01（执行 Chief）
 draft_date: 2026-08-12
-basis: CR-T006-SPIKE-STOP-01（Founder 裁决 A：接受第一轮失败，收尾 PR #17 已合并 @ b975302）+ 第一轮失败根因（词法不可分 / 手工词表覆盖不足）
+basis: CR-T006-SPIKE-STOP-01（Founder 裁决 A：接受第一轮失败，收尾 PR #17 已合并 @ b975302）+ 第一轮失败根因（词法不可分 / 手工词表覆盖不足）+ 公开方案调研（spike-r2-research.md，只读）
 state_constraint: TASK-006 保持 APPROVED；TASK-004 保持 PAUSED；不启动 TASK-007 / TASK-005B；不修改产品代码、正式 8 Case、Schema、评测规则；不唤醒 Builder
-founder_direction: 针对词法不可分和手工词表覆盖不足提出新机制；**不预先选定方案**
+founder_direction: 针对词法不可分和手工词表覆盖不足提出新机制；**不预先选定方案**；调研先行（已完成，证据落盘 spike-r2-research.md）
 ```
 
 ---
@@ -47,6 +47,17 @@ founder_direction: 针对词法不可分和手工词表覆盖不足提出新机�
 | 4 | 两个正式候选不得只是**同一 embedding 分数的不同包装**；须分别说明输入、计算步骤、输出分数和针对第一轮根因的新增能力 | §3.1/§3.2 分别新增"输入 / 计算步骤 / 输出分数 / 针对第一轮根因的新增能力"四段式定义；信号链路上两候选不同（A = 逐对多维交互 + 集合相对特征；B = 聚类原型空间分布），非同一分数的不同包装 |
 | 5 | 修正 §8 第 2 项：候选 A 被降级**不得阻止候选 B 独立通过**；每个候选只核对自己的适用门 | §8 验收 2 重写：候选 A 的适用门 = 非冗余诊断 ρ<0.9（失败仅降级 A）；候选 B 的适用门 = 数据驱动定义核对（无人工词表、单一方法、输入来源合规）；**两候选互相独立，各自核对各自适用门后进入统一质量/延迟/资源/泛化门** |
 | 6 | 冻结 holdout 可覆盖"新天气表达"失败类型，但**候选设计不得读取具体文本、标签或词汇**；写清隔离方式和可审计证据 | §5.3 新增 holdout 隔离纪律：候选设计（S2 之前）只接触校准集与已批准契约，不读取 holdout-definition.json 内容；隔离方式 = 冻结提交先于候选设计提交（Git 历史核验）+ 脚本数据路径分离；可审计证据 = 冻结时间戳/提交号/哈希 + 候选设计提交记录，Reviewer 核对 |
+
+---
+
+## 0.1 Founder 调研指令修订记录（2026-08-12，调研先行 → v1.2）
+
+| # | Founder 指令（摘要） | v1.2 修改位置 |
+|---|---|---|
+| 1 | 先完成有边界的公开方案调研（本地召回重排/相关性过滤/多信号融合，≥3 个代表性方案：问题匹配度/纯本地/中文/许可证/依赖模型/延迟资源/数据边界/可复用部分） | 调研已完成并落盘 `project-context/tasks/TASK-006/spike-r2-research.md`（4 方案：bge-reranker / ColBERT / RRF / sentence-transformers CrossEncoder；逐维对比表 + 证据来源清单） |
+| 2 | 本阶段只读调研：禁止安装依赖、下载模型、运行代码、接触用户数据、预先选定方案 | 调研全程只读（curl 抓取公开文档）；未安装/未下载/未运行/未接触用户数据；本 DRAFT 不预先选定方案（两候选并行验证） |
+| 3 | 据此判断**保留、替换或重新定义**候选 A/B | §3 候选 A 从"手搓多维交互特征"**重新定义**为**本地 cross-encoder 相关性重排（bge-reranker 系，经 fastembed TextCrossEncoder）**——业界成熟标准做法，判别力强于手搓特征（调研方案 1/4）；候选 B **保留** k-means 单一方法（针对 R2），明确不引入 RRF/ColBERT 作为第二实现（调研方案 2/3 评估为不适用或需新模型） |
+| 4 | 重新提交 DRAFT v1.2 时只询问"是否批准候选范围"；批准前不得唤醒 Builder 或开始实验 | §11 唯一问题 = "是否批准第二轮 Spike 候选范围 DRAFT v1.2"；§12 明确批准前不唤醒 Builder、不创建实施分支、不修改产品/评测规则 |
 
 ---
 
@@ -86,24 +97,30 @@ founder_direction: 针对词法不可分和手工词表覆盖不足提出新机�
 
 mem0 当前召回分数 = 查询 embedding 与记忆 embedding 的**单一余弦相似度**（同模型 `BAAI/bge-small-zh-v1.5`，本地 fastembed 推理）。它不含：多维交互结构、检索集合内相对分布、主题空间信息。
 
-### 3.1 候选机制 A：本地语义交互 + 集合相对特征 Gate（针对 R1 词法不可分）
+### 3.1 候选机制 A：本地 cross-encoder 相关性重排 Gate（重新定义，调研方案 1/4）
 
-**输入**：查询文本 `q` + 候选记忆文本 `m` + 本次 mem0 检索的候选集合 `S`（q 与 m 经本地 fastembed 得向量 `v_q`、`v_m`）。
+> 调研依据：bge-reranker（BAAI/FlagEmbedding，MIT；bge-reranker-base/large 支持中英，v2-m3 多语言 Apache-2.0）为业界成熟 cross-encoder 重排方案；fastembed（Qdrant）原生提供 `TextCrossEncoder.rerank(query, documents)` 接口，项目 mem0-server 已使用 fastembed——推理能力可能已在本地依赖链，无需新增 Python 依赖（详见 `spike-r2-research.md` 方案 1）。
+
+**输入**：查询文本 `q` + 候选记忆文本 `m`（cross-encoder 以 `(q, m)` 拼接对输入，直接输出相关性分数；不依赖 mem0 原始 score）。
 
 **计算步骤**：
-1. 逐对交互特征（非单一余弦）：`dot = v_q·v_m`（余弦分子）、`prod = v_q ⊙ v_m`（逐元素乘积向量）、`absdiff = |v_q − v_m|`（逐元素绝对差）、`signmatch = 1[sign(v_q) == sign(v_m)]` 逐元素一致率——这些是多维交互结构，mem0 单一余弦不含；
-2. 集合相对特征：对 `S` 内所有候选的 mem0 原始分计算均值/标准差 → `z = (score_m − mean_S)/std_S`；并取 `rank` = 候选在 S 中按相似度排序的相对位次归一化——mem0 分数本身不含集合分布信息；
-3. 将上述特征拼接为特征向量，经线性组合 + sigmoid 映射到 (0,1)（权重/阈值在校准集上调，随机制冻结）。
+1. 用本地 fastembed `TextCrossEncoder`（bge-reranker 系权重，**预装检查核验缓存**）对 `(q, m)` 逐对前向推理；
+2. 模型直接输出 `q` 与 `m` 的相关性 logit → sigmoid 归一化到 (0,1)（或按模型原生输出范围校准，校准集上确定映射参数）；
+3. 决策阈值在校准集上确定，随机制冻结。
 
-**输出分数**：0–1 连续相关性分数。
+**输出分数**：0–1 连续相关性分数（cross-encoder 原生相关性，非余弦相似度）。
 
-**针对第一轮根因的新增能力（R1）**：对"记忆文本几乎相同但查询语义不同"的正负对（E001"失眠" vs E004"天气" 对同一橘猫记忆），候选 A 通过**多维交互结构**（语义方向差异不只在余弦一维）与**集合相对分布**（该记忆在本次检索结果中的相对位置）提供 mem0 单一余弦之外的新信号。
+**针对第一轮根因的新增能力（R1）**：cross-encoder 将查询与记忆**拼接后联合编码**，能建模两者间的深层语义交互（"失眠"查询 vs 同一橘猫记忆在"天气"上下文下应判无关，在"失眠"上下文下应判相关）——这正是第一轮词法信号物理上无法做到的判别；判别力强于"手搓多维交互特征"（调研结论）。
 
-**冗余降级规则（Founder Review 1 第 1 条）**：若实现中实际只使用单一余弦（如仅 `dot` 一项），或经非冗余诊断 ρ ≥ 0.9，则**自动降级为冗余基线**，不作为正式候选；不得以"多维特征名义上存在但实际无增益"规避。降级不影响候选 B 独立评估（§8 验收 2）。
+**冗余降级规则（沿用）**：若实现中实际退化为单一向量余弦（如错误使用 embedding 而非 cross-encoder），或非冗余诊断 ρ ≥ 0.9，则自动降级为冗余基线，不作为正式候选；降级不影响候选 B 独立评估（§8 验收 2）。
 
-### 3.2 候选机制 B：本地 embedding 校准集原型聚类 Gate（针对 R2 手工词表覆盖不足）
+**依赖约束（关键）**：bge-reranker 权重**必须已预装缓存**（预装检查 P5 核验 fastembed 缓存目录含 reranker 权重）；**若未缓存 → 立即停止，提交依赖/范围裁决，不得下载**（Founder 裁决 A + DRAFT §5.4）。
 
-**输入来源（全部列出，Founder Review 1 第 3 条）**：
+### 3.2 候选机制 B：本地 embedding 校准集原型聚类 Gate（保留，调研方案 2/3 对照）
+
+> 调研依据：ColBERT（late-interaction）与 RRF（多信号融合）经评估**不作为本候选的第二实现**——ColBERT 需新 checkpoint 与新索引（违反"仅已预装"约束）；RRF 是融合层而非词表覆盖替代，且本 Spike 单检索源下价值有限（详见 `spike-r2-research.md` 方案 2/3）。k-means 数据驱动主题空间保留为唯一方法。
+
+**输入来源（全部列出）**：
 - (a) 正式 8 Case 种子文本（`v2/migrations/002_eval.sql` E001–E008，已批准）；
 - (b) 第一轮已入库校准检索样本文本（`spike/data/calibration/round-{1,2,3}/`，合成数据，已批准入库）；
 - 以上为**唯一输入**；**不使用任何"通用知识"、未批准语料、人工词表、下载模型或新增依赖**（k-means 用纯 JS 实现或现有依赖实现，零新增包）。
@@ -158,6 +175,8 @@ mem0 当前召回分数 = 查询 embedding 与记忆 embedding 的**单一余弦
 
 P1 mem0-server loopback 可达 → P2 版本 → P3 PostgreSQL/评测表 → P4 Node/pg 依赖 → P5 fastembed 模型缓存存在（**禁止执行会触发下载的实例化命令**）→ P6 网络边界环境审计。任一缺失 → 立即停止，提交范围/依赖裁决，不得安装。
 
+**P5 扩展（候选 A 依赖核验）**：除既有 embedding 缓存（bge-small-zh-v1.5）外，核验 fastembed 缓存目录是否含 **bge-reranker 系 cross-encoder 权重**（候选 A 所需）；**若未缓存 → 候选 A 无法执行，立即停止并提交依赖/范围裁决（不得下载）**；候选 B 不依赖 reranker 权重（用既有 embedding），可独立继续（§8 候选独立性）。
+
 ## 6. 延迟与资源门（沿用第一轮口径，DRAFT v1.2 §6 全量继承）
 
 - **测量口径**：预热 5 次；每场景有效样本 ≥ 30；P95 = `ceil(0.95×N)` 位；进程边界 = 只测候选机制函数本身；**基线 = 仅本地检索；处理组 = 同一次检索 + 候选 Gate；增量 = 处理组 − 基线**；候选函数单独耗时仅参考，不得用作增量；
@@ -168,7 +187,7 @@ P1 mem0-server loopback 可达 → P2 版本 → P3 PostgreSQL/评测表 → P4 
 
 ### ✅ 允许
 
-1. 在第二轮 Spike 分支新增**隔离测量/验证脚本**：评测专用 user_id、真实本地 mem0 检索（loopback）、本地 embedding 推理（fastembed 缓存）、本地统计/聚类计算；只允许合成数据；可写入 holdout 合成种子（完成后清理）；
+1. 在第二轮 Spike 分支新增**隔离测量/验证脚本**：评测专用 user_id、真实本地 mem0 检索（loopback）、本地 embedding 推理与 **cross-encoder 重排推理（fastembed TextCrossEncoder，仅限预装检查核验通过的缓存权重）**、本地统计/聚类计算；只允许合成数据；可写入 holdout 合成种子（完成后清理）；
 2. 读取正式代码、契约与第一轮证据作为只读输入；
 3. 证据落盘：脚本 + 原始数据 + 冻结记录 + 审计写入 `project-context/tasks/TASK-006/spike-r2/`；
 4. 使用已预装本地组件（经预装检查核验）；
@@ -243,12 +262,13 @@ P1 mem0-server loopback 可达 → P2 版本 → P3 PostgreSQL/评测表 → P4 
 
 ## 11. Founder 批准记录（待裁决）
 
-- Founder 2026-08-12 裁决 A 指示：第二轮应针对**词法不可分**和**手工词表覆盖不足**提出新机制，**不预先选定方案**——本 DRAFT 据此提出候选 A（语义交互 + 集合相对特征，针对 R1）与候选 B（embedding 校准集原型聚类 k-means，针对 R2），并保留"不预先选定"的两候选并行验证框架；v1.1 已按 Founder Review 1 六项意见修订（§0 修订记录）；
-- **唯一待裁决问题**：是否批准第二轮 Spike 候选范围 DRAFT **v1.1**（候选 A + 候选 B 方向、限时、冻结 holdout、延迟/资源门、验收、停止条件、允许/禁止范围）；
+- Founder 2026-08-12 裁决 A 指示：第二轮应针对**词法不可分**和**手工词表覆盖不足**提出新机制，**不预先选定方案**；并要求先完成公开方案调研（已完成，`spike-r2-research.md`：4 方案对比）；
+- 本 DRAFT v1.2 依据调研结论：候选 A = **本地 cross-encoder 相关性重排**（重新定义，bge-reranker 系经 fastembed TextCrossEncoder，权重预装核验）；候选 B = **embedding 校准集原型聚类 k-means**（保留，单一方法）；两候选并行验证、不预先选定；
+- **唯一待裁决问题**：是否批准第二轮 Spike 候选范围 DRAFT **v1.2**（候选 A + 候选 B 方向、限时、冻结 holdout、延迟/资源门、验收、停止条件、允许/禁止范围）；
 - 执行模式确认、Spike 分支创建等事项在 DRAFT 批准后另行裁决；
 - **批准前**：不唤醒 Builder、不创建实施分支、不修改产品/评测规则。
 
 ## 12. 下一交接
 
-- Founder 批准 DRAFT **v1.1**（Review 1）→ 执行模式门单独确认 → 唤醒长期 Builder 会话（先交实施计划，再执行）；
+- Founder 批准 DRAFT **v1.2**（Review 1）→ 执行模式门单独确认 → 唤醒长期 Builder 会话（先交实施计划，再执行）；
 - 本窗口在 Founder 裁决前停止。
