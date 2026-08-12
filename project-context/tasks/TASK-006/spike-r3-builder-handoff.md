@@ -155,3 +155,28 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 ## 17. 下一张交接卡要求
 
 阶段 1 完成（实施计划落盘）后，返回 Review 2 交接卡（目标角色 = Founder/Reviewer，附实施计划路径与 diff）；长期会话全部完成后，返回独立 Reviewer 交接卡（附完整证据与 Spike 报告）。
+
+---
+
+## 18. 阶段 1 完成记录（2026-08-13）
+
+- **已完成**：启动回执（AGENTS 规则版本 2026-08-12.2、origin/main @ 6660ca2、分支 feature/task-006-r3-spike @ e8dc976、工作区干净）；Review 2 实施计划落盘 `project-context/tasks/TASK-006/spike-r3/implementation-plan.md`（v1.0，DRAFT_FOR_REVIEW_2）；
+- **未完成**：S0 预装检查及后续全部实测阶段（等待实施计划批准）；
+- **Git 状态**：实施计划文件已创建于 worktree `E:/task-006-r3-spike-worktree`；需 commit + push；
+- **下一窗口**：Founder/Reviewer Review 2（审批实施计划）。
+
+## 19. 下一窗口唤醒卡（Review 2）
+
+先说人话（30 秒）：
+第三轮 Spike 的 Builder 已经完成了实施计划文档。这份计划详细写了三种方案怎么测、按什么顺序、用什么指标，但还没做任何实测。现在需要你或 Reviewer 审查这份计划，确认没问题后 Builder 才能开始实际操作。你现在只需要看一眼计划并决定是否批准。
+
+直接复制给下一个角色（≤10 行短卡）：
+
+目标角色：Founder / Reviewer（Review 2）
+本次唯一目标：审批 TASK-006 第三轮 Spike 实施计划（implementation-plan.md v1.0）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md
+分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
+允许执行：只读核验 + 审批/打回实施计划
+禁止执行：任何实测、下载模型、外部调用
+验收：实施计划覆盖 DRAFT §6 全部要求（主/补分表、三方案评估顺序、冻结候选池规模、模型事实报告要求、延迟/资源/费用测量方案、验收逐项对标）
+停止条件：实施计划不完整或与 DRAFT v1.1 冲突 → 打回 Builder 修订
