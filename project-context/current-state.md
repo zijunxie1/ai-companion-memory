@@ -49,7 +49,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在。Founder 已批准路线 B（不外发用户数据的本地/规则/检索路线）；外部 Gate 不进入产品。临时计划 v1.4 与 CR-01 v1.2 均未批准；没有产品代码、实施 Worktree或正式 Reviewer 报告；任务不进入 IN_PROGRESS |
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
-| GOV-002 | **MERGED** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；实施分支 `codex/gov-002`，PR #14 已 Rebase 合并（`011168f`，2026-08-12）；合并后修正（A 类遗留 + B 类展示结构）在分支 `codex/gov-002-post-merge` 实施中，待 Review 3 |
+| GOV-002 | **MERGED（合并后修正实施中，PR #15 待复审）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`，2026-08-12）。合并后修正（A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）在分支 `codex/gov-002-post-merge` 实施，PR #15 CHANGES_REQUESTED → 补充修复完成，待同一 Reviewer 复审；统一治理版本目标 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
 | TASK-006 本地 Gate Spike | 未开始（规划基础已获 Founder 同意） | 候选独立 Spike；不得外发用户数据，不接入产品；必须在 GOV-002 后单独批准和执行 |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -96,7 +96,7 @@ TASK-006 内部后续规划顺序：
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：独立 Reviewer（GOV-002 Review 3）。
-- **本次只需要它完成**：对照 GOV-002 验收标准（draft.md §5 的 7 项 + §5.1 沟通六条）审查 8 文件 diff、验证证据与启动回执/required_reading 合规；输出 REVIEW_APPROVED 或 CHANGES_REQUESTED；不修改代码。
+- **目标角色**：同一独立 Reviewer（GOV-002 合并后修正复审）。
+- **本次只需要它完成**：对照交接包 §9 Founder 补充指令与 V1—V8 验收标准，复审 PR #15 补充 commit 的 9 文件 diff（重点：AGENTS.md 版本 2026-08-12.2、D-GOV-002-POSTMERGE 新增、§0.3 无 text 围栏示例、YAML 代码框措辞、M4 降级）；输出 REVIEW_APPROVED 或 CHANGES_REQUESTED；不修改代码。
 - **不得执行**：修改产品代码、TASK-006、合并、部署或自行扩大审查范围。
-- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`、`project-mainline-roadmap.md`、GOV-002 `draft.md` 与实现报告、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、GOV-COMM-001 任务证据。
+- **必须阅读**：`AGENTS.md`、`context-manifest.md`、本文件、`decision-register.md`（D-GOV-002-POSTMERGE）、GOV-002 `draft.md` 与 `implementation-report.md`（§9）、`agent-response-protocol.md`、`role-wakeup-and-handoff.md`、`templates/role-handoff-template.md`。

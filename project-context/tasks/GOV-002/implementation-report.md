@@ -130,12 +130,15 @@ required_reading:
 | V7 零越界（v2/、eval/、migrations/、TASK-006/、roadmap、product、CHIEF-BOOTSTRAP、state-machine 零变化） | ✅ |
 | V8 红线 #6（同一 PR 同步；git diff --check） | ✅ |
 
-### 9.5 V3 阻塞说明（须 Founder 处理）
+### 9.5 V3 版本纪律（2026-08-12 补充修复后）
 
-`AGENTS.md` 为 Hermes 受保护 agent 指令文件：本次版本号写入（2026-08-12.1 → 2026-08-12.2）在桌面端弹出审批但**超时未获同意**，按规则不重试、不绕过。因此本 PR 的 AGENTS.md 版本号**仍为 2026-08-12.1**，V3 未完全通过。处理选项：
+`AGENTS.md` 为 Hermes 受保护 agent 指令文件：Founder 2026-08-12 授权精确修改（交接包 §9 指令 2），版本号 `2026-08-12.1` → `2026-08-12.2` 通过正常审批流程申请写入，**不得绕过**。版本号是否已落盘以提交后 AGENTS.md 实际内容为准（若审批再次超时未同意，按规则不重试，V3 状态如实记录为未完成并上报 Founder）。
 
-1. Founder 在桌面端重新允许对 `AGENTS.md` 的一次性写入（重新触发审批）后，Builder 补一个仅含版本号的小 commit 进本 PR；或
-2. Founder 手动编辑 `AGENTS.md` 版本行为 `2026-08-12.2` 后推送；或
-3. 维持 2026-08-12.1 合并，把版本升级作为下次治理变更处理（需另行批准）。
+### 9.6 最终事实（补充修复后同步）
 
-**除 AGENTS.md 版本号外，本 PR 其余 7 个文件的修改均已落盘并验证。**
+- 最终修改范围：**9 个文件**（A 类：AGENTS.md、context-manifest.md、current-state.md、decision-register.md、tasks/GOV-002/draft.md、tasks/GOV-002/implementation-report.md；B 类：agent-response-protocol.md、role-wakeup-and-handoff.md、templates/role-handoff-template.md）；
+- 决策登记：新增 **D-GOV-002-POSTMERGE**（APPROVED，Founder 2026-08-12 授权，记录批准范围/依据/日期/统一版本 2026-08-12.2）；D-GOV-002-SCOPE 保持 APPROVED；
+- PR：**PR #15**（base=main，head=codex/gov-002-post-merge；补充 commit 后保持 OPEN）；PR #15 在 REVIEW_APPROVED 前禁止合并；
+- 统一治理版本目标：**2026-08-12.2**（AGENTS.md 头部 C1）；
+- B 类措辞统一：**"YAML 代码框"**（明确为 Markdown 渲染容器）；§0.3 已删除 text 围栏示例，默认示例为短纯文本；M4 降级（短卡仍截断 → 正文给出交接文档文件路径）已写入 §5.1 规则 5、templates 规则 4、role-wakeup §3.1；
+- 复审对象：**同一独立 Reviewer**（复审 PR #15 补充 commit）。
