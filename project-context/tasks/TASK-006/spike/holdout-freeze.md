@@ -3,7 +3,7 @@
 ```yaml
 freeze_type: holdout
 freeze_timestamp: 2026-08-12T09:18:38+08:00（UTC 2026-08-12T01:18:38Z）
-git_commit: <S1 提交号（写入后回填）>
+git_commit: 9459a70（S1 冻结提交；本文件与 holdout-definition.json 同提交入库）
 content_hash: sha256=307d266374f850e3abc282182e15b9f7c398f5417de4bd7326896cbea1ab0336
 frozen_object: holdout-definition.json（本目录，唯一事实；冻结后不得修改）
 scenario_count: 4
