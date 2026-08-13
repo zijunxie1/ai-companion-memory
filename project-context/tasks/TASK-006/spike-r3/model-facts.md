@@ -78,4 +78,6 @@ download_method: huggingface_hub snapshot_download（revision 固定，allow_pat
 
 ## 7. 结论
 
-方案 B-1 `BAAI/bge-reranker-base` 已按 Founder 裁决下载完成并核验通过：固定版本 `2cfc18c...`、仅 ONNX+tokenizer+config（1.13GB ≤ 1.2GB）、SHA-256 与 LFS oid 一致、零新增依赖、最小推理检查通过。**具备进入 S1 冻结统一测试题的条件**。
+方案 B-1 `BAAI/bge-reranker-base` 已按 Founder 裁决下载完成并核验通过：固定版本 `2cfc18c...`、仅 ONNX+tokenizer+config（1.13GB ≤ 1.2GB）、SHA-256 与 LFS oid 一致、零新增依赖、最小推理检查通过。
+
+**下一步（S0.3 门）**：B-1 就绪不代表可直接进入 S1。下一步必须先执行 **S0.3 方案 C 连通检查**（P5-B DeepSeek 连通性只读核验，仅当 C 已获外部调用授权时执行）；**只有 S0.3 成功后才进入 S1 冻结统一测试题；S0.3 失败则只停止 C，A/B 不受影响、独立继续**。
