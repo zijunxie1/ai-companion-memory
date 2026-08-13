@@ -160,26 +160,27 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 ## 18. 阶段记录（2026-08-13）
 
-- **已完成**：启动回执；Review 2 实施计划落盘 v1.0 → v1.1（打回修订）；实施计划 v1.1 获 Founder 批准；S0 预装检查完成（`spike-r3/preflight-check.md`）；方案 B 模型选择决策卡落盘（`spike-r3/b-model-selection-card.md`，D-T006-R3-B-MODEL）；
-- **Founder 裁决（2026-08-13）**：保留 A；**有条件批准 C**（仅合成数据调用现有 DeepSeek `deepseek-chat`，整批候选单次判断、≤100 次、费用≤10 元、零真实数据、完整记录字段/次数/延迟/费用/失败）；**B 下载暂缓**，先只读形成模型选择卡对比两个模型；P6 表述修正（"仅 loopback" → "默认禁外联，C 仅白名单放行 DeepSeek"）；
-- **B 模型选择卡结论**：推荐候选 B-1 `BAAI/bge-reranker-base`（fastembed 0.8.0 与 mem0 2.0.13 唯一同时原生支持；ONNX 推理 onnxruntime 已预装；零新增依赖；1.04GB；mit）；候选 B-2 v2-m3 无 fastembed 支持、需新增 sentence-transformers+torch，不推荐；
-- **冻结纪律（Founder 明确）**：B 裁决前不得进入 S1、不得创建/查看 holdout、不得运行 A/C 正式实验；
-- **当前阻塞**：等待 Founder 裁决 D-T006-R3-B-MODEL（方案 B 下载授权）；
-- **Git 状态**：需 commit + push（新增 `preflight-check.md`、`b-model-selection-card.md`、P6 修正）；
-- **下一窗口**：Founder（裁决 D-T006-R3-B-MODEL）。
+- **已完成**：启动回执；Review 2 实施计划 v1.0 → v1.1；实施计划 v1.1 获 Founder 批准；S0 预装检查完成；方案 B 模型选择决策卡（D-T006-R3-B-MODEL）；**方案 B-1 下载与核验完成**（`spike-r3/model-facts.md`）；
+- **Founder 裁决（2026-08-13）**：保留 A；**有条件批准 C**（仅合成数据、现有 DeepSeek `deepseek-chat`、整批单次判断、≤100 次、费用≤10 元、零真实数据、完整记录）；**批准 B-1 下载**（`BAAI/bge-reranker-base`，固定 sha `2cfc18c...`，仅 ONNX+tokenizer+config ≤1.2GB，禁 safetensors/bin/v2-m3/torch）；P6 修正为"默认禁外联，C 仅白名单放行 DeepSeek"；
+- **B-1 下载核验结果**：5 文件（onnx/model.onnx 1112.46MB + tokenizer.json 17.1MB + 3 配置），总 1.13GB ≤1.2GB；SHA-256 与 HF LFS oid `15b9a8c3...` 一致；零新增依赖；最小推理检查通过（失眠/天气相关-无关分离方向正确，logit 需 sigmoid 归一化）；
+- **三方案状态**：A（零依赖基线，可执行）✅；B-1（权重已下载，可执行）✅；C（有条件授权，仅合成数据调用 DeepSeek）✅——**三方案齐备**；
+- **冻结纪律（Founder 明确）**：S1 冻结统一测试题后，A/B/C 不得提前查看 holdout；
+- **未完成**：S1 冻结候选池 + S2/S3 校准 + S4 主实验 + S4.5 补充实验 + S6 holdout + S7 测量 + S8 审计 + S9 报告；
+- **Git 状态**：需 commit + push（新增 `model-facts.md`、`b-model-selection-card.md`、`preflight-check.md`、P6 修正、交接文件更新）；
+- **下一窗口**：Builder 本窗口继续（进入 S1 冻结候选池，或返回 Founder 确认后继续）。
 
-## 19. 下一窗口唤醒卡（Founder 裁决 D-T006-R3-B-MODEL）
+## 19. 下一窗口唤醒卡（S1 冻结统一测试题）
 
 先说人话（30 秒）：
-方案 B 的模型选择卡做好了。结论很简单：本机两条现成路线都只认 bge-reranker-base 这一个模型（约 1GB、MIT 许可、零新增依赖），另一个 v2-m3 虽然更出名但要额外装一堆依赖，不划算。现在请你裁决要不要批准下载 base 这个模型——批了之后三方案就齐了，才能冻结同一套测试题开始正式测试。
+方案 B 的模型下载好了、也验证能用了，三个方案现在都齐了。下一步是造一套统一的测试题并冻结起来（三种方案共用同一套、谁也不许提前偷看）。这一步做完后，才能进入校准和正式测试。你现在需要确认是否让我继续往下走 S1。
 
 直接复制给下一个角色（≤10 行短卡）：
 
-目标角色：Founder（裁决 D-T006-R3-B-MODEL）
-本次唯一目标：裁决方案 B 是否下载候选 B-1 bge-reranker-base（推荐）
-任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/b-model-selection-card.md（§6 待裁决选项）
+目标角色：Builder（本长期会话继续）
+本次唯一目标：进入 S1 冻结统一候选池与 holdout（三方案共用，A/B/C 不得提前查看 holdout）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md（§7 S1）；model-facts.md（B 已就绪）
 分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
-允许执行：Founder 裁决
-禁止执行：Builder 在裁决前不进入 S1、不下载、不跑 A/C 实验
-验收：Founder 明确选择其一——批 B-1 / 批 B-2 / 两个都测 / 维持不下载
-停止条件：Builder 不得自行下载任何权重
+允许执行：S1 冻结候选池/校准集/holdout（仅合成数据）
+禁止执行：A/B/C 提前查看 holdout；真实用户数据；超授权外部调用（C 限 DeepSeek 白名单）
+验收：冻结候选池 ≥30 对（相关≥8/无关≥8/混淆≥8/零条≥3 场景/关键记忆≥5），哈希锁定，提交号+时间戳入库
+停止条件：冻结失效或需超批准范围改动 → 停并上报
