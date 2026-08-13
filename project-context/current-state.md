@@ -92,7 +92,7 @@ TASK-006 内部后续规划顺序：
 ## 当前建议动作
 
 1. GOV-002 已实施并合并（PR #14 @ `011168f`）；合并后修正 PR #15 已并入 origin/main（`920ae72`/`5de2714`，统一治理版本 2026-08-12.2）；
-2. **TASK-006 第三轮 Spike 已进入 S0.3 前状态（2026-08-13）**：规划 PR #19 已合并（`6660ca2`）；执行模式 persistent_session 已确认；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（`2cfc18c`，预估 1.04GB／实测 1.13GB，执行分支证据 `feature/task-006-r3-spike` @ `b156e0c`）；方案 C 已授权（仅合成数据、DeepSeek、≤100 次/≤10 元）、待 S0.3 连通检查。**下一步**：长期 Builder 先执行 **S0.3 方案 C 连通检查**（通过后进入 S1，失败则只停 C，A/B 独立继续）；流程统一为 **S1 冻结 → S2/S3 校准集核验与标注 → S4/S4.5 主实验+补充实验 → S5 机制冻结 → S6 holdout 一次性运行并清理 → S7 延迟/资源/费用 → S8 网络审计 → S9 报告**；
+2. **TASK-006 第三轮 Spike 已进入 S0.3 前状态（2026-08-13）**：规划 PR #19 已合并（`6660ca2`）；执行模式 persistent_session 已确认；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（`2cfc18c`，预估 1.04GB／实测 1.13GB，执行分支证据 `feature/task-006-r3-spike` @ `007722e`）；方案 C 已授权（仅合成数据、DeepSeek、≤100 次/≤10 元）、待 S0.3 连通检查。**下一步**：长期 Builder 先执行 **S0.3 方案 C 连通检查**（通过后进入 S1，失败则只停 C，A/B 独立继续）；流程统一为 **S1 冻结 → S2/S3 校准集核验与标注 → S4/S4.5 主实验+补充实验 → S5 机制冻结 → S6 holdout 一次性运行并清理 → S7 延迟/资源/费用 → S8 网络审计 → S9 报告**；
 3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；真实用户记忆外发、v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
 ## 下一窗口唤醒卡（当前建议）
@@ -100,4 +100,4 @@ TASK-006 内部后续规划顺序：
 - **目标角色**：长期 Builder（本 persistent_session 会话继续）。
 - **本次唯一目标**：先执行 S0.3 方案 C 连通检查（通过后进入 S1 冻结统一候选池与 holdout，失败则只停 C）。
 - **不得执行**：A/B/C 提前查看 holdout；真实用户数据；超授权外部调用（C 限 DeepSeek 白名单、≤100 次/≤10 元）；v2-m3 或其他模型下载；安装 torch/sentence-transformers。
-- **必须阅读**：`tasks/TASK-006/spike-r3-candidate-draft.md`（v1.1，已在 main）、`tasks/TASK-006/spike-r3/implementation-plan.md`（§7 S0.3/S1，执行分支证据 `feature/task-006-r3-spike` @ `b156e0c`）、`tasks/TASK-006/spike-r3/model-facts.md`（执行分支证据，同上）、本文件、`decision-register.md`（D-T006-R3-B-MODEL / -C-EXT）。
+- **必须阅读**：`tasks/TASK-006/spike-r3-candidate-draft.md`（v1.1，已在 main）、`tasks/TASK-006/spike-r3/implementation-plan.md`（§7 S0.3/S1，执行分支证据 `feature/task-006-r3-spike` @ `007722e`）、`tasks/TASK-006/spike-r3/model-facts.md`（执行分支证据，同上）、本文件、`decision-register.md`（D-T006-R3-B-MODEL / -C-EXT）。
