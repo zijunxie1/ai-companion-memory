@@ -30,21 +30,21 @@ conclusion: 共享依赖 P1-P4/P6 通过；方案 B 已下载核验（B-1 bge-re
 |---|---|
 | 时间 | 2026-08-13（Asia/Shanghai） |
 | 接口（脱敏） | `https://api.deepseek.com/v1/models`（GET，只读列表；基础地址 = `https://api.deepseek.com/v1`，已含 `/v1`，未重复拼接） |
-| 认证方式 | `Authorization: Bearer <REDACTED>`（密钥来自容器 env `MEM0_LLM_API_KEY`，长度 35，前缀 `sk-eea...`，**全文未回显**） |
+| 认证方式 | `Authorization: Bearer <REDACTED>`（密钥来自容器 env `MEM0_LLM_API_KEY`，**全文未回显、未记录任何密钥特征**） |
 | 状态码 | **HTTP 200**（认证通过） |
 | 返回内容 | 可用模型 `["deepseek-v4-flash", "deepseek-v4-pro"]` |
 | 调用次数 | 1 次（仅本次只读列表请求） |
 | 费用 | 0 元（models 列表请求不计费） |
 | 网络边界 | 仅访问白名单 `api.deepseek.com` 一个地址；未发送评测题/Memory/真实用户数据 |
 
-### ⚠️ 事实差异（需 Founder 澄清，不阻塞 S0.3 结论）
+### ✅ 模型名事实差异（已由 Founder 裁决，2026-08-13）
 
 - **Founder 授权卡原文**：方案 C 使用"现有 DeepSeek `deepseek-chat` 接口"；
 - **容器实际配置**：`MEM0_LLM_MODEL=deepseek-v4-flash`（非 `deepseek-chat`）；
-- **`.env.example`（历史）**：`MEM0_LLM_MODEL=deepseek-chat`（与容器实际配置不一致）；
-- **API 实际可用模型**：`deepseek-v4-flash`、`deepseek-v4-pro`——**列表中没有 `deepseek-chat`**。
+- **API 实际可用模型**：`deepseek-v4-flash`、`deepseek-v4-pro`——**列表中没有 `deepseek-chat`**；
+- **Founder 裁决（2026-08-13）**：方案 C 实验模型由 `deepseek-chat` 调整为 **`deepseek-v4-flash`**，仅限本次合成数据 Spike；DeepSeek 白名单、≤100 次、≤10 元、零真实用户数据等限制不变。
 
-> 该差异不影响"接口可连接 + 认证通过"的 S0.3 结论，但影响方案 C 正式实验（S4）时选用的模型名。按 DRAFT §5.1"接口/模型变更需 Founder 批准"，方案 C 实验前需 Founder 确认采用哪个模型名（建议 `deepseek-v4-flash`，与容器实际配置一致）。Builder 不自行决定模型名。
+> 结论：方案 C 实验模型名 = `deepseek-v4-flash`（已裁决确定）；其余 C 授权边界（白名单/次数/费用/零真实数据）不变。
 
 ## S0.4 docker diff 核验（零产品改动）
 
