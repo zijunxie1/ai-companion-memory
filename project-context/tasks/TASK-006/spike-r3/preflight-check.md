@@ -7,7 +7,7 @@ check_date: 2026-08-13（Asia/Shanghai）
 checker: Builder（TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike）
 plan_commit: 7996847（实施计划 v1.1）
 branch: feature/task-006-r3-spike
-conclusion: 共享依赖全部通过；方案 B 专属依赖 P5-A 未通过（无 reranker 权重）；方案 C 未获外部调用授权（P5-B 跳过）；docker diff 无产品代码改动
+conclusion: 共享依赖 P1-P4/P6 通过；方案 B 已下载核验（B-1 bge-reranker-base）；方案 C S0.3 连通检查通过（HTTP 200，认证通过，模型 deepseek-v4-flash/pro，含模型名差异需 Founder 澄清）；docker diff 无产品代码改动
 ```
 
 ## 核验结果
@@ -19,8 +19,32 @@ conclusion: 共享依赖全部通过；方案 B 专属依赖 P5-A 未通过（�
 | P3 | PostgreSQL（ai_companion）loopback 可达、评测表存在 | ✅ | `v2-postgres` Up（healthy）；`docker exec v2-postgres psql -U postgres -d ai_companion -t -c "select count(*) from eval_cases;"` → **8**（只读） |
 | P4 | Node/npm 现有依赖满足脚本运行 | ✅ | node **v22.23.2**；pg **8.22.0**（经主仓库 `E:\正式作品\v2\app\node_modules` 解析，worktree 无 node_modules，只读复用，不安装任何包） |
 | P5-A | 方案 B 专属：fastembed 缓存含 reranker/cross-encoder 权重 | ❌ | 容器内 `/tmp/fastembed_cache/` 仅 `models--Qdrant--bge-small-zh-v1.5`（embedding）与 `models--Qdrant--bm25`；全容器 find 无任何 `*reranker*` / `*cross*encoder*` / `*bge-reranker*` 目录；`HF_HOME` 与 `TRANSFORMERS_CACHE` 均为空 |
-| P5-B | 方案 C 专属：外部模型接口连通性 | ⏭️ 跳过 | **方案 C 未获 Founder 外部调用授权**（D-T006-R3-C-EXT 待决）→ 按实施计划 §7 S0.3，跳过 P5-B，标记方案 C 不可执行；本检查未发起任何外部调用 |
+| P5-B | 方案 C 专属：外部模型接口连通性（S0.3） | ✅ | 2026-08-13 S0.3 执行：`GET https://api.deepseek.com/v1/models` → **HTTP 200**，Bearer 认证通过，返回模型 `[deepseek-v4-flash, deepseek-v4-pro]`；仅此一次只读列表请求，未发送任何评测/用户数据；**发现事实差异见下方 S0.3 记录** |
 | P6 | 网络边界：默认禁止外部访问；方案 C 获准后仅放行指定 DeepSeek 地址，其余外部访问仍禁止 | ✅ | `HTTP_PROXY/HTTPS_PROXY/ALL_PROXY=http://127.0.0.1:7890`（本机代理，存在真实外网出口）；`NO_PROXY=127.0.0.1,localhost,::1`；实验脚本 fetch 白名单默认仅 loopback，方案 C 获准后追加 DeepSeek 白名单 |
+
+## S0.3 方案 C 连通检查记录（2026-08-13）
+
+> 唯一目标：只验证已授权 DeepSeek 接口能否连接和通过身份验证；不发送评测题、Memory 或任何真实用户数据。
+
+| 项 | 脱敏记录 |
+|---|---|
+| 时间 | 2026-08-13（Asia/Shanghai） |
+| 接口（脱敏） | `https://api.deepseek.com/v1/models`（GET，只读列表；基础地址 = `https://api.deepseek.com/v1`，已含 `/v1`，未重复拼接） |
+| 认证方式 | `Authorization: Bearer <REDACTED>`（密钥来自容器 env `MEM0_LLM_API_KEY`，长度 35，前缀 `sk-eea...`，**全文未回显**） |
+| 状态码 | **HTTP 200**（认证通过） |
+| 返回内容 | 可用模型 `["deepseek-v4-flash", "deepseek-v4-pro"]` |
+| 调用次数 | 1 次（仅本次只读列表请求） |
+| 费用 | 0 元（models 列表请求不计费） |
+| 网络边界 | 仅访问白名单 `api.deepseek.com` 一个地址；未发送评测题/Memory/真实用户数据 |
+
+### ⚠️ 事实差异（需 Founder 澄清，不阻塞 S0.3 结论）
+
+- **Founder 授权卡原文**：方案 C 使用"现有 DeepSeek `deepseek-chat` 接口"；
+- **容器实际配置**：`MEM0_LLM_MODEL=deepseek-v4-flash`（非 `deepseek-chat`）；
+- **`.env.example`（历史）**：`MEM0_LLM_MODEL=deepseek-chat`（与容器实际配置不一致）；
+- **API 实际可用模型**：`deepseek-v4-flash`、`deepseek-v4-pro`——**列表中没有 `deepseek-chat`**。
+
+> 该差异不影响"接口可连接 + 认证通过"的 S0.3 结论，但影响方案 C 正式实验（S4）时选用的模型名。按 DRAFT §5.1"接口/模型变更需 Founder 批准"，方案 C 实验前需 Founder 确认采用哪个模型名（建议 `deepseek-v4-flash`，与容器实际配置一致）。Builder 不自行决定模型名。
 
 ## S0.4 docker diff 核验（零产品改动）
 
@@ -35,20 +59,13 @@ conclusion: 共享依赖全部通过；方案 B 专属依赖 P5-A 未通过（�
 1. **Docker Desktop 启动前 daemon 未运行**：本次 S0 开始时 `docker` 报 pipe 不存在（daemon 未启动），经 `Start-Process 'Docker Desktop.exe'` 恢复已预装组件（非下载/安装/外部调用）；容器随 Docker Desktop 启动自动恢复（compose restart policy）。检查全程只读，未向容器写入任何新文件。
 2. **容器内存在 TASK-004 历史 spike 脚本残留**：属历史证据，本轮不清理（交接包 §12 禁止 11：历史工作区只记 W2，禁止写入/同步/清理）。
 
-## 结论与后续动作
+## 结论与后续动作（2026-08-13 更新，S0.3 已执行）
 
 1. **共享依赖 P1–P4、P6 全部通过** → 方案 A（零新增依赖基线）可执行；
-2. **方案 B 专属依赖 P5-A 未通过**（本机无任何 reranker/cross-encoder 权重）→ 按 DRAFT §9.1 候选级停止第 4 条，**标记方案 B 不可执行**；不产出 model-facts.md（权重未缓存）；**不得下载/安装/替换权重**（交接包 §12 禁止 13）；
-3. **方案 C 未获外部调用授权** → 标记方案 C 不可执行；P5-B 跳过，未发起任何外部调用；
-4. **完成度分档**（DRAFT §8.0）：B 未获下载授权 + C 未获外部调用授权 → 本轮只能形成**部分证据**（仅方案 A 主实验 + 补充实验），**不得宣称第三轮完整通过**，须返回 Founder 决定是否补授权 / 缩小范围 / 停止。
+2. **方案 B 已下载核验完成** → B-1 `bge-reranker-base`（固定 sha `2cfc18c...`）可执行（见 `model-facts.md`）；
+3. **方案 C S0.3 连通检查通过** → 接口可连接 + 认证通过（HTTP 200）；但模型名存在事实差异（授权卡 `deepseek-chat` vs 容器实际 `deepseek-v4-flash`，API 无 `deepseek-chat`），方案 C 正式实验前需 Founder 确认模型名（Builder 不自行决定）；
+4. **完成度分档**（DRAFT §8.0）：三方案均已获授权并具备执行条件 → 待 S1 冻结后进入完整对比实验。
 
-## 下一步（等待 Founder 决策）
+## 下一步（S0.3 已通过，进入 S1 冻结统一测试题）
 
-S0 预装检查已完成。因方案 B/C 均不可执行，在进入 S1 冻结候选池前，需 Founder 裁决：
-
-- **选项 1**：只执行方案 A（零新增依赖基线）主实验 + 补充实验，形成部分证据后如实报告；
-- **选项 2**：批准方案 B 下载授权（需先产出模型事实报告 + Founder 逐项裁决下载哪个候选，见 D-T006-R3-B-MODEL）；
-- **选项 3**：批准方案 C 外部调用（需单独 Change Request + 数据外发政策裁决，见 D-T006-R3-C-EXT）；
-- **选项 4**：停止本轮 Spike。
-
-Builder 不自行缩成单方案，不跳过未授权方案。
+S0 预装检查 + S0.3 方案 C 连通检查全部完成。下一步 = **S1 冻结统一候选池与 holdout**（三方案共用，A/B/C 不得提前查看 holdout）。本轮不直接造题，等待 Founder 确认后进入 S1。

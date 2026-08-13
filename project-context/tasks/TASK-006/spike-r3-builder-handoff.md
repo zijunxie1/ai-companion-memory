@@ -165,28 +165,29 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 ## 18. 阶段记录（2026-08-13）
 
-- **已完成**：启动回执；Review 2 实施计划 v1.0 → v1.1；实施计划 v1.1 获 Founder 批准；S0 预装检查完成；方案 B 模型选择决策卡（D-T006-R3-B-MODEL）；**方案 B-1 下载与核验完成**（`spike-r3/model-facts.md`）；
-- **Founder 裁决（2026-08-13）**：保留 A；**有条件批准 C**（仅合成数据、现有 DeepSeek `deepseek-chat`、整批单次判断、≤100 次、费用≤10 元、零真实数据、完整记录）；**批准 B-1 下载**（`BAAI/bge-reranker-base`，固定 sha `2cfc18c...`，仅 ONNX+tokenizer+config ≤1.2GB，禁 safetensors/bin/v2-m3/torch）；P6 修正为"默认禁外联，C 仅白名单放行 DeepSeek"；
-- **B-1 下载核验结果**：5 文件（onnx/model.onnx 1112.46MB + tokenizer.json 17.1MB + 3 配置），总 1.13GB ≤1.2GB；SHA-256 与 HF LFS oid `15b9a8c3...` 一致；零新增依赖；最小推理检查通过（失眠/天气相关-无关分离方向正确，logit 需 sigmoid 归一化）；
-- **三方案状态**：A（零依赖基线，可执行）✅；B-1（权重已下载，可执行）✅；C（已授权、待 S0.3 连通检查）⚠️；
-- **下一步（S0.3 门）**：三方案参数虽已备齐，但 **S0.3 方案 C 连通检查是唯一下一步**——只有 S0.3 成功后才进入 S1 冻结统一测试题；S0.3 失败则只停止 C，A/B 不受影响、独立继续；
+- **已完成**：启动回执；Review 2 实施计划 v1.0 → v1.1；实施计划 v1.1 获 Founder 批准；S0 预装检查完成；方案 B 模型选择决策卡（D-T006-R3-B-MODEL）；方案 B-1 下载与核验完成（`model-facts.md`）；**S0.3 方案 C 连通检查通过**（`preflight-check.md` §S0.3）；
+- **S0.3 连通检查结果**：`GET https://api.deepseek.com/v1/models` → **HTTP 200**，Bearer 认证通过，可用模型 `[deepseek-v4-flash, deepseek-v4-pro]`；1 次只读列表请求、费用 0 元、未发送任何评测/用户数据、仅访问白名单 `api.deepseek.com`；密钥全文未回显；
+- **⚠️ 模型名事实差异（需 Founder 澄清，不阻塞 S0.3）**：Founder 授权卡写 `deepseek-chat`，但容器实际 `MEM0_LLM_MODEL=deepseek-v4-flash`、API 无 `deepseek-chat`；方案 C 正式实验（S4）前需 Founder 确认模型名（建议 `deepseek-v4-flash`），Builder 不自行决定；
+- **三方案状态**：A（零依赖基线，可执行）✅；B-1（权重已下载核验，可执行）✅；C（连通检查通过，模型名待确认）⚠️；
+- **下一步（S0.3 已通过）**：进入 **S1 冻结统一候选池与 holdout**（三方案共用，A/B/C 不得提前查看 holdout）；本轮不直接造题；
 - **冻结纪律（Founder 明确）**：S1 冻结统一测试题后，A/B/C 不得提前查看 holdout；
-- **未完成**：S0.3 方案 C 连通检查 →（通过后）S1 冻结候选池 + S2/S3 校准 + S4 主实验 + S4.5 补充实验 + S5 机制冻结 + S6 holdout 一次性运行并清理 + S7 延迟/资源/费用 + S8 网络审计 + S9 报告；
-- **Git 状态**：需 commit + push（新增 `model-facts.md`、`b-model-selection-card.md`、`preflight-check.md`、P6 修正、交接文件更新）；
-- **下一窗口**：Builder 本窗口继续（先执行 S0.3 方案 C 连通检查，通过后进入 S1 冻结候选池，或返回 Founder 确认后继续）。
+- **未完成**：S1 冻结候选池 + S2/S3 校准 + S4 主实验 + S4.5 补充实验 + S5 机制冻结 + S6 holdout 一次性运行并清理 + S7 延迟/资源/费用 + S8 网络审计 + S9 报告；
+- **Git 状态**：需 commit + push（`preflight-check.md` S0.3 更新 + 交接文件更新）；
+- **下一窗口**：Builder 本窗口继续（进入 S1 冻结，或返回 Founder 确认后继续）。
 
-## 19. 下一窗口唤醒卡（S0.3 方案 C 连通检查 → S1 冻结）
+## 19. 下一窗口唤醒卡（S0.3 已通过 → S1 冻结统一测试题）
 
 先说人话（30 秒）：
-方案 B 的模型下载好了、也验证能用了。但下一步不是直接造测试题——必须先做方案 C 的连通检查（确认外部模型接口能不能通），这一步通过了才去造并冻结统一的测试题；要是 C 连不通，就只停掉 C，A 和 B 不受影响继续往下走。
+方案 C 的外部模型接口连通检查通过了（能连上、身份验证也通过）。同时发现一个要你拍板的小事：授权卡上写的是 deepseek-chat，但机器里实际配的是 deepseek-v4-flash、接口里也根本没有 deepseek-chat 这个模型名——这个不影响现在，但方案 C 正式跑的时候得确认用哪个。现在三个方案都具备条件了，下一步是造一套统一的测试题并冻结起来，三种方案共用、谁也不许提前偷看。
 
 直接复制给下一个角色（≤10 行短卡）：
 
 目标角色：Builder（本长期会话继续）
-本次唯一目标：先执行 S0.3 方案 C 连通检查（P5-B DeepSeek 连通性只读核验）；只有成功后才进入 S1 冻结统一候选池与 holdout；失败只停止 C，A/B 不受影响、独立继续
-任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md（§7 S0.3/S1）；model-facts.md（B 已就绪）
+本次唯一目标：进入 S1 冻结统一候选池与 holdout（三方案共用，A/B/C 不得提前查看 holdout）
+任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/implementation-plan.md（§7 S1）；preflight-check.md（§S0.3 已通过）；model-facts.md（B 已就绪）
 分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
-允许执行：S0.3 方案 C 连通检查（通过后）S1 冻结候选池/校准集/holdout（仅合成数据）
+允许执行：S1 冻结候选池/校准集/holdout（仅合成数据）
 禁止执行：A/B/C 提前查看 holdout；真实用户数据；超授权外部调用（C 限 DeepSeek 白名单、≤100 次/≤10 元）
-验收：S0.3 通过后，冻结候选池 ≥30 对（相关≥8/无关≥8/混淆≥8/零条≥3 场景/关键记忆≥5），哈希锁定，提交号+时间戳入库
-停止条件：S0.3 失败只停 C（A/B 独立继续）；冻结失效或需超批准范围改动 → 停并上报
+验收：冻结候选池 ≥30 对（相关≥8/无关≥8/混淆≥8/零条≥3 场景/关键记忆≥5），哈希锁定，提交号+时间戳入库
+停止条件：冻结失效或需超批准范围改动 → 停并上报
+待 Founder 确认：方案 C 正式实验模型名（deepseek-chat vs deepseek-v4-flash，容器实际为后者）
