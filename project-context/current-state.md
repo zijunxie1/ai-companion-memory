@@ -2,7 +2,7 @@
 
 > 快照性质：工作状态索引，不替代 Git、代码、数据库、正式契约或任务裁决。
 >
-> 最近只读核验：2026-08-12（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
+> 最近只读核验：2026-08-13（Asia/Shanghai）；核验人：operational-chief-2026-08-12-01（执行 Chief）
 > 核验方式：本地 `git fetch origin main` / `git rev-parse` / `git log` / `git worktree list` / `git status` / `git ls-tree`、正式任务文件、`gh pr list` / `gh pr view`，以及 `E:\task-006-research-tmp\` 公开调研材料；未查询数据库、未调用外部模型。
 > 本快照以本次核验时的 `origin/main @ 6660ca2` 为基础；GOV-CHIEF-001、GOV-COMM-001、GOV-002（含合并后修正 PR #15）、TASK-006 第一/二轮 Spike、第三轮规划（PR #19）均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
@@ -16,7 +16,7 @@
 
 P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。Founder 已选择不外发用户数据的路线 B；**方案 C（外部大模型相关性裁判）已获有条件授权作合成数据效果上限对照（DeepSeek、≤100 次/≤10 元），待 S0.3 连通检查；真实用户记忆外发仍禁止**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已批准（DRAFT v1.1 + 执行模式 persistent_session），方案 B-1 `bge-reranker-base` 已下载核验完成，下一步 = 先执行 S0.3 方案 C 连通检查，通过后进入 S1 冻结**。项目未 CLOSED，未进行生产部署。
 
-## Git 事实（2026-08-12 执行 Chief 重新核验）
+## Git 事实（2026-08-13 执行 Chief 重新核验）
 
 | 项 | 当前核验值 |
 |---|---|
@@ -92,7 +92,7 @@ TASK-006 内部后续规划顺序：
 ## 当前建议动作
 
 1. GOV-002 已实施并合并（PR #14 @ `011168f`）；合并后修正 PR #15 已并入 origin/main（`920ae72`/`5de2714`，统一治理版本 2026-08-12.2）；
-2. **TASK-006 第三轮 Spike 已进入 S0.3 前状态（2026-08-13）**：规划 PR #19 已合并（`6660ca2`）；执行模式 persistent_session 已确认；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（`2cfc18c`，实测 1.13GB，实施分支 `5653240`）；方案 C 已授权（仅合成数据、DeepSeek、≤100 次/≤10 元）、待 S0.3 连通检查。**下一步**：长期 Builder 先执行 **S0.3 方案 C 连通检查**（通过后进入 S1，失败则只停 C，A/B 独立继续）；流程统一为 **S1 冻结 → S2/S3 校准集核验与标注 → S4/S4.5 主实验+补充实验 → S5 方案 C 评估 → S6 机制冻结 → S7 holdout 一次性运行 → S8 延迟/资源测量 → S9 网络审计 → S10 报告**；
+2. **TASK-006 第三轮 Spike 已进入 S0.3 前状态（2026-08-13）**：规划 PR #19 已合并（`6660ca2`）；执行模式 persistent_session 已确认；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（`2cfc18c`，实测 1.13GB，实施分支 `5653240`）；方案 C 已授权（仅合成数据、DeepSeek、≤100 次/≤10 元）、待 S0.3 连通检查。**下一步**：长期 Builder 先执行 **S0.3 方案 C 连通检查**（通过后进入 S1，失败则只停 C，A/B 独立继续）；流程统一为 **S1 冻结 → S2/S3 校准集核验与标注 → S4/S4.5 主实验+补充实验 → S5 机制冻结 → S6 holdout 一次性运行并清理 → S7 延迟/资源/费用 → S8 网络审计 → S9 报告**；
 3. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；真实用户记忆外发、v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
 ## 下一窗口唤醒卡（当前建议）
