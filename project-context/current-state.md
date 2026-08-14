@@ -10,7 +10,7 @@
 
 > 非自动更新：本文件只有在某个角色被 Founder 唤醒并实际写入时才会变化。每次读取必须重新用 Git 和任务文件核对。
 
-> 上下文规则版本：`2026-08-15.2`（本治理变更；未合并前正式主线仍为上一版本，读取时以远端 main 的 `AGENTS.md` 为准）
+> 上下文规则版本：`2026-08-15.3`（本治理变更；未合并前正式主线仍为上一版本，读取时以远端 main 的 `AGENTS.md` 为准）
 
 ## 一句话状态
 
@@ -51,7 +51,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环，E004 �
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
-| GOV-COMM-002 | **IMPLEMENTED（交付通道修正后待定向复审）** | Founder 已批准并授权直接执行 Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复批准边界。首轮技术审查通过，但完整报告倾倒到 Founder 聊天；现已固定为“PR 页存完整报告，Founder 聊天只留大白话结论和短卡”。实施仅在 `codex/gov-founder-alignment`，未合并前不属于正式主线规则 |
+| GOV-COMM-002 | **IMPLEMENTED（第二次真实回复偏差已修正，待定向复审）** | Founder 已批准并授权直接执行 Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复批准边界。首轮回复把完整报告倒进聊天；第二次虽已把报告放对位置，但仍用技术话压缩结果，并在 Founder 尚未决定合并时提前给了合并卡。现已补上“小白能懂”的可验证含义、“当前阶段完成≠下一阶段获批”、旧会话/全局 Skill 不得作为输出模板，以及一次性 Skill 生命周期。实施仅在 `codex/gov-founder-alignment`，未合并前不属于正式主线规则；本机 Hermes 已将两项项目污染 Skill 可恢复归档并开启 Skill 写入审批 |
 | TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致（`c3d73cc` 非本分支历史祖先，仅为来源锚点）。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**。R4 必须使用独立文件和后续独立分支，不得进入本次 R3 收尾。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -104,7 +104,7 @@ TASK-006 内部后续规划顺序：
 
 ## 下一窗口短卡（当前建议）
 
-- **目标角色**：独立 Reviewer（仅在 GOV-COMM-002 实施分支提交后，由 Founder 发送短卡唤醒）。
-- **本次只需要 Reviewer 完成**：定向复核“完整审查报告进 PR Review / Comment，Founder 聊天只留大白话结论、报告位置和短卡”，并确认无范围扩大。
+- **目标角色**：独立 Reviewer（仅在 GOV-COMM-002 本轮修正提交后，由 Founder 发送短卡唤醒）。
+- **本次只需要 Reviewer 完成**：定向复核“小白能懂不等于技术话缩短”“下一步仍待 Founder 决定时不得提前出卡”“旧会话/全局 Skill 不能覆盖仓库规则”，并确认本机一次性 Skill 已退出后续注入。
 - **不得执行**：Reviewer 不修改分支文件、不合并、不启动 R4、不读取 holdout；允许且要求向 PR #26 提交 Review / Comment 作为完整报告。
-- **必须阅读**：`tasks/GOV-COMM-002/draft.md`、`tasks/GOV-COMM-002/implementation-report.md`、`tasks/GOV-COMM-002/reviewer-handoff.md` 及其 required_reading。
+- **必须阅读**：`tasks/GOV-COMM-002/draft.md`、`tasks/GOV-COMM-002/hermes-skill-audit.md`、`tasks/GOV-COMM-002/implementation-report.md`、`tasks/GOV-COMM-002/reviewer-handoff.md` 及其 required_reading。

@@ -19,7 +19,7 @@ review_delivery_channel: <Reviewer 任务必填：PR URL + 允许提交 Review /
 5. **渲染异常降级**：短纯文本卡仍被截断或渲染失败时，正文一句话说明"交接卡渲染失败，请读取交接文档文件路径"；
 6. **未实测不得声称已解决**：任何"渲染问题已解决"的表述必须基于实际验证成功，不得以推测代替验证；
 7. 本规则只约束交接卡的**展示与可复制性**，不改变十七字段语义（字段定义见 `role-wakeup-and-handoff.md` §3.1）。
-8. **Reviewer 特殊交付**：交接文件必须在 `review_delivery_channel` 指定 PR 与 Review / Comment 授权；完整报告发到 PR 页，Founder 聊天只发大白话结论、报告位置和短卡。无可用通道时停止上报，不得将完整报告改倒进聊天。
+8. **Reviewer 特殊交付**：交接文件必须在 `review_delivery_channel` 指定 PR 与 Review / Comment 授权；完整报告发到 PR 页，Founder 聊天只发小白能懂的处境、实际影响、建议和报告位置。若下一步仍待 Founder 决定，不附短卡；决定后才给卡。无可用通道时停止上报，不得将完整报告改倒进聊天。
 
 ```text
 # 交接卡

@@ -11,7 +11,7 @@ required_reading:
   - project-context/handoff-and-task-state-machine.md
   - project-context/templates/role-handoff-template.md
 task_id: GOV-COMM-002
-status: IMPLEMENTED（首轮技术审查通过后修正交付通道；待定向复审；未合并前不属于正式主线事实）
+status: IMPLEMENTED（两次真实回复偏差均已定位并修正；待定向复审；未合并前不属于正式主线事实）
 execution_mode: persistent_session
 assigned_role: Governance Builder
 branch: codex/gov-founder-alignment
@@ -33,6 +33,9 @@ Founder 2026-08-15 已明确批准直接执行以下协作修正：
 - Founder 的选择可唯一解释后，直接输出执行卡或继续执行，不再二次确认；
 - 上下文压缩后必须重新读取正式规则、当前任务/交接和批准边界，不能只凭摘要继续；
 - 规则必须适用于 Chief、Builder、Reviewer、Release / QA 和临时 Agent。
+- “小白能懂”必须让没有项目背景的人知道现在的处境、实际影响、建议和自己只要决定什么，不能把技术词缩短后冒充大白话；
+- Reviewer 的“审查通过/建议合并”不等于 Founder 已批准合并；下一步仍待决定时不得提前给执行卡；
+- Hermes 的全局 Skill、Memory、旧会话和压缩摘要只作定位线索，不得覆盖仓库正式规则或直接充当本次输出模板；一次性项目 Skill 在任务结束后退出后续注入，全局 Skill 写入必须经过批准。
 
 ## 明确未批准
 
@@ -55,7 +58,10 @@ Founder 2026-08-15 已明确批准直接执行以下协作修正：
 - `project-context/templates/role-handoff-template.md`：交互阶段与批准/未批准/待决边界；
 - `project-context/current-state.md`：同步 R3 已合并事实、治理版本和本任务审查入口，避免压缩恢复读取旧状态；
 - 本任务 DRAFT、实现报告和 Reviewer 交接；
+- 本任务 Hermes Skill 污染审计；
 - `project-context/decision-register.md`：记录 Founder 已批准规则。
+
+本机 Hermes 配置与 Skill 归档属于本任务已获批准的运行环境修正，不进入产品代码：对已确认包含项目私有事实和旧回复模板的两项一次性 Skill 先备份后归档，并开启全局 Skill 写入审批。通用代码审查与会话交接 Skill 不做无证据清理。
 
 ## 验收标准
 
@@ -69,8 +75,10 @@ Founder 2026-08-15 已明确批准直接执行以下协作修正：
 8. Chief 在提出新系统/实验/依赖前先核对已有设计、实现、实际接线、运行和测试证据；
 9. 统一治理版本升级，所有强制入口无互相冲突的旧表述；
 10. diff 零产品代码、零数据库、零评测、零 TASK-006 实验证据修改。
-11. Reviewer 完整报告提交到 PR Review / Comment；Founder 聊天只包含大白话结论、真正风险、报告位置和必要的短卡，不再倾倒完整矩阵、扫描或过程清单。
+11. Reviewer 完整报告提交到 PR Review / Comment；Founder 聊天只包含大白话结论、真正风险、建议和报告位置，不再倾倒完整矩阵、扫描或过程清单；仅当下一步已获 Founder 批准时才附必要短卡。
+12. Reviewer 必须把审查结论翻译成实际含义；若 Founder 尚未决定合并/返修/部署，回复只请求这一个决定且不附下一张卡；
+13. 全局 Skill、Memory、旧会话或压缩摘要不得充当正式事实、批准证据或回复模板；项目一次性 Skill 已退出本机后续提示注入，后续 Skill 写入须经批准。
 
 ## Review 策略
 
-全部规则修改完成后只做一次最终独立 Review，审查最终分支头。首轮 Review 的技术结论已通过，但完整报告被倾倒到 Founder 聊天，暴露交付通道未定义。Founder 已授权针对该缺口修正；修正后只定向复审该通道及受影响引用，不重做未受影响的全部技术审查。
+全部规则修改完成后只审查最终分支头。首轮 Review 的技术结论已通过，但完整报告被倾倒到 Founder 聊天；第一次修正后，第二次回复仍把技术话缩短后称为大白话，并在 Founder 尚未决定合并时提前给卡。Founder 已授权定位可观察的判断路径、清理一次性 Skill、补齐规则并再次定向复审；未受影响的产品范围和原技术验收无需重做。
