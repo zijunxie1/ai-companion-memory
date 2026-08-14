@@ -1,0 +1,221 @@
+{
+  "generated_at": "2026-08-14T00:59:10.861Z",
+  "seeds": [
+    {
+      "scenario": "S1_insomnia",
+      "pair_id": "S1-01",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7",
+      "memory": "用户长期失眠，入睡困难",
+      "added_ids": [
+        "7cbb97d4-2fa3-4baa-894e-d8ec2da1d6d7"
+      ]
+    },
+    {
+      "scenario": "S1_insomnia",
+      "pair_id": "S1-03",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7",
+      "memory": "橘猫小橘半夜会跳上床陪用户",
+      "added_ids": [
+        "29126746-5012-4cb1-9a84-f4167ec88dc6"
+      ]
+    },
+    {
+      "scenario": "S1_insomnia",
+      "pair_id": "S1-04",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7",
+      "memory": "用户养了一只橘猫叫小橘，三岁了",
+      "added_ids": [
+        "9d3e2434-bf7d-452c-970d-52e13b338945"
+      ]
+    },
+    {
+      "scenario": "S1_insomnia",
+      "pair_id": "S1-05",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7",
+      "memory": "用户上周办了健身卡，还没去过几次",
+      "added_ids": [
+        "2d0d653c-325e-4a8a-ba88-6a78ef7d95a4"
+      ]
+    },
+    {
+      "scenario": "S1_insomnia",
+      "pair_id": "S1-06",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7",
+      "memory": "用户喜欢看科幻电影",
+      "added_ids": [
+        "ae836ec7-91a2-43ab-beed-9de2ea6b8524"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-01",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户喜欢在晴天去公园散步",
+      "added_ids": [
+        "e86ee513-b323-4e40-a253-03190d7543de"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-02",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户有过敏性鼻炎，换季容易发作",
+      "added_ids": [
+        "92a06982-0d7f-4ae7-b8ac-de42111e36f4"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-03",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户长期失眠，入睡困难",
+      "added_ids": [
+        "0eff9c3f-65d5-4dec-8555-59c6388145c9"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-04",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户养了一只橘猫叫小橘，三岁了",
+      "added_ids": [
+        "e74ead71-3c54-453c-87ab-12f5b974e104"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-05",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户上个月和前任分手了",
+      "added_ids": [
+        "3dca4774-cd5e-4e73-8ad6-68677810dcd6"
+      ]
+    },
+    {
+      "scenario": "S2_weather",
+      "pair_id": "S2-06",
+      "user_id": "eval-spike-r3-s2_weather-te62id",
+      "memory": "用户在公司做后端开发",
+      "added_ids": [
+        "4df0b27c-9c54-471f-b208-6f291cb912b0"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-01",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "用户养了一只橘猫叫小橘，三岁了",
+      "added_ids": [
+        "75ec81aa-704c-4d53-94fe-b05d7c713b2a"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-02",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "用户和小橘感情很深，相处三年",
+      "added_ids": [
+        "60be6514-7eba-4e67-ad8a-3fc6ce552851"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-03",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "橘猫小橘最近食欲不太好",
+      "added_ids": [
+        "bc4bdd88-8a3d-4dab-a008-a572e8f60478"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-04",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "用户最近在减肥，控制饮食",
+      "added_ids": [
+        "a5119ae5-d251-46cd-b6bc-90f777f16e2d"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-05",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "用户的同事也养猫，推荐了一款猫粮",
+      "added_ids": [
+        "30afc8d0-b566-4017-991a-84624eb16bbd"
+      ]
+    },
+    {
+      "scenario": "S3_cat",
+      "pair_id": "S3-06",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh",
+      "memory": "用户买了新的健身器材",
+      "added_ids": [
+        "8430602d-5a71-4b2b-b7db-a55251fe8568"
+      ]
+    },
+    {
+      "scenario": "S5_other_attr",
+      "pair_id": "S5-01",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v",
+      "memory": "用户最近工作压力大，项目赶进度",
+      "added_ids": [
+        "43ac667b-a1c8-4085-bf76-177d8fda8e45"
+      ]
+    },
+    {
+      "scenario": "S5_other_attr",
+      "pair_id": "S5-02",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v",
+      "memory": "用户喜欢通过运动缓解压力",
+      "added_ids": [
+        "f4e8c449-d260-4264-98d8-096b7711d954"
+      ]
+    },
+    {
+      "scenario": "S5_other_attr",
+      "pair_id": "S5-03",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v",
+      "memory": "用户的闺蜜最近失恋了，情绪低落",
+      "added_ids": [
+        "e29fb597-6807-428a-a0b7-66edbd493d6d"
+      ]
+    },
+    {
+      "scenario": "S5_other_attr",
+      "pair_id": "S5-04",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v",
+      "memory": "用户的同事升职了，用户有点失落",
+      "added_ids": [
+        "77551ce6-f700-4fb0-b82d-f1ed4a71d608"
+      ]
+    },
+    {
+      "scenario": "S5_other_attr",
+      "pair_id": "S5-05",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v",
+      "memory": "用户养了一只橘猫叫小橘，三岁了",
+      "added_ids": [
+        "fc23667f-3c6b-446d-809b-5f6f98d2d24f"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "scenario": "S1_insomnia",
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7"
+    },
+    {
+      "scenario": "S2_weather",
+      "user_id": "eval-spike-r3-s2_weather-te62id"
+    },
+    {
+      "scenario": "S3_cat",
+      "user_id": "eval-spike-r3-s3_cat-zno2wh"
+    },
+    {
+      "scenario": "S5_other_attr",
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v"
+    }
+  ]
+}

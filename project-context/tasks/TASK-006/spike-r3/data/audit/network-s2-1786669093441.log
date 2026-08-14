@@ -1,0 +1,22 @@
+[
+  {
+    "ts": "2026-08-14T00:58:13.442Z",
+    "event": "verify",
+    "parent_hash_ok": true,
+    "calibration_pairs": 22
+  },
+  {
+    "ts": "2026-08-14T00:58:29.150Z",
+    "event": "seed",
+    "count": 22,
+    "method": "docker exec mem0 SDK add(infer=False)",
+    "external": false
+  },
+  {
+    "ts": "2026-08-14T00:58:29.151Z",
+    "event": "scheme_a_search",
+    "endpoint": "http://127.0.0.1:8100/memories/search",
+    "external": false,
+    "note": "3 rounds per scene"
+  }
+]
