@@ -3,7 +3,7 @@
 ```yaml
 freeze_type: candidate_pool
 freeze_timestamp: 2026-08-14T08:44:10+08:00（UTC 2026-08-14T00:44:10Z）
-git_commit: <待 S1.4 提交后回填>
+git_commit: 6b1cb17885414fe01634c1a5741db1ea79cc023b（S1 冻结提交）
 content_hash: sha256=70994185911dee85aa16bb1d6707be0385cb769e64e7d2cb7fce6ec318a3bff4
 frozen_object: candidate-pool-definition.json（本目录，唯一事实；冻结后不得修改）
 spike_id: TASK-006-SPIKE-LOCAL-GATE-R3

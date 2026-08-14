@@ -7,7 +7,7 @@ check_date: 2026-08-13（Asia/Shanghai）
 checker: Builder（TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike）
 plan_commit: 7996847（实施计划 v1.1）
 branch: feature/task-006-r3-spike
-conclusion: 共享依赖 P1-P4/P6 通过；方案 B 已下载核验（B-1 bge-reranker-base）；方案 C S0.3 连通检查通过（HTTP 200，认证通过，模型 deepseek-v4-flash/pro，含模型名差异需 Founder 澄清）；docker diff 无产品代码改动
+conclusion: 共享依赖 P1-P4/P6 通过；方案 B 已下载核验（B-1 bge-reranker-base）；方案 C S0.3 连通检查通过（HTTP 200，认证通过，模型已裁决为 deepseek-v4-flash）；docker diff 无产品代码改动
 ```
 
 ## 核验结果
@@ -63,7 +63,7 @@ conclusion: 共享依赖 P1-P4/P6 通过；方案 B 已下载核验（B-1 bge-re
 
 1. **共享依赖 P1–P4、P6 全部通过** → 方案 A（零新增依赖基线）可执行；
 2. **方案 B 已下载核验完成** → B-1 `bge-reranker-base`（固定 sha `2cfc18c...`）可执行（见 `model-facts.md`）；
-3. **方案 C S0.3 连通检查通过** → 接口可连接 + 认证通过（HTTP 200）；但模型名存在事实差异（授权卡 `deepseek-chat` vs 容器实际 `deepseek-v4-flash`，API 无 `deepseek-chat`），方案 C 正式实验前需 Founder 确认模型名（Builder 不自行决定）；
+3. **方案 C S0.3 连通检查通过** → 接口可连接 + 认证通过（HTTP 200）；模型名已由 Founder 裁决为 `deepseek-v4-flash`（仅限本次合成数据 Spike）；
 4. **完成度分档**（DRAFT §8.0）：三方案均已获授权并具备执行条件 → 待 S1 冻结后进入完整对比实验。
 
 ## 下一步（S0.3 已通过，进入 S1 冻结统一测试题）
