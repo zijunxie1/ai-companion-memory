@@ -19,13 +19,13 @@ task_id: GOV-COMM-002
 status: IMPLEMENTED（两次真实回复偏差已修正；待第三次定向复审）
 interaction_stage: handoff
 branch: codex/gov-founder-alignment
-target_role: 独立 Reviewer
+target_role: 新开独立 Reviewer 窗口（不得复用前两次 Reviewer 会话）
 review_delivery_channel: PR #26 Review / Comment（已授权提交完整报告，不得修改分支）
 ```
 
 ## 1. 目标角色
 
-独立 Reviewer，定向复审“小白实际含义、决定前不出卡、旧 Skill/旧会话隔离”修正；不修改被审分支，但已明确授权向 PR #26 提交 Review / Comment。
+新开独立 Reviewer 窗口，定向复审“小白实际含义、决定前不出卡、旧 Skill/旧会话隔离”修正；不得复用前两次 Reviewer 会话，因为旧窗口可能保留启动时快照。Reviewer 不修改被审分支，但已明确授权向 PR #26 提交 Review / Comment。
 
 ## 2. 项目位置
 
@@ -96,7 +96,7 @@ P1 治理层 → Founder 沟通与角色交接修正 → 实施完成、尚未�
 ## 13. 具体步骤
 
 1. 从远端核对正式主线、PR #26 最终 head 与 `e225347..最终 head` 定向 diff；
-2. 完整读取 required_reading，但只重复检查受定向修正影响的规则；
+2. 确认这是归档两项污染 Skill 后启动的新窗口；完整读取 required_reading，但只重复检查受定向修正影响的规则；
 3. 对照 DRAFT 验收 12/13，逐条推演场景 H/I/J；不得只扫描关键词，必须写出一个小白即使不懂 PR、版本、分支和状态缩写也能判断的示例回复；
 4. 核对 `hermes-skill-audit.md` 的会话路径、Skill 归档、启用清单和 `skills.write_approval=true`；不要声称能读取未公开思考；
 5. 确认统一版本 `2026-08-15.3`、术语和引用一致，diff 仍为纯治理范围；

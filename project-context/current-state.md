@@ -104,7 +104,7 @@ TASK-006 内部后续规划顺序：
 
 ## 下一窗口短卡（当前建议）
 
-- **目标角色**：独立 Reviewer（仅在 GOV-COMM-002 本轮修正提交后，由 Founder 发送短卡唤醒）。
+- **目标角色**：新开独立 Reviewer 窗口（仅在 GOV-COMM-002 本轮修正提交后，由 Founder 发送短卡唤醒；不得复用刚才可能保留旧 Skill/旧规则快照的 Reviewer 窗口）。
 - **本次只需要 Reviewer 完成**：定向复核“小白能懂不等于技术话缩短”“下一步仍待 Founder 决定时不得提前出卡”“旧会话/全局 Skill 不能覆盖仓库规则”，并确认本机一次性 Skill 已退出后续注入。
 - **不得执行**：Reviewer 不修改分支文件、不合并、不启动 R4、不读取 holdout；允许且要求向 PR #26 提交 Review / Comment 作为完整报告。
 - **必须阅读**：`tasks/GOV-COMM-002/draft.md`、`tasks/GOV-COMM-002/hermes-skill-audit.md`、`tasks/GOV-COMM-002/implementation-report.md`、`tasks/GOV-COMM-002/reviewer-handoff.md` 及其 required_reading。
