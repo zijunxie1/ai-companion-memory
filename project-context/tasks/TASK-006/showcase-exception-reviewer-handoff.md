@@ -50,9 +50,9 @@ Founder 2026-08-14 采纳决策 Chief 对选项 A 的裁决：作品集展示阶
 ## 5. 当前事实（已核验）
 
 - **远端正式主线**：`origin/main` @ `12b2ef8`（PR #20 已合并后的最新头）；
-- **PR #22**：`feature/task-006-showcase-exception` @ `633aca0`，base = `main`，状态 OPEN；
-- **PR #22 改动**：仅 5 个治理文档（+36/−17），**零产品代码、零 Schema、零评测、零权限改动**；
-- 待改文件清单：`decision-register.md`、`tasks/TASK-006/route-b-decision.md`、`product.md`、`current-state.md`、`project-mainline-roadmap.md`；
+- **PR #22**：`feature/task-006-showcase-exception`，base = `main`，状态 OPEN；当前 head 以远端 PR 实时结果为准。首次 Review 的核验快照为 `6cebeef`，本修复提交会使 head 继续前移，快照不得当作当前头；
+- **PR #22 改动范围**：原 5 个治理文档 + `AGENTS.md` 统一规则版本修正 + 本交接包，共 7 个文件；**零产品代码、零 Schema、零评测、零权限改动**。行数统计同样以远端 PR 实时结果为准；首次 Review 快照为 +168/−17（含本交接包 132 行），本修复后会变化，不再把固定统计写成当前事实；
+- 文件清单：`AGENTS.md`（仅 C1 版本）、`decision-register.md`、`tasks/TASK-006/route-b-decision.md`、`product.md`、`current-state.md`、`project-mainline-roadmap.md`、本交接包；
 - **裁决核心**（D-T006-SHOWCASE-EXCEPTION）：展示阶段取消真实查询+候选记忆外发限制；例外仅限 Founder 个人展示、不适用于未来正式产品或其他用户；未来产品化判断模型优先本机、恢复路线 B；**方案 C 运行授权未包含在本裁决内**；
 - 相关执行分支证据（未合入 main，仅作背景）：`feature/task-006-r3-spike` @ `ad581f6`（方案 A/B 校准均候选级停止）。
 
