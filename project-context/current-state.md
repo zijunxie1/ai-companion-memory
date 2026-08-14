@@ -72,9 +72,12 @@ TASK-006 内部后续规划顺序：
 
 ```text
 （治理顺序完成后）本地 Gate Spike（第一/二/三轮已执行，均 STOPPED/FAILED）
-→（第三轮停止后）第四轮「上下文记忆可用性判断」方案草案审批（D-T006-R4-DIRECTION，独立分支）
-→（第四轮草案通过后）新 Change Request + 新实施计划 + Founder 批准
-→ 产品实现与独立 Review
+→（第三轮停止后）第四轮「上下文记忆可用性判断」R4 DRAFT 审批（D-T006-R4-DIRECTION，独立分支）
+→ 执行模式判断
+→ 实验实施计划 Review
+→ 使用新数据执行 R4 Spike
+→ 独立 Review
+→ Founder 决定是否进入产品化
 ```
 
 该内部顺序不改变项目主线；TASK-006 未完成时，不默认绕过它启动 TASK-007 或 TASK-005B。
