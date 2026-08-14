@@ -2,7 +2,7 @@
 
 > 本文件是所有 AI Agent 进入本项目时的强制执行章程。
 > 完整项目上下文入口见 `project-context/context-manifest.md`。
-> 规则版本（统一治理包版本，C1）：`2026-08-15.1`
+> 规则版本（统一治理包版本，C1）：`2026-08-15.2`
 
 ## 每次工作前的强制阅读
 
@@ -24,7 +24,7 @@
 5. `project-context/product.md`（已批准的产品目标与成功标准）；
 6. `project-context/project-mainline-roadmap.md`（项目主线、优先级、角色窗口与偏航恢复规则）；
 7. `project-context/handoff-and-task-state-machine.md`（状态机、Review 门和交接规则）；
-8. `project-context/agent-response-protocol.md`（Founder 友好回复与决策完整性规范）；
+8. `project-context/agent-response-protocol.md`（Founder 对话与 Agent 执行交接规范）；
 9. `project-context/role-wakeup-and-handoff.md`（非驻留 Agent 的唤醒、休眠检查点和人工接力规则）；
 10. `project-context/decision-register.md`（已批准、待决、暂停和否决的重大决策）；
 11. 当前任务目录下的 DRAFT、决策、验收标准、最新交接包和 Review 结论；
@@ -73,6 +73,7 @@
 - **明确决定直接执行**：Founder 的选择可唯一解释时，直接进入执行或输出交接卡，不再要求二次确认、不发送“决定回执”；只有真实歧义时才用一句话澄清；
 - **密度自适应**：简单事项（L1）通常 3—5 句；普通交接（L2）为 2—4 句说明 + ≤10 行短卡；复杂事项（L3）才分层展开。不得机械拆成七八个栏目，也不得把全部内容挤成文字墙；
 - **呈现按关系选择**：单一事实用短段落，方案比较最多一张小表，前后依赖最多一张小图；技术证据放附录或交接文件；
+- **Reviewer 两通道交付**：完整审查报告必须提交到 PR 的 Review / Comment，不得把验收矩阵、日志和问题全文倾倒到 Founder 聊天；聊天只保留大白话结论、必须决策的风险、报告位置和下一张短卡。提交 PR Review / Comment 是审查证据交付，不属于修改被审分支；
 - 第一部分必须是 `## 先说人话（30 秒）`，禁止出现 commit SHA、Git 命令、文件路径、PR 编号、Worktree、Schema、状态机缩写和未解释的英文术语；
 - 提出新系统、新实验或新依赖前，必须先核对已有设计、已有实现、实际接线、运行和测试证据；不得把接线故障包装成新能力建设；
 - 无需 Founder 操作时明确写“你现在不需要操作”；相同事件或状态未变化的通知只汇报一次；回复前在内部执行协议自检，不向 Founder展示检查清单。
@@ -80,7 +81,7 @@
 **唯一权威来源映射**（正文只在权威文件出现一次，其他文件只引用）：
 
 - 回复格式（L1/L2/L3 与全部模板）→ `project-context/agent-response-protocol.md`；
-- 交接流程（交接卡结构、唤醒卡、交接检查点）→ `project-context/role-wakeup-and-handoff.md`；交接卡填写模板 → `project-context/templates/role-handoff-template.md`；
+- 交接流程（交接卡结构、短卡、交接检查点）→ `project-context/role-wakeup-and-handoff.md`；交接卡填写模板 → `project-context/templates/role-handoff-template.md`；
 - 启动与恢复流程（新窗口继承顺序、上下文压缩恢复、启动回执）→ `project-context/context-manifest.md`。
 
 重要状态变化必须同步更新 `project-context/current-state.md`；重大决策必须同步更新 `project-context/decision-register.md`。未写入文件的聊天结论不得作为跨会话长期事实。
@@ -89,12 +90,12 @@
 
 默认所有角色窗口都是休眠的：只有 Founder 向该窗口发送消息后，Agent 才开始工作。不得声称 Chief、Builder、Reviewer 或 Release 会自动监听、自动接力或自动检查过程。
 
-- 当前活跃角色在休眠前必须按 `project-context/role-wakeup-and-handoff.md` 落盘状态并输出“下一窗口唤醒卡”；
-- Founder 决定是否以及何时把唤醒卡发送给下一角色；
+- 当前活跃角色在休眠前必须按 `project-context/role-wakeup-and-handoff.md` 落盘状态并输出“下一窗口短卡”；
+- Founder 决定是否以及何时把短卡发送给下一角色；
 - 下一角色被唤醒后重新读取项目文件并输出启动回执；
 - Reviewer 只在被 Founder 唤醒后执行事后 Review 门，不是持续监督者；
 - 没有活跃 Agent 时，`current-state.md`、决策登记和任务状态不会自动更新；
-- 普通 Hermes 编码会话通常在启动时注入根目录 `AGENTS.md`，但使用的是启动时快照；旧会话可能保留旧规则，且被引用的 `project-context` 文件不会自动全部读取。因此每张唤醒卡仍必须显式要求核对 `AGENTS.md` 版本并读取 `context-manifest.md`；重大规则更新后必要时新开同角色窗口。
+- 普通 Hermes 编码会话通常在启动时注入根目录 `AGENTS.md`，但使用的是启动时快照；旧会话可能保留旧规则，且被引用的 `project-context` 文件不会自动全部读取。因此每张短卡仍必须显式要求核对 `AGENTS.md` 版本并读取 `context-manifest.md`；重大规则更新后必要时新开同角色窗口。
 
 ## 角色与权限
 
@@ -102,7 +103,7 @@
 - **执行 Chief of Staff**（日常 Chief）：分析、质疑、拆解、规划、协调。不自行改变产品目标、不合并主分支、不部署、不接触密钥。遇八类升级事项（产品目标/隐私合规/主线/延迟目标/新依赖/范围扩大/证据冲突/TASK-006 重定义）**不得自行收敛**，必须停止相关写操作、形成升级卡，由 Founder 人工转发到决策 Chief 窗口；执行 Chief 不能自动联系、唤醒或假定决策 Chief 已看到升级内容（详见 `project-context/role-wakeup-and-handoff.md` §5.1）。身份与拆分关系以 `project-context/CHIEF-BOOTSTRAP.md` 为准。
 - **决策 Chief of Staff**（原 Chief 窗口）：只裁决升级卡中的唯一问题，不接管日常执行；结论只有经 Founder 明确采纳后才生效。Founder 仍是唯一最终审批人。
 - **Builder Agent**：在独立分支实现，增加测试，通过构建和检查。不直接修改主分支，不超范围修改。
-- **Reviewer Agent**：独立审查，对照验收标准检查。默认只审查不修改代码。
+- **Reviewer Agent**：独立审查，对照验收标准检查。默认不修改被审分支；可按交接授权向 PR 提交 Review / Comment 作为完整审查证据。
 - **Release / QA Agent**：部署验证、健康检查、冒烟测试。生产部署仍需用户批准。
 
 > 非驻留边界：所有角色窗口默认休眠，只有 Founder 向对应窗口发送消息后才会工作。不存在自动监听、自动接力、自动 Review 或自动状态更新（见 `project-context/role-wakeup-and-handoff.md`）。

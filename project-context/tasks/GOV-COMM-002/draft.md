@@ -11,7 +11,7 @@ required_reading:
   - project-context/handoff-and-task-state-machine.md
   - project-context/templates/role-handoff-template.md
 task_id: GOV-COMM-002
-status: IMPLEMENTED（待独立 Review；未合并前不属于正式主线事实）
+status: IMPLEMENTED（首轮技术审查通过后修正交付通道；待定向复审；未合并前不属于正式主线事实）
 execution_mode: persistent_session
 assigned_role: Governance Builder
 branch: codex/gov-founder-alignment
@@ -69,7 +69,8 @@ Founder 2026-08-15 已明确批准直接执行以下协作修正：
 8. Chief 在提出新系统/实验/依赖前先核对已有设计、实现、实际接线、运行和测试证据；
 9. 统一治理版本升级，所有强制入口无互相冲突的旧表述；
 10. diff 零产品代码、零数据库、零评测、零 TASK-006 实验证据修改。
+11. Reviewer 完整报告提交到 PR Review / Comment；Founder 聊天只包含大白话结论、真正风险、报告位置和必要的短卡，不再倾倒完整矩阵、扫描或过程清单。
 
 ## Review 策略
 
-全部规则修改完成后只做一次最终独立 Review，审查最终分支头。非结论性排版偏好不得触发重复审查；只有影响权限、批准边界、压缩恢复、交接完整性或规则互相矛盾的问题才要求修改。
+全部规则修改完成后只做一次最终独立 Review，审查最终分支头。首轮 Review 的技术结论已通过，但完整报告被倾倒到 Founder 聊天，暴露交付通道未定义。Founder 已授权针对该缺口修正；修正后只定向复审该通道及受影响引用，不重做未受影响的全部技术审查。

@@ -320,16 +320,12 @@ Builder 完成后由独立 Reviewer 执行。
 
 ### Reviewer → 用户
 
-必须提供：
+分两个通道提供，不得把完整技术审查倾倒到 Founder 聊天：
 
-- 审查结论；
-- BLOCKER / MAJOR / MINOR / SUGGESTION；
-- 验收标准逐项结果；
-- 权限和安全结论；
-- 测试充分性；
-- 是否超范围；
-- 是否建议合并；
-- 剩余风险。
+1. **PR Review / Comment（完整报告）**：审查结论；BLOCKER / MAJOR / MINOR / SUGGESTION；验收标准逐项结果；权限和安全结论；测试充分性；是否超范围；是否建议合并；剩余风险。Reviewer 提交这份报告不等于修改被审分支。
+2. **Founder 聊天（简短结果）**：3—5 句大白话说明能否继续、真正风险和建议；给出完整报告的 PR 位置；需接力时再附 ≤10 行短卡。
+
+若没有 PR 或 Reviewer 无权提交 Review / Comment，必须停止并请求指定审查证据通道，不得把 Founder 聊天当成完整报告存储位置。
 
 ### 用户 → Release / QA
 
