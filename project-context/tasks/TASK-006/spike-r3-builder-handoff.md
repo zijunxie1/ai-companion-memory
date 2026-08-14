@@ -167,11 +167,11 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 
 - **已完成**：启动回执；Review 2 实施计划 v1.0 → v1.1；S0 预装检查；方案 B-1 下载核验；S0.3 方案 C 连通检查；模型名裁决 `deepseek-v4-flash`；S1 候选池冻结（32 对，SHA256 `70994185...`）；**S2/S3 校准完成**（`calibration-result.md`）；
 - **S2 采集结果**：校准 22 对，方案 A 三轮 mem0 检索（波动 0，三轮完全一致）；方案 B cross-encoder 本地推理；种子 22 条 infer=False 写入、22/22 清理核验清零；全程 loopback，外部请求 0；holdout 10 对零运行；
-- **S3 校准结果**：方案 A 分离边际 **-0.2323**（≤0.1，候选级停止）；方案 B 分离边际 **-0.3794**（≤0.1，候选级停止）；两者 F1 均约 0.7 但为"阈值选在重叠区"假象（R3 根因复现）；方案 B 独立门漏 3 条关键记忆（失眠↔养猫隐式关联类）；
-- **三方案状态**：A（候选级停止：分离边际 -0.2323）❌；B-1（候选级停止：分离边际 -0.3794 + 独立门漏 3 关键）❌；C（未执行校准：deepseek-v4-flash 待正式主线决策登记同步）⏸️；
+- **S3 校准结果**：方案 A 分离边际 **-0.2323**（≤0.1，候选级停止）；方案 B 分离边际 **-0.3794**（≤0.1，候选级停止）；两者 F1 均约 0.7 但为"阈值选在重叠区"假象（R3 根因复现）；方案 B 独立门漏 3 个关键候选配对（涉及 2 条不同关键记忆 K1、K4，失眠↔养猫隐式关联类）；
+- **三方案状态**：A（候选级停止：分离边际 -0.2323）❌；B-1（候选级停止：分离边际 -0.3794 + 独立门漏 3 配对，涉及 K1/K4）❌；C（未执行校准：deepseek-v4-flash 待正式主线决策登记同步）⏸️；
 - **当前阻塞**：方案 A/B 均触发候选级停止；方案 C 需先同步正式决策登记（deepseek-v4-flash）后才可校准；
-- **下一步**：返回 Founder 裁决（A/B 不达标 + C 待决策同步）→ 是否继续/缩范围/停止；
-- **Git 状态**：需 commit + push（新增 calibration-only-definition.json、calibration-result.md、scripts/ 4 个、data/calibration/ 5 个、data/audit/ 2 个 + 交接文件更新）；
+- **下一步**：返回 Founder 裁决（A/B 不达标 + C 待决策同步）→ 是否继续/缩范围/停止；**A/B 已候选级停止，Builder 不得继续调参、不得缩小验收范围、不得进入 S4**；
+- **Git 状态**：已提交并推送（HEAD = origin/feature/task-006-r3-spike @ `93ac59b`，包含 calibration-only-definition.json、calibration-result.md、scripts/ 4 个、data/calibration/ 5 个、data/audit/ 2 个 + 交接文件更新）；
 - **下一窗口**：Founder（裁决 A/B 不达标后的去向）。
 
 ## 19. 下一窗口唤醒卡（S2/S3 完成 → Founder 裁决去向）
@@ -186,6 +186,6 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 任务与交接文件路径：project-context/tasks/TASK-006/spike-r3/calibration-result.md（§6-7 结论）
 分支：feature/task-006-r3-spike（worktree E:/task-006-r3-spike-worktree）
 允许执行：Founder 裁决
-禁止执行：Builder 在裁决前不进入 S4 主实验、不执行方案 C 校准、不读取 holdout
+禁止执行：Builder 在裁决前不进入 S4 主实验、不执行方案 C 校准、不读取 holdout；A/B 已候选级停止，不得继续调参、不得缩小验收范围
 验收：Founder 明确选择——继续（需指定方向）/ 缩范围 / 停止本轮
 停止条件：A/B 分离边际 -0.2323/-0.3794 已触发候选级停止；C 待正式决策登记同步
