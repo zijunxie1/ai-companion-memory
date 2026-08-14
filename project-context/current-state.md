@@ -4,25 +4,25 @@
 >
 > 最近只读核验：2026-08-14（Asia/Shanghai）；核验人：Builder（TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike）＋ 治理同步
 > 核验方式：本地 `git fetch origin main` / `git rev-parse` / `git log` / `git worktree list` / `git status`；正式任务文件与执行分支证据；未查询数据库、未调用外部模型（S0.3 连通检查除外，见 D-T006-R3-C-EXT）。
-> 本快照以本次核验时的 `origin/main @ 12b2ef8` 为基础；GOV-CHIEF-001、GOV-COMM-001、GOV-002（含合并后修正 PR #15）、TASK-006 第一/二轮 Spike、第三轮规划（PR #19）与第三轮治理落盘（D-T006-R3-EXEC / -B-MODEL / -C-EXT）均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
+> 本快照以本次核验时的 `origin/main @ 8994593` 为基础；GOV-CHIEF-001、GOV-COMM-001、GOV-002（含合并后修正 PR #15）、TASK-006 第一/二轮 Spike、第三轮规划（PR #19）、第三轮治理落盘（D-T006-R3-EXEC / -B-MODEL / -C-EXT）与作品集展示阶段数据外发临时例外（D-T006-SHOWCASE-EXCEPTION，PR #22）均已合入。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
 > 非自动更新：本文件只有在某个角色被 Founder 唤醒并实际写入时才会变化。每次读取必须重新用 Git 和任务文件核对。
 
-> 上下文规则版本：`2026-08-12.2`
+> 上下文规则版本：`2026-08-14.1`
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。**2026-08-14 作品集展示阶段数据外发临时例外已批准（D-T006-SHOWCASE-EXCEPTION）：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；方案 C 运行授权未包含在内**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已批准（DRAFT v1.1 + 执行模式 persistent_session）：S1 候选池已冻结（32 对）、S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；方案 C 运行授权未包含在展示例外内、合入前禁止运行 C**。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。**2026-08-14 作品集展示阶段数据外发临时例外已批准（D-T006-SHOWCASE-EXCEPTION）：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；方案 C 运行授权未包含在内**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已批准（DRAFT v1.1 + 执行模式 persistent_session）：S1 候选池已冻结（32 对）、S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；方案 C 运行授权未包含在展示例外内，PR #21 合入仅同步状态、不构成方案 C 运行授权，运行仍待 Founder 单独批准**。项目未 CLOSED，未进行生产部署。
 
-## Git 事实（2026-08-13 执行 Chief 重新核验）
+## Git 事实（2026-08-14 Builder 重新核验）
 
 | 项 | 当前核验值 |
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，核验以 `git fetch origin main` 结果为准） |
-| `origin/main`（本次核验快照） | `12b2ef8`（含第三轮治理落盘 D-T006-R3-EXEC / -B-MODEL / -C-EXT，2026-08-13/14；含 GOV-002 合并后修正 PR #15 `5de2714`、TASK-006 第一/二轮 Spike；读取时必须重新核验最新 tip） |
+| `origin/main`（本次核验快照） | `8994593`（含第三轮治理落盘 D-T006-R3-EXEC / -B-MODEL / -C-EXT 与展示阶段例外 D-T006-SHOWCASE-EXCEPTION PR #22，2026-08-13/14；含 GOV-002 合并后修正 PR #15 `5de2714`、TASK-006 第一/二轮 Spike；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 44+ / master 独有 0（merge-base = master HEAD `064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
@@ -32,7 +32,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-002 | **已合并（含合并后修正 PR #15）**：PR #14 @ `011168f` + 合并后修正 PR #15 @ `5de2714`（A 类遗留 MA1/M1—M4 + B 类展示结构，统一治理版本 2026-08-12.2）均已 Rebase 合并进 `origin/main`；PR #15 状态 MERGED，不再待复审 |
 | TASK-006 规划分支 | `feature/task-006-draft` @ `982d8a1`（Worktree `E:/task-006-plan-worktree`，干净；历史规划分支，DRAFT 已以 `0762a17` 进入 origin/main） |
 | TASK-006 实施分支 | `feature/task-006-e004-gate` 指向 `0762a17`（历史分支，未推进；无实施 Worktree、无产品实现差异） |
-| 其他 Worktree | `E:/gov-001-worktree` 干净；`E:/gov-001b-worktree` 干净；`E:/gov-001c-worktree` 有历史治理改动；`E:/task-005a-worktree` 干净；全部保持不动 |
+| 其他 Worktree | `E:/gov-001-worktree` 干净；`E:/gov-001b-worktree` 干净；`E:/gov-001c-worktree` 有历史治理改动；`E:/task-005a-worktree` 干净；`E:/task-006-r3-spike-worktree`（执行分支 `feature/task-006-r3-spike`，含 S2/S3 校准证据）；`E:/task-006-r3-gov-sync-worktree`（本治理同步分支）；`E:/task-006-showcase-worktree`（展示阶段例外分支 `feature/task-006-showcase-exception`，已合入 main）；全部保持不动 |
 
 主线已收敛为 `main`；`master` 是 `main` 的祖先。禁止 force push。本轮治理分支不承载产品代码。
 
@@ -51,7 +51,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
-| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike APPROVED，方案 A/B 校准均候选级停止，方案 C 已授权待 S0.3 连通检查** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端）分表；完成度分档；关键记忆防漏独立门。**当前进展**：规划 PR #19 已合并（`6660ca2`）；执行模式 = persistent_session 已确认（D-T006-R3-EXEC）；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（D-T006-R3-B-MODEL）；**S1 候选池已冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准完成：方案 A 分离边际 −0.2323、方案 B −0.3794，双双候选级停止**（执行分支证据 `feature/task-006-r3-spike` @ `ad581f6`）；**S0.3 方案 C 连通检查已通过**（模型 deepseek-v4-flash，D-T006-R3-C-EXT）。**方案 C 运行授权未包含在展示例外内**（D-T006-SHOWCASE-EXCEPTION）：**#21 合入前禁止运行 C；A/B 已候选级停止，不得继续调参或缩小验收**。**2026-08-14 展示阶段例外**：展示阶段允许方案 C 处理 Founder 自有真实数据，未来产品化改回本地。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -EXEC / -B-MODEL / -C-EXT / -SHOWCASE-EXCEPTION |
+| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike APPROVED，方案 A/B 校准均候选级停止，方案 C 已授权、S0.3 连通检查已通过** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端）分表；完成度分档；关键记忆防漏独立门。**当前进展**：规划 PR #19 已合并（`6660ca2`）；执行模式 = persistent_session 已确认（D-T006-R3-EXEC）；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（D-T006-R3-B-MODEL）；**S1 候选池已冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准完成：方案 A 分离边际 −0.2323、方案 B −0.3794，双双候选级停止**（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）；**S0.3 方案 C 连通检查已通过**（模型 deepseek-v4-flash，D-T006-R3-C-EXT）。**方案 C 运行授权未包含在展示例外内**（D-T006-SHOWCASE-EXCEPTION）：**本 PR #21 合入仅同步状态，不构成方案 C 运行授权，运行仍待 Founder 单独批准；A/B 已候选级停止，不得继续调参或缩小验收**。**2026-08-14 展示阶段例外**：展示阶段允许方案 C 处理 Founder 自有真实数据，未来产品化改回本地。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -EXEC / -B-MODEL / -C-EXT / -SHOWCASE-EXCEPTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
 
@@ -93,7 +93,7 @@ TASK-006 内部后续规划顺序：
 
 1. GOV-002 已实施并合并（PR #14 @ `011168f`）；合并后修正 PR #15 已并入 origin/main（`920ae72`/`5de2714`，统一治理版本 2026-08-12.2）；
 2. **作品集展示阶段数据外发临时例外已批准（2026-08-14，D-T006-SHOWCASE-EXCEPTION）**：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；本轮执行 Chief 落地纯治理同步（本文件 + product.md + route-b-decision.md + decision-register.md + project-mainline-roadmap.md）；**方案 C 的运行授权未包含在内**，需另一次单独审批；
-3. **TASK-006 第三轮 Spike 状态**：S1 候选池已冻结（32 对）；S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止（执行分支证据 `feature/task-006-r3-spike` @ `ad581f6`）；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；**#21 合入前禁止运行 C；A/B 已候选级停止，不得继续调参或缩小验收**；
+3. **TASK-006 第三轮 Spike 状态**：S1 候选池已冻结（32 对）；S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；**PR #21 合入仅同步状态，不构成方案 C 运行授权，运行仍待 Founder 单独批准；A/B 已候选级停止，不得继续调参或缩小验收**；
 4. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
 ## 下一窗口唤醒卡（当前建议）
@@ -101,4 +101,4 @@ TASK-006 内部后续规划顺序：
 - **目标角色**：独立 Reviewer（Review 本治理 PR #21）。
 - **本次只需要 Reviewer 完成**：核对 PR #21 状态同步与最新主线（含展示阶段例外 D-T006-SHOWCASE-EXCEPTION）一致、方案 C 运行授权未包含在内、A/B 已候选级停止且禁止调参/缩验收。
 - **不得执行**：运行方案 C、创建实施分支、唤醒 Builder、下载模型或调用外部服务、修改产品代码。
-- **必须阅读**：`decision-register.md`（D-T006-R3-SPIKE / -C-EXT / -SHOWCASE-EXCEPTION）、`current-state.md`、`tasks/TASK-006/spike-r3/calibration-result.md`（执行分支证据 `feature/task-006-r3-spike` @ `ad581f6`）。
+- **必须阅读**：`decision-register.md`（D-T006-R3-SPIKE / -C-EXT / -SHOWCASE-EXCEPTION）、`current-state.md`、`tasks/TASK-006/spike-r3/calibration-result.md`（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）。
