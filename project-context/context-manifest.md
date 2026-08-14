@@ -17,13 +17,13 @@
 5. `project-context/product.md` — 已批准的产品目标和成功标准；
 6. `project-context/project-mainline-roadmap.md` — 主线顺序、角色边界和偏航恢复；
 7. `project-context/handoff-and-task-state-machine.md` — 状态机和交接规则；
-8. `project-context/agent-response-protocol.md` — Founder 友好回复和决策完整性规则（回复分级 L1/L2/L3 唯一权威）；
+8. `project-context/agent-response-protocol.md` — Founder 对话/Agent 交接分离、回复密度和决策后直接交接规则（唯一权威）；
 9. `project-context/role-wakeup-and-handoff.md` — 休眠窗口的人工唤醒和交接规则（交接卡结构唯一权威）；
 10. `project-context/decision-register.md` — 已批准、待决和否决的重大决策；
 11. 当前任务目录中的最新 DRAFT、裁决、交接包和 Review；
 12. 当前任务涉及的正式契约、实现和测试。
 
-新 Agent 不得向 Founder 重复整份背景：只需简短确认理解（先说人话 + 启动回执），然后直接执行。
+新 Agent 不得向 Founder 重复整份技术背景：先按 `agent-response-protocol.md` 用与问题难度相称的大白话说明它将做什么、不会做什么，再提交启动回执。完整技术事实由 Agent 自己从交接文件读取，不倾倒给 Founder。
 
 如果文件内容与 Git、代码、数据库或测试冲突，以“停止写操作并上报”为准，不自行选择一个版本继续。
 
@@ -53,6 +53,8 @@
 核验后的正式主线提交（C3，远端头；本地 origin/main 仅在与远端头一致时记录）：
 上下文来源声明（C6，本窗口实际读取来源：正式主线文件 / 远端 / 聊天）：
 当前任务与状态：
+当前交互阶段：讨论 / 已决定 / 交接或执行
+Founder 已明确批准 / 未批准 / 待决：
 当前分支 / Worktree / 工作区是否干净：
 本窗口允许执行：
 本窗口禁止执行：
@@ -166,7 +168,7 @@ Chief 类型：执行 Chief（日常职责）/ 决策 Chief（八类升级裁决
 - 距离上次活动较久，仓库可能被其他 Agent 修改；
 - `current-state.md` 的 commit 或时间与仓库不匹配。
 
-### 4.1 恢复流程（八步，按顺序执行）
+### 4.1 恢复流程（十步，按顺序执行）
 
 发生压缩或记忆不确定时，**先停止写操作**，再按以下顺序恢复：
 
@@ -174,12 +176,14 @@ Chief 类型：执行 Chief（日常职责）/ 决策 Chief（八类升级裁决
 2. 重读 `AGENTS.md`；
 3. 重读 `project-context/context-manifest.md`（本文件）；
 4. 重读 `project-context/current-state.md`；
-5. 重读当前任务和最新交接包；
-6. 重做 Git 只读核验（分支 / HEAD / Worktree / 工作区）；
-7. 重新说明当前项目位置和工作；
-8. 无冲突后继续。
+5. 重读当前任务和最新交接包，提取 Founder 已批准、未批准、待决和已否决内容；
+6. 重新判断当前交互阶段：讨论 / 已决定 / 交接或执行；
+7. 重做 Git 只读核验（分支 / HEAD / Worktree / 工作区）；
+8. 按 `agent-response-protocol.md` 重新选择 L1 / L2 / L3 密度，并先用大白话说明当前工作；
+9. 核对下游执行需要的完整判断是否已在交接文件中；
+10. 无冲突后继续；若已有唯一明确的 Founder 决定，直接恢复执行，不得要求二次确认。
 
-> **聊天摘要只能用于定位文件，不能作为任务批准、Git 状态或正式决策的唯一证据。**
+> **聊天摘要只能用于定位文件，不能作为任务批准、Git 状态或正式决策的唯一证据。** 若摘要写“Founder 已同意”但任务/交接/决策文件没有准确记录批准边界，必须停止并补证；若正式文件已经准确记录，则不得因压缩重新让 Founder 确认一遍。
 
 ## 4.2 非驻留窗口说明
 
@@ -200,5 +204,7 @@ required_reading:
   - project-context/tasks/TASK-XXX/draft.md
   - <本任务相关正式契约>
 ```
+
+除 `required_reading` 外，交接文件正文必须按 `role-wakeup-and-handoff.md` §3.1 记录：当前交互阶段、Founder 已批准、明确未批准和仍待决内容。后续 Agent 不得只凭聊天短卡补猜这些边界。
 
 Reviewer 发现 `required_reading` 缺失、启动回执缺失或读取版本过期时，应至少标记为 MAJOR；若已导致范围、权限或事实判断错误，应标记为 BLOCKER。

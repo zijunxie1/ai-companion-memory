@@ -411,7 +411,7 @@ User / Chief of Staff / Builder / Reviewer / Release
 交接另一 Agent / 请求用户裁决
 ```
 
-**L1 普通回复与 L2 普通交接不附加本固定状态报告**：L1 总长 3—5 句（`agent-response-protocol.md` §0.1/§0.2）；L2 只含简短说明 + 一张完整十七字段交接卡（`role-wakeup-and-handoff.md` §3.1）。
+**L1 普通回复与 L2 普通交接不附加本固定状态报告**：L1 通常 3—5 句（`agent-response-protocol.md` §1.1）；L2 只含 2—4 句 Founder 说明 + ≤10 行聊天短卡，完整十七字段仅写入交接文件（`role-wakeup-and-handoff.md` §3.1/§4）。
 
 ---
 
