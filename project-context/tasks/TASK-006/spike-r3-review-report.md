@@ -1,30 +1,46 @@
-# TASK-006 第三轮 Spike — 独立 Review 报告（收尾）
+# TASK-006 第三轮 Spike — 独立 Review 报告（原实验分支证据审查）
 
 ```yaml
-doc_type: Reviewer 报告（第三轮 Spike 收尾；独立事后 Review）
+doc_type: Reviewer 报告（第三轮 Spike 原实验分支证据独立事后 Review）
 task_id: TASK-006（内部第三轮 Spike：TASK-006-SPIKE-LOCAL-GATE-R3）
-review_target: feature/task-006-r3-closeout（收尾 PR 最终 head；证据锚点 feature/task-006-r3-spike @ c3d73cc）
+review_target: feature/task-006-r3-spike @ c3d73cc（原实验分支，方案 C 原始实验证据；本报告只审查该分支证据）
 review_date: 2026-08-15（Asia/Shanghai）
 reviewer: 独立 Reviewer
-conclusion: REVIEW_APPROVED
+conclusion: REVIEW_APPROVED（仅限原实验分支证据；当前收尾分支尚待建立 PR 后独立审查）
 counts: 0 BLOCKER / 0 MAJOR / 1 MINOR / 1 NOTE
+required_reading:
+  - AGENTS.md
+  - project-context/context-manifest.md
+  - project-context/current-state.md
+  - project-context/decision-register.md
+  - project-context/tasks/TASK-006/spike-r3-candidate-draft.md（v1.1，APPROVED）
+  - project-context/tasks/TASK-006/spike-r3/implementation-plan.md
+  - project-context/tasks/TASK-006/spike-r3/calibration-result.md
+  - project-context/tasks/TASK-006/spike-r3/calibration-only-definition.json
+  - project-context/tasks/TASK-006/spike-r3/data/calibration/（scheme-a-rounds / scheme-b-scores / scheme-c-result / calibration-result / seeds / cleanup-result）
+  - project-context/tasks/TASK-006/spike-r3/data/audit/
+  - project-context/tasks/TASK-006/spike-r3/scripts/
 ```
 
 ---
 
 ## 1. 结论
 
-**REVIEW_APPROVED（0 BLOCKER / 0 MAJOR / 1 MINOR / 1 NOTE）**
+**REVIEW_APPROVED（0 BLOCKER / 0 MAJOR / 1 MINOR / 1 NOTE）——仅限原实验分支证据。**
 
-第三轮 Spike 的失败证据、停止状态与状态同步如实、可信、无越界；holdout 未触碰；产品代码零变化。可以进入 Founder 合并裁决。
+本报告审查的是**原实验分支 `feature/task-006-r3-spike` @ `c3d73cc`** 的第三轮 Spike 失败证据与停止状态。审查结论：证据如实、可信、无越界；holdout 未触碰；产品代码零变化。
+
+**本报告不构成对收尾分支 `feature/task-006-r3-closeout` 的审查通过**。收尾分支（从 `c3d73cc` 复制并逐字节核验一致的 21 份证据 + 4 个收尾文件）在本次审查时尚未建立、也无 PR；它须在建立 PR 后另经一次独立 Review，方可进入合并裁决。
 
 ---
 
 ## 2. 审查对象与证据锚点
 
-- **证据锚点**：`feature/task-006-r3-spike` @ `c3d73cc`（方案 C 原始实验证据，不可改写）；
-- **实际审查对象**：收尾分支 `feature/task-006-r3-closeout` 的最终 head（带入 22 份既有证据 + 4 个收尾文件）；
-- **审查方式**：`gh pr diff` / 完整 diff 对照原始 JSON 与冻结定义，不比较旧分支提交。
+- **审查对象**：`feature/task-006-r3-spike` @ `c3d73cc`（原实验分支的最终 head，方案 C 原始实验证据）；
+- **证据锚点**：`c3d73cc` 保持可核验、不可改写；
+- **审查方式**：只读核对原实验分支的原始 JSON、冻结定义、脚本与结果记录（本地 `git show c3d73cc` / 文件比对），**未使用 `gh pr diff`**（当时不存在 PR）；不比较旧分支提交历史。
+
+> 收尾分支 `feature/task-006-r3-closeout` 的证据文件是从 `c3d73cc` 复制并逐字节核验一致的（见收尾分支当前提交说明），本报告只核验 `c3d73cc` 这一来源锚点本身。
 
 ---
 
@@ -39,9 +55,7 @@ counts: 0 BLOCKER / 0 MAJOR / 1 MINOR / 1 NOTE
 | 冻结定义/脚本/原始 JSON | ✅ 未改写、未删除、未重新生成 |
 | 执行分支证据锚点 | ✅ `c3d73cc` 保持可核验 |
 | "7 与 6"口径 | ✅ 已核对准确，不列为问题（见 §4 NOTE） |
-| 决策登记拆分 | ✅ 未新增 D-T006-R3-STOP；更新 D-T006-R3-SPIKE / D-T006-R3-C-EXT 执行结果；Founder 选择 A 单独登记 D-T006-R4-DIRECTION |
 | TASK-006 状态 | ✅ 保持 APPROVED，未写成完成 |
-| R4 隔离 | ✅ R4 方向仅在决策登记记录，未混入 R3 收尾 PR、未进入产品实现/Schema/依赖/外部服务 |
 
 ---
 
@@ -71,13 +85,13 @@ counts: 0 BLOCKER / 0 MAJOR / 1 MINOR / 1 NOTE
 
 | 项 | 结论 |
 |---|---|
-| required_reading | ✅ 完整 |
+| required_reading | ✅ 完整（见本报告头部 YAML） |
 | 启动回执 | ✅ C1 / C3 / C6 已记录 |
 | Founder 回复协议（L1/L2/L3） | ✅ 遵守 |
-| 决策登记与状态同步 | ✅ 随收尾 PR 同步，无越界 |
+| 审查范围 | ✅ 仅原实验分支 `c3d73cc` 证据；未越界到收尾分支合并裁决 |
 
 ---
 
 ## 7. 下一窗口
 
-**Founder**：审阅收尾分支后可审查差异后，决定是否授权推送、建立 PR、独立 Review（本报告即为独立 Review 结论）与合并。
+**Founder**：本报告已批准**原实验分支 `feature/task-006-r3-spike` @ `c3d73cc` 的证据**。收尾分支 `feature/task-006-r3-closeout` 尚待建立 PR 后经独立 Review，方可决定是否合并。

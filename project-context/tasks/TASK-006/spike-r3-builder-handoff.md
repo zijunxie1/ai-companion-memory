@@ -168,8 +168,8 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 - **已完成**：启动回执；Review 2 实施计划 v1.0 → v1.1；S0 预装检查；方案 B-1 下载核验；S0.3 方案 C 连通检查；模型名裁决 `deepseek-v4-flash`；S1 候选池冻结（32 对，SHA256 `70994185...`）；S2/S3 校准完成；方案 C 校准完成（Founder 2026-08-14 批准校准阶段运行后执行）；**三方案全部候选级停止**；
 - **最终结果**：方案 A 分离边际 -0.2323、方案 B -0.3794、方案 C -0.5667 + 波动 0.35，全部触发候选级停止；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对全程零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）；
 - **本轮结论**：**STOPPED / FAILED，形成部分证据**（三方案均不达标，非"完整对比通过"，DRAFT §8.0）；返回 Founder 裁决；
-- **Founder 2026-08-15 裁决**：选择 A——停止"孤立记忆打分 + 单一阈值"路线，保留第三轮失败证据，转向 R4「上下文记忆可用性判断」（D-1 核心方向 + D-3 输出方式 + D-4 安全要求；D-2/D-5 暂缓），见 D-T006-R4-DIRECTION；
-- **Git 状态**：执行分支证据锚点 = `feature/task-006-r3-spike` @ `c3d73cc`（不可改写）；收尾分支 `feature/task-006-r3-closeout` 以不改写历史方式带入 22 份证据 + 4 个收尾文件；
+- **Founder 2026-08-15 裁决**：选择 A——已批准"停止孤立记忆打分 + 单一阈值路线，保留第三轮失败证据"并"转向 R4 上下文记忆可用性判断 + 起草独立 DRAFT"；**D-1/D-3/D-4 为推荐方向、待 R4 DRAFT 审查；D-2/D-5 尚未裁决**，见 D-T006-R4-DIRECTION；
+- **Git 状态**：执行分支证据锚点 = `feature/task-006-r3-spike` @ `c3d73cc`（不可改写，非收尾分支历史祖先）；收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制 21 份 spike-r3/ 证据文件并逐字节核验一致，另新增 4 个收尾文件（current-state / decision-register / spike-r3-builder-handoff 收尾章节更新 / spike-r3-review-report）；
 - **Builder 已停止**：不得继续调参、不得缩小验收范围、不得进入 S4 主实验、不得读取 holdout。
 
 ## 19. 下一窗口唤醒卡（R3 收尾 → Founder 审阅）
@@ -180,7 +180,7 @@ Spike 报告（验收逐项对标、诚实声明）、脚本 + 原始数据 + �
 直接复制给下一个角色（≤10 行短卡）：
 
 目标角色：Founder（审阅 R3 收尾分支后决定是否授权建 PR / 推送 / 独立 Review）
-本次唯一目标：审阅收尾分支 feature/task-006-r3-closeout 的 4 个收尾文件 + 22 份带入证据
+本次唯一目标：审阅收尾分支 feature/task-006-r3-closeout 的 4 个收尾文件 + 21 份从 c3d73cc 复制并逐字节核验一致的证据文件
 任务与交接文件路径：project-context/tasks/TASK-006/spike-r3-review-report.md、spike-r3/calibration-result.md
 分支：feature/task-006-r3-closeout（收尾分支）；证据锚点 feature/task-006-r3-spike @ c3d73cc
 允许执行：Founder 审阅并裁决下一步（建 PR / 推送 / 独立 Review）
