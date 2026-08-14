@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。**2026-08-14 作品集展示阶段数据外发临时例外已批准（D-T006-SHOWCASE-EXCEPTION）：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；方案 C 运行授权未包含在内**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已批准（DRAFT v1.1 + 执行模式 persistent_session）：S1 候选池已冻结（32 对）、S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；**方案 C 校准阶段运行已获 Founder 2026-08-14 批准（22 校准对、≤100 次/≤10 元、仅白名单 DeepSeek 地址、10 个 holdout 封存，分离边际不达标或漏关键记忆即停）**。项目未 CLOSED，未进行生产部署。
+P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-005A 已合入默认主线并通过合并后主线 QA；PR #10、PR #11 与 GOV-COMM-001 治理同步均已合并（GOV-COMM-001 合并提交为 `3412c3c`，状态同步 `980bfa5`）。E004 无关召回问题仍未解决，TASK-006 保持 `APPROVED`。**2026-08-14 作品集展示阶段数据外发临时例外已批准（D-T006-SHOWCASE-EXCEPTION）**。Chief 角色已按 Founder 裁决拆分为执行 Chief / 决策 Chief（GOV-CHIEF-001 已合入）；GOV-COMM-001、GOV-002（含合并后修正 PR #15 @ `5de2714`）均已合并。TASK-006 本地 Gate Spike 第一轮 STOPPED/FAILED、第二轮候选 A 因无重排权重只停候选 A／候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕——方案 A 分离边际 -0.2323、方案 B -0.3794、方案 C -0.5667 + 波动 0.35，三方案全部触发候选级停止（本轮结论 = STOPPED / FAILED，形成部分证据，非完整对比通过）**；holdout 10 对全程零读取。**Founder 2026-08-15 选择 A（D-T006-R4-DIRECTION）：停止"孤立记忆打分 + 单一阈值"路线，转向"上下文记忆可用性判断"（D-1 核心方向，DRAFT 待审批，独立分支）**。项目未 CLOSED，未进行生产部署。
 
 ## Git 事实（2026-08-14 Builder 重新核验）
 
@@ -51,7 +51,7 @@ P1 已形成真实聊天、Memory、Trace 和 8 Case Eval 纵向闭环；TASK-00
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
-| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike APPROVED，方案 A/B 校准均候选级停止，方案 C 校准阶段运行已批准（待执行）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验（固定候选池判断器对比）与补充实验（Mem0 阈值端到端）分表；完成度分档；关键记忆防漏独立门。**当前进展**：规划 PR #19 已合并（`6660ca2`）；执行模式 = persistent_session 已确认（D-T006-R3-EXEC）；方案 B-1 `bge-reranker-base` 已批准并下载核验完成（D-T006-R3-B-MODEL）；**S1 候选池已冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准完成：方案 A 分离边际 −0.2323、方案 B −0.3794，双双候选级停止**（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）；**S0.3 方案 C 连通检查已通过**（模型 deepseek-v4-flash，D-T006-R3-C-EXT）。**Founder 2026-08-14 批准方案 C 校准阶段运行**：原长期 Builder 使用 `deepseek-v4-flash` 对已冻结 22 个校准配对执行相关性判断并确定阈值；调用 ≤100 次、费用 ≤10 元、仅白名单 DeepSeek 地址；10 个 holdout 继续封存、不得读取或运行；不得修改 A/B 参数、测试题、验收标准或产品代码；**分离边际不达标或漏关键记忆立即停止并报告**。A/B 已候选级停止，不得继续调参或缩小验收。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -EXEC / -B-MODEL / -C-EXT / -SHOWCASE-EXCEPTION |
+| TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾 PR（`feature/task-006-r3-closeout`）带入。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」（D-1 核心方向 + D-3 输出方式 + D-4 安全要求；D-2/D-5 暂缓），DRAFT 待审批、独立分支。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
 
@@ -92,15 +92,14 @@ TASK-006 内部后续规划顺序：
 ## 当前建议动作
 
 1. GOV-002 已实施并合并（PR #14 @ `011168f`）；合并后修正 PR #15 已并入 origin/main（`920ae72`/`5de2714`，统一治理版本 2026-08-12.2）；
-2. **作品集展示阶段数据外发临时例外已批准（2026-08-14，D-T006-SHOWCASE-EXCEPTION）**：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；**PR #22 已合并并成为正式治理事实**；**方案 C 的运行授权未包含在展示例外内，已于 2026-08-14 由 Founder 单独批准（校准阶段运行）**；
-3. **TASK-006 第三轮 Spike 状态**：S1 候选池已冻结（32 对）；S2/S3 校准完成——方案 A 分离边际 -0.2323、方案 B 分离边际 -0.3794，均触发候选级停止（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）；S0.3 方案 C 连通检查已通过（模型 deepseek-v4-flash）；**方案 C 校准阶段运行已获 Founder 2026-08-14 批准（22 校准对、≤100 次/≤10 元、仅白名单 DeepSeek 地址、10 个 holdout 封存），待原长期 Builder 执行；A/B 已候选级停止，不得继续调参或缩小验收**；
-4. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
+2. **作品集展示阶段数据外发临时例外已批准（2026-08-14，D-T006-SHOWCASE-EXCEPTION）**：展示阶段允许外部大模型处理 Founder 自有真实数据，未来产品化改回本地（路线 B）；
+3. **TASK-006 第三轮 Spike 已执行完毕（2026-08-14）**：方案 A/B/C 三方案全部触发候选级停止（分离边际 −0.2323/−0.3794/−0.5667，方案 C 另波动 0.35 判据失效）；本轮结论 = STOPPED / FAILED，形成部分证据；holdout 10 对零读取；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾 PR `feature/task-006-r3-closeout` 带入；
+4. **Founder 2026-08-15 选择 A（D-T006-R4-DIRECTION）**：停止"孤立记忆打分 + 单一阈值"路线，转向 R4「上下文记忆可用性判断」（D-1 核心方向 + D-3 输出方式 + D-4 安全要求；D-2/D-5 暂缓）；R4 DRAFT 待审批、独立分支，不得混入 R3 收尾；旧 holdout 永久留作 R3 证据；
+5. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
 ## 下一窗口唤醒卡（当前建议）
 
-- **目标角色**：原长期 Builder（TASK-006｜Builder｜第三轮检索后相关性判断对照 Spike，persistent_session 会话）。
-- **本次唯一目标**：使用 DeepSeek `deepseek-v4-flash` 对已冻结的 22 个校准配对执行相关性判断并确定阈值。
-- **授权边界**：调用 ≤100 次、费用 ≤10 元、仅白名单 DeepSeek 地址；10 个 holdout 配对继续封存，不得读取或运行。
-- **不得执行**：修改 A/B 参数、测试题、验收标准或产品代码；v2-m3 或其他模型下载；安装 torch/sentence-transformers。
-- **停止条件**：方案 C 分离边际不达标或漏关键记忆 → 立即停止并报告 Founder。
-- **必须阅读**：`decision-register.md`（D-T006-R3-C-EXT / -SPIKE）、`current-state.md`、`tasks/TASK-006/spike-r3/implementation-plan.md`、`tasks/TASK-006/spike-r3/calibration-result.md`、`tasks/TASK-006/spike-r3-builder-handoff.md`（执行分支证据 `feature/task-006-r3-spike` @ `fa90634`）。
+- **目标角色**：Founder（审阅 R3 收尾分支 `feature/task-006-r3-closeout` 的可审查差异后，决定是否授权建 PR / 推送 / 独立 Review）。
+- **本次只需要 Founder 完成**：审阅收尾分支落盘的 4 个文件（current-state / decision-register / spike-r3-builder-handoff / spike-r3-review-report）+ 22 份带入证据，确认无误后授权下一步。
+- **不得执行**：推送、建 PR、合并、继续实验、读取 holdout、运行 R4 实验。
+- **必须阅读**：`decision-register.md`（D-T006-R4-DIRECTION / D-T006-R3-SPIKE / D-T006-R3-C-EXT）、`tasks/TASK-006/spike-r3-review-report.md`、`tasks/TASK-006/spike-r3/calibration-result.md`、本文件。

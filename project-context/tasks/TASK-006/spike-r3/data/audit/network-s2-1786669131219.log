@@ -1,0 +1,34 @@
+[
+  {
+    "ts": "2026-08-14T00:58:51.219Z",
+    "event": "verify",
+    "parent_hash_ok": true,
+    "calibration_pairs": 22
+  },
+  {
+    "ts": "2026-08-14T00:59:06.700Z",
+    "event": "seed",
+    "count": 22,
+    "method": "docker exec mem0 SDK add(infer=False)",
+    "external": false
+  },
+  {
+    "ts": "2026-08-14T00:59:06.701Z",
+    "event": "scheme_a_search",
+    "endpoint": "http://127.0.0.1:8100/memories/search",
+    "external": false,
+    "note": "3 rounds per scene"
+  },
+  {
+    "ts": "2026-08-14T00:59:10.860Z",
+    "event": "scheme_b_cross_encoder",
+    "model": "BAAI/bge-reranker-base",
+    "method": "container fastembed local ONNX",
+    "external": false
+  },
+  {
+    "ts": "2026-08-14T00:59:10.861Z",
+    "event": "done",
+    "external_requests": 0
+  }
+]
