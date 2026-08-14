@@ -42,3 +42,4 @@ product_code_changed: false
 - Reviewer 不把旧会话或全局 Skill 当作当前批准和回复模板；
 - Reviewer 的 Founder 回复即使不懂 PR、分支、版本号、状态缩写，也能知道处境、实际影响、建议和唯一要决定的事；
 - Founder 作出决定之前不出现下一张执行卡。
+- 本轮定向复审使用新开的 Reviewer 窗口；旧窗口可能保留启动时 Skill 索引、AGENTS.md 和已注入会话片段的快照，不用于验证归档后的行为。

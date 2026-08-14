@@ -30,6 +30,8 @@ task_006_experiment_changed: false
 
 本机 Hermes 运行环境另完成三项修正：创建可恢复 Skill 快照；归档包含项目私有事实与旧模板的 `multi-agent-project-governance`、`ai-eval-methodology`；开启 `skills.write_approval=true`。完整证据见 `hermes-skill-audit.md`。未归档通用代码审查/会话交接 Skill，未关闭 Memory 或旧会话搜索。
 
+本轮独立复审必须新开 Reviewer 窗口。既有 Reviewer 窗口可能继续持有启动时的旧 Skill 索引、旧 `AGENTS.md` 快照和已注入的旧会话片段，复用它不能验证归档后的真实启动行为。
+
 ## 验证结果
 
 2026-08-15 已完成静态一致性验证：
