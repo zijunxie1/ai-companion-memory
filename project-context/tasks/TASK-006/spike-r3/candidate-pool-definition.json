@@ -1,0 +1,72 @@
+{
+  "freeze_type": "candidate_pool",
+  "spike_id": "TASK-006-SPIKE-LOCAL-GATE-R3",
+  "version": "1.0",
+  "freeze_timestamp": "2026-08-14T08:44:10+08:00",
+  "description": "S1 冻结统一候选池：三方案（A/B/C）共享的固定判断输入。校准部分（~70%，22 对）+ holdout 部分（~30%，10 对）。全部为合成数据，不复用第一轮 H1-H4 原文、第二轮骨架原文、E001-E005 原文。关键记忆对应 E001（失眠↔橘猫）与 E003（小橘）已批准正向关联，但文本全新。",
+  "pair_granularity": "一个候选对 = 一条 query + 一条候选记忆 + 相关性标签 + 类别 + split",
+  "key_memories": [
+    {"id": "K1", "text": "用户养了一只橘猫叫小橘，三岁了"},
+    {"id": "K2", "text": "用户长期失眠，入睡困难"},
+    {"id": "K3", "text": "用户失眠时抱着橘猫小橘会安心一些"},
+    {"id": "K4", "text": "橘猫小橘半夜会跳上床陪用户"},
+    {"id": "K5", "text": "用户和小橘感情很深，相处三年"}
+  ],
+  "key_memory_gate_rule": "独立门：关键记忆作为 relevant 出现的全部正向候选对，在冻结机制下必须被判为 relevant（保留）；任一漏掉 → 该方案独立门不通过。正向关键候选对共 7 个，覆盖 K1-K5 五条关键记忆。",
+  "pairs": [
+    {"pair_id": "S1-01", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "用户长期失眠，入睡困难", "category": "clear_relevant", "label": "relevant", "is_key": true, "key_id": "K2", "split": "calibration"},
+    {"pair_id": "S1-02", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "用户失眠时抱着橘猫小橘会安心一些", "category": "clear_relevant", "label": "relevant", "is_key": true, "key_id": "K3", "split": "holdout"},
+    {"pair_id": "S1-03", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "橘猫小橘半夜会跳上床陪用户", "category": "clear_relevant", "label": "relevant", "is_key": true, "key_id": "K4", "split": "calibration"},
+    {"pair_id": "S1-04", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "hard", "label": "relevant", "is_key": true, "key_id": "K1", "split": "calibration", "hard_type": "语义隐式关联（失眠↔橘猫正向关联，E001 同构）"},
+    {"pair_id": "S1-05", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "用户上周办了健身卡，还没去过几次", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S1-06", "scenario": "S1_insomnia", "query": "最近总是睡不着，翻来覆去到天亮", "memory": "用户喜欢看科幻电影", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+
+    {"pair_id": "S2-01", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户喜欢在晴天去公园散步", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S2-02", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户有过敏性鼻炎，换季容易发作", "category": "hard", "label": "relevant", "is_key": false, "split": "calibration", "hard_type": "语义隐式关联（天气变化与鼻炎）"},
+    {"pair_id": "S2-03", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户长期失眠，入睡困难", "category": "clear_irrelevant", "label": "irrelevant", "is_key": true, "key_id": "K2", "split": "calibration"},
+    {"pair_id": "S2-04", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "clear_irrelevant", "label": "irrelevant", "is_key": true, "key_id": "K1", "split": "calibration"},
+    {"pair_id": "S2-05", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户上个月和前任分手了", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S2-06", "scenario": "S2_weather", "query": "今天天气不错，想出去走走", "memory": "用户在公司做后端开发", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+
+    {"pair_id": "S3-01", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "clear_relevant", "label": "relevant", "is_key": true, "key_id": "K1", "split": "calibration"},
+    {"pair_id": "S3-02", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "用户和小橘感情很深，相处三年", "category": "clear_relevant", "label": "relevant", "is_key": true, "key_id": "K5", "split": "calibration"},
+    {"pair_id": "S3-03", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "橘猫小橘最近食欲不太好", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S3-04", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "用户最近在减肥，控制饮食", "category": "hard", "label": "irrelevant", "is_key": false, "split": "calibration", "hard_type": "多义词（瘦：猫瘦 vs 人减肥）"},
+    {"pair_id": "S3-05", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "用户的同事也养猫，推荐了一款猫粮", "category": "hard", "label": "irrelevant", "is_key": false, "split": "calibration", "hard_type": "他人属性（同事的猫，非用户的猫）"},
+    {"pair_id": "S3-06", "scenario": "S3_cat", "query": "小橘最近好像瘦了，是不是该换猫粮", "memory": "用户买了新的健身器材", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+
+    {"pair_id": "S4-01", "scenario": "S4_polysemy", "query": "这个周末想去钓鱼，放松一下", "memory": "用户喜欢钓鱼，有一套钓竿", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "holdout"},
+    {"pair_id": "S4-02", "scenario": "S4_polysemy", "query": "这个周末想去钓鱼，放松一下", "memory": "用户在公司负责钓鱼营销活动策划", "category": "hard", "label": "irrelevant", "is_key": false, "split": "holdout", "hard_type": "多义词（休闲钓鱼 vs 网络钓鱼诈骗）"},
+    {"pair_id": "S4-03", "scenario": "S4_polysemy", "query": "这个周末想去钓鱼，放松一下", "memory": "用户最近在学做菜", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "holdout"},
+    {"pair_id": "S4-04", "scenario": "S4_polysemy", "query": "这个周末想去钓鱼，放松一下", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "clear_irrelevant", "label": "irrelevant", "is_key": true, "key_id": "K1", "split": "holdout"},
+
+    {"pair_id": "S5-01", "scenario": "S5_other_attr", "query": "最近工作压力好大，想找人倾诉", "memory": "用户最近工作压力大，项目赶进度", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S5-02", "scenario": "S5_other_attr", "query": "最近工作压力好大，想找人倾诉", "memory": "用户喜欢通过运动缓解压力", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S5-03", "scenario": "S5_other_attr", "query": "最近工作压力好大，想找人倾诉", "memory": "用户的闺蜜最近失恋了，情绪低落", "category": "clear_irrelevant", "label": "irrelevant", "is_key": false, "split": "calibration"},
+    {"pair_id": "S5-04", "scenario": "S5_other_attr", "query": "最近工作压力好大，想找人倾诉", "memory": "用户的同事升职了，用户有点失落", "category": "hard", "label": "irrelevant", "is_key": false, "split": "calibration", "hard_type": "他人属性（同事升职 vs 用户压力）"},
+    {"pair_id": "S5-05", "scenario": "S5_other_attr", "query": "最近工作压力好大，想找人倾诉", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "hard", "label": "relevant", "is_key": true, "key_id": "K1", "split": "calibration", "hard_type": "语义隐式关联（宠物陪伴缓解压力）"},
+
+    {"pair_id": "S7-01", "scenario": "S7_unseen_expr", "query": "外面阴沉沉的，出门要带伞吗", "memory": "用户出门总是忘带伞", "category": "clear_relevant", "label": "relevant", "is_key": false, "split": "holdout"},
+    {"pair_id": "S7-02", "scenario": "S7_unseen_expr", "query": "外面阴沉沉的，出门要带伞吗", "memory": "用户喜欢晴天，心情会好", "category": "hard", "label": "relevant", "is_key": false, "split": "holdout", "hard_type": "语义隐式关联（喜欢晴天 vs 阴沉天气）"},
+    {"pair_id": "S7-03", "scenario": "S7_unseen_expr", "query": "外面阴沉沉的，出门要带伞吗", "memory": "用户有风湿病，变天时关节会酸痛", "category": "hard", "label": "relevant", "is_key": false, "split": "holdout", "hard_type": "未见过表达（阴沉沉/变天，R2 失败类型）"},
+    {"pair_id": "S7-04", "scenario": "S7_unseen_expr", "query": "外面阴沉沉的，出门要带伞吗", "memory": "用户的雨伞是黑色的", "category": "hard", "label": "irrelevant", "is_key": false, "split": "holdout", "hard_type": "字面相关语义无关（雨伞）"},
+    {"pair_id": "S7-05", "scenario": "S7_unseen_expr", "query": "外面阴沉沉的，出门要带伞吗", "memory": "用户养了一只橘猫叫小橘，三岁了", "category": "clear_irrelevant", "label": "irrelevant", "is_key": true, "key_id": "K1", "split": "holdout"}
+  ],
+  "zero_return_scenarios": [
+    {"scenario_id": "Z1", "query": "最近有什么好看的科幻片推荐吗", "pairs": [
+      {"memory": "用户长期失眠，入睡困难", "label": "irrelevant"},
+      {"memory": "用户养了一只橘猫叫小橘，三岁了", "label": "irrelevant"},
+      {"memory": "用户上周办了健身卡，还没去过几次", "label": "irrelevant"}
+    ]},
+    {"scenario_id": "Z2", "query": "今天中午吃什么好呢", "pairs": [
+      {"memory": "用户长期失眠，入睡困难", "label": "irrelevant"},
+      {"memory": "用户养了一只橘猫叫小橘，三岁了", "label": "irrelevant"},
+      {"memory": "用户上个月和前任分手了", "label": "irrelevant"}
+    ]},
+    {"scenario_id": "Z3", "query": "想给妈妈买生日礼物，有什么建议", "pairs": [
+      {"memory": "用户在公司做后端开发", "label": "irrelevant"},
+      {"memory": "用户喜欢看科幻电影", "label": "irrelevant"},
+      {"memory": "用户养了一只橘猫叫小橘，三岁了", "label": "irrelevant"}
+    ]}
+  ]
+}

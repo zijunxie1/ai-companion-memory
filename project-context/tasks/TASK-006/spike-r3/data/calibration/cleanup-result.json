@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-08-14T01:01:13.732Z",
+  "deleted": [
+    {
+      "id": "7cbb97d4-2fa3-4baa-894e-d8ec2da1d6d7",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "29126746-5012-4cb1-9a84-f4167ec88dc6",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "9d3e2434-bf7d-452c-970d-52e13b338945",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "2d0d653c-325e-4a8a-ba88-6a78ef7d95a4",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "ae836ec7-91a2-43ab-beed-9de2ea6b8524",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "e86ee513-b323-4e40-a253-03190d7543de",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "92a06982-0d7f-4ae7-b8ac-de42111e36f4",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "0eff9c3f-65d5-4dec-8555-59c6388145c9",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "e74ead71-3c54-453c-87ab-12f5b974e104",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "3dca4774-cd5e-4e73-8ad6-68677810dcd6",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "4df0b27c-9c54-471f-b208-6f291cb912b0",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "75ec81aa-704c-4d53-94fe-b05d7c713b2a",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "60be6514-7eba-4e67-ad8a-3fc6ce552851",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "bc4bdd88-8a3d-4dab-a008-a572e8f60478",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "a5119ae5-d251-46cd-b6bc-90f777f16e2d",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "30afc8d0-b566-4017-991a-84624eb16bbd",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "8430602d-5a71-4b2b-b7db-a55251fe8568",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "43ac667b-a1c8-4085-bf76-177d8fda8e45",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "f4e8c449-d260-4264-98d8-096b7711d954",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "e29fb597-6807-428a-a0b7-66edbd493d6d",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "77551ce6-f700-4fb0-b82d-f1ed4a71d608",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "id": "fc23667f-3c6b-446d-809b-5f6f98d2d24f",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "verify": [
+    {
+      "user_id": "eval-spike-r3-s1_insomnia-k0r7d7"
+    },
+    {
+      "user_id": "eval-spike-r3-s2_weather-te62id"
+    },
+    {
+      "user_id": "eval-spike-r3-s3_cat-zno2wh"
+    },
+    {
+      "user_id": "eval-spike-r3-s5_other_attr-pzaw9v"
+    }
+  ],
+  "total_remaining": 0,
+  "verify_note": "user 池查询返回 {memories:{results:[]}}（空数组）；全部 22 条记忆已 DELETE 成功，剩余=0"
+}

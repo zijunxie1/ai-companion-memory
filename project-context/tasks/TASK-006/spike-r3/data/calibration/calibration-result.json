@@ -1,0 +1,427 @@
+{
+  "generated_at": "2026-08-14T01:00:19.766Z",
+  "calibration_pairs": 22,
+  "scheme_a": {
+    "scheme": "A (mem0 score)",
+    "sample_pairs": 22,
+    "separation": {
+      "minPos": 0.33473057,
+      "maxNeg": 0.56702656,
+      "margin": -0.23229598999999995
+    },
+    "volatility": {
+      "max": 0,
+      "pairs_over_0_1": 0
+    },
+    "per_pair": [
+      {
+        "pair_id": "S1-01",
+        "label": "relevant",
+        "score": 0.61,
+        "vol": 0
+      },
+      {
+        "pair_id": "S1-03",
+        "label": "relevant",
+        "score": 0.3964,
+        "vol": 0
+      },
+      {
+        "pair_id": "S1-04",
+        "label": "relevant",
+        "score": 0.3437,
+        "vol": 0
+      },
+      {
+        "pair_id": "S1-05",
+        "label": "irrelevant",
+        "score": 0.3661,
+        "vol": 0
+      },
+      {
+        "pair_id": "S1-06",
+        "label": "irrelevant",
+        "score": 0.3349,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-01",
+        "label": "relevant",
+        "score": 0.5775,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-02",
+        "label": "relevant",
+        "score": 0.4019,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-03",
+        "label": "irrelevant",
+        "score": 0.4054,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-04",
+        "label": "irrelevant",
+        "score": 0.3143,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-05",
+        "label": "irrelevant",
+        "score": 0.3831,
+        "vol": 0
+      },
+      {
+        "pair_id": "S2-06",
+        "label": "irrelevant",
+        "score": 0.2649,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-01",
+        "label": "relevant",
+        "score": 0.6953,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-02",
+        "label": "relevant",
+        "score": 0.5441,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-03",
+        "label": "relevant",
+        "score": 0.7616,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-04",
+        "label": "irrelevant",
+        "score": 0.567,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-05",
+        "label": "irrelevant",
+        "score": 0.5653,
+        "vol": 0
+      },
+      {
+        "pair_id": "S3-06",
+        "label": "irrelevant",
+        "score": 0.3916,
+        "vol": 0
+      },
+      {
+        "pair_id": "S5-01",
+        "label": "relevant",
+        "score": 0.6778,
+        "vol": 0
+      },
+      {
+        "pair_id": "S5-02",
+        "label": "relevant",
+        "score": 0.5432,
+        "vol": 0
+      },
+      {
+        "pair_id": "S5-03",
+        "label": "irrelevant",
+        "score": 0.5509,
+        "vol": 0
+      },
+      {
+        "pair_id": "S5-04",
+        "label": "irrelevant",
+        "score": 0.5593,
+        "vol": 0
+      },
+      {
+        "pair_id": "S5-05",
+        "label": "relevant",
+        "score": 0.3347,
+        "vol": 0
+      }
+    ],
+    "best_grid": {
+      "thr": 0.3200000000000001,
+      "tp": 11,
+      "fp": 9,
+      "tn": 2,
+      "fn": 0,
+      "precision": 0.55,
+      "recall": 1,
+      "f1": 0.7096774193548387
+    }
+  },
+  "scheme_b": {
+    "scheme": "B (cross-encoder sigmoid)",
+    "sample_pairs": 22,
+    "separation": {
+      "minPos": 0.0000372859571778152,
+      "maxNeg": 0.37948674617604916,
+      "margin": -0.3794494602188713
+    },
+    "volatility": {
+      "note": "cross-encoder 确定性推理，单轮；无波动概念"
+    },
+    "per_pair": [
+      {
+        "pair_id": "S1-01",
+        "label": "relevant",
+        "logit": 2.578,
+        "sigmoid": 0.9294
+      },
+      {
+        "pair_id": "S1-03",
+        "label": "relevant",
+        "logit": -4.6131,
+        "sigmoid": 0.0098
+      },
+      {
+        "pair_id": "S1-04",
+        "label": "relevant",
+        "logit": -10.1969,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S1-05",
+        "label": "irrelevant",
+        "logit": -9.842,
+        "sigmoid": 0.0001
+      },
+      {
+        "pair_id": "S1-06",
+        "label": "irrelevant",
+        "logit": -8.7219,
+        "sigmoid": 0.0002
+      },
+      {
+        "pair_id": "S2-01",
+        "label": "relevant",
+        "logit": 0.5664,
+        "sigmoid": 0.6379
+      },
+      {
+        "pair_id": "S2-02",
+        "label": "relevant",
+        "logit": -10.1967,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S2-03",
+        "label": "irrelevant",
+        "logit": -10.1937,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S2-04",
+        "label": "irrelevant",
+        "logit": -10.196,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S2-05",
+        "label": "irrelevant",
+        "logit": -10.1967,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S2-06",
+        "label": "irrelevant",
+        "logit": -10.1965,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S3-01",
+        "label": "relevant",
+        "logit": -2.2064,
+        "sigmoid": 0.0992
+      },
+      {
+        "pair_id": "S3-02",
+        "label": "relevant",
+        "logit": -1.9835,
+        "sigmoid": 0.1209
+      },
+      {
+        "pair_id": "S3-03",
+        "label": "relevant",
+        "logit": 1.7986,
+        "sigmoid": 0.858
+      },
+      {
+        "pair_id": "S3-04",
+        "label": "irrelevant",
+        "logit": -1.0374,
+        "sigmoid": 0.2617
+      },
+      {
+        "pair_id": "S3-05",
+        "label": "irrelevant",
+        "logit": -0.4917,
+        "sigmoid": 0.3795
+      },
+      {
+        "pair_id": "S3-06",
+        "label": "irrelevant",
+        "logit": -10.1965,
+        "sigmoid": 0
+      },
+      {
+        "pair_id": "S5-01",
+        "label": "relevant",
+        "logit": 2.8295,
+        "sigmoid": 0.9442
+      },
+      {
+        "pair_id": "S5-02",
+        "label": "relevant",
+        "logit": -2.0577,
+        "sigmoid": 0.1133
+      },
+      {
+        "pair_id": "S5-03",
+        "label": "irrelevant",
+        "logit": -5.1894,
+        "sigmoid": 0.0055
+      },
+      {
+        "pair_id": "S5-04",
+        "label": "irrelevant",
+        "logit": -4.4784,
+        "sigmoid": 0.0112
+      },
+      {
+        "pair_id": "S5-05",
+        "label": "relevant",
+        "logit": -10.1929,
+        "sigmoid": 0
+      }
+    ],
+    "best_grid": {
+      "thr": 0.02,
+      "tp": 7,
+      "fp": 2,
+      "tn": 9,
+      "fn": 4,
+      "precision": 0.7777777777777778,
+      "recall": 0.6363636363636364,
+      "f1": 0.7000000000000001
+    }
+  },
+  "key_memory_gate": {
+    "rule": "独立门：关键记忆作为 relevant 出现的全部正向候选对，在冻结机制下必须被判为 relevant（保留）；任一漏掉 → 该方案独立门不通过。正向关键候选对共 6 个，覆盖 K1-K5 五条关键记忆。",
+    "positive_key_pairs": 6,
+    "scheme_a": [
+      {
+        "pair_id": "S1-01",
+        "key_id": "K2",
+        "memory": "用户长期失眠，入睡困难",
+        "scoreA": 0.6100321,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S1-03",
+        "key_id": "K4",
+        "memory": "橘猫小橘半夜会跳上床陪用户",
+        "scoreA": 0.39640265999999996,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S1-04",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "scoreA": 0.34371376,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S3-01",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "scoreA": 0.6953109999999999,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S3-02",
+        "key_id": "K5",
+        "memory": "用户和小橘感情很深，相处三年",
+        "scoreA": 0.54410535,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S5-05",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "scoreA": 0.33473057,
+        "passed_at_best_thr": true
+      }
+    ],
+    "scheme_b": [
+      {
+        "pair_id": "S1-01",
+        "key_id": "K2",
+        "memory": "用户长期失眠，入睡困难",
+        "logit": 2.577967643737793,
+        "sigmoid": 0.9294300835438115,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S1-03",
+        "key_id": "K4",
+        "memory": "橘猫小橘半夜会跳上床陪用户",
+        "logit": -4.613096237182617,
+        "sigmoid": 0.009823592392715142,
+        "passed_at_best_thr": false
+      },
+      {
+        "pair_id": "S1-04",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "logit": -10.196856498718262,
+        "sigmoid": 0.0000372859571778152,
+        "passed_at_best_thr": false
+      },
+      {
+        "pair_id": "S3-01",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "logit": -2.206367254257202,
+        "sigmoid": 0.09918016298981669,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S3-02",
+        "key_id": "K5",
+        "memory": "用户和小橘感情很深，相处三年",
+        "logit": -1.9834803342819214,
+        "sigmoid": 0.12094832093952432,
+        "passed_at_best_thr": true
+      },
+      {
+        "pair_id": "S5-05",
+        "key_id": "K1",
+        "memory": "用户养了一只橘猫叫小橘，三岁了",
+        "logit": -10.192909240722656,
+        "sigmoid": 0.00003743341980611307,
+        "passed_at_best_thr": false
+      }
+    ]
+  },
+  "stop_criteria": {
+    "scheme_a": {
+      "margin_ok": false,
+      "margin": -0.23229598999999995,
+      "volatility_max": 0,
+      "volatility_ok": true
+    },
+    "scheme_b": {
+      "margin_ok": false,
+      "margin": -0.3794494602188713
+    }
+  }
+}
