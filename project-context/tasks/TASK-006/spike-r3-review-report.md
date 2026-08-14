@@ -14,6 +14,12 @@ required_reading:
   - project-context/current-state.md
   - project-context/decision-register.md
   - project-context/tasks/TASK-006/spike-r3-candidate-draft.md（v1.1，APPROVED）
+  - project-context/tasks/TASK-006/spike-r3-builder-handoff.md（Builder 交接包）
+  - project-context/tasks/TASK-006/spike-r3/candidate-pool-freeze.md（冻结记录）
+  - project-context/tasks/TASK-006/spike-r3/candidate-pool-definition.json（冻结候选池定义）
+  - project-context/tasks/TASK-006/spike-r3/preflight-check.md（预装检查）
+  - project-context/tasks/TASK-006/spike-r3/model-facts.md（模型事实）
+  - project-context/tasks/TASK-006/spike-r3/b-model-selection-card.md（方案 B 模型选择）
   - project-context/tasks/TASK-006/spike-r3/implementation-plan.md
   - project-context/tasks/TASK-006/spike-r3/calibration-result.md
   - project-context/tasks/TASK-006/spike-r3/calibration-only-definition.json
