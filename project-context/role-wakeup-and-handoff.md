@@ -38,7 +38,7 @@ Founder 只需要完成两类动作：
 3. 重大决策更新 `project-context/decision-register.md`；
 4. 保存实际分支、commit、diff、测试、已知限制和未完成项；
 5. 明确下一责任角色；
-6. 输出下一窗口短卡；
+6. 仅当 Founder 已明确批准下一步且确实需要角色接力时，输出下一窗口短卡；若仍在等待 Founder 决定，只讲明白并停在当前窗口；
 7. 停止，不代替下一角色继续。
 
 如果 Agent 没有权限修改文件，必须在回复中提供可直接落盘的完整交接内容，并标明“尚未落盘”。Reviewer 完整报告不适用此通用回退，必须按 §3.1 的 Reviewer 结果交付规则处理。
@@ -81,7 +81,7 @@ Founder 只需要完成两类动作：
 
 **Reviewer 交接规则**：独立 Review 是完成和合并前的**必经步骤**；当前阶段确实达到 Review 门且 Founder 已批准进入下一阶段时，直接输出 Reviewer 短卡，不再请求二次确认。Builder 完成规则修改后停在 IMPLEMENTED，不得自行宣布 Review 完成。
 
-**Reviewer 结果交付规则**：Reviewer 默认不修改被审分支，但交接文件必须明确授权其向对应 PR 提交 Review / Comment，用于持久保存完整审查报告。Founder 聊天只接收大白话结论、必须处理的风险、报告位置和下一张短卡，不接收完整验收矩阵、日志或合规清单。若无 PR 或无法提交 Review / Comment，Reviewer 必须停止并请求指定可持久保存的证据通道，不得把完整报告倾倒到 Founder 聊天作为替代。
+**Reviewer 结果交付规则**：Reviewer 默认不修改被审分支，但交接文件必须明确授权其向对应 PR 提交 Review / Comment，用于持久保存完整审查报告。Founder 聊天只接收大白话结论、实际影响、建议和报告位置，不接收完整验收矩阵、日志或合规清单。若合并、部署或返修仍待 Founder 决定，Reviewer 先停在讨论阶段，不附下一张卡；Founder 明确决定后才直接给卡。若无 PR 或无法提交 Review / Comment，Reviewer 必须停止并请求指定可持久保存的证据通道，不得把完整报告倾倒到 Founder 聊天作为替代。
 
 ## 4. 下一窗口短卡（Founder 复制主体）
 
