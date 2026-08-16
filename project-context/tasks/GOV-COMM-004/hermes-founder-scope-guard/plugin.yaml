@@ -1,0 +1,7 @@
+name: founder-scope-guard
+version: "0.1.0"
+description: Preserve Founder action boundaries across turns and block explicitly prohibited Hermes tool calls.
+author: local
+provides_hooks:
+  - pre_llm_call
+  - pre_tool_call
