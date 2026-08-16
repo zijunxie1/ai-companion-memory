@@ -8,6 +8,7 @@
 interaction_stage: decided | handoff | execution
 founder_alignment_source: <正式决策 ID / 任务批准记录 / 可核验的 Founder 明确指令>
 review_delivery_channel: <Reviewer 任务必填：PR URL + 允许提交 Review / Comment；非 Reviewer 任务写 N/A>
+persistence_authorization: <只读 / 可写交接文件 / 可提交 / 可推送 / 可建 PR；逐项记录，不得推导>
 ```
 
 ## 交接卡格式规则（GOV-002 §5.1 落盘 + 合并后修正，scope_add）
@@ -43,12 +44,17 @@ review_delivery_channel: <Reviewer 任务必填：PR URL + 允许提交 Review /
 （逐项列出：已完成 / 未完成）
 
 ## 7. 已批准决策
-（必须分清三个边界）
+（必须分清内容决定与动作权限）
 
-- Founder 已明确批准：
+- Founder 已明确批准的内容决定：
 - Founder 明确未批准：
 - 仍待 Founder 决定：
+- 当前已授权动作：
+- 当前仍禁止动作：
+- 治理落盘 / Git 权限：
 - 依据：决策 ID / 任务批准记录 / 可核验的明确指令
+
+> 内容获批、任务进入 APPROVED 或执行模式获批，都不能自动解除“只读 / 禁止修改 / 禁止提交”等限制。
 
 ## 8. 决策理由
 （为什么这样决策）
