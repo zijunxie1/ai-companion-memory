@@ -17,8 +17,8 @@ required_reading:
   - project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py
   - project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/test_founder_scope_guard.py
 task_id: GOV-COMM-004
-status: DRAFT_AFTER_FOUNDER_RETEST
-next_gate: FOUNDER_RETEST_THEN_IN_REVIEW
+status: DRAFT_AFTER_ROOT_FIX
+next_gate: REAL_REGRESSION_THEN_FOUNDER_AUTHORIZATION
 assigned_role: Independent Reviewer
 branch: codex/gov-comm-004-root-fix
 base: origin/main@7ef1023
@@ -29,7 +29,7 @@ product_scope: none
 
 独立审查 GOV-COMM-004 是否真正从根因上解决 Hermes 回复漂移与动作越权，而不是只增加另一层提示词。审查同时覆盖正式治理 diff、本机 Hermes 全局规则、插件机械拦截、真实会话证据和范围保护。
 
-> 本交接当前只是待用草案。Founder 尚未完成 2026-08-16.2 的新 Codex/Hermes 会话复测，也未授权启动 Reviewer；复测达到预期并指定可持久化的 PR Review / Comment 通道后才能使用。
+> 本交接当前只是待用草案。2026-08-16.2 的第二次复测已经暴露旧插件强制回执、外部暂停交接提权和 Codex 中间进度过多；2026-08-16.3 已做根因修复，但尚须完成新进程真实回归，且 Founder 尚未授权启动 Reviewer。回归达到预期并指定可持久化的 PR Review / Comment 通道后才能使用。
 
 ## 2. 审查对象
 
@@ -45,10 +45,10 @@ product_scope: none
 3. 内容批准、动作权限和治理落盘权限是否真正独立，APPROVED 是否不再自动授予写入；
 4. `founder-scope-guard` 是否只认 Founder 原始消息，Agent/工具输出不能创造权限；压缩摘要不能冒充授权；跨进程持久状态仅保存禁止类别；
 5. 工具分类是否既能拦受禁的写入/Git/PR/合并/委派/holdout，又不误拦只读 Git 查询；
-6. 真实回归会话 `20260816_083234_b6baac`、`20260816_083939_cb6d26` 的权限证据是否支持报告结论；`20260816_084118_9d1b90`、`20260816_084152_38d138` 只作旧版 RootFix 反例基线，不得冒充 2026-08-16.2 呈现通过证据；
-7. Founder 新会话复测是否覆盖 `validation-scenarios.md` A—P，尤其是真正大白话、纠偏一次一件事、短段落与留白、具体收件人 + 单一代码框、简单事项不展示启动回执；
+6. 真实回归会话 `20260816_083234_b6baac`、`20260816_083939_cb6d26` 的权限证据是否支持报告结论；`20260816_084118_9d1b90`、`20260816_084152_38d138` 只作旧版反例；`01a008a5-4272-7421-9612-de119498f03d` 与 `20260816_113656_b1e68a` 是 2026-08-16.2 第二次失败证据，不得冒充通过证据；
+7. 2026-08-16.3 新进程真实复测是否覆盖 `validation-scenarios.md` A—R，尤其是真正大白话、纠偏一次一件事、短段落与留白、具体收件人 + 单一代码框、简单事项默认无启动回执、中间进度低噪音、外部临时交接不覆盖正式状态；
 8. Hermes 默认模型是否仍为 `deepseek-v4-pro`，配置差异是否只新增启用权限锁；缩放、保留 Skill、Session Review、产品、R4、评测和 holdout 是否均未变化；
-9. 执行验证脚本和插件 11 个测试，检查 `git diff --check` 与完整 diff。
+9. 执行验证脚本和插件测试，确认 canonical 与 installed 插件逐字节一致，检查 `git diff --check` 与完整 diff。
 
 ## 4. 允许与禁止
 

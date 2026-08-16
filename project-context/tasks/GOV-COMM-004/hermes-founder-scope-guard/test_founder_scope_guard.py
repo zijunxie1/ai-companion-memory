@@ -76,7 +76,7 @@ class ScopeTests(unittest.TestCase):
         state = guard.derive_scope(history, "继续")
         self.assertEqual(set(guard.ACTION_ALIASES), state.prohibited)
 
-    def test_first_turn_injects_adaptive_format_and_receipt(self):
+    def test_first_turn_keeps_verification_internal_and_forbids_default_receipt(self):
         original_path = guard.STATE_PATH
         try:
             guard.STATE_PATH = Path(self.id().replace(".", "_") + ".json")
@@ -87,8 +87,11 @@ class ScopeTests(unittest.TestCase):
                 is_first_turn=True,
             )
             self.assertIn("one short natural", result["context"])
-            self.assertIn("## 启动回执", result["context"])
-            self.assertIn("no more than seven", result["context"])
+            self.assertIn("Complete the required startup verification internally", result["context"])
+            self.assertIn("Do not display a startup receipt unless the Founder explicitly requested it", result["context"])
+            self.assertNotIn("## 启动回执", result["context"])
+            self.assertIn("All Founder-visible progress/tool commentary", result["context"])
+            self.assertIn("DRAFT, PAUSED, SUPERSEDED, REFERENCE_ONLY", result["context"])
         finally:
             if guard.STATE_PATH.exists():
                 guard.STATE_PATH.unlink()

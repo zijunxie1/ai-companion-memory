@@ -2,7 +2,7 @@
 
 > 本文件是所有 AI Agent 进入本项目时的强制执行章程。
 > 完整项目上下文入口见 `project-context/context-manifest.md`。
-> 规则版本（统一治理包版本，C1）：`2026-08-16.2`
+> 规则版本（统一治理包版本，C1）：`2026-08-16.3`
 
 ## 每次工作前的强制阅读
 
@@ -15,20 +15,13 @@
 - 上下文压缩、丢失或无法准确复述当前状态；
 - 中断后恢复工作，且仓库或任务状态可能已经变化。
 
-### 固定必读文件
+### 分层必读文件
 
-1. `AGENTS.md`（本文件）；
-2. `project-context/context-manifest.md`（完整阅读顺序和角色专项上下文）；
-3. `project-context/CHIEF-BOOTSTRAP.md`（Chief 必读；其他角色了解执行 Chief / 决策 Chief 身份与拆分边界）；
-4. `project-context/current-state.md`（最近一次核验的项目状态）；
-5. `project-context/product.md`（已批准的产品目标与成功标准）；
-6. `project-context/project-mainline-roadmap.md`（项目主线、优先级、角色窗口与偏航恢复规则）；
-7. `project-context/handoff-and-task-state-machine.md`（状态机、Review 门和交接规则）；
-8. `project-context/agent-response-protocol.md`（Founder 对话与 Agent 执行交接规范）；
-9. `project-context/role-wakeup-and-handoff.md`（非驻留 Agent 的唤醒、休眠检查点和人工接力规则）；
-10. `project-context/decision-register.md`（已批准、待决、暂停和否决的重大决策）；
-11. 当前任务目录下的 DRAFT、决策、验收标准、最新交接包和 Review 结论；
-12. 当前任务涉及的正式契约文件。
+**所有新窗口最低必读**：`AGENTS.md`、`project-context/context-manifest.md`、`project-context/agent-response-protocol.md`、`project-context/current-state.md`、`project-context/decision-register.md`，以及 Founder 当前消息明确指定的任务/交接文件。简单只读状态确认或讨论完成这些即可，不得为形式完整遍历全部历史任务、分支和外部交接目录。
+
+**进入规划、写入、Review、合并、部署、角色接管或高风险裁决前再完整读取**：`project-context/CHIEF-BOOTSTRAP.md`、`project-context/product.md`、`project-context/project-mainline-roadmap.md`、`project-context/handoff-and-task-state-machine.md`、`project-context/role-wakeup-and-handoff.md`、当前任务目录的 DRAFT/裁决/验收/最新交接/Review，以及本次操作涉及的正式契约。完整阅读是动作门，不是每个简单问题的聊天负担。
+
+外部 `E:/project-handoffs/` 文件只有在 Founder 当前消息明确指定，或当前正式交接文件明确引用为**当前有效交接**时才读取。文件时间更晚不等于更权威；标记为 `DRAFT`、`PAUSED`、`SUPERSEDED`、`REFERENCE_ONLY` 或“非正式主线”的文件不能覆盖 `current-state.md`、`decision-register.md` 和 Git，也不能创造下一步动作。
 
 ### 启动核对要求
 
@@ -54,10 +47,10 @@
 
 ### 启动回执与上下文恢复
 
-新窗口、新任务、角色交接、上下文压缩后恢复或仓库状态可能变化时，必须先完成 `project-context/context-manifest.md` 规定的启动核验，再按事情难度向 Founder 回复。简单事项不得仅因“新窗口”附加启动回执；只有核验发现会影响 Founder 判断的冲突、权限或角色身份问题，或 Founder 主动要求查看时，才展示紧凑启动回执。
+新窗口、新任务、角色交接、上下文压缩后恢复或仓库状态可能变化时，必须先完成 `project-context/context-manifest.md` 规定的内部启动核验，再按事情难度向 Founder 回复。**聊天中默认永远不展示启动回执；只有 Founder 明确说“给我看启动回执/核验清单”时才展示。** 新窗口、W1—W3 告警、阻断、权限边界或角色身份都不能自行触发回执；真正影响决定的异常直接用大白话解释，不另附表。
 
 - 启动回执必须基于重新读取文件和只读核对，不能只复制上一次回复；
-- 如确需展示，Founder 可见启动回执最多七个信息行；完整已读清单、分支/Worktree、命令和 Chief 内部字段写入任务/交接记录，不在聊天展开；
+- Founder 明确要求展示时，回执最多七个信息行；完整已读清单、分支/Worktree、命令和 Chief 内部字段写入任务/交接记录，不在聊天展开；
 - 上下文压缩摘要只能帮助定位文件，不能作为任务批准、Git 状态或产品事实的唯一来源；
 - 压缩恢复必须重新读取当前任务/交接文件中的 Founder 已批准、未批准和待决边界，并恢复当前处于讨论、已决定还是交接/执行阶段；
 - 正式任务或交接已准确记录 Founder 的明确决定时，不得因压缩再次要求 Founder 二次确认；
@@ -76,6 +69,8 @@
 - **密度自适应**：简单事项（L1）通常 3—5 句；普通交接（L2）为 2—4 句说明 + ≤10 行短卡；复杂事项（L3）才分层展开。句数/章节数是指导而非机械格式，不得机械拆成七八个栏目，也不得把全部内容挤成文字墙；
 - **真正的大白话**：不是把技术句子缩短或把英文换成中文；必须先说 Founder 能观察到什么、为什么会这样、现在先处理哪一步。纠偏时一次只讲清一个主要问题，不能同时抛出多层抽象概念；
 - **视觉可读性**：复杂回复使用短段落和留白，一个自然段只完成一个作用；加粗只用于结论、推荐和 Founder 当前要决定的事。不得连续堆长段、括号、引号、破折号或大段全粗体；表格只用于确实更容易横向比较的少量信息；
+- **中间进度也算 Founder 回复**：commentary、工具前说明和阶段更新同样遵守大白话与密度规则。简单只读问题最多一条很短的进度说明；只有工作超过 60 秒、出现真正阻断或需要 Founder 介入时才再更新。不得在中间消息倾倒分支、提交、文件扫描或内部推理，最终答案也不重复这些过程；
+- **临时文件不越权**：不得因为外部交接文件更新、时间更晚或内容更详细，就把它当成正式状态或批准。发现正式状态与临时材料不同，只按临时材料的状态标签处理；`DRAFT/PAUSED/SUPERSEDED/REFERENCE_ONLY` 只作线索，不构成 W1，也不触发 Founder 可见回执；
 - **复杂方案审批先完成决策翻译**：请求 Founder 批准长草案、复杂实现或重大方向时，Founder 正文必须让其在不读技术文件的情况下理解——现在遇到什么、方案怎么解决、能/不能解决什么、主要好处与代价、最大风险或未知、为什么推荐（或不推荐）、此刻只需决定什么。不得只说“草案已覆盖全部要求，请批准”“所有验收均通过，请决定”，也不得用缩短后的技术话概括数百行文件后要求整体批准（完整定义见 `project-context/agent-response-protocol.md` §1.5）；
 - **呈现按关系选择**：单一事实用短段落，方案比较最多一张小表，前后依赖最多一张小图；技术证据放附录或交接文件；
 - **历史模板隔离**：历史 TASK/GOV 文件中保留的“执行模式判断”“固定状态报告”或旧交接块只作当时审计证据，不是当前 Founder 回复指令；不得从历史任务复制旧模板覆盖当前唯一回复协议；
@@ -113,7 +108,7 @@
 
 - 当前活跃角色在休眠前必须按 `project-context/role-wakeup-and-handoff.md` 保存状态；只有已获写入权限时才落盘，只有下一步已获批准且确需换角色时才输出“下一窗口短卡”；
 - Founder 决定是否以及何时把短卡发送给下一角色；
-- 下一角色被唤醒后重新读取项目文件并完成启动核验；只有出现影响 Founder 判断的异常或 Founder 主动要求时才展示启动回执；
+- 下一角色被唤醒后重新读取项目文件并完成内部启动核验；只有 Founder 明确要求时才展示启动回执；
 - Reviewer 只在被 Founder 唤醒后执行事后 Review 门，不是持续监督者；
 - 没有活跃 Agent 时，`current-state.md`、决策登记和任务状态不会自动更新；
 - 普通 Hermes 编码会话通常在启动时注入根目录 `AGENTS.md`，但使用的是启动时快照；旧会话可能保留旧规则，且被引用的 `project-context` 文件不会自动全部读取。因此每张短卡仍必须显式要求核对 `AGENTS.md` 版本并读取 `context-manifest.md`；重大规则更新后必要时新开同角色窗口。

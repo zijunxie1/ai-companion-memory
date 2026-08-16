@@ -6,22 +6,20 @@
 >
 > **本文件是启动与恢复流程的唯一权威来源**（新窗口继承顺序、上下文压缩恢复流程、内部启动核验与按需回执）；其他文件只引用本文件，不重复全文。
 
-## 1. 新窗口继承流程（固定阅读顺序）
+## 1. 新窗口继承流程（分层阅读）
 
-所有角色在新窗口/新会话/接手任务时，先按以下顺序完整阅读（**新窗口继承流程**）：
+所有角色在新窗口/新会话/接手任务时，先完成最低阅读：
 
 1. `AGENTS.md` — 权限、红线和工作门；
 2. `project-context/context-manifest.md` — 本清单；
-3. `project-context/CHIEF-BOOTSTRAP.md` — Chief 身份、继任关系和上岗核对；
+3. `project-context/agent-response-protocol.md` — Founder 回复方式唯一权威；
 4. `project-context/current-state.md` — 最近一次核验的项目状态；
-5. `project-context/product.md` — 已批准的产品目标和成功标准；
-6. `project-context/project-mainline-roadmap.md` — 主线顺序、角色边界和偏航恢复；
-7. `project-context/handoff-and-task-state-machine.md` — 状态机和交接规则；
-8. `project-context/agent-response-protocol.md` — Founder 对话/Agent 交接分离、回复密度和决策后直接交接规则（唯一权威）；
-9. `project-context/role-wakeup-and-handoff.md` — 休眠窗口的人工唤醒和交接规则（交接卡结构唯一权威）；
-10. `project-context/decision-register.md` — 已批准、待决和否决的重大决策；
-11. 当前任务目录中的最新 DRAFT、裁决、交接包和 Review；
-12. 当前任务涉及的正式契约、实现和测试。
+5. `project-context/decision-register.md` — 已批准、待决和否决的重大决策；
+6. Founder 当前消息明确指定的任务或交接文件。
+
+简单只读状态确认或讨论到此即可。进入规划、写入、Review、合并、部署、角色接管或高风险裁决前，再按顺序补读：`CHIEF-BOOTSTRAP.md`、`product.md`、`project-mainline-roadmap.md`、`handoff-and-task-state-machine.md`、`role-wakeup-and-handoff.md`、当前任务全部正式裁决/验收/最新交接/Review，以及涉及的契约、实现和测试。
+
+不得用目录遍历替代选择。外部 `E:/project-handoffs/` 只有被 Founder 当前消息或正式当前交接明确点名时才进入阅读范围；较新的时间戳不能覆盖正式状态。`DRAFT`、`PAUSED`、`SUPERSEDED`、`REFERENCE_ONLY` 或明确写着“非正式主线”的文件只能提供线索。
 
 新 Agent 不得向 Founder 重复整份技术背景：先在内部完成启动核验，再按 `agent-response-protocol.md` 用与问题难度相称的大白话说明它将做什么、不会做什么。完整技术事实由 Agent 自己从交接文件读取，不倾倒给 Founder。
 
@@ -41,9 +39,9 @@
 
 ## 3. 强制启动核验与按需回执
 
-新窗口、新任务、角色交接、上下文压缩后恢复或仓库状态变化后，Agent 必须先在内部完成启动核验。简单或正常事项不得仅因为“这是新窗口”就在 Founder 正文后追加回执。只有核验发现会影响 Founder 判断的证据冲突、权限边界、角色身份或上下文缺失，或者 Founder 主动要求查看时，才展示紧凑启动回执。
+新窗口、新任务、角色交接、上下文压缩后恢复或仓库状态变化后，Agent 必须先在内部完成启动核验。聊天中默认不展示启动回执；只有 Founder 明确要求查看启动回执或核验清单时才展示。任何告警、阻断、权限边界、角色身份或新窗口本身都不能自行触发回执；影响判断的问题直接进入大白话正文。
 
-确需展示时，格式如下：
+Founder 明确要求展示时，格式如下：
 
 ```text
 ## 启动回执
@@ -60,7 +58,7 @@
 
 完整启动核验仍必须在内部完成：逐项已读文件、权威主线、分支/Worktree/工作区、Founder 已批准/未批准/待决、允许/禁止动作、Chief 继任边界和全部冲突。已获写入权限时把完整记录放入任务、交接或实施报告；未获写入权限时不为落盘越权。Founder 聊天不展示完整内部清单。
 
-启动核验不是形式证明。Agent 必须先做只读 Git/文件核对，不能只根据聊天摘要填写；核验完整不等于聊天必须展示回执。确需展示时，`## 先说人话` 永远先于回执，回执不得重复正文的建议或当前决定。
+启动核验不是形式证明。Agent 必须先做只读 Git/文件核对，不能只根据聊天摘要填写；核验完整不等于聊天必须展示回执。Founder 明确要求时，`## 先说人话` 永远先于回执，回执不得重复正文的建议或当前决定。
 
 若 Agent 无法从磁盘读到 `AGENTS.md` 当前规则版本，或回执版本与磁盘不一致，说明会话仍在使用旧规则快照：必须先显式重读，不能继续写操作。
 
