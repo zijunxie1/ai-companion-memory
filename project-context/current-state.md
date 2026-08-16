@@ -10,11 +10,11 @@
 
 > 非自动更新：本文件只有在某个角色被 Founder 唤醒并实际写入时才会变化。每次读取必须重新用 Git 和任务文件核对。
 
-> 上下文规则版本：`2026-08-16.1`（本治理变更 GOV-COMM-004；未合并前正式主线仍为 `2026-08-15.4`，读取时以远端 main 的 `AGENTS.md` 为准）
+> 上下文规则版本：`2026-08-16.2`（本治理变更 GOV-COMM-004；未合并前正式主线仍为 `2026-08-15.4`，读取时以远端 main 的 `AGENTS.md` 为准）
 
 ## 一句话状态
 
-P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，R4 未启动。GOV-COMM-004 已在独立治理分支和本机 Hermes 完成根因修复：清除固定输出冲突、分离内容决定与动作权限，并新增跨进程持久的工具权限锁；真实 DeepSeek V4 Pro 回归已覆盖简单/复杂回复、决定后短卡、只读批准和禁止委派。当前状态为 IMPLEMENTED、待独立 Review，未推送、未建 PR、未合并；正式主线规则仍为 2026-08-15.4。本治理不修改产品、评测、R4 草案或 holdout。项目未 CLOSED，未进行生产部署。
+P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，R4 未启动。GOV-COMM-004 已在独立治理分支完成根因修复并补入 Founder 最终验收要求：真正的大白话、复杂回复留白、具体收件人 + 单一复制框、简单回复不展示启动回执；权限锁和内容/动作权限分离保持不变。当前状态为 IMPLEMENTED、待 Founder 用新 Codex/Hermes 会话复测，之后才进入独立 Review；未推送、未建 PR、未合并。Hermes 缩放、默认模型、产品、评测、R4 草案和 holdout 均未修改。
 
 ## Git 事实（2026-08-15 治理 Builder 重新核验）
 
@@ -53,7 +53,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
 | GOV-COMM-002 | **MERGED（PR #26 @ `df5c2d9`，2026-08-15）** | Founder 已批准并授权直接执行 Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复批准边界。实施期间两次真实 Review 回复暴露的问题（完整报告倒进聊天 / 技术话缩短冒充大白话 / 未决定提前给卡）均已修正并补入规则；本机 Hermes 已将两项项目污染 Skill 可恢复归档并开启 Skill 写入审批。已 Rebase 合并进 `origin/main`（`df5c2d9`），成为正式主线规则 |
 | GOV-COMM-003 | **MERGED（`7ef1023`，2026-08-15）** | 自适应密度与复杂方案审批决策翻译已进入正式主线。真实 Hermes 后续验证发现它未清除更早的固定“执行模式判断/状态报告”模板，也未定义内容批准与动作权限的独立关系；缺口由 GOV-COMM-004 修复 |
-| GOV-COMM-004 | **IMPLEMENTED（待独立 Review；未合并前不属于正式主线事实）** | 固定输出冲突已清除；内容决定/动作权限已分离；交接和压缩恢复动作边界；Hermes SOUL/Memory 已备份修正；`founder-scope-guard` 已启用，权限跨进程持久并在工具前机械拦截。插件 11/11 测试、Plugin Doctor、静态检查和 4 组真实 DeepSeek V4 Pro 行为回归通过。未改默认模型、产品、评测、R4、holdout、保留 Skill 或 Session Review |
+| GOV-COMM-004 | **IMPLEMENTED（待 Founder 新会话复测，再独立 Review；未合并前不属于正式主线事实）** | 固定输出冲突已清除；内容决定/动作权限已分离；Hermes 权限锁保持生效。2026-08-16.2 又补齐真正大白话、纠偏一次一件事、复杂回复短段落与留白、交接具体收件人 + 单一代码框、简单回复不展示启动回执。未改缩放、默认模型、产品、评测、R4、holdout、保留 Skill 或 Session Review |
 | TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致（`c3d73cc` 非本分支历史祖先，仅为来源锚点）。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**。R4 必须使用独立文件和后续独立分支，不得进入本次 R3 收尾。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
@@ -103,12 +103,9 @@ TASK-006 内部后续规划顺序：
 3. **TASK-006 第三轮 Spike 已执行完毕（2026-08-14）**：方案 A/B/C 三方案全部触发候选级停止（分离边际 −0.2323/−0.3794/−0.5667，方案 C 另波动 0.35 判据失效）；本轮结论 = STOPPED / FAILED，形成部分证据；holdout 10 对零读取；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致；
 4. **Founder 2026-08-15 选择 A（D-T006-R4-DIRECTION）**：停止"孤立记忆打分 + 单一阈值"路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**；R4 DRAFT 待审批、独立分支，不得混入 R3 收尾；旧 holdout 永久留作 R3 证据；
 5. **GOV-COMM-002 已合并（PR #26 @ `df5c2d9`，2026-08-15）**：Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复边界已固化为正式主线规则；本机一次性 Skill 已归档并开启写入审批；
-6. **GOV-COMM-004 已实施（待独立 Review）**：治理分支与本机 Hermes 已完成规则去冲突、权限分离和机械工具锁；真实 DeepSeek V4 Pro 已通过简单/复杂回复、决定后短卡、跨进程权限恢复和只读批准回归。仍未推送、未建 PR、未合并；正式主线尚未采用 2026-08-16.1；
+6. **GOV-COMM-004 已实施（待 Founder 新会话复测，再独立 Review）**：规则版本已升至 2026-08-16.2；除原有去冲突、权限分离和机械工具锁外，已加入真正大白话、视觉留白、具体收件人 + 单一复制框、简单回复不展示启动回执。仍未推送、未建 PR、未合并；正式主线尚未采用本版本；
 7. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
-## 下一窗口短卡（当前建议）
+## 当前下一步
 
-- **目标角色**：新开独立 Reviewer 窗口（由 Founder 发送短卡唤醒；不得复用可能保留旧 Skill/旧规则快照的 Reviewer 窗口）。
-- **本次只需要 Reviewer 完成**：对照 `tasks/GOV-COMM-004/validation-scenarios.md` 的 A—M 场景，独立核验固定模板清零、内容决定/动作权限分离、压缩与交接恢复、Hermes 全局规则和 `founder-scope-guard` 的机械拦截；复核真实会话证据与默认模型/产品/R4/holdout 范围保护。
-- **不得执行**：Reviewer 不修改分支文件、不合并、不启动 R4、不读取 holdout；允许且要求向对应 PR 提交 Review / Comment 作为完整报告。
-- **必须阅读**：`tasks/GOV-COMM-004/root-cause-report.md`、`tasks/GOV-COMM-004/validation-scenarios.md`、`tasks/GOV-COMM-004/implementation-report.md`、插件源码/测试及其 required_reading。
+先由 Founder 在新 Codex 与 Hermes 会话复测简单事项、复杂讨论和决定后交接三类呈现。达到预期后再生成独立 Reviewer 短卡；当前不得提前进入 Review、推送、建 PR、合并或恢复 R4。

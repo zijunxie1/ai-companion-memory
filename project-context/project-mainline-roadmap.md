@@ -58,7 +58,7 @@
 | 窗口 / 角色 | 应该做什么 | 不应该做什么 | 固定产出 |
 |---|---|---|---|
 | **Founder / CEO（用户）** | 决定产品方向、任务优先级、范围取舍、主线方案、是否合并与部署 | 不需要代替 Builder 解决实现细节；不把口头同意自动视为已经合并 | 裁决文本、任务批准/否决、合并与部署授权 |
-| **执行 Chief of Staff** | 读取项目事实；质疑需求；维护已批准方向；拆分单一可审查任务；定义目标、非目标、风险、验收门和停止条件；处理普通 Change Request；安排人工交接 | 不写产品实现；不自行选择或重排主线；不把 DRAFT 写成已实现事实；不越过 Founder 批准；遇八类升级事项不得自行收敛 | DRAFT、普通决策包、优先级、Chief→Builder 交接包、固定状态报告；八类事项按 `role-wakeup-and-handoff.md` §5.1 形成升级卡 |
+| **执行 Chief of Staff** | 读取项目事实；质疑需求；维护已批准方向；拆分单一可审查任务；定义目标、非目标、风险、验收门和停止条件；处理普通 Change Request；安排人工交接 | 不写产品实现；不自行选择或重排主线；不把 DRAFT 写成已实现事实；不越过 Founder 批准；遇八类升级事项不得自行收敛 | DRAFT、普通决策包、优先级、Chief→Builder 交接包、内部状态记录；八类事项按 `role-wakeup-and-handoff.md` §5.1 形成升级卡 |
 | **决策 Chief of Staff** | 只裁决 Founder 人工转发的升级卡中的唯一问题；对八类重大事项给出选项与建议 | 不接管日常执行；不自动监听或唤醒其他角色；裁决未经 Founder 明确采纳不得视为生效 | 决策 Chief 升级卡裁决；最终审批权仍归 Founder |
 | **Git / Governance Builder** | 只执行已批准的分支收敛方案；保全历史；解决明确冲突；形成可审查 PR | 不自行决定 main/master；不 force push；不顺便改产品功能 | Git 审计、冲突解决记录、测试结果、PR、回滚点 |
 | **长期 Builder** | 先提交实施计划；在独立分支实现一个任务；同步代码、测试、迁移和契约；记录失败尝试与已知限制 | 不修改任务目标；不降低验收标准；不跨任务顺手重构；不直接合并主线；不自己宣布 Review 通过 | 实施计划、代码与测试、Builder 实现报告、commit/PR、Change Request |
@@ -474,4 +474,4 @@ Builder 在任何代码修改前必须提交以下计划，等待 Review 2：
 
 > 阅读 `AGENTS.md`、`project-context/product.md`、`project-context/handoff-and-task-state-machine.md`、TASK-003 最终 Review 与本路线图。先以只读方式核对 Git、任务状态、契约和现有实现。按照第 9 节输出跨任务实施规划，不修改代码、不提交、不推送、不合并。遇到本文与仓库事实冲突时，以 AGENTS.md 的“停止并上报”规则处理，不自行选择主线或修改产品成功标准。
 
-在执行上述指令前，还必须读取 `project-context/context-manifest.md`、`project-context/current-state.md`、`project-context/decision-register.md`、`project-context/agent-response-protocol.md` 和 `project-context/role-wakeup-and-handoff.md`，并提交启动回执。Builder 的规划回复必须先给出 Founder 可理解的产品摘要，再附技术计划；阶段结束时返回下一窗口唤醒卡。
+在执行上述指令前，还必须读取 `project-context/context-manifest.md`、`project-context/current-state.md`、`project-context/decision-register.md`、`project-context/agent-response-protocol.md` 和 `project-context/role-wakeup-and-handoff.md`，并完成内部启动核验。Builder 的规划回复必须先给出 Founder 可理解的产品摘要；技术计划写入文件，不默认倾倒到聊天。阶段结束且 Founder 已批准交接时，按收件人提示 + 单一代码框返回下一窗口短卡。
