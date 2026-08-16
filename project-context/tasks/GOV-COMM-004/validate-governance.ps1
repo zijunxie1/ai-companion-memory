@@ -30,13 +30,15 @@ $formalFiles = @(
     'project-context/templates/role-handoff-template.md'
 )
 
-Require-Text 'AGENTS.md' '2026-08-16\.2' 'unified version'
-Require-Text 'project-context/current-state.md' '2026-08-16\.2' 'current-state unified version'
+Require-Text 'AGENTS.md' '2026-08-16\.3' 'unified version'
+Require-Text 'project-context/current-state.md' '2026-08-16\.3' 'current-state unified version'
 Require-Text 'AGENTS.md' '决定内容与动作权限必须分开' 'authorization model'
 Require-Text 'project-context/agent-response-protocol.md' '内容决定与动作权限是两件事' 'response authorization boundary'
 Require-Text 'project-context/context-manifest.md' '当前允许动作.*当前禁止动作' 'compression restores action scope'
-Require-Text 'project-context/context-manifest.md' '简单或正常事项不得仅因为.*新窗口.*追加回执' 'startup receipt hidden by default'
+Require-Text 'project-context/context-manifest.md' '只有 Founder 明确要求查看启动回执或核验清单时才展示' 'startup receipt requires explicit Founder request'
 Require-Text 'project-context/context-manifest.md' '内部启动记录.*至少包含' 'internal startup evidence'
+Require-Text 'project-context/context-manifest.md' '新窗口继承流程（分层阅读）' 'risk-tiered startup reading'
+Require-Text 'project-context/context-manifest.md' '较新的时间戳不能覆盖正式状态' 'external handoff cannot override formal state'
 Require-Text 'project-context/role-wakeup-and-handoff.md' '当前已授权的.*动作' 'handoff action permissions'
 Require-Text 'project-context/handoff-and-task-state-machine.md' '内容门.*不是当前窗口自动获得' 'APPROVED is content-only gate'
 Require-Text 'project-context/templates/role-handoff-template.md' 'persistence_authorization' 'persistence authorization field'
@@ -44,12 +46,16 @@ Require-Text 'project-context/agent-response-protocol.md' '历史 TASK/GOV 文�
 Require-Text 'project-context/agent-response-protocol.md' '大白话.*不是把技术句子缩短' 'true plain-language definition'
 Require-Text 'project-context/agent-response-protocol.md' '纠偏与对齐时一次只解决一个理解问题' 'one correction at a time'
 Require-Text 'project-context/agent-response-protocol.md' '复杂不等于密集' 'visual breathing rule'
+Require-Text 'project-context/agent-response-protocol.md' '中间消息也是最终阅读体验的一部分' 'progress messages governed by Founder protocol'
+Require-Text 'project-context/agent-response-protocol.md' '最多先发一条很短的进度说明' 'simple task progress limit'
 Require-Text 'project-context/agent-response-protocol.md' '下面整段复制给<具体角色>' 'explicit handoff recipient'
 Require-Text 'project-context/role-wakeup-and-handoff.md' '只能替换成本次真实收件人' 'specific handoff recipient'
 Require-Text 'project-context/templates/role-handoff-template.md' '一次复制' 'single copy block'
 Require-Text 'project-context/tasks/GOV-COMM-004/founder-communication-intent-and-acceptance.md' 'runtime_authority: project-context/agent-response-protocol.md' 'Founder intent evidence without second authority'
 Require-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/plugin.yaml' 'pre_llm_call[\s\S]*pre_tool_call' 'Hermes guard hooks'
 Require-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py' 'Content approval is not action permission' 'mechanical authorization guard'
+Require-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py' 'Never display a startup receipt unless the Founder explicitly asks' 'Hermes no default startup receipt'
+Require-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py' 'files marked DRAFT, PAUSED, SUPERSEDED, REFERENCE_ONLY' 'Hermes external handoff authority guard'
 
 Reject-Text 'AGENTS.md' '## 委派前的固定输出' 'legacy fixed delegation output'
 Reject-Text 'AGENTS.md' '## 固定状态报告' 'legacy fixed status report'
@@ -57,6 +63,8 @@ Reject-Text 'AGENTS.md' '## 执行模式判断' 'legacy Founder execution-mode h
 Reject-Text 'AGENTS.md' '任务达到 APPROVED 后，Chief of Staff 必须先输出以下判断' 'legacy mandatory field block'
 Reject-Text 'project-context/context-manifest.md' 'Chief 身份实例：\s*\r?\n与前任会话的关系' 'legacy expanded Chief startup receipt'
 Reject-Text 'project-context/context-manifest.md' '第一份实质性输出必须.*Founder 可见的紧凑启动回执' 'legacy forced visible startup receipt'
+Reject-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py' 'followed by a compact.*启动回执' 'plugin forced startup receipt'
+Reject-Text 'project-context/tasks/GOV-COMM-004/hermes-founder-scope-guard/__init__.py' 'first substantive response must' 'plugin legacy first-response template'
 
 $authorityCount = 0
 foreach ($file in $formalFiles) {
@@ -88,6 +96,12 @@ if ($SoulPath) {
         $soul = Get-Content -LiteralPath $SoulPath -Raw
         if ($soul -notmatch 'tool-use.*never.*expand|工具.*不.*扩大|read-only task.*read-only tools') {
             $failures.Add('SOUL missing explicit tool-use permission boundary')
+        }
+        if ($soul -notmatch 'Never display a startup receipt unless the Founder explicitly asks') {
+            $failures.Add('SOUL still permits an automatic startup receipt')
+        }
+        if ($soul -notmatch 'files marked DRAFT, PAUSED, SUPERSEDED, REFERENCE_ONLY') {
+            $failures.Add('SOUL missing external handoff authority boundary')
         }
     }
 }

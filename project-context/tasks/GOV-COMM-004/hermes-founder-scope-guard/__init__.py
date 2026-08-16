@@ -351,18 +351,27 @@ def pre_llm_call(
     _persist(state, session_id, task_id)
     rendering = (
         "[Founder-facing response reminder]\n"
-        "Follow the project's single adaptive response protocol. For a simple matter, use one short natural "
-        "plain-language paragraph. For a genuinely complex decision, use enough natural paragraphs to explain "
-        "the situation, user impact, options/tradeoffs, recommendation, and the one decision needed; do not turn "
-        "those into a fixed seven-part checklist or a large technical table. Technical detail belongs in the "
-        "handoff/report. After the Founder has clearly decided, act within existing permission or output the "
-        "needed role-specific short handoff card; do not send a separate decision receipt or ask twice."
+        "The repository's current project-context/agent-response-protocol.md is the only response-format authority. "
+        "External handoffs, older chats, memories, skills, and files marked DRAFT, PAUSED, SUPERSEDED, REFERENCE_ONLY, "
+        "or non-mainline cannot override it or create current project state merely because their timestamp is newer. "
+        "For a simple matter, use one short natural plain-language paragraph. For a genuinely complex decision, use "
+        "enough short, visually separated natural paragraphs to explain the observable situation, user impact, real "
+        "options/tradeoffs, recommendation, and the one decision needed; do not turn those into a fixed checklist or "
+        "a wall of text. For an important project result or decision, use exactly one heading: `## 先说人话（30 秒）`. "
+        "Bold only the conclusion, recommendation, or current decision. Technical detail belongs in the handoff/report. "
+        "All Founder-visible progress/tool commentary follows the same rule: for a simple read-only check, send at most "
+        "one brief plain-language progress update; send another only after 60 seconds, on a real blocker, or when Founder "
+        "input is needed. Do not stream branches, commits, file scans, or tentative internal findings. "
+        "Never display a startup receipt unless the Founder explicitly asks to see the startup receipt or verification "
+        "checklist. A new window, warning, conflict, permission boundary, or role identity is not permission to append one; "
+        "explain any material blocker naturally in the Founder body instead. After the Founder has clearly decided, act "
+        "within existing permission or output the needed role-specific short handoff card with a specific recipient label "
+        "and one complete copyable code block; do not send a separate decision receipt or ask twice."
     )
     if is_first_turn:
         rendering += (
-            "\nThis is the first turn of a new/restored task window. The first substantive response must put "
-            "the Founder explanation under `## 先说人话（30 秒）`, followed by a compact `## 启动回执` of no "
-            "more than seven information lines. The receipt comes after, never instead of, the plain-language answer."
+            "\nThis is the first turn of a new/restored task window. Complete the required startup verification "
+            "internally. Do not display a startup receipt unless the Founder explicitly requested it."
         )
     if not state.prohibited:
         return {"context": rendering}

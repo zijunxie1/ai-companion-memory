@@ -124,3 +124,37 @@ Founder 对 Codex 与 Hermes 的 RootFix 测试指出：权限和固定模板问
 本轮将这些要求一次性并入唯一回复规范：大白话从可观察现象开始；纠偏一次只处理一个理解问题；复杂回复使用短段落、留白和克制加粗；决定后的交接固定为“具体收件人提示 + 一个代码框”；启动核验保留为内部强制证据，但简单聊天不默认展示回执。Founder 的原始意图与验收感受固定在 `founder-communication-intent-and-acceptance.md`，但运行权威仍只有 `agent-response-protocol.md`。
 
 本修正不改变 Hermes 界面缩放，不修改默认模型、产品、数据库、评测、R4、holdout、保留 Skill 或 Session Review。
+
+## 8. 第二次真实复测的最终溯源（2026-08-16）
+
+复测会话：Codex `01a008a5-4272-7421-9612-de119498f03d`；Hermes `20260816_113656_b1e68a`。
+
+### 8.1 排除项
+
+- 两个会话工作目录均为 `E:/gov-comm-004-root-fix-worktree`，不是主检出或错误分支；
+- Hermes 模型仍是 `deepseek-v4-pro`；
+- Hermes 系统提示明确包含 RootFix `AGENTS.md` 和规则版本 `2026-08-16.2`；不是云端旧 AGENTS，也没有从 Hermes 安装目录的 `AGENTS.md` 取代项目文件；
+- 会话未发生压缩，不能归因于摘要丢失。
+
+### 8.2 直接根因
+
+1. 仓库规则已改成“简单事项不显示回执”，但 canonical 和已安装的 `founder-scope-guard` 仍在 `pre_llm_call(is_first_turn=True)` 每轮注入“首轮必须追加 `## 启动回执`”。这是 Hermes 首轮错误的最高优先级指令来源；原插件测试还把错误行为当成 PASS。
+2. Hermes 虽在推理中列出全部必读文件，却只实际打开 `context-manifest.md`、`current-state.md`、`decision-register.md`，没有打开唯一回复权威 `agent-response-protocol.md`。随后它遍历 `E:/project-handoffs`，读取了暂停的 R4 交接和仍标为 `DRAFT_FOR_FOUNDER_REVIEW` 的外部沟通草案。
+3. 旧规则允许“发现影响判断的异常”自行展示回执。Hermes 把外部非正式、较新时间戳的准备材料误判为 current-state 滞后（W1），从而第二次为回执寻找理由。外部文件本身没有明确 `PAUSED/SUPERSEDED` 激活标签，扩大了误判空间。
+4. Codex 的最终答案已基本合格，但工具核验超过 60 秒时连续输出分支、提交和中间判断。现有协议只约束最终正文，没有明确把 commentary/工具进度纳入 Founder 阅读体验。
+
+### 8.3 一次性修复
+
+- 插件 canonical 与 installed copy 同步移除首轮强制回执，并新增“只有 Founder 明确要求才展示”、中间进度低噪音、外部临时文件不提权、重要回复单标题、交接单一复制框提醒；
+- Hermes `SOUL.md` 同步同一行为，避免全局规则与项目规则再次分叉；
+- 仓库启动阅读按风险分层：简单只读问题读最小权威集，进入写入/Review/高风险动作前才补全；最低层必须读取 `agent-response-protocol.md`；
+- W1—W3、阻断和角色身份不再触发回执，回执只响应 Founder 明确请求；
+- `E:/project-handoffs` 的 R3/R4/接线交接显式标记暂停或被取代，外部 Founder 草案标记已由仓库批准记录取代；
+- commentary/工具进度正式纳入 Founder 回复协议与回归场景。
+
+### 8.4 修复后真实结果
+
+- `20260816_115827_582d8a`（Hermes 新进程，简单只读）：无默认启动回执、无交接卡，用两个短段落说明第三轮已结束和当前需要做什么；
+- `20260816_120058_27a478`（Hermes 新进程，复杂决策）：先用用户可见现象解释问题，再区分接线与判断；一张小表给出取舍，最后只留下一个决定；无默认回执、无提前交接卡；
+- 两次均使用当前默认 `deepseek-v4-pro`，未指定替代模型；测试后 Hermes 桌面端再次正常重启，确保长期桌面进程加载 installed 插件新版本；
+- 治理检查、插件 11 项测试、`git diff --check` 和 canonical/installed 插件哈希一致性全部通过。
