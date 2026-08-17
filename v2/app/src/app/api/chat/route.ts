@@ -4,8 +4,8 @@
 // 数据流：
 //   1. 接收用户消息
 //   2. 调用 mem0.search() 语义召回相关 Memory
-//   3. 获取用户 Persona
-//   4. 组装 { message, memories, persona } → 调用 Dify Chatflow
+//   3. 获取用户 Persona 与此前最近对话（recent history）
+//   4. 组装 { message, memories, persona, relationshipStage, recentHistory } → 调用 Dify Chatflow
 //   5. 接收 AI 回复
 //   6. 调用 mem0.add() 从本轮对话抽取候选 Memory
 //   7. 写入 conversations + traces 到 PostgreSQL
@@ -20,11 +20,12 @@ import {
   insertTrace,
   finalizeTraceWrite,
   getUserPersona,
+  getRecentConversations,
 } from "@/lib/db";
 import { env } from "@/lib/env";
 import { containsCrisis } from "@/lib/eval-crisis";
 import { RECALL_TOP_K, RECALL_THRESHOLD, WRITE_MODE } from "@/lib/memory-config";
-import type { ChatRequest, ChatResponse } from "@/lib/types";
+import type { ChatRequest, ChatResponse, Conversation } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
@@ -49,6 +50,10 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    // Step 0: 读取此前最近 20 条对话（写入当前消息之前读取，避免当前消息同时出现在 recent_history 与 user_input）
+    const recentConversations = await getRecentConversations(user_id, 20);
+    const recentHistory = formatRecentHistory(recentConversations);
+
     // Step 1: 记录用户消息到对话表
     const userConvId = await insertConversation(user_id, "user", message);
 
@@ -76,6 +81,7 @@ export async function POST(request: NextRequest) {
       memories: usedMemory,
       persona,
       relationshipStage,
+      recentHistory,
       userId: user_id,
       conversationId: body.conversation_id,
     });
@@ -173,4 +179,12 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+/** 将最近对话按时间正序格式化为 Dify recent_history 文本；无历史返回空字符串 */
+function formatRecentHistory(conversations: Conversation[]): string {
+  if (conversations.length === 0) return "";
+  return conversations
+    .map((c) => `${c.role === "user" ? "用户" : "AI"}: ${c.content}`)
+    .join("\n");
 }
