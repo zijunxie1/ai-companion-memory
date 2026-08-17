@@ -5,6 +5,9 @@
 //   - user_input (paragraph, 必填) — 用户输入的内容
 //   - user_id (text, 必填) — 用户ID
 //   - conversation_id (text, 必填) — 对话ID
+//   - persona (text) — 用户人设（对象序列化为文本）
+//   - relationship_stage (text) — 关系阶段
+//   - recent_history (text) — 近期对话（本轮消息之前，时间正序）
 //
 // V2 策略：mem0 召回的 Memory 拼接到 user_input 前面，
 // 让 V1 的知识检索节点和 LLM 都能看到 Memory 上下文。
@@ -19,10 +22,12 @@ export async function callDifyChatflow(params: {
   memories: Memory[];
   persona: Record<string, unknown>;
   relationshipStage: string;
+  recentHistory: string;
   userId: string;
   conversationId?: string;
 }): Promise<DifyResult> {
-  const { message, memories, userId } = params;
+  const { message, memories, persona, relationshipStage, recentHistory, userId } =
+    params;
 
   // 将 Memory 拼接到 user_input 前面（V1 Chatflow 通过 user_input 接收全部内容）
   // 注意：Dify user_input 限制 500 字符，需要控制 Memory 注入量
@@ -49,6 +54,9 @@ export async function callDifyChatflow(params: {
       user_input: fullInput,
       user_id: userId,
       conversation_id: "",
+      persona: JSON.stringify(persona),
+      relationship_stage: relationshipStage,
+      recent_history: recentHistory,
     },
     query: message,
     response_mode: "blocking" as const,
