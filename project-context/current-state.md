@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，第四轮（R4）已完成两轮验证 + 判断标准修订 + 收尾 + 独立证据审查，但**整体未通过**，不启动第五轮、不接入聊天产品，当前接受为 Demo 已知限制；R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」）。GOV-COMM-004 已合并进 main。当前任务为 GOV-005：新增 `project-context/project-atlas.md` 项目全览地图并接入上下文恢复导航（已获 Founder 批准按计划执行），未推送、未建 PR、未合并。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
+P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，第四轮（R4）已完成两轮验证 + 判断标准修订 + 收尾 + 独立证据审查，但**整体未通过**，不启动第五轮、不接入聊天产品，当前接受为 Demo 已知限制；R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」）。GOV-COMM-004 已合并进 main（PR #28）。当前任务 GOV-005 已实现，处于独立 Review 中（PR #30，未合并）；新增 `project-context/project-atlas.md` 项目全览地图并接入上下文恢复导航。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
 
 ## Git 事实（2026-08-15 治理 Builder 重新核验）
 
@@ -32,7 +32,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | GOV-002 | **已合并（含合并后修正 PR #15）**：PR #14 @ `011168f` + 合并后修正 PR #15 @ `5de2714`（A 类遗留 MA1/M1—M4 + B 类展示结构，统一治理版本 2026-08-12.2）均已 Rebase 合并进 `origin/main`；PR #15 状态 MERGED，不再待复审 |
 | TASK-006 规划分支 | `feature/task-006-draft` @ `982d8a1`（Worktree `E:/task-006-plan-worktree`，干净；历史规划分支，DRAFT 已以 `0762a17` 进入 origin/main） |
 | TASK-006 实施分支 | `feature/task-006-e004-gate` 指向 `0762a17`（历史分支，未推进；无实施 Worktree、无产品实现差异） |
-| 当前治理 Worktree | `E:/gov-comm-004-root-fix-worktree`（`codex/gov-comm-004-root-fix`，从 `origin/main @ 7ef1023` 创建；只修改协作治理与 Hermes 全局回复边界） |
+| 当前治理 Worktree | `E:/gov-005-project-atlas-worktree`（`codex/gov-005-project-atlas`，从 `origin/main @ ece45fb` 创建；只新增项目全览地图并接入上下文恢复导航） |
 
 主线已收敛为 `main`；`master` 是 `main` 的祖先。禁止 force push。本轮治理分支不承载产品代码。
 
@@ -53,11 +53,11 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
 | GOV-COMM-002 | **MERGED（PR #26 @ `df5c2d9`，2026-08-15）** | Founder 已批准并授权直接执行 Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复批准边界。实施期间两次真实 Review 回复暴露的问题（完整报告倒进聊天 / 技术话缩短冒充大白话 / 未决定提前给卡）均已修正并补入规则；本机 Hermes 已将两项项目污染 Skill 可恢复归档并开启 Skill 写入审批。已 Rebase 合并进 `origin/main`（`df5c2d9`），成为正式主线规则 |
 | GOV-COMM-003 | **MERGED（`7ef1023`，2026-08-15）** | 自适应密度与复杂方案审批决策翻译已进入正式主线。真实 Hermes 后续验证发现它未清除更早的固定“执行模式判断/状态报告”模板，也未定义内容批准与动作权限的独立关系；缺口由 GOV-COMM-004 修复 |
-| GOV-COMM-004 | **IMPLEMENTED / REAL_REGRESSION_PASS（2026-08-16.3，待独立 Review；未合并前不属于正式主线事实）** | 复测追出并修正 canonical/installed 插件首轮强制回执、外部暂停交接提权和进度消息失控三个根因。静态治理、插件 11 项测试、哈希一致性及 Hermes 新进程简单/复杂真实回归均 PASS；桌面端已重启加载。未改缩放、默认模型、产品、评测、R4、holdout、保留 Skill 或 Session Review |
+| GOV-COMM-004 | **MERGED（PR #28 @ `517bc80`，2026-08-16）** | 复测追出并修正 canonical/installed 插件首轮强制回执、外部暂停交接提权和进度消息失控三个根因。静态治理、插件 11 项测试、哈希一致性及 Hermes 新进程简单/复杂真实回归均 PASS；桌面端已重启加载。已 Rebase 合并进 `origin/main`，成为正式主线事实。未改缩放、默认模型、产品、评测、R4、holdout、保留 Skill 或 Session Review |
 | TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致（`c3d73cc` 非本分支历史祖先，仅为来源锚点）。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**。R4 必须使用独立文件和后续独立分支，不得进入本次 R3 收尾。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
-| GOV-005 | **APPROVED（实施中，未合并）** | 新增 `project-context/project-atlas.md` 项目全览地图（索引 + 大白话翻译层）并接入上下文恢复导航；统一治理版本 2026-08-16.3 → 2026-08-19.1；不修改产品、评测、R4、holdout；见 D-GOV-005 |
+| GOV-005 | **IMPLEMENTED / IN_REVIEW（PR #30，未合并）** | 新增 `project-context/project-atlas.md` 项目全览地图（索引 + 大白话翻译层）并接入上下文恢复导航；统一治理版本 2026-08-16.3 → 2026-08-19.1；不修改产品、评测、R4、holdout；见 D-GOV-005 |
 
 ## 已确认主线顺序
 
@@ -104,9 +104,9 @@ TASK-006 内部后续规划顺序：
 3. **TASK-006 第三轮 Spike 已执行完毕（2026-08-14）**：方案 A/B/C 三方案全部触发候选级停止（分离边际 −0.2323/−0.3794/−0.5667，方案 C 另波动 0.35 判据失效）；本轮结论 = STOPPED / FAILED，形成部分证据；holdout 10 对零读取；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致；
 4. **Founder 2026-08-15 选择 A（D-T006-R4-DIRECTION）**：停止"孤立记忆打分 + 单一阈值"路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**；R4 DRAFT 待审批、独立分支，不得混入 R3 收尾；旧 holdout 永久留作 R3 证据；
 5. **GOV-COMM-002 已合并（PR #26 @ `df5c2d9`，2026-08-15）**：Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复边界已固化为正式主线规则；本机一次性 Skill 已归档并开启写入审批；
-6. **GOV-COMM-004 已实施（2026-08-16.3 待真实回归，再独立 Review）**：已清除插件强制首轮回执、收口外部临时交接权威、限制中间进度噪音并改为分层启动阅读；既有真正大白话、视觉留白、单一复制框和权限锁继续生效。仍未推送、未建 PR、未合并；正式主线尚未采用本版本；
+6. **GOV-COMM-004 已合并（PR #28 @ `517bc80`，2026-08-16）**：已清除插件强制首轮回执、收口外部临时交接权威、限制中间进度噪音并改为分层启动阅读；既有真正大白话、视觉留白、单一复制框和权限锁继续生效；已成为正式主线事实；
 7. 在 Founder 另行批准前，不启动任何产品实现或后续主线任务；v2-m3 下载、torch/sentence-transformers 新依赖继续禁止。
 
 ## 当前下一步
 
-GOV-005 已获 Founder 批准按计划执行：新增 `project-atlas.md` 并接入上下文恢复导航、升级统一治理版本至 2026-08-19.1。实施完成后 commit + push + 建 PR，返回结果并停止，等待 Founder 人工转交独立 Reviewer；当前不自行唤醒 Reviewer、不合并、不部署、不恢复 R4。
+GOV-005 已实现并处于独立 Review 中（PR #30）。Review 打回（CHANGES_REQUESTED：5 MAJOR + 1 MINOR）后由原 Builder 修正，再交同一独立 Reviewer 复审。当前不自行唤醒 Reviewer、不合并、不部署、不恢复 R4。

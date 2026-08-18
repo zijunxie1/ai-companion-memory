@@ -25,6 +25,7 @@ drafter: GOV-005 Builder（本窗口；无旧会话继承，事实均从 origin/
 draft_date: 2026-08-19
 basis: Founder 对 GOV-005 的完整任务指令（目标、主线/分支/工作区、必读、证据、项目尺度、地图覆盖项、状态边界、允许/禁止、实施顺序、验收标准）
 execution_mode: persistent_session（本窗口为治理 Builder 长期会话；只推进 GOV-005 单一问题）
+interaction_stage: decided（Founder 已批准实施计划；实施后进入 handoff 交独立 Reviewer）
 branch: codex/gov-005-project-atlas
 worktree: E:/gov-005-project-atlas-worktree
 ```
