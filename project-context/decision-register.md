@@ -52,7 +52,7 @@
 - ✅ **GOV-002 已合并（含合并后修正 PR #15）**（2026-08-12）：DRAFT v1.2 已批准、delegated 已确认、Review 2 已批准；PR #14 已合并（`011168f`）；合并后修正 PR #15 已 Rebase 合并（`5de2714`，MERGED，不再待复审）；见 D-GOV-002-SCOPE 与 D-GOV-002-POSTMERGE；
 - ✅ **GOV-COMM-002 已合并**（PR #26 @ `df5c2d9`，2026-08-15）：Founder 对话/Agent 交接分层、密度自适应、明确决定不二次确认、压缩恢复批准边界已固化为正式主线规则；见 D-GOV-COMM-002；
 - ✅ **GOV-COMM-003 已合并**（`7ef1023`，2026-08-15）：复杂方案审批决策翻译与密度指导已进入主线；真实 Hermes 回归暴露的后续根因由 GOV-COMM-004 修复；见 D-GOV-COMM-003；
-- ✅ **GOV-COMM-004 2026-08-16.3 已实施、待真实回归后独立 Review**：插件强制回执、外部暂停交接误提权和中间进度噪音已从源头修正；机械工具锁保持启用；默认模型、缩放、产品、R4 与 holdout 不在范围；见 D-GOV-COMM-004；
+- ✅ **GOV-COMM-004 已合并**（PR #28 @ `517bc80`，2026-08-16）：插件强制回执、外部暂停交接误提权和中间进度噪音已从源头修正；机械工具锁保持启用；默认模型、缩放、产品、R4 与 holdout 不在范围；见 D-GOV-COMM-004；
 - ✅ **TASK-006 本地 Gate Spike 已裁决**（2026-08-12）：DRAFT v1.2 已批准并执行，Spike 停止（STOPPED/FAILED，停止条件 9）；**Founder 裁决选项 A**（接受失败结论；禁止补 H4 词表/重跑冻结 holdout/重启外部模型路线）；收尾 PR 待建并交独立 Reviewer；见 D-T006-LOCAL-SPIKE 与 CR-T006-SPIKE-STOP-01；
 - ✅ **TASK-006 第三轮「检索后相关性判断」对照 Spike DRAFT v1.1 已批准**（2026-08-12）：三方案对照、主/补充实验分离、完成度分档、样本规模与关键记忆防漏门；见 D-T006-R3-SPIKE；
 - ✅ **第三轮执行模式已确认**（2026-08-12）：HANDOFF REQUIRED / persistent_session；见 D-T006-R3-EXEC；

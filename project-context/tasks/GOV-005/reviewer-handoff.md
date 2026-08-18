@@ -29,7 +29,7 @@ target_role: Reviewer（独立审查，默认不修改被审分支）
 
 ## 1. 目标角色
 
-独立 Reviewer（全新子 Agent 视角，追溯审查，不修改被审分支）。
+原 GOV-005 独立 Reviewer（同一 Reviewer 复审，保持独立审查视角，不修改被审分支）。
 
 ## 2. 项目位置
 

@@ -95,3 +95,13 @@ project-atlas §7 将全部能力归入四态（已实现有证据 / 部分实�
 | MAJOR 4 | R4 内部信号写成作品集效果 | §7.2/§8/§10 统一口径：13/13→0/13 为合成实验内部记录、非作品集效果结论，补对照组 A 仅 1/3 反证 |
 | MAJOR 5 | Reviewer 交接缺十七字段、draft 缺 interaction_stage | reviewer-handoff.md 补齐 17 字段；draft.md 补 interaction_stage |
 | MINOR 1 | R2 "停止/暂停"写混 | §8 R2 逐项写清：候选 A 停止（权重缓存缺失）、候选 B 暂停（Founder 指示） |
+
+## 10. 复审打回修正记录（2026-08-19，第二次）
+
+复审 CHANGES_REQUESTED（0 BLOCKER / 1 MAJOR / 2 MINOR），已逐项修正：
+
+| 项 | 问题 | 修正 |
+|---|---|---|
+| MAJOR 1 | decision-register.md「当前待 Founder 决策」第 55 行仍写 GOV-COMM-004"待真实回归后独立 Review"，与决策卡/Git（PR #28 已合并）矛盾 | 该条改为「已合并（PR #28 @ `517bc80`）」，并全文搜索确认无残留旧口径 |
+| MINOR 1 | current-state.md「Git 事实」小节日期仍是旧日期 2026-08-15 | 同步为 2026-08-19 |
+| MINOR 2 | reviewer-handoff.md §1 目标角色仍写"全新子 Agent" | 改为"原 GOV-005 独立 Reviewer（同一 Reviewer 复审）" |
