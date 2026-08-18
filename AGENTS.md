@@ -2,7 +2,7 @@
 
 > 本文件是所有 AI Agent 进入本项目时的强制执行章程。
 > 完整项目上下文入口见 `project-context/context-manifest.md`。
-> 规则版本（统一治理包版本，C1）：`2026-08-16.3`
+> 规则版本（统一治理包版本，C1）：`2026-08-19.1`
 
 ## 每次工作前的强制阅读
 
@@ -20,6 +20,8 @@
 **所有新窗口最低必读**：`AGENTS.md`、`project-context/context-manifest.md`、`project-context/agent-response-protocol.md`、`project-context/current-state.md`、`project-context/decision-register.md`，以及 Founder 当前消息明确指定的任务/交接文件。简单只读状态确认或讨论完成这些即可，不得为形式完整遍历全部历史任务、分支和外部交接目录。
 
 **进入规划、写入、Review、合并、部署、角色接管或高风险裁决前再完整读取**：`project-context/CHIEF-BOOTSTRAP.md`、`project-context/product.md`、`project-context/project-mainline-roadmap.md`、`project-context/handoff-and-task-state-machine.md`、`project-context/role-wakeup-and-handoff.md`、当前任务目录的 DRAFT/裁决/验收/最新交接/Review，以及本次操作涉及的正式契约。完整阅读是动作门，不是每个简单问题的聊天负担。
+
+想快速确认项目全貌与当前阶段，可加读 `project-context/project-atlas.md`（项目全览地图）。它是「导读 + 大白话翻译层」，不是权威状态来源，也不替代上述必读文件；任务状态、决策与 Git 事实仍分别以 `current-state.md`、`decision-register.md`、任务文件和 Git 为准。地图与权威文件冲突时，以权威文件为准并报告差异。
 
 外部 `E:/project-handoffs/` 文件只有在 Founder 当前消息明确指定，或当前正式交接文件明确引用为**当前有效交接**时才读取。文件时间更晚不等于更权威；标记为 `DRAFT`、`PAUSED`、`SUPERSEDED`、`REFERENCE_ONLY` 或“非正式主线”的文件不能覆盖 `current-state.md`、`decision-register.md` 和 Git，也不能创造下一步动作。
 

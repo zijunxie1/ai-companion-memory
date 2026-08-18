@@ -2,19 +2,19 @@
 
 > 快照性质：工作状态索引，不替代 Git、代码、数据库、正式契约或任务裁决。
 >
-> 最近只读核验：2026-08-16（Asia/Shanghai）；核验人：GOV-COMM-004 根因修复窗口
-> 核验方式：`git ls-remote` / `git rev-parse` / `git log` / `git worktree list` / `git status`；正式主线治理文件、Hermes 会话数据库、实际系统提示词与全局规则只读核验；未查询产品数据库、未启动 R4、未读取 holdout。
-> 本快照以本次核验时的 `origin/main @ 7ef1023` 为基础；GOV-COMM-003 已 Rebase 合并并成为正式主线行为。真实 Hermes 会话 `20260815_114833_6cc864` 暴露两类根因：正式规则同时存在“密度自适应”和旧固定输出模板；内容批准与动作权限未分离，导致只读审查后越权修改并提交。本治理分支仅修复协作规则，不承认该 Hermes 本地 R4 提交为正式主线事实。每次读取仍须重新核验远端主线，快照不会自动更新。
+> 最近只读核验：2026-08-19（Asia/Shanghai）；核验人：GOV-005 治理 Builder（项目全览地图窗口）
+> 核验方式：`git ls-remote` / `git rev-parse` / `git log` / `git worktree list` / `git status`；正式主线治理文件、R4 指定证据（task-006-context-wiring-worktree）与 TASK-003 设计母版参考只读核验；未查询产品数据库、未启动任何实验、未读取 holdout。
+> 本快照以本次核验时的 `origin/main @ ece45fb` 为基础；GOV-COMM-004 已合并进 main（AGENTS.md 统一版本 2026-08-16.3 生效）。本治理任务（GOV-005）只新增项目全览地图并接入上下文恢复导航，不修改产品、评测、R4 或 holdout。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
 > 非自动更新：本文件只有在某个角色被 Founder 唤醒并实际写入时才会变化。每次读取必须重新用 Git 和任务文件核对。
 
-> 上下文规则版本：`2026-08-16.3`（本治理变更 GOV-COMM-004；未合并前正式主线仍为 `2026-08-15.4`，读取时以远端 main 的 `AGENTS.md` 为准）
+> 上下文规则版本：`2026-08-19.1`（本治理变更 GOV-005；升级前正式主线统一版本为 `2026-08-16.3`，读取时以远端 main 的 `AGENTS.md` 为准）
 
 ## 一句话状态
 
-P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，R4 未启动。2026-08-16 第二次复测已排除错误分支、云端旧规则和压缩丢失，最终追到 Hermes 插件强制回执、外部暂停交接提权及 Codex 中间进度未受约束三个根因。GOV-COMM-004 已升级到 2026-08-16.3 并完成一次性修复；Hermes 新进程简单回归 `20260816_115827_582d8a` 与复杂回归 `20260816_120058_27a478` 均达到预期，桌面端已再次重启加载新插件。当前待 Founder 决定是否送独立 Review；未推送、未建 PR、未合并。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
+P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，第四轮（R4）已完成两轮验证 + 判断标准修订 + 收尾 + 独立证据审查，但**整体未通过**，不启动第五轮、不接入聊天产品，当前接受为 Demo 已知限制；R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」）。GOV-COMM-004 已合并进 main。当前任务为 GOV-005：新增 `project-context/project-atlas.md` 项目全览地图并接入上下文恢复导航（已获 Founder 批准按计划执行），未推送、未建 PR、未合并。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
 
 ## Git 事实（2026-08-15 治理 Builder 重新核验）
 
@@ -22,7 +22,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，核验以 `git fetch origin main` 结果为准） |
-| `origin/main`（本次核验快照） | `7ef1023`（GOV-COMM-003 已 Rebase 合并；统一规则版本 2026-08-15.4；读取时必须重新核验最新 tip） |
+| `origin/main`（本次核验快照） | `ece45fb`（GOV-COMM-004 已 Rebase 合并；统一规则版本 2026-08-16.3，GOV-005 升级为 2026-08-19.1；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 44+ / master 独有 0（merge-base = master HEAD `064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
@@ -47,7 +47,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | TASK-004 | DRAFT / PAUSED | 三轮 Spike 未达标；物理删除有效，但未来可能重新抽取；不得降低 E006 标准或宣称删除 Case 100% 通过 |
 | GOV-001 | GOV-001A：MERGED；GOV-001B：MERGED | 主线收敛和治理文件入库已完成 |
 | TASK-005A | MERGED（QA_APPROVED_MAINLINE） | PR #8 @ `4f93fa6` 已合并并完成本地/测试主线 QA；Run #28 证明快照能力，E004 FAIL 如实记录；未进行生产部署，是否 CLOSED 待后续裁决 |
-| TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在；没有相关性修复产品代码。第三轮 A/B/C 全部 STOPPED/FAILED，R3 收尾 PR #25 已合并；最终 PR 独立 Review = REVIEW_APPROVED。Founder 仅批准 R4 方向与起草，未批准产品实现、Schema、依赖、外部服务或新实验运行；见 D-T006-R4-DIRECTION |
+| TASK-006 | **APPROVED** | DRAFT v1.1 已入库；E004 缺陷仍存在；没有相关性修复产品代码。第一/二/三轮（本地 Gate Spike、R3 三方案对照）全部 STOPPED/FAILED，R3 收尾 PR #25 已合并。**第四轮 R4「上下文记忆可用性判断」已完成两轮真实验证 + 判断标准修订 v2 + 收尾 + 独立证据审查（REVIEW_APPROVED，0 BLOCKER/0 MAJOR/1 MINOR），但整体未通过**：显式判断把无关记忆硬扯从 13/13 降到 0/13（有效），但「关键记忆不能漏」连续两轮失败、「证据不足」独立成档未实现；不启动第五轮、不接入聊天产品；当前接受为 Demo 已知限制。R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」，位于 `codex/task-006-context-wiring` 分支 worktree）。见 D-T006-R4-DIRECTION |
 | GOV-CHIEF-001 | **MERGED** | 执行 Chief / 决策 Chief 角色拆分与状态校准；PR #11 已 Rebase 合并（`42786da`），REVIEW_APPROVED → MERGED，正式治理事实 |
 | GOV-COMM-001 | **MERGED** | 沟通与交接规范；Review 1 已批准、delegated 已同意、Review 2 已批准（2026-08-12）；已完成 **14 个文件**（8 个现有治理文件 + 1 个新模板 + 3 份正式规划文件 + 2 份过程证据文件），V1—V9 验证通过；最终独立复审 **REVIEW_APPROVED（0/0/0）**后，已 Rebase 合并进 `origin/main`（`3412c3c`）。未进行部署，纯治理规则已成为正式主线事实 |
 | GOV-002 | **MERGED（含合并后修正）** | 上下文完整性护栏；DRAFT v1.2 已批准（2026-08-12）、delegated 已确认、Review 2 实现计划已批准；PR #14 已 Rebase 合并（`011168f`）；合并后修正 PR #15（`5de2714`，A 类遗留 MA1/M1—M4 + 状态同步 + B 类展示结构）**已 Rebase 合并，状态 MERGED，不再待复审**；统一治理版本 2026-08-12.2（见 D-GOV-002-POSTMERGE） |
@@ -57,6 +57,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致（`c3d73cc` 非本分支历史祖先，仅为来源锚点）。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**。R4 必须使用独立文件和后续独立分支，不得进入本次 R3 收尾。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
+| GOV-005 | **APPROVED（实施中，未合并）** | 新增 `project-context/project-atlas.md` 项目全览地图（索引 + 大白话翻译层）并接入上下文恢复导航；统一治理版本 2026-08-16.3 → 2026-08-19.1；不修改产品、评测、R4、holdout；见 D-GOV-005 |
 
 ## 已确认主线顺序
 
@@ -108,4 +109,4 @@ TASK-006 内部后续规划顺序：
 
 ## 当前下一步
 
-先由 Founder 在新 Codex 与 Hermes 会话复测简单事项、复杂讨论和决定后交接三类呈现。达到预期后再生成独立 Reviewer 短卡；当前不得提前进入 Review、推送、建 PR、合并或恢复 R4。
+GOV-005 已获 Founder 批准按计划执行：新增 `project-atlas.md` 并接入上下文恢复导航、升级统一治理版本至 2026-08-19.1。实施完成后 commit + push + 建 PR，返回结果并停止，等待 Founder 人工转交独立 Reviewer；当前不自行唤醒 Reviewer、不合并、不部署、不恢复 R4。

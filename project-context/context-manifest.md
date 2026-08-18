@@ -19,6 +19,8 @@
 
 简单只读状态确认或讨论到此即可。进入规划、写入、Review、合并、部署、角色接管或高风险裁决前，再按顺序补读：`CHIEF-BOOTSTRAP.md`、`product.md`、`project-mainline-roadmap.md`、`handoff-and-task-state-machine.md`、`role-wakeup-and-handoff.md`、当前任务全部正式裁决/验收/最新交接/Review，以及涉及的契约、实现和测试。
 
+想快速确认项目全貌与当前阶段，可加读 `project-context/project-atlas.md`（项目全览地图）。它是「导读 + 大白话翻译层」，**不是权威状态来源**，也不替代上述任何必读文件；任务状态、决策和 Git 事实仍分别以 `current-state.md`、`decision-register.md`、任务文件和 Git 为准。本地图与权威文件冲突时，以权威文件为准并报告差异。
+
 不得用目录遍历替代选择。外部 `E:/project-handoffs/` 只有被 Founder 当前消息或正式当前交接明确点名时才进入阅读范围；较新的时间戳不能覆盖正式状态。`DRAFT`、`PAUSED`、`SUPERSEDED`、`REFERENCE_ONLY` 或明确写着“非正式主线”的文件只能提供线索。
 
 新 Agent 不得向 Founder 重复整份技术背景：先在内部完成启动核验，再按 `agent-response-protocol.md` 用与问题难度相称的大白话说明它将做什么、不会做什么。完整技术事实由 Agent 自己从交接文件读取，不倾倒给 Founder。
@@ -168,6 +170,8 @@ Founder 明确要求展示时，格式如下：
 9. 按 `agent-response-protocol.md` 重新选择 L1 / L2 / L3 密度，并先用大白话说明当前工作；
 10. 核对下游执行需要的完整判断是否已在交接文件中；
 11. 无冲突后继续；若已有唯一明确的 Founder 决定，不得要求二次确认，但只能恢复正式文件已经授权的动作。
+
+> 需要快速重获项目全貌时，可读 `project-context/project-atlas.md`（项目全览地图）快速定位；它只是导读，不替代上述重新读取的权威文件。
 
 > **聊天摘要、Memory、全局 Skill 和旧会话只能用于定位线索，不能作为任务批准、动作权限、Git 状态、正式决策或回复格式的唯一证据。** 若其中写“Founder 已同意”但任务/交接/决策文件没有准确记录内容边界和动作边界，必须停止并补证；若正式文件已经准确记录，则不得因压缩重新让 Founder 确认一遍。摘要不得把“内容已批准”压缩成“全部动作已授权”。全局 Skill 与仓库正式规则冲突时，以重新读取的仓库规则为准；不得照搬旧会话的最终回答。
 
