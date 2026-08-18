@@ -2,7 +2,7 @@
 
 ```yaml
 task_id: GOV-005
-status: IMPLEMENTED（待独立 Review，未合并）
+status: IMPLEMENTED（已修正 Review 打回；待独立复审，未合并）
 branch: codex/gov-005-project-atlas
 worktree: E:/gov-005-project-atlas-worktree
 baseline: origin/main @ ece45fb（远端与本地一致，三级核验通过）
@@ -81,4 +81,17 @@ project-atlas §7 将全部能力归入四态（已实现有证据 / 部分实�
 
 ## 8. 下一步
 
-等待 Founder 人工转交独立 Reviewer 做 Review 3（代码与行为 Review）。本窗口不自行唤醒 Reviewer、不合并、不部署。
+等待 Founder 人工转交独立 Reviewer 复审（Review 3 打回后同一 Reviewer 复审）。本窗口不自行唤醒 Reviewer、不合并、不部署。
+
+## 9. 首次 Review 打回修正记录（2026-08-19）
+
+独立 Review 首次打回 CHANGES_REQUESTED（0 BLOCKER / 5 MAJOR / 1 MINOR），已逐项修正：
+
+| 项 | 问题 | 修正 |
+|---|---|---|
+| MAJOR 1 | 状态快照含互相冲突的旧事实（GOV-COMM-004 写"未合并"、GOV-005 写"实施中"、过期 Worktree/建议动作） | current-state.md 与 decision-register.md 统一为 GOV-COMM-004=MERGED（PR #28 @ `517bc80`）、GOV-005=IMPLEMENTED/IN_REVIEW（PR #30）；清理过期 Worktree 与建议动作 |
+| MAJOR 2 | 正式必做项（TASK-007/005B/20 Case/完整 Bad Case/生产部署）误归"未来设想" | project-atlas §7.3 改为"已批准但未实现（正式未完成缺口）"；§7.4"未来设想"只保留个人网站、CR-B、完整主动聊天/Safety OS |
+| MAJOR 3 | 三层 Demo 蓝图与已实现混淆 | §5 改为"产品蓝图"，每层逐项标注"当前已有/部分已有/后续方向" |
+| MAJOR 4 | R4 内部信号写成作品集效果 | §7.2/§8/§10 统一口径：13/13→0/13 为合成实验内部记录、非作品集效果结论，补对照组 A 仅 1/3 反证 |
+| MAJOR 5 | Reviewer 交接缺十七字段、draft 缺 interaction_stage | reviewer-handoff.md 补齐 17 字段；draft.md 补 interaction_stage |
+| MINOR 1 | R2 "停止/暂停"写混 | §8 R2 逐项写清：候选 A 停止（权重缓存缺失）、候选 B 暂停（Founder 指示） |
