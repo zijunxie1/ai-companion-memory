@@ -19,7 +19,7 @@ required_reading:
   - project-context/tasks/TASK-006/route-b-decision.md
 doc_type: 治理任务 DRAFT
 task_id: GOV-005
-status: APPROVED（Founder 已通过 GOV-005 Builder 会话指令下达并批准任务方向、范围、权限与验收；本文件由 Builder 落盘为正式任务定义）
+status: MERGED（Founder 2026-08-19 批准 DRAFT 并授权实施；经两轮 Review 打回修正后 REVIEW_APPROVED，PR #30 已合并进 origin/main @ `b2b955b`）
 draft_version: v1.0
 drafter: GOV-005 Builder（本窗口；无旧会话继承，事实均从 origin/main 与指定证据重新核验）
 draft_date: 2026-08-19

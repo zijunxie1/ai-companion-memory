@@ -4,7 +4,7 @@
 >
 > 最近只读核验：2026-08-19（Asia/Shanghai）；核验人：GOV-005 治理 Builder（项目全览地图窗口）
 > 核验方式：`git ls-remote` / `git rev-parse` / `git log` / `git worktree list` / `git status`；正式主线治理文件、R4 指定证据（task-006-context-wiring-worktree）与 TASK-003 设计母版参考只读核验；未查询产品数据库、未启动任何实验、未读取 holdout。
-> 本快照以本次核验时的 `origin/main @ ece45fb` 为基础；GOV-COMM-004 已合并进 main（AGENTS.md 统一版本 2026-08-16.3 生效）。本治理任务（GOV-005）只新增项目全览地图并接入上下文恢复导航，不修改产品、评测、R4 或 holdout。每次读取仍须重新核验远端主线，快照不会自动更新。
+> 本快照以本次核验时的 `origin/main @ b2b955b` 为基础；GOV-COMM-004 已合并（PR #28），GOV-005 已合并（PR #30，AGENTS.md 统一版本 2026-08-19.1 生效）。本治理任务（GOV-005）只新增项目全览地图并接入上下文恢复导航，不修改产品、评测、R4 或 holdout。每次读取仍须重新核验远端主线，快照不会自动更新。
 >
 > 更新要求：重要状态变化、合并、部署、角色交接或上下文恢复后更新；不得提前写入未发生状态。
 
@@ -14,7 +14,7 @@
 
 ## 一句话状态
 
-P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，第四轮（R4）已完成两轮验证 + 判断标准修订 + 收尾 + 独立证据审查，但**整体未通过**，不启动第五轮、不接入聊天产品，当前接受为 Demo 已知限制；R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」）。GOV-COMM-004 已合并进 main（PR #28）。当前任务 GOV-005 已实现，处于独立 Review 中（PR #30，未合并）；新增 `project-context/project-atlas.md` 项目全览地图并接入上下文恢复导航。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
+P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVED`，第四轮（R4）已完成两轮验证 + 判断标准修订 + 收尾 + 独立证据审查，但**整体未通过**，不启动第五轮、不接入聊天产品，当前接受为 Demo 已知限制；R4 证据尚未全部进入正式主线（标「已完成并审查、待正式保存」）。GOV-COMM-004 已合并（PR #28）。GOV-005 已合并（PR #30）：`project-context/project-atlas.md` 项目全览地图已进入正式主线并接入上下文恢复导航。缩放、默认模型、产品、评测、R4 和 holdout 均未修改。
 
 ## Git 事实（2026-08-19 治理 Builder 重新核验）
 
@@ -22,7 +22,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 |---|---|
 | 仓库 | `E:\正式作品`（主检出为历史 `feature/task-004-spike`，无 upstream，存在历史修改和未跟踪文件；本轮不触碰） |
 | GitHub 默认分支 | `main`（此前 `gh` 实测；本次本地 `origin/HEAD` 仍指向 `origin/main`，核验以 `git fetch origin main` 结果为准） |
-| `origin/main`（本次核验快照） | `ece45fb`（GOV-COMM-004 已 Rebase 合并；统一规则版本 2026-08-16.3，GOV-005 升级为 2026-08-19.1；读取时必须重新核验最新 tip） |
+| `origin/main`（本次核验快照） | `b2b955b`（GOV-005 已合并；统一规则版本 2026-08-19.1；读取时必须重新核验最新 tip） |
 | `origin/master` | `064f5b6`（已被 main 完全吸收，保留为归档引用） |
 | 分叉 | main 独有 44+ / master 独有 0（merge-base = master HEAD `064f5b6`） |
 | PR #10 治理同步 | **已完成**：`codex/task-006-governance-sync` 分支四文件治理同步已 Rebase 合并进 `origin/main`（2026-08-12 00:34 Asia/Shanghai） |
@@ -57,7 +57,7 @@ P1 产品主线未变：E004 无关召回仍未解决，TASK-006 保持 `APPROVE
 | TASK-006 本地 Gate Spike | 第一轮 **STOPPED/FAILED**；第二轮候选 A 只停候选 A、候选 B 暂停；**第三轮「检索后相关性判断」对照 Spike 已执行完毕，三方案候选级停止（STOPPED / FAILED，形成部分证据）** | 第一轮两候选均失败已收尾（PR #17 合并）。**第二轮**：候选 A（cross-encoder 方向）因 P5-A 无 reranker 权重缓存只停候选 A，候选 B（k-means）Founder 指示暂停。**第三轮**：Founder 批准 DRAFT v1.1——方案 A 零新增依赖基线 / 方案 B 本地 Cross-Encoder 方向 / 方案 C 外部大模型效果上限对照；主实验与补充实验分表；完成度分档；关键记忆防漏独立门。**执行结果（2026-08-14 已完毕）**：S1 候选池冻结（32 对，SHA256 `70994185...`，校准 22 + holdout 10）；S2/S3 校准 + 方案 C 校准完成——**方案 A 分离边际 −0.2323、方案 B −0.3794、方案 C −0.5667 + 波动 0.35，三方案全部触发候选级停止**；方案 B 独立门漏 3 个关键候选配对（涉及 K1、K4）；holdout 10 对零读取/零运行；外部调用 12 次（失败 1 次 parse_mismatch）。**本轮结论 = STOPPED / FAILED，形成部分证据**，非"完整对比通过"；执行分支证据 `feature/task-006-r3-spike` @ `c3d73cc`，收尾分支 `feature/task-006-r3-closeout` 从 `c3d73cc` 复制证据文件并逐字节核验一致（`c3d73cc` 非本分支历史祖先，仅为来源锚点）。**Founder 2026-08-15 选择 A**：停止单分数路线，转向 R4「上下文记忆可用性判断」并起草独立新方案（已批准）；**D-1/D-3/D-4 为推荐方向、待第四轮 DRAFT 审查；D-2/D-5 尚未裁决**。R4 必须使用独立文件和后续独立分支，不得进入本次 R3 收尾。**仍禁止**：v2-m3 下载、torch/sentence-transformers 等新依赖；见 D-T006-R3-SPIKE / -C-EXT / D-T006-R4-DIRECTION |
 | TASK-007 | 未开始 | `3000` 吸收 V2 Design Spec 与 `8765` 设计母版 |
 | TASK-005B | 未开始 | Persistent Eval Runner |
-| GOV-005 | **IMPLEMENTED / IN_REVIEW（PR #30，未合并）** | 新增 `project-context/project-atlas.md` 项目全览地图（索引 + 大白话翻译层）并接入上下文恢复导航；统一治理版本 2026-08-16.3 → 2026-08-19.1；不修改产品、评测、R4、holdout；见 D-GOV-005 |
+| GOV-005 | **MERGED（PR #30 @ `b2b955b`，2026-08-19）** | 新增 `project-context/project-atlas.md` 项目全览地图（索引 + 大白话翻译层）并接入上下文恢复导航；统一治理版本 2026-08-16.3 → 2026-08-19.1；不修改产品、评测、R4、holdout；见 D-GOV-005 |
 
 ## 已确认主线顺序
 
@@ -109,4 +109,4 @@ TASK-006 内部后续规划顺序：
 
 ## 当前下一步
 
-GOV-005 已实现并处于独立 Review 中（PR #30）。Review 打回（CHANGES_REQUESTED：5 MAJOR + 1 MINOR）后由原 Builder 修正，再交同一独立 Reviewer 复审。当前不自行唤醒 Reviewer、不合并、不部署、不恢复 R4。
+GOV-005 已合并（PR #30 @ `b2b955b`），项目全览地图已进入正式主线。下一步由 Founder 决定是否启动后续主线任务（TASK-007 需先经 Chief 重新评估 TASK-006 状态后单独 DRAFT/批准）。当前不自行启动任何任务、不部署、不恢复 R4。

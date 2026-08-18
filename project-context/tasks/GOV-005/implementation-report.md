@@ -2,7 +2,7 @@
 
 ```yaml
 task_id: GOV-005
-status: IMPLEMENTED（已修正 Review 打回；待独立复审，未合并）
+status: MERGED（PR #30 @ `b2b955b`，2026-08-19；经两轮 Review 打回修正后 REVIEW_APPROVED）
 branch: codex/gov-005-project-atlas
 worktree: E:/gov-005-project-atlas-worktree
 baseline: origin/main @ ece45fb（远端与本地一致，三级核验通过）

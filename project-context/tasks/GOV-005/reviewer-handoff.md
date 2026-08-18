@@ -18,7 +18,7 @@ required_reading:
   - project-context/project-atlas.md
 doc_type: Reviewer 交接包
 task_id: GOV-005
-status: IMPLEMENTED / IN_REVIEW（Builder 已实现并推 PR #30；首次 Review 打回后已修正，待复审）
+status: MERGED（PR #30 @ `b2b955b`；复审 REVIEW_APPROVED 后已合并）
 branch: codex/gov-005-project-atlas
 worktree: E:/gov-005-project-atlas-worktree
 interaction_stage: handoff
