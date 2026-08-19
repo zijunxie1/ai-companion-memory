@@ -1,0 +1,28 @@
+{
+  "url": "file:///E:/%E6%AD%A3%E5%BC%8F%E4%BD%9C%E5%93%81/prototypes/task-003-eval-console-v2.1/index.html",
+  "summaryHeight": 144,
+  "issueDefaultVisible": 2,
+  "consoleErrors": [],
+  "consoleMessages": [],
+  "contrast": {
+    "desktop": {
+      "total": 542,
+      "failures": []
+    },
+    "mobile": {
+      "total": 395,
+      "failures": []
+    }
+  },
+  "touch": {
+    "desktop": {
+      "total": 37,
+      "failures": []
+    },
+    "mobile": {
+      "total": 28,
+      "failures": []
+    }
+  },
+  "failures": []
+}

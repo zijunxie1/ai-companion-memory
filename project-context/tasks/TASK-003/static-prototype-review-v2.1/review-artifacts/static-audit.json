@@ -1,0 +1,178 @@
+{
+  "files": {
+    "htmlPath": "E:\\正式作品\\prototypes\\task-003-eval-console-v2.1\\index.html",
+    "cssSrcPath": "E:\\正式作品\\prototypes\\task-003-eval-console-v2.1\\src\\input.css",
+    "cssDistPath": "E:\\正式作品\\prototypes\\task-003-eval-console-v2.1\\dist\\app.css",
+    "specPath": "E:\\正式作品\\prototypes\\task-003-eval-console-v2.1\\design-spec-v2-implementation.md",
+    "dataPath": "E:\\正式作品\\v2\\app\\src\\lib\\eval-data.ts"
+  },
+  "colors": {
+    "htmlInline": [],
+    "dist": [
+      "#1C1D21",
+      "#2F9364",
+      "#5F625C",
+      "#6E5BAA",
+      "#70747D",
+      "#7D817A",
+      "#BE8128",
+      "#C94E49",
+      "#E2E4EA",
+      "#E6F4EC",
+      "#EFEFEB",
+      "#F6F7F9",
+      "#FCE9E7",
+      "#FFF",
+      "#FFF3D8"
+    ],
+    "specTotal": 15
+  },
+  "fontSizes": {
+    "allowed": [
+      48,
+      24,
+      16,
+      14,
+      12,
+      10
+    ],
+    "all": [
+      10,
+      12,
+      14,
+      16,
+      24,
+      48
+    ]
+  },
+  "radii": {
+    "allowed": [
+      12,
+      8
+    ],
+    "all": [
+      8,
+      12
+    ]
+  },
+  "statusClasses": [
+    "success",
+    "warning",
+    "neutral",
+    "error"
+  ],
+  "sourceCases": [
+    {
+      "id": "E001",
+      "before": "4/5",
+      "after": "4/5",
+      "gsb": "good"
+    },
+    {
+      "id": "E002",
+      "before": "3/5",
+      "after": "2/5",
+      "gsb": "bad"
+    },
+    {
+      "id": "E003",
+      "before": "4/5",
+      "after": "3/5",
+      "gsb": "bad"
+    },
+    {
+      "id": "E004",
+      "before": "2/5",
+      "after": "3/5",
+      "gsb": "good"
+    },
+    {
+      "id": "E005",
+      "before": "2/5",
+      "after": "2/5",
+      "gsb": "same"
+    },
+    {
+      "id": "E006",
+      "before": "4/5",
+      "after": "4/5",
+      "gsb": "same"
+    },
+    {
+      "id": "E007",
+      "before": "FAIL",
+      "after": "PASS",
+      "gsb": "good"
+    },
+    {
+      "id": "E008",
+      "before": "FAIL",
+      "after": "PARTIAL",
+      "gsb": "not_applicable"
+    }
+  ],
+  "htmlCases": [
+    {
+      "id": "E001",
+      "gsb": "good",
+      "before": "4/5",
+      "after": "4/5"
+    },
+    {
+      "id": "E002",
+      "gsb": "bad",
+      "before": "3/5",
+      "after": "2/5"
+    },
+    {
+      "id": "E003",
+      "gsb": "bad",
+      "before": "4/5",
+      "after": "3/5"
+    },
+    {
+      "id": "E004",
+      "gsb": "good",
+      "before": "2/5",
+      "after": "3/5"
+    },
+    {
+      "id": "E005",
+      "gsb": "same",
+      "before": "2/5",
+      "after": "2/5"
+    },
+    {
+      "id": "E006",
+      "gsb": "same",
+      "before": "4/5",
+      "after": "4/5"
+    },
+    {
+      "id": "E007",
+      "gsb": "good",
+      "before": "FAIL",
+      "after": "PASS"
+    },
+    {
+      "id": "E008",
+      "gsb": "not_applicable",
+      "before": "FAIL",
+      "after": "PARTIAL"
+    }
+  ],
+  "gsbCounts": {
+    "good": 3,
+    "bad": 2,
+    "same": 2,
+    "not_applicable": 1
+  },
+  "missingCases": [],
+  "bc006Source": "E007",
+  "bc007Source": "E008",
+  "issueCount": 4,
+  "media": [],
+  "specLoaded": true,
+  "failures": [],
+  "warnings": []
+}

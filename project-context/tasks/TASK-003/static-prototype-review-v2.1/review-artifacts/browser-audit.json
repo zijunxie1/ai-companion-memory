@@ -1,0 +1,1977 @@
+{
+  "url": "file:///C:/Users/admin/Documents/%E4%BD%9C%E5%93%811/index.html",
+  "goodCases": [
+    {
+      "id": "E001",
+      "gsb": "good"
+    },
+    {
+      "id": "E004",
+      "gsb": "good"
+    },
+    {
+      "id": "E007",
+      "gsb": "good"
+    }
+  ],
+  "sameCases": [
+    {
+      "id": "E003",
+      "gsb": "same"
+    },
+    {
+      "id": "E005",
+      "gsb": "same"
+    },
+    {
+      "id": "E006",
+      "gsb": "same"
+    }
+  ],
+  "badCases": [
+    {
+      "id": "E002",
+      "gsb": "bad"
+    }
+  ],
+  "expanded": {
+    "open": "true",
+    "ariaExpanded": "true",
+    "columns": "610px 610px"
+  },
+  "searchCases": [
+    {
+      "id": "E007",
+      "gsb": "good"
+    }
+  ],
+  "searchError": {
+    "wrapperError": true,
+    "errorVisible": true,
+    "activeId": "caseSearch",
+    "describedBy": "searchError"
+  },
+  "tabStops": [
+    {
+      "tag": "BUTTON",
+      "id": "sidebarToggle",
+      "text": "✦",
+      "outline": "none 3px rgb(225, 196, 81)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "text": "OV评测总览",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "text": "BCBad Case",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "MMMemory 管理",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "TRTrace 日志",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "RN评测运行",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "RP分析报告",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "ST系统设置",
+      "outline": "none 3px rgba(255, 255, 255, 0.62)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "INPUT",
+      "id": "caseSearch",
+      "text": "搜索 Case",
+      "outline": "none 3px rgb(25, 26, 23)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "After Baseline · v2.1 ⌄",
+      "outline": "none 3px rgb(25, 26, 23)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "°",
+      "outline": "none 3px rgb(95, 98, 92)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "导出报告 ↗",
+      "outline": "none 3px rgb(255, 255, 255)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "text": "查看全部 Bad Cases →",
+      "outline": "none 3px rgb(201, 68, 41)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "指标定义 ↗",
+      "outline": "none 3px rgb(25, 26, 23)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "全部 7",
+      "outline": "none 3px rgb(255, 255, 255)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "Good 3",
+      "outline": "none 3px rgb(95, 98, 92)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "Same 3",
+      "outline": "none 3px rgb(95, 98, 92)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "Bad 1",
+      "outline": "none 3px rgb(95, 98, 92)",
+      "boxShadow": "rgb(250, 250, 248) 0px 0px 0px 2px, rgba(217, 78, 48, 0.35) 0px 0px 0px 4px"
+    }
+  ],
+  "tabKeyboardBefore": {
+    "active": "all",
+    "tabIndexes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "tabKeyboardAfterRight": {
+    "active": "all",
+    "selected": "all"
+  },
+  "mobileLayout": {
+    "viewport": 375,
+    "compareColumns": "309px",
+    "visibleCategory": "none",
+    "visibleScore": "none"
+  },
+  "consoleErrors": [],
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation"
+    },
+    {
+      "type": "warning",
+      "text": "cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation"
+    }
+  ],
+  "contrast": {
+    "desktopTotal": 408,
+    "desktopFailures": [
+      {
+        "tag": "A",
+        "text": " ",
+        "color": "rgb(106, 107, 93)",
+        "background": "rgb(156, 142, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 1.65,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "BC",
+        "color": "rgb(106, 107, 93)",
+        "background": "rgb(156, 142, 69)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 1.65,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": " ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "AI Companion Memory OS",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "/",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "TASK-003",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌕",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 14,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(254, 254, 254)",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "ratio": 3.31,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "最后完成评测",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Research evaluation report · 07",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "导出报告",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "↗",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "ARTICLE",
+        "text": " ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "核心结论 · Strong constraint",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Before → After",
+        "color": "rgb(249, 228, 224)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 11,
+        "fontWeight": 500,
+        "ratio": 3.4,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "False Memory Rate",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "40%",
+        "color": "rgb(238, 175, 162)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 48,
+        "fontWeight": 500,
+        "ratio": 2.23,
+        "required": 3,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(234, 158, 141)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 24,
+        "fontWeight": 400,
+        "ratio": 1.92,
+        "required": 3,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "5 条 Memory 写入全部准确；身份证号未写入，LLM 幻觉也没有再被 Memory 链路吸收。",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "强约束",
+        "color": "rgb(241, 191, 180)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 2.22,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "2↑ · 1→",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "隐私保护与安全兜底改善；删除合规本轮未复测。",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Priority queue",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "3 issues",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Good / Same / Bad",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "安全 Case 单独计入强约束",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "    ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Before Baseline",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Memory journey map",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "用户输入",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Memory 召回",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "GT",
+        "color": "rgb(117, 111, 98)",
+        "background": "rgb(241, 239, 232)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 4.34,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Gate 待增强",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "PT",
+        "color": "rgb(117, 111, 98)",
+        "background": "rgb(241, 239, 232)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 4.34,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Prompt 待增强",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "生成回复",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 10,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "已有：输入、召回、回复、写入、延迟。缺失：Gate 命中、过滤 Memory、实际 Prompt 注入。",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Multi-dimensional evidence",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "40%",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 23,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before Baseline 与 After Baseline · 5 分制",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "2/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "1/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "3.5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "1/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "英文",
+        "color": "rgb(112, 116, 109)",
+        "background": "rgb(239, 239, 235)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before / After evidence",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": " ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Case",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "输入与评测目标",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "类别",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Score",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "结论",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(244, 243, 239)",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "ratio": 3,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "写入准确率 · 建立 Memory 基线",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 248, 244)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.18,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "4/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 248, 244)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.18,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 248, 244)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.18,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 254, 253)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.31,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "召回准确率 · 异步写入延迟",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "3/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "写入准确率 · 仍有无关召回",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "4/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "连续性 · 召回准确率",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "2/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "不应召回率 · 阈值验证",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "2/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "冲突检测 · 偏好写入",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "4/5",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "隐私边界 · 不应写入 Memory",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Gate 命中、被过滤 Memory 与实际 Prompt 注入将在 Case 详情页明确标注为缺失，不伪造链路数据。",
+        "color": "rgb(112, 116, 109)",
+        "background": "rgb(246, 245, 241)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 4.36,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "FOOTER",
+        "text": "  ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Memory Atelier · Humanized Data Atelier Design System",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "TASK-003 / AFTER_BASELINE / 2026-07-25",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      }
+    ],
+    "mobileTotal": 178,
+    "mobileFailures": [
+      {
+        "tag": "DIV",
+        "text": " ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "AI Companion Memory OS",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "/",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "TASK-003",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(250, 250, 248)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.19,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Research evaluation report · 07",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "导出报告",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "↗",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "ARTICLE",
+        "text": " ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "核心结论 · Strong constraint",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "Before → After",
+        "color": "rgb(249, 228, 224)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 11,
+        "fontWeight": 500,
+        "ratio": 3.4,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "False Memory Rate",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "40%",
+        "color": "rgb(238, 175, 162)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 38,
+        "fontWeight": 500,
+        "ratio": 2.23,
+        "required": 3,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "→",
+        "color": "rgb(234, 158, 141)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 24,
+        "fontWeight": 400,
+        "ratio": 1.92,
+        "required": 3,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "5 条 Memory 写入全部准确；身份证号未写入，LLM 幻觉也没有再被 Memory 链路吸收。",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(217, 78, 48)",
+        "fontSize": 13,
+        "fontWeight": 400,
+        "ratio": 4.13,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "强约束",
+        "color": "rgb(241, 191, 180)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 2.22,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "2↑ · 1→",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "DIV",
+        "text": "  ",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "隐私保护与安全兜底改善；删除合规本轮未复测。",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(221, 96, 69)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.61,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before / After evidence",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "写入准确率 · 建立 Memory 基线",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 248, 244)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.18,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 248, 244)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.18,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 254, 253)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.31,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "召回准确率 · 异步写入延迟",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "写入准确率 · 仍有无关召回",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "连续性 · 召回准确率",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "不应召回率 · 阈值验证",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "冲突检测 · 偏好写入",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Before",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "After",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 255)",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "ratio": 3.33,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SMALL",
+        "text": "隐私边界 · 不应写入 Memory",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "SPAN",
+        "text": "⌄",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(255, 255, 254)",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "ratio": 3.32,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "FOOTER",
+        "text": "  ",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "Memory Atelier · Humanized Data Atelier Design System",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      },
+      {
+        "tag": "P",
+        "text": "TASK-003 / AFTER_BASELINE / 2026-07-25",
+        "color": "rgb(138, 142, 134)",
+        "background": "rgb(249, 249, 247)",
+        "fontSize": 11,
+        "fontWeight": 400,
+        "ratio": 3.17,
+        "required": 4.5,
+        "pass": false
+      }
+    ]
+  },
+  "touchTargets": {
+    "desktopTotal": 26,
+    "desktopFailures": [
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "全部 7",
+        "width": 65.4,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Good 3",
+        "width": 72.9,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Same 3",
+        "width": 74.3,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Bad 1",
+        "width": 63.9,
+        "height": 40,
+        "pass": false
+      }
+    ],
+    "mobileTotal": 17,
+    "mobileFailures": [
+      {
+        "tag": "A",
+        "id": "",
+        "role": null,
+        "text": "总览",
+        "width": 52,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "role": null,
+        "text": "指标",
+        "width": 52,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "role": null,
+        "text": "Cases",
+        "width": 64.7,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "全部 7",
+        "width": 65.4,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Good 3",
+        "width": 72.9,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Same 3",
+        "width": 74.3,
+        "height": 40,
+        "pass": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "role": "tab",
+        "text": "Bad 1",
+        "width": 63.9,
+        "height": 40,
+        "pass": false
+      }
+    ]
+  }
+}
