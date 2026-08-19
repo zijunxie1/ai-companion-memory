@@ -1,0 +1,13 @@
+{
+  "name": "memory-eval-console",
+  "version": "2.1.0",
+  "private": true,
+  "description": "AI Memory 评测控制台 · 作品集可用原型（V2.1 Builder 修订）",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/app.css --minify",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.0"
+  }
+}
