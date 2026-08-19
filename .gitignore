@@ -34,3 +34,7 @@ bin/
 obj/
 dist/
 build/
+
+# TASK-007: preserve prototype design asset build output (overrides dist/ above for this path only)
+!prototypes/task-003-eval-console-v2.1/dist/
+!prototypes/task-003-eval-console-v2.1/dist/**
